@@ -4,3 +4,6 @@
 [submodule "repos/dotbot-brewfile"]
 	path = repos/dotbot-brewfile
 	url = https://github.com/sobolevn/dotbot-brewfile.git
+[submodule "repos/zplug"]
+	path = repos/zplug
+	url = https://github.com/zplug/zplug
