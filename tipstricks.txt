@@ -1,0 +1,5 @@
+^R: Select interactive history search
+^T: Compose command from history sections
+^Y: Send signals to processes
+pv: cat with progress measuring
+peco: interactive grepping
