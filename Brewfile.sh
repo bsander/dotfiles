@@ -150,40 +150,40 @@ cask "foldingtext"
 # cask "github-desktop"
 cask "gitify"
 cask "gitscout"
-cask "gitter"
+# cask "gitter"
 cask "google-chrome"
 cask "google-drive"
-cask "gpgtools"
+# cask "gpgtools"
 cask "gpgtools-beta"
-cask "hyper"
-cask "hyperterm"
+# cask "hyper"
+# cask "hyperterm"
 cask "iterm2-beta"
 cask "jaxx"
-cask "karabiner"
+# cask "karabiner"
 cask "keybase"
 cask "kitematic"
 cask "lastpass"
-cask "macvim"
+# cask "macvim"
 cask "marp"
-cask "mightytext"
+# cask "mightytext"
 cask "minikube"
-cask "miro-video-converter"
+# cask "miro-video-converter"
 cask "ngrok"
-cask "noti"
-cask "notion"
+# cask "noti"
+# cask "notion"
 cask "nvalt"
-cask "nylas-mail"
-cask "nylas-n1"
+# cask "nylas-mail"
+# cask "nylas-n1"
 cask "p4merge"
 cask "pgadmin3"
-cask "plex-home-theater"
-cask "postbox"
+# cask "plex-home-theater"
+# cask "postbox"
 cask "qlstephen"
-cask "radiant-player"
+# cask "radiant-player"
 cask "rambox"
-cask "resilio-sync"
+# cask "resilio-sync"
 cask "rocket"
-cask "seil"
+# cask "seil"
 cask "skim"
 cask "skitch"
 cask "skype"
@@ -191,27 +191,27 @@ cask "softu2f"
 cask "sonos"
 cask "sourcetree"
 cask "spotify"
-cask "sql-tabs"
+# cask "sql-tabs"
 cask "steam"
-cask "sublime-text"
-cask "sublime-text3"
-cask "tagspaces"
+# cask "sublime-text"
+# cask "sublime-text3"
+# cask "tagspaces"
 cask "the-unarchiver"
-cask "thunderbird"
+# cask "thunderbird"
 cask "tomtom-mysports-connect"
 cask "torbrowser"
-cask "trailer"
+# cask "trailer"
 cask "transmission"
-cask "unetbootin"
-cask "upterm"
-cask "vagrant"
+# cask "unetbootin"
+# cask "upterm"
+# cask "vagrant"
 cask "veracrypt"
 cask "virtualbox"
 cask "virtualbox-extension-pack"
 cask "viscosity"
 cask "visual-studio-code"
 cask "vlc"
-cask "vysor"
+# cask "vysor"
 cask "wireshark"
 mas "Airmail 2", id: 918858936
 mas "BetterSnapTool", id: 417375580
@@ -219,25 +219,25 @@ mas "Canary Mail", id: 1236045954
 mas "ClamXav", id: 430207028
 mas "Flow", id: 469770826
 mas "Folder Tidy", id: 486626129
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "iPhoto", id: 408981381
+# mas "GarageBand", id: 682658836
+# mas "iMovie", id: 408981434
+# mas "iPhoto", id: 408981381
 mas "Keynote", id: 409183694
-mas "LastPass", id: 926036361
-mas "Marko", id: 607997198
-mas "Metanota Pro", id: 515250764
+# mas "LastPass", id: 926036361
+# mas "Marko", id: 607997198
+# mas "Metanota Pro", id: 515250764
 mas "Microsoft Remote Desktop", id: 715768417
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Paint X Lite", id: 668502966
-mas "Pasteasy", id: 906277880
+# mas "Pasteasy", id: 906277880
 mas "PiPifier", id: 1160374471
-mas "Pocket", id: 568494494
-mas "Shazam", id: 897118787
+# mas "Pocket", id: 568494494
+# mas "Shazam", id: 897118787
 mas "Simplenote", id: 692867256
-mas "Slack", id: 803453959
-mas "Social Pro", id: 433364821
-mas "Sunrise Calendar", id: 886106985
+# mas "Slack", id: 803453959
+# mas "Social Pro", id: 433364821
+# mas "Sunrise Calendar", id: 886106985
 mas "TurboCollage", id: 433371445
-mas "Tweetbot", id: 557168941
+# mas "Tweetbot", id: 557168941
 mas "Xcode", id: 497799835
