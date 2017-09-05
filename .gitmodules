@@ -7,3 +7,6 @@
 [submodule "repos/zplug"]
 	path = repos/zplug
 	url = https://github.com/zplug/zplug
+[submodule "repos/zgen"]
+	path = repos/zgen
+	url = https://github.com/tarjoilija/zgen
