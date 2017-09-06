@@ -1,0 +1,11 @@
+- defaults:
+    shell:
+      stdout: true
+      stderr: true
+
+- shell:
+    - command: dot
+      description: Installing dotfiles
+    - command: brew doctor
+      description: Installing dotfiles
+    - command: brew cask doctor

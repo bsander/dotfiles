@@ -1,0 +1,26 @@
+version: '2'
+services:
+  es1:
+    image: elasticsearch:1
+    volumes:
+      - es1_data:/usr/share/elasticsearch/data
+      - "$HOME/src/SAAS-Sitesearch/components/crawler/scripts:/usr/share/elasticsearch/config/scripts/crawler"
+      - "$HOME/src/SAAS-Sitesearch/resources/elasticsearch-files/analysis:/usr/share/elasticsearch/analysis"
+    ports:
+      - "9200:9200"
+  es2:
+    image: sha256:39fef10eecad6c968c515e8cca58ca7eaba22909cff0a4e08f00dca086cb358f
+    volumes:
+      - es2_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+  kibana1:
+    image: kibana:4.1
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://es1:9200
+
+volumes:
+  es1_data:
+  es2_data:

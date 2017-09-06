@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Prepare given disk for mounting/booting by Virtualbox
+set -x
+diskutil unmountDisk "${1:=/dev/disk2}" && sudo chmod 777 "$1"

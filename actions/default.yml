@@ -1,0 +1,34 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+    shell:
+      stdout: true
+      stderr: true
+
+- link:
+    ~/.curlrc: dotfiles/curlrc.ini
+    ~/docker-compose.yml: dotfiles/docker-compose.yml
+    ~/.editorconfig: dotfiles/editorconfig.ini
+    ~/.gitconfig: dotfiles/gitconfig.ini
+    ~/.gitignore: dotfiles/gitignore.txt
+    ~/.hgrc: dotfiles/hgrc.ini
+    ~/.npmrc: dotfiles/npmrc.ini
+    ~/.tigrc: dotfiles/tigrc.ini
+    # Note this link is not actually in use, but the target file _is_.
+    ~/.zhistory: zhistory.txt
+    ~/.zshrc: dotfiles/zshrc.zsh
+
+- clean:
+    - '~'
+
+- shell:
+    - command: git submodule update --init --recursive
+      description: Installing submodules
+    - command: brew bundle --file=Brewfile.sh
+      description: Installing software
+      stdout: false
+    # - command: brew cleanup
+    #   description: Cleaning up
+    # - command: brew cask cleanup
+    #   description: Cleaning up

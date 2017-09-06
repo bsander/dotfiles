@@ -1,0 +1,1 @@
+curl -Gs "https://www.mankier.com/api/explain/?cols="$(tput cols) --data-urlencode "q=$*" | less

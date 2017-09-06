@@ -1,0 +1,15 @@
+- defaults:
+    # link:
+    #   create: true
+    #   relink: true
+    shell:
+      stdout: true
+      stderr: true
+
+- shell:
+    - command: dot
+      description: Installing dotfiles
+    - command: brew bundle dump --file=Brewfile.sh --force && brew leaves | awk -f bin/brewstrainer.awk - Brewfile.sh | sponge Brewfile.sh
+      description: Updating Brewfile
+    # - command: zsh -ic "zgen update"
+    #   description: Updating zgen

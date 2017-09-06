@@ -2,6 +2,8 @@
 
 ## Frequent actions
 e ()  { "$EDITOR" "${@:-.}"; }
+alias ls="gls --color --group-directories-first -Fh"
+alias g="git"
 alias rgf="rg --files -g"
 
 ## Dotfiles related
@@ -11,7 +13,7 @@ alias .ssh="e ~/.ssh/config" # Edit SSH configuration
 alias .c="cd \$DOTFILES" # cd into this dotfiles repository
 alias .e="e \$DOTFILES" # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
-
+alias options="setopt ksh_option_print && setopt"
 
 # ZSH completion/globbing madness
 # alias curl="noglob curl"
@@ -19,6 +21,8 @@ alias .ce="cd \$DOTFILES; e"
 ## Misc. ops
 alias tig="tig status" # Always open tig in status view
 alias serve="http-server -o" # Statically serve directory
+# Print and copy last n commands
+last () { fc -ln -$1 | awk '{$1=$1}1' | tee >(pbcopy); }
 
 # Docker and docker-compose
 alias d="docker"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export ZPLUG_HOME="$DOTFILES/repos/zplug"
-export ZPLUG_THREADS=1
+# export ZPLUG_THREADS=1
 source "$ZPLUG_HOME/init.zsh"
 
 ## A next-generation plugin manager for zsh
@@ -50,7 +50,9 @@ zplug "docker/compose", use:contrib/completion/zsh
 zplug 'knu/zsh-manydots-magic', use:manydots-magic, defer:2
 
 ## An oh-my-zsh plugin to help remembering those aliases you defined once
-zplug "djui/alias-tips"
+# zplug "djui/alias-tips"
+
+zplug "b4b4r07/zplug-doctor", use:zplug-doctor
 
 ## Playground / Disabled / Inactive
 # zplug "psprint/zsh-navigation-tools"

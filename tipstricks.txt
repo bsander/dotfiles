@@ -1,5 +1,18 @@
+^F: Find options based on man pages
+^G: Toggle between global and directory history
+^Q: Push current line to the next prompt
 ^R: Select interactive history search
 ^T: Compose command from history sections
+^Xe: Edit current command in $VISUAL
 ^Y: Send signals to processes
-pv: cat with progress measuring
+⌘ Z: Undo
+$WORDCHARS: contains word characters (i.e. alt-backspace will not break on these)
+Esc-h: Show man page of currently typed command
+Esc-Esc: toggle sudo on current command
+httpstat: curl with metadata
+jq[n]: Streaming JSON parsers
 peco: interactive grepping
+pv: cat with progress measuring
+Tab completion: Use `+` to select more from menu
+zsnapshot: export running config of current shell
+zprof: zsh command profiling (zmodload zsh/zprof)
