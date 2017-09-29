@@ -13,7 +13,9 @@ alias .ssh="e ~/.ssh/config" # Edit SSH configuration
 alias .c="cd \$DOTFILES" # cd into this dotfiles repository
 alias .e="e \$DOTFILES" # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
-alias options="setopt ksh_option_print && setopt"
+alias .options="setopt ksh_option_print && setopt"
+alias .d="direnv allow"
+
 
 # ZSH completion/globbing madness
 # alias curl="noglob curl"

@@ -4,6 +4,9 @@
 setopt GLOB_COMPLETE
 setopt extended_glob
 
+## Don't auto-quote variables passed on the commandline
+setopt SH_WORD_SPLIT
+
 # sort globs numerically
 setopt numeric_glob_sort
 
@@ -70,9 +73,20 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower
 zstyle ':completion::complete:*' use-cache 1
 
 ## Menu Selection
-# zstyle ':completion:*' menu yes select
 zstyle ':completion:*' menu select
+## Don't show `./` and `../` in completions 
 zstyle ':completion:*' special-dirs true
+# zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*' ignore-parents parent pwd
+zstyle ':completion:*' accept-exact-dirs true
+zstyle ':completion:*' insert-tab false
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' format '%d:'
+zstyle ':completion:*' list-dirs-first true
+zstyle ':completion:*' verbose true
+zstyle ':completion:*' completer _complete _match _approximate
+# zstyle ':completion:*:approximate:*' max-errors 3 numeric
+zstyle ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/3 )) numeric )'
 
 ## Use colors in completion
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
@@ -83,6 +97,7 @@ expand-or-complete-with-dots() {
   zle expand-or-complete
   zle redisplay
 }
+zstyle ':completion:*' show-completer true
 zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 
@@ -146,9 +161,6 @@ setopt interactive_comments
 ## List jobs in the long format by default.
 setopt LONG_LIST_JOBS
 
-## do not autoselect the first completion entry
-unsetopt menu_complete
-
 ## show completion menu on successive tab press. needs unsetop menu_complete to work
 setopt auto_menu
 
@@ -169,15 +181,33 @@ setopt auto_param_keys
 setopt list_packed
 
 ## Word characters (alt-backspace will not break on these)
-WORDCHARS='*?.[]~=&;!#$%^(){}<>'
+WORDCHARS='*?$'
 
 ## (^Q): Push current line to the next prompt
 setopt NO_FLOW_CONTROL
 bindkey '^q' push-line-or-edit
 
+## do not autoselect the first completion entry
+unsetopt menu_complete
+
+## Warn of running background jobs belonging to this sesison on exit
+setopt CHECK_JOBS
+## Disown background jobs instead of killing them (disabled)
+# setopt NO_HUP
+
+## Set preferred keybinding mode
+# bindkey -v # Vi mode
+bindkey -e # Emacs mode
+bindkey -M emacs '^j' vi-cmd-mode # Quickly switch from emacs
 
 ## Prompt configuration
-GEOMETRY_PROMPT_PLUGINS=(exec_time git node)
-GEOMETRY_PROMPT_SUFFIX="$ "
-PROMPT_GEOMETRY_COLORIZE_ROOT=true
-PROMPT_GEOMETRY_GIT_TIME=false
+# GEOMETRY_PROMPT_PLUGINS=(exec_time git node)
+# GEOMETRY_PROMPT_SUFFIX="$ "
+# GEOMETRY_SYMBOL_JOBS="⚙ "
+# PROMPT_GEOMETRY_COLORIZE_ROOT=true
+# PROMPT_GEOMETRY_GIT_TIME=false
+
+PURE_CMD_MAX_EXEC_TIME=5
+PURE_PROMPT_SYMBOL='%(!.#.$)' # $ for regular, # for root
+
+export PROMPT_EOL_MARK='%'

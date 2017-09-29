@@ -6,6 +6,9 @@
 ## Profiling
 # zmodload zsh/zprof
 
+## Verbosity
+# set -x
+
 ## your project folder that we can `c [tab]` to
 export PROJECTS="${PROJECTS:-$HOME/src}"
 
@@ -28,6 +31,8 @@ source "$DOTFILES/zsh/plumbing.zsh"
 # source "$DOTFILES/zsh/completion.zsh"
 source "$DOTFILES/zsh/preferences.zsh"
 source "$DOTFILES/zsh/environment.zsh"
+## Install iTerm2 shell integration if available
+[[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 source "$DOTFILES/zsh/path.zsh"
 source "$DOTFILES/zsh/alias.zsh"
 source "$DOTFILES/zsh/announce.zsh"

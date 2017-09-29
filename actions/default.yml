@@ -9,9 +9,11 @@
 - link:
     ~/.curlrc: dotfiles/curlrc.ini
     ~/docker-compose.yml: dotfiles/docker-compose.yml
-    ~/.editorconfig: dotfiles/editorconfig.ini
+    # ~/.editorconfig: dotfiles/editorconfig.ini
     ~/.gitconfig: dotfiles/gitconfig.ini
     ~/.gitignore: dotfiles/gitignore.txt
+    # Hushes the default "Last login" message on macos
+    ~/.hushlogin: dotfiles/hushlogin.txt
     ~/.hgrc: dotfiles/hgrc.ini
     ~/.npmrc: dotfiles/npmrc.ini
     ~/.tigrc: dotfiles/tigrc.ini
@@ -21,14 +23,15 @@
 
 - clean:
     - '~'
+    - "$PROJECTS"
 
 - shell:
     - command: git submodule update --init --recursive
       description: Installing submodules
-    - command: brew bundle --file=Brewfile.sh
+    - command: brew bundle check --file=Brewfile.sh || brew bundle --file=Brewfile.sh
       description: Installing software
       stdout: false
-    # - command: brew cleanup
-    #   description: Cleaning up
-    # - command: brew cask cleanup
-    #   description: Cleaning up
+    - command: brew cleanup
+      description: Cleaning up
+    - command: brew cask cleanup
+      description: Cleaning up

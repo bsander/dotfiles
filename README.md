@@ -1,3 +1,10 @@
+# #!/.files
+
+## Init
+
+```shell
+PROJECTS=
+```
 
 ## TODO
 - [X] Prompt configuration
@@ -9,17 +16,19 @@
   - eslintrc?
 - [X] Brewfile, Caskfile, Masfile doorlopen
   - misc. installs?
-- [ ] Git-crypt
-  - history sync
-  - npmfile (auth token)
+- [X] Git-crypt
+  - [X] history sync
+  - [X] npmfile (auth token)
+- [ ] Fresh init
 - [ ] OSX defaults
 - [ ] repos/resources
 - [X] Cleanup actions
-- [ ] Repair actions
 - [ ] NPM "global" installs
 - [ ] Automated updates
-  - [ ] weekly init
+  - [ ] weekly
 - [ ] Prompt: shortest significant paths in between
+- [ ] Repair actions
 
 ## Used
 - https://github.com/anishathalye/dotbot
+- https://github.com/AGWA/git-crypt

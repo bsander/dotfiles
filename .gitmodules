@@ -10,3 +10,6 @@
 [submodule "repos/zgen"]
 	path = repos/zgen
 	url = https://github.com/tarjoilija/zgen
+[submodule "repos/zsh-prompt"]
+	path = repos/zsh-prompt
+	url = https://github.com/bsander/zsh-prompt
