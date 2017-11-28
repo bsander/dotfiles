@@ -50,11 +50,11 @@ cask "dropbox"
 cask "firefox"
 # cask "foldingtext"
 cask "franz"
-cask "google-chrome"
 cask "google-backup-and-sync"
 # cask "gpg-suite"
-cask "gpg-suite-beta"
 # cask "hyper"
+cask "google-chrome"
+cask "iterm2"
 cask "keybase"
 # cask "lastpass"
 # cask "minikube"
@@ -67,7 +67,6 @@ cask "spotify"
 # cask "sql-tabs"
 cask "standard-notes"
 cask "steam"
-cask "tomtom-sports-connect"
 cask "torbrowser"
 # cask "trailer"
 cask "transmission"
@@ -81,7 +80,8 @@ cask "visual-studio-code"
 # cask "whatsapp"
 # cask "wireshark"
 cask "caskroom/drivers/sonos"
-cask "iterm2"
+cask "caskroom/drivers/tomtom-sports-connect"
+cask "caskroom/versions/gpg-suite-beta"
 mas "BetterSnapTool", id: 417375580
 mas "Boxy", id: 1053031090
 mas "Canary Mail", id: 1236045954
@@ -91,14 +91,14 @@ mas "Dice Pass", id: 997688302
 mas "Fenêtre", id: 1286743037
 # mas "Flow", id: 469770826
 mas "Folder Tidy", id: 486626129
-# mas "GarageBand", id: 682658836
-# mas "iMovie", id: 408981434
 # mas "iPhoto", id: 408981381
-# mas "Keynote", id: 409183694
-# mas "LastPass", id: 926036361
 # mas "Microsoft Remote Desktop", id: 715768417
-# mas "Numbers", id: 409203825
-# mas "Pages", id: 409201541
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "LastPass", id: 926036361
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
 mas "PiPifier", id: 1160374471
 # mas "Pocket", id: 568494494
 mas "Shazam", id: 897118787
