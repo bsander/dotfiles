@@ -1,8 +1,17 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+    shell:
+      stdout: true
+      stderr: true
+      stdin: true
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
     - description: Installing homebrew
       command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    - description:
-      command: brew tap caskroom/cask
-    
+    - description: Running regular dotfiles ops
+      command: dot default
+    - description: Make ZSH the default shell
+      command: sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
