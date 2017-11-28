@@ -13,7 +13,7 @@
 export PROJECTS="${PROJECTS:-$HOME/src}"
 
 # shortcut to this dotfiles path is $DOTFILES
-export DOTFILES="${DOTFILES:-$PROJECTS/df-fresh}"
+export DOTFILES="${DOTFILES:-$PROJECTS/dotfiles}"
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
