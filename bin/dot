@@ -2,7 +2,7 @@
 
 ## http://redsymbol.net/articles/unofficial-bash-strict-mode/
 set -euo pipefail
-set -x
+# set -x
 
 ## Fully resolve base directory: http://stackoverflow.com/a/246128
 # shellcheck disable=SC2030
