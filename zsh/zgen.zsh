@@ -11,9 +11,6 @@ if ! zgen saved; then
   ## Up and Down keys search for typed input in history
   zgen load "zsh-users/zsh-history-substring-search"
 
-  ## (^R) Multi-word, syntax highlighted history searching for Zsh
-  zgen load "zdharma/history-search-multi-word"
-
   ## Integrated terminal workflow with Zshell
   ## Disabled: pinfo command not found
   # zgen load "zdharma/zconvey"
@@ -22,11 +19,14 @@ if ! zgen saved; then
   # zgen load "geometry-zsh/geometry"
 
   # ## My own theme
-  zgen load "mafredri/zsh-async"
+  # zgen load "mafredri/zsh-async"
   # zgen load "$DOTFILES/repos/zsh-prompt/pure.zsh"
 
   ## Spaceship theme
-  zgen load "denysdovhan/spaceship-zsh-theme" spaceship
+  zgen oh-my-zsh
+  # zgen load "denysdovhan/spaceship-zsh-theme" spaceship
+  # zgen load "bsander/spaceship-zsh-theme" spaceship
+  zgen load "$PROJECTS/spaceship-zsh-theme/spaceship.zsh"
 
   ## (^B) Browse interactive variables and other structures of Zshell
   zgen load "zdharma/zui"
@@ -67,6 +67,10 @@ if ! zgen saved; then
 
   ## Color ls and many command outputs
   zgen load "unixorn/warhol.plugin.zsh"
+
+  ## (^R) Multi-word, syntax highlighted history searching for Zsh
+  zgen load "zdharma/history-search-multi-word"
+
 
   ## Playground / Disabled / Inactive
   # zgen load "psprint/zsh-navigation-tools"

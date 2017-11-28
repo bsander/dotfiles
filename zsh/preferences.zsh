@@ -211,3 +211,76 @@ PURE_CMD_MAX_EXEC_TIME=5
 PURE_PROMPT_SYMBOL='%(!.#.$)' # $ for regular, # for root
 
 export PROMPT_EOL_MARK='%'
+
+## Spaceship theme settings
+
+SPACESHIP_PROMPT_ORDER=(
+  exit_code     # Exit code section
+  exec_time     # Execution time
+  jobs          # Backgound jobs indicator
+  # battery       # Battery level and status
+  # time          # Time stamps section
+  user          # Username section
+  host          # Hostname section
+  # package       # Package version
+  node          # Node.js section
+  # ruby          # Ruby section
+  # elixir        # Elixir section
+  # xcode         # Xcode section
+  # swift         # Swift section
+  # golang        # Go section
+  # php           # PHP section
+  # rust          # Rust section
+  # haskell       # Haskell Stack section
+  # julia         # Julia section
+  docker        # Docker section
+  # aws           # Amazon Web Services section
+  # venv          # virtualenv section
+  # conda         # conda virtualenv section
+  # pyenv         # Pyenv section
+  # dotnet        # .NET section
+  # ember         # Ember.js section
+  kubecontext   # Kubectl context section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  # hg            # Mercurial section (hg_branch  + hg_status)
+  line_sep      # Line break
+  # vi_mode       # Vi-mode indicator
+  char          # Prompt character
+)
+
+SPACESHIP_PROMPT_SYMBOL='%(!.#.$)'
+SPACESHIP_PROMPT_PREFIXES_SHOW=false
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_DIR_TRUNC=0
+# Thin space after for width: " "
+SPACESHIP_JOBS_SYMBOL="⚙ "
+SPACESHIP_EXIT_CODE_SHOW=true
+SPACESHIP_EXIT_CODE_SYMBOl="✘("
+SPACESHIP_EXIT_CODE_SUFFIX="%F{red})%f "
+
+SPACESHIP_NODE_SYMBOL_ONLY=true
+SPACESHIP_DOCKER_SYMBOL_ONLY=true
+SPACESHIP_PACKAGE_SYMBOL_ONLY=true
+SPACESHIP_KUBECONTEXT_SYMBOL_ONLY=true
+
+SPACESHIP_GIT_SHA_PREFIX="@ "
+SPACESHIP_GIT_SHA_SUFFIX=" "
+SPACESHIP_GIT_BRANCH_SUFFIX=" "
+SPACESHIP_GIT_SHA_COLOR="magenta"
+SPACESHIP_GIT_BRANCH_COLOR="magenta"
+SPACESHIP_GIT_STATUS_SHOW=true
+SPACESHIP_GIT_STATUS_PREFIX=""
+SPACESHIP_GIT_STATUS_SUFFIX=" "
+
+SPACESHIP_GIT_STATUS_UNTRACKED=' %F{white}✦%f'
+SPACESHIP_GIT_STATUS_ADDED=' %F{green}●%f'
+SPACESHIP_GIT_STATUS_MODIFIED=' %F{magenta}⊙%f'
+SPACESHIP_GIT_STATUS_RENAMED=' %F{magenta}↪%f'
+SPACESHIP_GIT_STATUS_DELETED=' %F{red}✘%f'
+SPACESHIP_GIT_STATUS_STASHED=' %F{blue}⚑%f'
+SPACESHIP_GIT_STATUS_UNMERGED=' %F{red}⁉%f'
+SPACESHIP_GIT_STATUS_AHEAD=' %F{yellow}⇡%f'
+SPACESHIP_GIT_STATUS_BEHIND=' %F{yellow}⇣%f'
+SPACESHIP_GIT_STATUS_DIVERGED=' %F{red}⇡⇣%f'
+SPACESHIP_GIT_STATUS_CLEAN=' %F{green}✓%f'

@@ -26,8 +26,10 @@
     - "$PROJECTS"
 
 - shell:
-    - command: git submodule update --init --recursive
-      description: Installing submodules
+    - description: Updating Homebrew
+      command: brew update
+    - description: Upgrading software
+      command: brew upgrade
     - command: brew bundle check --file=Brewfile.sh || brew bundle --file=Brewfile.sh
       description: Installing software
       stdout: false
