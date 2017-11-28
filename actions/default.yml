@@ -32,7 +32,6 @@
       command: brew upgrade
     - command: brew bundle check --file=Brewfile.sh || brew bundle --file=Brewfile.sh
       description: Installing software
-      stdout: false
     - command: brew cleanup
       description: Cleaning up
     - command: brew cask cleanup
