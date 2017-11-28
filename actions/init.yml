@@ -15,3 +15,5 @@
       command: $DOTFILES/bin/dot default
     - description: Make ZSH the default shell
       command: sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+    - description: Creating required directories
+      command: mkdir -p $HOME/.ssh
