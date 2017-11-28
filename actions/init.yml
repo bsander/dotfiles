@@ -12,6 +12,6 @@
     - description: Installing homebrew
       command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     - description: Running regular dotfiles ops
-      command: dot default
+      command: $DOTFILES/bin/dot default
     - description: Make ZSH the default shell
       command: sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
