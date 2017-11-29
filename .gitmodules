@@ -13,3 +13,6 @@
 [submodule "repos/zsh-prompt"]
 	path = repos/zsh-prompt
 	url = https://github.com/bsander/zsh-prompt
+[submodule "repos/FiraCode"]
+	path = repos/FiraCode
+	url = https://github.com/tonsky/FiraCode.git
