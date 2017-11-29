@@ -12,6 +12,7 @@
     # ~/.editorconfig: dotfiles/editorconfig.ini
     ~/.gitconfig: dotfiles/gitconfig.ini
     ~/.gitignore: dotfiles/gitignore.txt
+    ~/.gnupg/gpg.conf: dotfiles/gpg.conf
     # Hushes the default "Last login" message on macos
     ~/.hushlogin: dotfiles/hushlogin.txt
     ~/.hgrc: dotfiles/hgrc.ini
