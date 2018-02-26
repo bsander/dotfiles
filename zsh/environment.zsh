@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-export EDITOR="code"
-export VISUAL="$EDITOR -w"
+export EDITOR=code
+export VISUAL="$EDITOR"
 export BROWSER="open"
 
 # Enrise Gitlab url
@@ -18,3 +18,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Per-dir environment configuration
 eval "$(direnv hook zsh)"
+
+# NVM Setup
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"

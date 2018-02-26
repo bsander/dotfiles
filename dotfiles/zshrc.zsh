@@ -21,7 +21,7 @@ export DOTFILES="${DOTFILES:-$PROJECTS/dotfiles}"
 
 # set -x
 ## Autoload functions and completions
-fpath=("$DOTFILES/zsh/functions" "$DOTFILES/zsh/completions" $fpath)
+fpath=("$DOTFILES/zsh/functions" "$DOTFILES/zsh/completions" "$(brew --prefix)/share/zsh/site-functions" $fpath)
 autoload -U "$DOTFILES/zsh"/functions/*(:t)
 autoload -U "$DOTFILES/zsh"/completions/*(:t)
 

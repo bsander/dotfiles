@@ -6,5 +6,7 @@ PATH="$DOTFILES/bin:$PATH"
 PATH="./bin:$PATH"
 # Include downloaded go binaries in path
 PATH="$GOPATH/bin:$PATH"
+# Homebrew python
+PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 export PATH

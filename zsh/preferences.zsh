@@ -134,9 +134,13 @@ bindkey "^[[3~" delete-char
 # Skip forward/back a word with opt-arrow
 bindkey '[C' forward-word
 bindkey '[D' backward-word
+# bindkey '^[^[[C' forward-word
+# bindkey '^[^[[D' backward-word
 # Skip to start/end of line with cmd-arrow
 bindkey '[E' beginning-of-line
 bindkey '[F' end-of-line
+# bindkey '^[[D' beginning-of-line
+# bindkey '^[[C' end-of-line
 # Delete word with opt-backspace/opt-delete
 bindkey '[G' backward-kill-word
 bindkey '[H' kill-word
@@ -168,8 +172,8 @@ setopt auto_menu
 # ex: completes to Desktop/ from Dktop with cursor before k)
 setopt complete_in_word
 
-# autocorrect misspelled command
-setopt correct_all
+# don't autocorrect misspelled commands
+unsetopt correct_all
 
 # remove extra slashes if needed
 setopt auto_remove_slash
