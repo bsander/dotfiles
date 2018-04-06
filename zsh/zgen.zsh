@@ -82,6 +82,7 @@ fi
 
 ## Somehow, completions appear to work when they are loaded after zgen has called compinit.
 zgen oh-my-zsh "plugins/kubectl"
+zgen oh-my-zsh "plugins/gitfast"
 zgen load "lukechilds/zsh-better-npm-completion"
 zgen load "docker/cli" contrib/completion/zsh/_docker
 zgen load "docker/compose" contrib/completion/zsh/_docker-compose

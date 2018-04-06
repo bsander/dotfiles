@@ -43,6 +43,8 @@ setopt brace_ccl
 ## Switching directories for lazy people
 setopt auto_cd
 
+setopt no_complete_aliases
+
 ## Share history file amongst all Zsh sessions, ignoring dupes
 HISTFILE="$DOTFILES/zhistory.txt"   # The path to the history file.
 HISTSIZE=10000                      # The maximum number of events to save in the internal history.

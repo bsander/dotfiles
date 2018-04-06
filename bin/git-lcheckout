@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# This exists solely for supporting a different completion using only local branches
+# Derived from https://gist.github.com/mmrko/b3ec6da9bea172cdb6bd83bdf95ee817
+
+git checkout "$@"
