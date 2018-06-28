@@ -68,11 +68,17 @@ autoload run-help
 # Make zsh know about hosts already accessed by SSH (redundant?)
 # zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-## Case insensitive completion
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
+## case-insensitive (uppercase from lowercase) completion
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+## case-insensitive (all) completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+## case-insensitive,partial-word and then substring completion
+# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ## Cache completion
-zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' use-cache 0
 
 ## Menu Selection
 zstyle ':completion:*' menu select
@@ -80,18 +86,50 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' special-dirs true
 # zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' ignore-parents parent pwd
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
 zstyle ':completion:*' accept-exact-dirs true
 zstyle ':completion:*' insert-tab false
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' format '%d:'
+zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' verbose true
 zstyle ':completion:*' completer _complete _match _approximate
-# zstyle ':completion:*:approximate:*' max-errors 3 numeric
+
+# Typos
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/3 )) numeric )'
 
 ## Use colors in completion
+zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Don't complete unavailable commands.
+zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+
+# Array completion element sorting.
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+# Directories
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
+zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'users' 'expand'
+zstyle ':completion:*' squeeze-slashes yes
+
+# History
+zstyle ':completion:*:history-words' stop yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+
+# Environmental Variables
+zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
 
 ## Use "waiting dots" in completion
 expand-or-complete-with-dots() {
