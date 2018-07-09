@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 ## Frequent actions
-e ()  { "$EDITOR" "${@:-.}"; }
-alias ls="gls --color --group-directories-first -Fh"
+e ()  { ${BASE_VISUAL:-$VISUAL} "${@:-.}"; }
+# alias ls="gls --color --group-directories-first -Fh"
 alias g="git"
-alias rgf="rg --files -g"
+alias h=http
+alias hp=http-prompt
+# alias rgf="rg --files -g"
 
 ## Dotfiles related
 alias .r='exec $SHELL -l' # Reload shell environment
@@ -73,5 +75,25 @@ kp () {
  sleep 0.5
 }
 ksn() {
-  kubectl config set-context $(kubectl config current-context) --namespace "$@"
+  kubectl config set-context "$(kubectl config current-context)" --namespace "$@"
 }
+
+## development related
+addtype () {
+  set -x
+  # See if type definitions exist already
+  yarn add --dev "@types/${1:?}" || \
+  # Try to generate them from the package
+  ypx dts-gen -m "$1" -f "${2:-types}/$1.d.ts" || \
+  # If all else fails, produce a generic declaration
+  echo "declare module '$1'" > "${2:-types}/$1.d.ts"
+}
+
+## Experimental CLI replacements
+export EXA_GRID_ROWS=20
+alias ls="exa --group-directories-first --sort=name"
+alias ll="exa --long --grid --header --group-directories-first --sort=name"
+lt () { exa --tree --group-directories-first --level="${1:-2}" --ignore-glob="$(git ign-glob || echo '^$')" "${@:2}"; }
+alias cat=bat
+alias grep=rg
+alias find=fd

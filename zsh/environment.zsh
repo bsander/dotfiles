@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-export EDITOR=code
-export VISUAL="$EDITOR"
+export BASE_EDITOR=vim
+export BASE_VISUAL=code
 export BROWSER="open"
+export PAGER=slit
+
+export EDITOR="$BASE_EDITOR -w"
+export VISUAL="$BASE_VISUAL -w"
 
 # Enrise Gitlab url
 export GITLAB_URL="https://gitlab.enrise.com"
