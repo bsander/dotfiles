@@ -82,9 +82,9 @@ zstyle ':completion::complete:*' use-cache 0
 
 ## Menu Selection
 zstyle ':completion:*' menu select
-## Don't show `./` and `../` in completions 
+## Don't show `./` and `../` in completions
 zstyle ':completion:*' special-dirs true
-# zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
