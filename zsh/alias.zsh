@@ -67,10 +67,6 @@ alias kpd="kp;kd"
 kp () {
   (
     set -x; kubectl proxy --address='0.0.0.0' --accept-hosts '(docker.for.mac.|)localhost'
-    # ( set -x; kubectl proxy --address='0.0.0.0' --accept-hosts '(docker.for.mac.|)localhost' ) &;
-    # sleep 10 && # 6h 21600
-    # echo "Killing kubectl proxy.." &&
-    # killall kubectl
   ) &
  sleep 0.5
 }
@@ -89,6 +85,12 @@ addtype () {
   echo "declare module '$1'" > "${2:-types}/$1.d.ts"
 }
 
+alias stderred="DYLD_INSERT_LIBRARIES=\$HOME/.ghq/github.com/sickill/stderred/build/libstderred.dylib${DYLD_INSERT_LIBRARIES:+:$DYLD_INSERT_LIBRARIES}"
+
+## Speelcheck
+alias brwe=brew
+alias ypc=ypx
+
 ## Experimental CLI replacements
 export EXA_GRID_ROWS=20
 alias ls="exa --group-directories-first --sort=name"
@@ -97,3 +99,4 @@ lt () { exa --tree --group-directories-first --level="${1:-2}" --ignore-glob="$(
 alias cat=bat
 alias grep=rg
 alias find=fd
+alias tree=lt

@@ -198,6 +198,8 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey "^Xe" edit-command-line
 bindkey "^X^E" edit-command-line
+copyline() { printf %s "$READLINE_LINE"|pbcopy; }
+bindkey "^Xc" copyline
 
 ## allow comments with #
 setopt interactive_comments
