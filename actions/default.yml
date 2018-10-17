@@ -23,7 +23,7 @@
     ~/.zshrc: dotfiles/zshrc.zsh
 
 - clean:
-    - '~'
+    - "~"
     - "$PROJECTS"
 
 - shell:
@@ -34,6 +34,4 @@
     - command: brew bundle check --file=Brewfile.sh || brew bundle --file=Brewfile.sh
       description: Installing software
     - command: brew cleanup
-      description: Cleaning up
-    - command: brew cask cleanup
       description: Cleaning up

@@ -3,7 +3,7 @@
 export BASE_EDITOR=vim
 export BASE_VISUAL=code
 export BROWSER="open"
-export PAGER=slit
+# export PAGER=less
 
 export EDITOR="$BASE_EDITOR -w"
 export VISUAL="$BASE_VISUAL -w"

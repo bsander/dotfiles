@@ -26,13 +26,14 @@ alias .d="direnv allow"
 alias tig="tig status" # Always open tig in status view
 alias serve="http-server -o" # Statically serve directory
 # Print and copy last n commands
-last () { fc -ln -$1 | awk '{$1=$1}1' | tee >(pbcopy); }
+last () { fc -ln -"${1:-1}" | awk '{$1=$1}1' | tee >(pbcopy); }
 
 # Docker and docker-compose
 alias d="docker"
-alias dr="docker run --rm -it"
+alias dr="docker run --rm --interactive --tty"
 alias dc="docker-compose"
-alias dcl="docker-compose logs -f --tail=20"
+alias dcl="docker-compose logs --follow --tail=20"
+alias dcd="docker-compose down --timeout 0"
 
 ds() {
   # Stop all running docker containers
@@ -78,7 +79,7 @@ ksn() {
 addtype () {
   set -x
   # See if type definitions exist already
-  yarn add --dev "@types/${1:?}" || \
+  yarn add "@types/${1:?}" || \
   # Try to generate them from the package
   ypx dts-gen -m "$1" -f "${2:-types}/$1.d.ts" || \
   # If all else fails, produce a generic declaration
