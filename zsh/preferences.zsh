@@ -198,8 +198,15 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey "^Xe" edit-command-line
 bindkey "^X^E" edit-command-line
-copyline() { printf %s "$READLINE_LINE"|pbcopy; }
-bindkey "^Xc" copyline
+## Allow copying the current command line to clipboard
+# https://unix.stackexchange.com/a/290214
+copy-to-clipboard() {
+    zle kill-buffer
+    print -rn -- $CUTBUFFER | pbcopy
+    zle yank
+}
+zle -N copy-to-clipboard
+bindkey "^Xc" copy-to-clipboard
 
 ## allow comments with #
 setopt interactive_comments
