@@ -24,15 +24,19 @@ export DOTFILES="${DOTFILES:-$PROJECTS/dotfiles}"
 ## Autoload functions and completions
 # shellcheck disable=SC2206
 fpath=("$DOTFILES/zsh/functions" "$DOTFILES/zsh/completions" "$(brew --prefix)/share/zsh/site-functions" $fpath)
+# shellcheck source=../zsh/completion.zsh
+source "$DOTFILES/zsh/completion.zsh"
 autoload -U "$DOTFILES/zsh"/functions/*(:t)
 autoload -U "$DOTFILES/zsh"/completions/*(:t)
 
 # source "$DOTFILES/zsh/zplug.zsh"
 # shellcheck source=../zsh/zgen.zsh
 source "$DOTFILES/zsh/zgen.zsh"
+
+## compinit has now been called.
+
 # shellcheck source=../zsh/plumbing.zsh
 source "$DOTFILES/zsh/plumbing.zsh"
-# source "$DOTFILES/zsh/completion.zsh"
 # shellcheck source=../zsh/preferences.zsh
 source "$DOTFILES/zsh/preferences.zsh"
 # shellcheck source=../zsh/environment.zsh

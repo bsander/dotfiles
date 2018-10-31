@@ -84,8 +84,9 @@ fi
 zgen oh-my-zsh "plugins/kubectl"
 zgen oh-my-zsh "plugins/gitfast"
 zgen load "lukechilds/zsh-better-npm-completion"
-zgen load "docker/cli" contrib/completion/zsh/_docker
-zgen load "docker/compose" contrib/completion/zsh/_docker-compose
+zgen load "greymd/docker-zsh-completion"
+# zgen load "docker/cli" contrib/completion/zsh/_docker
+# zgen load "docker/compose" contrib/completion/zsh/_docker-compose
 
 ## translates "..." into "../.."
 ## "If you are enabling url-quote-magic, make sure to load url-quote-magic first and then load manydots-magic."

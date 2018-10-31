@@ -17,6 +17,7 @@ alias .e="e \$DOTFILES" # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
 alias .options="setopt ksh_option_print && setopt"
 alias .d="direnv allow"
+alias .z="rm -f ~/.zcompdump && compinit"
 
 
 # ZSH completion/globbing madness
