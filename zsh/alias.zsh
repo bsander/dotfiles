@@ -4,8 +4,7 @@
 e ()  { ${BASE_VISUAL:-$VISUAL} "${@:-.}"; }
 # alias ls="gls --color --group-directories-first -Fh"
 alias g="git"
-alias h=http
-alias hp=http-prompt
+alias y="yarn"
 # alias rgf="rg --files -g"
 
 ## Dotfiles related
@@ -19,12 +18,17 @@ alias .options="setopt ksh_option_print && setopt"
 alias .d="direnv allow"
 alias .z="rm -f ~/.zcompdump && compinit"
 
+## RTL Related
+w () {
+  # Runs arguments as command through a workspace docker container
+  (cd "${PROJECTS}/RTL/distribution-service-setup" && set -x && "./workspace" "$@" )
+}
+
 
 # ZSH completion/globbing madness
 # alias curl="noglob curl"
 
 ## Misc. ops
-alias tig="tig status" # Always open tig in status view
 alias serve="http-server -o" # Statically serve directory
 # Print and copy last n commands
 last () { fc -ln -"${1:-1}" | awk '{$1=$1}1' | tee >(pbcopy); }

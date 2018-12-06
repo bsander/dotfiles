@@ -133,7 +133,7 @@ zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-va
 
 ## Use "waiting dots" in completion
 expand-or-complete-with-dots() {
-  echo -n "\e[31m…\e[0m"
+  echo -n "\\e[31m…\\e[0m"
   zle expand-or-complete
   zle redisplay
 }
@@ -142,9 +142,9 @@ zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 
 ## Use colors in ls https://geoff.greer.fm/lscolors/
-LSCOLORS="gafxcxdxbxegedabagacad"
-LS_COLORS="di=36;40:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
-CLICOLOR=true
+# LSCOLORS="gafxcxdxbxegedabagacad"
+# LS_COLORS="di=36;40:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+# CLICOLOR=true
 
 ## Keys for history navigation
 # if zplug check zsh-users/zsh-history-substring-search; then
