@@ -21,7 +21,7 @@ alias .z="rm -f ~/.zcompdump && compinit"
 ## RTL Related
 w () {
   # Runs arguments as command through a workspace docker container
-  (cd "${PROJECTS}/RTL/distribution-service-setup" && set -x && "./workspace" "$@" )
+  (cd "${PROJECTS}/RTL/CDP" && set -x && "./workspace" "$@" )
 }
 
 
