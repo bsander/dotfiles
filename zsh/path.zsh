@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+
+source "$HOME/.profile"
+
 # Always check $DOTFILES for binaries
 PATH="$DOTFILES/bin:$PATH"
 # Always check relative ./bin/ for executables

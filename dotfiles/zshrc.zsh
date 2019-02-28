@@ -29,7 +29,6 @@ source "$DOTFILES/zsh/completion.zsh"
 autoload -U "$DOTFILES/zsh"/functions/*(:t)
 autoload -U "$DOTFILES/zsh"/completions/*(:t)
 
-# source "$DOTFILES/zsh/zplug.zsh"
 # shellcheck source=../zsh/zgen.zsh
 source "$DOTFILES/zsh/zgen.zsh"
 
