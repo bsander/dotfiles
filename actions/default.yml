@@ -7,6 +7,7 @@
       stderr: true
 
 - link:
+    ~/.config/fish: fish
     ~/.curlrc: dotfiles/curlrc.ini
     ~/docker-compose.yml: dotfiles/docker-compose.yml
     # ~/.editorconfig: dotfiles/editorconfig.ini

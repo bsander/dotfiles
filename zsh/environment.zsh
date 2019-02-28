@@ -8,9 +8,6 @@ export BROWSER="open"
 export EDITOR="$BASE_EDITOR -w"
 export VISUAL="$BASE_VISUAL -w"
 
-# Enrise Gitlab url
-export GITLAB_URL="https://gitlab.enrise.com"
-
 # kubectl: Always consider local `kube-config` file
 # export KUBECONFIG="./kube-config"
 
