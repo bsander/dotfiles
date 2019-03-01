@@ -1,7 +1,7 @@
 set -g BASE_EDITOR vim
 set -g BASE_VISUAL code
 set -g BROWSER open
-# set -g PAGER less
+set -g PAGER less
 
 set -g EDITOR "$BASE_EDITOR -w"
 set -g VISUAL "$BASE_VISUAL -w"

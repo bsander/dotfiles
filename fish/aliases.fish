@@ -6,6 +6,8 @@ alias .e="e \$DOTFILES" # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
 alias .f="\$DOTFILES/bin/dotbot" # Run update script
 
+alias e="\$BASE_VISUAL"
+
 ## Frequently used apps
 abbr --add --global b brew
 
@@ -23,14 +25,14 @@ abbr --add --global kx kubectx
 
 abbr --add --global y yarn
 
-## Typos
-abbr --add --global brwe brew
-abbr --add --global ypc ypx
-
 ## Substitute apps
-alias cat=bat
-alias grep=rg
-alias find=fd
+abbr --add --global cat bat
+abbr --add --global grep rg
+abbr --add --global find fd
 # alias tree=lt
 alias ls="exa --group-directories-first --sort=name"
 alias ll="exa --long --grid --header --group-directories-first --sort=name"
+
+## Typos
+abbr --add --global brwe brew
+abbr --add --global ypc ypx

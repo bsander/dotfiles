@@ -1,3 +1,8 @@
+## Some docs
+## - http://fishshell.com/docs/current/
+## - https://fishshell.com/docs/current/commands.html
+
+
 ## your project folder that we can `c [tab]` to
 set -q PROJECTS
 or set -g PROJECTS "$HOME/src"
@@ -29,7 +34,11 @@ and source "$FISH_HOME/fisher.fish"
 
 ## Interactive shell operations
 if status --is-interactive
-    # Load aliases
+    ## Load aliases
     test -f "$FISH_HOME/aliases.fish"
     and source "$FISH_HOME/aliases.fish"
+
+    ## Load prompt settings
+    test -f "$FISH_HOME/prompt.fish"
+    and source "$FISH_HOME/prompt.fish"
 end
