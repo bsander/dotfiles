@@ -23,6 +23,10 @@ and source "$HOME/.profile"
 test -f "$FISH_HOME/environment.fish"
 and source "$FISH_HOME/environment.fish"
 
+## Setup fisher package manager https://github.com/jorgebucaran/fisher
+test -f "$FISH_HOME/fisher.fish"
+and source "$FISH_HOME/fisher.fish"
+
 ## Interactive shell operations
 if status --is-interactive
     # Load aliases
