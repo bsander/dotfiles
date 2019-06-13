@@ -7,6 +7,7 @@
       stderr: true
 
 - link:
+    ~/.chunkwmrc: dotfiles/chunkwmrc.sh
     ~/.config/fish: fish
     ~/.config/kitty: kitty
     ~/.curlrc: dotfiles/curlrc.ini
@@ -21,6 +22,7 @@
     ~/.ignore: dotfiles/ignore.txt
     ~/.npmrc: dotfiles/npmrc.ini
     ~/.spacemacs: dotfiles/spacemacs.el
+    ~/.skhdrc: dotfiles/skhdrc.ini
     ~/.tigrc: dotfiles/tigrc.ini
     # Note this link is not actually in use, but the target file _is_.
     ~/.zhistory: zhistory.txt
