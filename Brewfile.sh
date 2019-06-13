@@ -7,7 +7,9 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "kryptco/tap"
+tap "railwaycat/emacsmacport"
 tap "wagoodman/dive"
+brew "awscli"
 brew "azure-cli"
 brew "bash"
 brew "bat"
@@ -17,23 +19,28 @@ brew "cmake"
 brew "coreutils"
 brew "csvkit"
 brew "direnv"
+brew "dtrx"
 brew "exa"
 brew "fd"
 brew "findutils"
+brew "fish"
+brew "fzf"
 brew "ghq"
 brew "git"
 brew "git-cal"
 brew "git-crypt"
+brew "graphviz"
 brew "hostess"
 brew "htop"
 brew "httpie"
 brew "httpstat"
 brew "hub"
 brew "icdiff"
-brew "jq"
-brew "kubernetes-cli"
+brew "interactive-rebase-tool"
+brew "kubectx"
 brew "leiningen"
 brew "lftp"
+brew "libidn2"
 brew "loc"
 brew "m-cli"
 brew "mas"
@@ -43,23 +50,32 @@ brew "ncdu"
 brew "neovim"
 brew "nvm"
 brew "peco"
+brew "pgcli"
 brew "pv"
+brew "python-yq"
+brew "q"
 brew "rename"
 brew "ripgrep"
-brew "rust"
 brew "rustup-init"
 brew "shellcheck"
 brew "tee-clc"
+brew "terraform"
 brew "tig"
 brew "tree"
 brew "vim"
 brew "watch"
 brew "wifi-password"
+brew "xsv"
+brew "yarn"
 brew "zsh"
 brew "heroku/brew/heroku"
+brew "railwaycat/emacsmacport/emacs-mac"
 brew "wagoodman/dive/dive"
+cask "alacritty"
 cask "alfred"
 cask "appcleaner"
+cask "bitwarden"
+cask "brave-browser"
 cask "cyberduck"
 cask "dbeaver-community"
 cask "docker-edge"
@@ -77,9 +93,11 @@ cask "helium"
 cask "imageoptim"
 cask "iterm2"
 cask "java8"
+cask "joplin"
 cask "karabiner-elements"
 cask "keepassxc"
 cask "keybase"
+cask "kitty"
 cask "ngrok"
 cask "numi"
 cask "onedrive"
@@ -101,21 +119,23 @@ cask "transmission"
 cask "typinator"
 cask "viscosity"
 cask "visual-studio-code"
-mas "Airmail 3", id: 918858936
-mas "BetterSnapTool", id: 417375580
-mas "Boxy", id: 1053031090
-mas "DaisyDisk", id: 411643860
-mas "Dice Pass", id: 997688302
-mas "Fenêtre", id: 1286743037
-mas "Folder Tidy", id: 486626129
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "Irvue", id: 1039633667
-mas "Keynote", id: 409183694
-mas "LastPass", id: 926036361
-mas "Magnet", id: 441258766
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
-mas "PiPifier", id: 1160374471
-mas "Shazam", id: 897118787
-mas "Xcode", id: 497799835
+cask "yed"
+mas "com.apple.dt.Xcode", id: 497799835
+mas "com.apple.garageband10", id: 682658836
+mas "com.apple.iMovieApp", id: 408981434
+mas "com.apple.iWork.Keynote", id: 409183694
+mas "com.apple.iWork.Numbers", id: 409203825
+mas "com.apple.iWork.Pages", id: 409201541
+mas "com.crowdcafe.windowmagnet", id: 441258766
+mas "com.daisydiskapp.DaisyDisk", id: 411643860
+mas "com.francescodilorenzo.Mailbro", id: 1053031090
+mas "com.hegenberg.BetterSnapTool", id: 417375580
+mas "com.lastpass.LastPass", id: 926036361
+mas "com.leonspok.osx.Irvue", id: 1039633667
+mas "com.microsoft.onenote.mac", id: 784801555
+mas "com.shazam.mac.Shazam", id: 897118787
+mas "com.tunabellysoftware.cleanmydesktop", id: 486626129
+mas "com.yoannmoinet.fenetre", id: 1286743037
+mas "de.APPenzeller.PiPifier", id: 1160374471
+mas "it.bloop.airmail2", id: 918858936
+mas "net.troz.DicePass", id: 997688302

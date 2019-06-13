@@ -12,4 +12,8 @@
 - [ ] Completion progress indicator on long blocks
 - [x] history navigation
 - [x] Go deeper in `c` completion (subdirs)
-- [ ] undo support
+- [ ] undo support https://github.com/fish-shell/fish-shell/issues/1367
+- [ ] Boostrap/dotbot
+- [x] (ish) Subcommand (git) completion https://github.com/fish-shell/fish-shell/issues/1976#issuecomment-452943987
+- [x] Git hash in prompt
+- [ ] Prompt tweaks

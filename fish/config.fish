@@ -5,11 +5,11 @@
 
 ## your project folder that we can `c [tab]` to
 set -q PROJECTS
-or set -g PROJECTS "$HOME/src"
+or set -gx PROJECTS "$HOME/src"
 
 ## shortcut to this dotfiles path is $DOTFILES
 set -q DOTFILES
-or set -g DOTFILES "$PROJECTS/dotfiles"
+or set -gx DOTFILES "$PROJECTS/dotfiles"
 
 ## Location of all fish shell config files
 set -q FISH_HOME
@@ -41,4 +41,19 @@ if status --is-interactive
     ## Load prompt settings
     test -f "$FISH_HOME/prompt.fish"
     and source "$FISH_HOME/prompt.fish"
+
+    ## More stuff not heavy enough for their own files yet
+
+    ## Setup keybindings
+    set -g fish_key_bindings hybrid_bindings
+    bind . expand-dot-to-parent-directory-path
+
+    ## Setup some git subcommand completions
+    ## This utilizes the alias hack from __fish_git_using_command
+    set -g __fish_git_alias_co checkout
+    set -g __fish_git_alias_rb rebase
+    set -g __fish_git_alias_rbo rebase
+    set -g __fish_git_alias_rbi rebase
+    set -g __fish_git_alias_rbif rebase
+    set -g __fish_git_alias_du diff
 end

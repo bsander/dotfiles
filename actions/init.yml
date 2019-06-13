@@ -13,6 +13,8 @@
       command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     - description: Running regular dotfiles ops
       command: $DOTFILES/bin/dot default
+    - description: Add ZSH and fish to /etc/shells
+      command: rg -qxF '/usr/local/bin/fish' /etc/shells || echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
     - description: Make ZSH the default shell
       command: sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
     - description: Creating required directories
