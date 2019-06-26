@@ -10,7 +10,6 @@ tap "kryptco/tap"
 tap "railwaycat/emacsmacport"
 tap "wagoodman/dive"
 brew "awscli"
-brew "azure-cli"
 brew "bash"
 brew "bat"
 brew "choose-gui"
@@ -25,9 +24,7 @@ brew "fd"
 brew "findutils"
 brew "fish"
 brew "fzf"
-brew "ghq"
 brew "git"
-brew "git-cal"
 brew "git-crypt"
 brew "graphviz"
 brew "hostess"
@@ -71,14 +68,13 @@ brew "zsh"
 brew "heroku/brew/heroku"
 brew "railwaycat/emacsmacport/emacs-mac"
 brew "wagoodman/dive/dive"
-cask "alacritty"
 cask "alfred"
 cask "appcleaner"
 cask "bitwarden"
 cask "brave-browser"
 cask "cyberduck"
 cask "dbeaver-community"
-cask "docker-edge"
+cask "docker"
 cask "dropbox"
 cask "evernote"
 cask "firefox"
@@ -93,19 +89,15 @@ cask "helium"
 cask "imageoptim"
 cask "iterm2"
 cask "java8"
-cask "joplin"
 cask "karabiner-elements"
-cask "keepassxc"
 cask "keybase"
 cask "kitty"
 cask "ngrok"
 cask "numi"
-cask "onedrive"
 cask "osxfuse"
 cask "pgadmin4"
 cask "postman"
 cask "qlstephen"
-cask "rambox"
 cask "skitch"
 cask "softu2f"
 cask "sonos"
@@ -119,23 +111,17 @@ cask "transmission"
 cask "typinator"
 cask "viscosity"
 cask "visual-studio-code"
-cask "yed"
 mas "com.apple.dt.Xcode", id: 497799835
 mas "com.apple.garageband10", id: 682658836
 mas "com.apple.iMovieApp", id: 408981434
 mas "com.apple.iWork.Keynote", id: 409183694
 mas "com.apple.iWork.Numbers", id: 409203825
 mas "com.apple.iWork.Pages", id: 409201541
-mas "com.crowdcafe.windowmagnet", id: 441258766
 mas "com.daisydiskapp.DaisyDisk", id: 411643860
-mas "com.francescodilorenzo.Mailbro", id: 1053031090
-mas "com.hegenberg.BetterSnapTool", id: 417375580
 mas "com.lastpass.LastPass", id: 926036361
 mas "com.leonspok.osx.Irvue", id: 1039633667
-mas "com.microsoft.onenote.mac", id: 784801555
 mas "com.shazam.mac.Shazam", id: 897118787
 mas "com.tunabellysoftware.cleanmydesktop", id: 486626129
 mas "com.yoannmoinet.fenetre", id: 1286743037
 mas "de.APPenzeller.PiPifier", id: 1160374471
-mas "it.bloop.airmail2", id: 918858936
 mas "net.troz.DicePass", id: 997688302
