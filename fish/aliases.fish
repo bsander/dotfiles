@@ -31,8 +31,12 @@ abbr --add --global dr "docker run --rm -it"
 
 abbr --add --global dc docker-compose
 abbr --add --global dcr "docker-compose run --rm"
-alias dcl="docker-compose logs --follow --tail=20"
-alias dcd="docker-compose down --timeout 0"
+# abbr --add --global dcu "docker-compose up -d && dcl"
+function dcu
+    docker-compose up -d $argv && docker-compose logs --follow --tail=20
+end
+abbr --add --global dcl "docker-compose logs --follow --tail=20"
+abbr --add --global dcd "docker-compose down --timeout 0"
 
 abbr --add --global k kubectl
 abbr --add --global kx kubectx
