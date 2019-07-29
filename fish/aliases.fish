@@ -11,8 +11,9 @@ function e
     ## Open current directory when no arguments are given
     if not count $argv >/dev/null
         e .
+        return
     end
-    $BASE_VISUAL $argv
+    eval $VISUAL $argv
 end
 
 ## Frequently used apps
@@ -31,6 +32,7 @@ abbr --add --global dr "docker run --rm -it"
 
 abbr --add --global dc docker-compose
 abbr --add --global dcr "docker-compose run --rm"
+abbr --add --global dcs "docker-compose stop"
 # abbr --add --global dcu "docker-compose up -d && dcl"
 function dcu
     docker-compose up -d $argv && docker-compose logs --follow --tail=20

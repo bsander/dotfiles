@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-export BASE_EDITOR=vim
-export BASE_VISUAL=code
 export BROWSER="open"
 # export PAGER=less
 
-export EDITOR="$BASE_EDITOR -w"
-export VISUAL="$BASE_VISUAL -w"
+# export EDITOR="emacsclient -nw"
+# export VISUAL="$EDITOR"
 
 # kubectl: Always consider local `kube-config` file
 # export KUBECONFIG="./kube-config"

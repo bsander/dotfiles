@@ -1,13 +1,15 @@
-set -gx BASE_EDITOR "emacs -nw"
-# set -gx BASE_VISUAL code
-set -gx BASE_VISUAL emacs
+# set -gx BASE_EDITOR "emacs -nw"
+# # set -gx BASE_VISUAL code
+# set -gx BASE_VISUAL emacs
 set -gx BROWSER open
 set -gx PAGER less
 
-set -gx EDITOR "$BASE_EDITOR -w"
-set -gx VISUAL "$BASE_VISUAL -w"
+# set -gx EDITOR "$BASE_EDITOR -w"
+# set -gx VISUAL "$BASE_VISUAL -w"
+set -gx EDITOR "emacsclient -a ''"
+set -gx VISUAL "emacsclient -a '' -n" # Don't wait for command completion
 
-set -gx GIT_EDITOR "$BASE_EDITOR"
+set -gx GIT_EDITOR "$EDITOR"
 
 ## kubectl: Always consider local `kube-config` file
 # set -gx KUBECONFIG "./kube-config"

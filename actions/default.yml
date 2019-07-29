@@ -10,6 +10,9 @@
     ~/.chunkwmrc: dotfiles/chunkwmrc.sh
     ~/.config/fish: fish
     ~/.config/kitty: kitty
+    ~/.config/nvim: vim
+    ~/.vim: vim
+    ~/.vimrc: vim/init.vim
     ~/.curlrc: dotfiles/curlrc.ini
     ~/docker-compose.yml: dotfiles/docker-compose.yml
     # ~/.editorconfig: dotfiles/editorconfig.ini
@@ -39,5 +42,7 @@
       command: brew upgrade
     - command: brew bundle check --file=Brewfile.sh || brew bundle --file=Brewfile.sh
       description: Installing software
+    - command: yarn global upgrade --latest
+      description: Upgrading global npm packages
     - command: brew cleanup
       description: Cleaning up
