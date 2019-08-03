@@ -11,6 +11,7 @@
     ~/.config/fish: fish
     ~/.config/kitty: kitty
     ~/.config/nvim: vim
+    ~/.ripgreprc: dotfiles/ripgreprc
     ~/.vim: vim
     ~/.vimrc: vim/init.vim
     ~/.curlrc: dotfiles/curlrc.ini

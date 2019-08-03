@@ -37,6 +37,8 @@ or set -gx LC_ALL "en_US.UTF-8"
 ## Fix for `tr: Illegal byte sequence`: https://unix.stackexchange.com/a/141434
 set -gx LC_CTYPE "C"
 
+## Ripgrep config file
+set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
 
 ## Set PATH
 set -gx PATH \

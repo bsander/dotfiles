@@ -111,7 +111,7 @@ chunkc set focused_border_skip_monocle   0
 #
 
 chunkc set ffm_bypass_modifier fn
-chunkc set ffm_standby_on_float 1
+chunkc set ffm_standby_on_float 0
 chunkc set ffm_disable_autoraise 1
 
 #

@@ -1,23 +1,29 @@
-set autoread " Auto-refresh unchanged files when content changes
-set number
-set nocompatible
+scriptencoding utf-8
+
+" TODO LIST
+" - :cdo :cfdo - interactive global search replace
+" - Git and Tig and Fugitive and Merginal
+" - deal with yank/paste vs system registry
+" - figure out localleader
+" - iab
+" - vimdiff
+" FIXME - broken
+
 let g:mapleader=' '
 let g:maplocalleader = ','
 
 call plug#begin('~/.vim/vendor')
 	Plug 'tpope/vim-sensible'
+  Plug 'liuchengxu/vim-better-default'
 
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 	Plug 'dbakker/vim-projectroot'
 	Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
 	Plug 'lotabout/skim.vim'
-
+  Plug 'rbgrouleff/bclose.vim'
 	Plug 'morhetz/gruvbox'
-	Plug 'scrooloose/nerdtree'
-	Plug 'mbbill/undotree'
 
-	Plug 'fszymanski/deoplete-emoji'
 	Plug 'w0rp/ale'
 
 	" Text Manipulation
@@ -30,30 +36,62 @@ call plug#begin('~/.vim/vendor')
 	Plug 'tommcdo/vim-exchange'
 
 	" Languages
+	Plug 'editorconfig/editorconfig-vim'
 	Plug 'sheerun/vim-polyglot'
 	Plug 'jparise/vim-graphql'
 
 	" UI / Syntax
-	Plug 'editorconfig/editorconfig-vim'
+  Plug 'airblade/vim-gitgutter'
 	Plug 'luochen1990/rainbow'
-	Plug 'liuchengxu/vim-which-key'
-	" Plug 'jimmay5469/vim-spacemacs'
-	" Plug 'liuchengxu/vim-better-default'
 
+  " Tools
+	Plug 'liuchengxu/vim-which-key'
+  Plug 'iberianpig/tig-explorer.vim'
+	Plug 'mbbill/undotree'
+	Plug 'scrooloose/nerdtree'
+  Plug 'tpope/vim-fugitive'
+  Plug 'idanarye/vim-merginal'
 call plug#end()
+
+
+let g:vim_better_default_enable_folding = 0
+let g:vim_better_default_persistent_undo = 0
+let g:vim_better_default_key_mapping = 1
+let g:vim_better_default_basic_key_mapping = 0
+let g:vim_better_default_buffer_key_mapping = 0
+let g:vim_better_default_file_key_mapping = 0
+let g:vim_better_default_fold_key_mapping = 0
+let g:vim_better_default_window_key_mapping = 0
+
+runtime! plugin/default.vim
+set termguicolors " make terminal colors vork in vimr
+set autoread " Auto-refresh unchanged files when content changes
+set norelativenumber
+set nonumber
+set signcolumn=yes
+set timeoutlen=600
 
 colorscheme gruvbox
 set background=dark " Gruvbox variant
 
 call deoplete#custom#option('sources', {
-\  '_': ['ale', 'emoji'],
+\  '_': ['ale'],
 \ })
 
+let g:fzf_buffers_jump = 1
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 let g:NERDCompactSexyComs = 0
+let g:NERDDefaultAlign = 'left'
+
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
 
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1
@@ -62,15 +100,17 @@ let g:EasyMotion_keys = 'jfkdhgls;anvmcutiroe'
 
 let g:rainbow_active = 1
 
+let g:undotree_WindowLayout = 4
+let g:undotree_ShortIndicators = 1
+let g:undotree_SetFocusWhenToggle = 1
+
+
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
 \   'auto_complete_delay': 150,
 \   'auto_refresh_delay': 150,
 \   'smart_case': v:true,
 \ })
-call deoplete#custom#source('emoji', 'filetypes', [])
-call deoplete#custom#source('emoji', 'converters', ['converter_emoji'])
-
 
 " let g:ale_set_balloons = 1
 let g:ale_fix_on_save = 1
@@ -82,8 +122,8 @@ let g:ale_linters = {
 \ }
 
 let g:ale_fixers = {
-\    'javascript': ['eslint'],
-\    'typescript': ['eslint']
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint']
 \ }
 
 " let g:deoplete#enable_at_startup = 1
@@ -107,34 +147,53 @@ let g:fzf_colors = {
 
 " KEYBINDINGS
 
-" NORMAL
-" Move line
-nnoremap <silent> J :m+1<CR>
-nnoremap <silent> K :m-2<CR>
-" duplicate line
-nnoremap gd :t.<CR>
-
-" VISUAL
-" move selection
-vmap <silent> J :'<'>,m'>+1<CR>:normal gv<CR>
-vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
-" duplicate selection
-vnoremap gd "ay'>p
-" vnoremap gd :'<'>,t'>.<CR>:'>+1<CR> " Can't be repeated with multiple lines
-
-
-" INSERT
+" ALL
+  " Redo
+  noremap U <C-r>
+  " Clear search highlight on escape
+  nnoremap <silent> <esc> :noh<CR><esc>
+  " God damn macros (move to <Leader>xq)
+  noremap q <Nop>
+  " Move line or selection
+  nnoremap <silent> J :m+1<CR>
+  nnoremap <silent> K :m-2<CR>
+  vmap <silent> J :'<'>,m'>+1<CR>:normal gv<CR>
+  vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
+  " Duplicate line or selection
+  nnoremap gd :t.<CR>
+  vnoremap gd "ay'>p
+  " Yank to the end of line
+  nnoremap Y y$
+  " Quit visual mode
+  vnoremap v <Esc>
+  " Moving around in insert/command modes
+  inoremap <C-h> <Left>
+  inoremap <C-j> <Down>
+  inoremap <C-k> <Up>
+  inoremap <C-l> <Right>
+  inoremap <C-a> <Home>
+  inoremap <C-e> <End>
+  inoremap <C-d> <Delete>
+  cnoremap <C-h> <Left>
+  cnoremap <C-j> <Down>
+  cnoremap <C-k> <Up>
+  cnoremap <C-l> <Right>
+  cnoremap <C-a> <Home>
+  cnoremap <C-e> <End>
+  cnoremap <C-d> <Delete>
+  " jj | Escaping insert/command mode
+  inoremap jj <Esc>
+  cnoremap jj <C-c>
 
 
 " WHICH_KEY
 let g:which_key_map =  {}
-set timeoutlen=150 " vim-which-key delay
 
 " LEADER LEADER
-noremap <leader><Space> :Commands<CR>
-noremap <leader><C-Space> :History:<CR>
-nnoremap <leader><ESC> <ESC>
-nnoremap <leader>/ :ProjectRootExe Rg<CR>
+noremap <Leader><Space> :Commands<CR>
+noremap <Leader><C-Space> :History:<CR>
+nnoremap <Leader><ESC> <ESC>
+nnoremap <Leader>/ :ProjectRootExe Rg<CR>
 nnoremap <Leader><Tab> :bnext<CR>
 let g:which_key_map['/'] = 'Search project'
 
@@ -143,57 +202,67 @@ let g:which_key_map.b = { 'name' : '+buffer' }
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bn :bnext<CR>
-nnoremap <Leader>bd :bdelete<CR>
-nnoremap <Leader>bD :bdelete!<CR>
+nnoremap <Leader>bd :Bclose<CR>
+nnoremap <Leader>bD :Bclose!<CR>
 nnoremap <Leader>br :edit<CR>
 nnoremap <Leader>bR :edit!<CR>
 
 " COMMENT (NERDCommenter)
 let g:which_key_map.c = { 'name' : '+comment' }
+map <Leader>cc <Plug>NERDCommenterToggle
+map <Leader>ci <Plug>NERDCommenterComment
+map <Leader>cm <Plug>NERDCommenterSexy
+map <Leader>cy <Plug>NERDCommenterYank
+nmap <Leader>cd :call NERDComment(1, 'yank')<CR>:normal p<CR>
+vmap <Leader>cd :call NERDComment(1, 'yank')<CR>:'>normal p<CR>
+map <Leader>ca <Plug>NERDCommenterAppend
 
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
-nnoremap <leader>fs :write<CR>
-nnoremap <leader>ff :ProjectRootExe Files<CR>
-nnoremap <leader>fr :History<CR>
-nnoremap <leader>ft :NERDTreeFind %<CR>
-nnoremap <leader>fT :NERDTreeToggle<CR>
+nnoremap <Leader>fs :write<CR>
+nnoremap <Leader>ff :ProjectRootExe Files<CR>
+nnoremap <Leader>fr :History<CR>
+nnoremap <Leader>ft :NERDTreeToggle<CR>
+nnoremap <Leader>fT :NERDTreeFind %<CR>
+
+" VIMRC / DOTFILE
+let g:which_key_map.f.e = { 'name' : '+vimrc' }
+nnoremap <Leader>fed :edit $MYVIMRC<CR>
+nnoremap <Leader>feR :source $MYVIMRC<CR>
+nnoremap <Leader>feS :write<CR>:source $MYVIMRC<CR>
+nnoremap <Leader>feI :PlugInstall<CR>
+nnoremap <Leader>feU :PlugUpdate<CR>
+nnoremap <Leader>feC :PlugClean<CR>
 
 " GIT
-
+let g:which_key_map.g = { 'name': '+git' }
+map <Leader>gs :Tig status<CR>
+map <Leader>gb :Gblame<CR>
+map <Leader>gg :Git<CR>
+map <Leader>gm :Merginal<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-nmap <leader>jj <Plug>(easymotion-overwin-f2)
+nmap <Leader>jj <Plug>(easymotion-overwin-f2)
 map <Leader>jl <Plug>(easymotion-bd-jk)
 nmap <Leader>jl <Plug>(easymotion-overwin-line)
 map  <Leader>jw <Plug>(easymotion-bd-w)
 nmap <Leader>jw <Plug>(easymotion-overwin-w)
 
-
-" VIMRC / DOTFILE
-let g:which_key_map.f.e = { 'name' : '+vimrc' }
-nnoremap <leader>fed :edit $MYVIMRC<CR>
-nnoremap <leader>feR :source $MYVIMRC<CR>
-nnoremap <leader>feS :write<CR>:source $MYVIMRC<CR>
-nnoremap <leader>feI :PlugInstall<CR>
-nnoremap <leader>feU :PlugUpdate<CR>
-nnoremap <leader>feC :PlugClean<CR>
-
-
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
-nnoremap <leader>qq :confirm qall<CR>
-nnoremap <leader>qs :wqall<CR>
-nnoremap <leader>qQ :qall!<CR>
+nnoremap <Leader>qq :confirm qall<CR>
+nnoremap <Leader>qs :wqall<CR>
+nnoremap <Leader>qQ :qall!<CR>
 
 " SEARCH
 let g:which_key_map.s = { 'name': '+search' }
-nnoremap <leader>ss :BLines<CR>
+nnoremap <Leader>ss :BLines<CR>
 
 " TOGGLES
 let g:which_key_map.t = { 'name': '+toggle' }
-nnoremap <leader>tn :set invnumber<CR>
+nnoremap <Leader>tn :set invnumber<CR>
+nnoremap <Leader>tN :set invrelativenumber<CR>
 nnoremap <Leader>t- :let &scrolloff=999-&scrolloff<CR>
 
 
@@ -207,7 +276,7 @@ nnoremap <Leader>wo <C-W>o
 let g:which_key_map.w.o = 'only'
 nnoremap <Leader>w= <C-W>=
 let g:which_key_map.w['='] = 'equalize'
-nnoremap <leader>wt :tabnew<CR>
+nnoremap <Leader>wt :tabnew<CR>
 
 nnoremap <Leader>w. :tabnext<CR>
 let g:which_key_map.w['.'] = '[>] tab'
@@ -258,13 +327,21 @@ let g:which_key_map.w.v = '[|] split'
 
 " TRANSFORMATIONS
 let g:which_key_map.x = {'name': '+transform' }
-nnoremap <leader>xd :t.<CR>
-vnoremap <leader>xd "ay'>p
+nnoremap <Leader>xd :t.<CR>
+vnoremap <Leader>xd "ay'>pgv
+let g:which_key_map.x.d = 'duplicate'
+nmap <Leader>xo <Plug>(NetrwBrowseX)
+vmap <Leader>xo <Plug>(NetrwBrowseXVis)
+noremap <Leader>xu :<C-u>UndotreeToggle<CR>
+noremap <Leader>xq q
+let g:which_key_map.x.q = 'macro'
+noremap <Leader>x@ :r!date<CR>
+
 
 " LOCAL LEADER
 let g:which_key_local_map = {}
 noremap <silent> <localleader><localleader> :ALEHover<CR>
-noremap <silent> <localleader><leader> :ALEFix<CR>
+noremap <silent> <localleader><Leader> :ALEFix<CR>
 
 " ERRORS
 let g:which_key_local_map.e = {'name': '+errors'}
@@ -277,14 +354,11 @@ noremap <localleader>ed :lclose<CR>
 call which_key#register('<Space>', 'g:which_key_map')
 call which_key#register(',', 'g:which_key_local_map')
 
-nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <Leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <Leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 vnoremap <silent> <localleader> :<c-u>WhichKeyVisual ','<CR>
-
-" nnoremap <silent> g :<c-u>WhichKey 'g'<CR>
-" vnoremap <silent> g :<c-u>WhichKeyVisual 'g'<CR>
 
 nnoremap <silent> [ :<c-u>WhichKey '['<CR>
 vnoremap <silent> [ :<c-u>WhichKeyVisual '['<CR>
@@ -295,27 +369,21 @@ vnoremap <silent> ] :<c-u>WhichKeyVisual ']'<CR>
 " nnoremap <silent> g :<c-u>WhichKey  'g'<CR> " Kills gg
 " nnoremap <silent> s :<c-u>WhichKey  's'<CR>
 
-" Clear search highlight on escape
-nnoremap <silent> <esc> :noh<CR><esc>
 
-if has('gui_running')
-  " Settings for when running in a GUI
-  set transparency=0
-  set guifont=FiraCode-Regular:h14
-  set guioptions+=gme " gray menu items, menu bar, gui tabs
-  set antialias
-  color ir_black+
-else
-  " Settings for when running in the console
-endif
+autocmd! FileType which_key
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-" https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+" " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
+" autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 function! <SID>AutoProjectRootCD()
   try
-    if &ft != 'help'
+    if &filetype != 'help'
       ProjectRootCD
     endif
   catch
@@ -327,9 +395,11 @@ autocmd BufEnter * call <SID>AutoProjectRootCD()
 
 " Use interactive grep versions
 command! -bang -nargs=* Ag call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
-command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', '÷'))
+command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 
 " Go to last cursor position when reopening file
-if has("autocmd")
+if has('autocmd')
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+autocmd FileType help noremap <buffer> q :q<cr>
