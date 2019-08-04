@@ -220,7 +220,9 @@ map <Leader>ca <Plug>NERDCommenterAppend
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <Leader>fs :write<CR>
+nnoremap <expr> <Leader>fS ':write ' .projectroot#guess() . '/' . expand('%')
 nnoremap <Leader>ff :ProjectRootExe Files<CR>
+nnoremap <Leader>fn :enew<CR>
 nnoremap <Leader>fr :History<CR>
 nnoremap <Leader>ft :NERDTreeToggle<CR>
 nnoremap <Leader>fT :NERDTreeFind %<CR>
