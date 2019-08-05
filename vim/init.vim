@@ -7,48 +7,62 @@ scriptencoding utf-8
 " - figure out localleader
 " - iab
 " - vimdiff
+" - exact matching with fzf/sk and rg
+" - vimr or alacritty?
+" - split up init.vim
+" - toggles
+" - leader group undo (C-h u)
+" - fzf/rg resume
+" - fzf vs skim?
 " FIXME - broken
+" - skim - fuzzy matcher -> more exact
+" - fzf - empty list on no input
 
 let g:mapleader=' '
 let g:maplocalleader = ','
 
 call plug#begin('~/.vim/vendor')
-	Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-sensible'
   Plug 'liuchengxu/vim-better-default'
 
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-	Plug 'dbakker/vim-projectroot'
-	Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-	Plug 'lotabout/skim.vim'
+  " Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+  " Plug 'lotabout/skim.vim'
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
+
+  Plug 'dbakker/vim-projectroot'
   Plug 'rbgrouleff/bclose.vim'
-	Plug 'morhetz/gruvbox'
+  Plug 'morhetz/gruvbox'
 
-	Plug 'w0rp/ale'
+  Plug 'w0rp/ale'
 
-	" Text Manipulation
-	Plug 'tpope/vim-unimpaired'
-	Plug 'terryma/vim-multiple-cursors'
-	Plug 'easymotion/vim-easymotion'
-	Plug 'tpope/vim-surround'
-	Plug 'terryma/vim-expand-region'
-	Plug 'scrooloose/nerdcommenter'
-	Plug 'tommcdo/vim-exchange'
+  " Text Manipulation
+  Plug 'tpope/vim-unimpaired'
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'tpope/vim-surround'
+  Plug 'terryma/vim-expand-region'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'tommcdo/vim-exchange'
 
-	" Languages
-	Plug 'editorconfig/editorconfig-vim'
-	Plug 'sheerun/vim-polyglot'
-	Plug 'jparise/vim-graphql'
+  " Languages
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'jparise/vim-graphql'
 
-	" UI / Syntax
+  " UI / Syntax
+  Plug 'andrewradev/bufferize.vim'
+  Plug 'vim-airline/vim-airline'
   Plug 'airblade/vim-gitgutter'
-	Plug 'luochen1990/rainbow'
+  Plug 'luochen1990/rainbow'
 
   " Tools
-	Plug 'liuchengxu/vim-which-key'
+  Plug 'liuchengxu/vim-which-key'
   Plug 'iberianpig/tig-explorer.vim'
-	Plug 'mbbill/undotree'
-	Plug 'scrooloose/nerdtree'
+  Plug 'mbbill/undotree'
+  Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-fugitive'
   Plug 'idanarye/vim-merginal'
 call plug#end()
@@ -104,6 +118,8 @@ let g:undotree_WindowLayout = 4
 let g:undotree_ShortIndicators = 1
 let g:undotree_SetFocusWhenToggle = 1
 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
@@ -161,7 +177,7 @@ let g:fzf_colors = {
   vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
   " Duplicate line or selection
   nnoremap gd :t.<CR>
-  vnoremap gd "ay'>p
+  vnoremap gd "ay'>"ap
   " Yank to the end of line
   nnoremap Y y$
   " Quit visual mode
@@ -201,9 +217,11 @@ let g:which_key_map['/'] = 'Search project'
 let g:which_key_map.b = { 'name' : '+buffer' }
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
+nnoremap <Leader>bc :enew<CR>
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bd :Bclose<CR>
 nnoremap <Leader>bD :Bclose!<CR>
+nnoremap <Leader>bm :Bufferize messages<CR>
 nnoremap <Leader>br :edit<CR>
 nnoremap <Leader>bR :edit!<CR>
 
@@ -222,15 +240,14 @@ let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <Leader>fs :write<CR>
 nnoremap <expr> <Leader>fS ':write ' .projectroot#guess() . '/' . expand('%')
 nnoremap <Leader>ff :ProjectRootExe Files<CR>
-nnoremap <Leader>fn :enew<CR>
 nnoremap <Leader>fr :History<CR>
 nnoremap <Leader>ft :NERDTreeToggle<CR>
 nnoremap <Leader>fT :NERDTreeFind %<CR>
 
 " VIMRC / DOTFILE
 let g:which_key_map.f.e = { 'name' : '+vimrc' }
-nnoremap <Leader>fed :edit $MYVIMRC<CR>
-nnoremap <Leader>feR :source $MYVIMRC<CR>
+nnoremap <Leader>fed :tabedit $MYVIMRC<CR>
+" nnoremap <Leader>feR :source $MYVIMRC<CR>
 nnoremap <Leader>feS :write<CR>:source $MYVIMRC<CR>
 nnoremap <Leader>feI :PlugInstall<CR>
 nnoremap <Leader>feU :PlugUpdate<CR>
@@ -238,10 +255,15 @@ nnoremap <Leader>feC :PlugClean<CR>
 
 " GIT
 let g:which_key_map.g = { 'name': '+git' }
-map <Leader>gs :Tig status<CR>
+" map <Leader>gs :Tig status<CR>
 map <Leader>gb :Gblame<CR>
 map <Leader>gg :Git<CR>
+map <Leader>gl :Glog!<CR>
 map <Leader>gm :Merginal<CR>
+
+" HELP
+let g:which_key_map.h = { 'name': '+help' }
+map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
@@ -396,8 +418,17 @@ endfunction
 autocmd BufEnter * call <SID>AutoProjectRootCD()
 
 " Use interactive grep versions
-command! -bang -nargs=* Ag call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
-command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+" command! -bang -nargs=* Ag call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+" command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', 'alt-/'),
+  \   <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Go to last cursor position when reopening file
 if has('autocmd')
