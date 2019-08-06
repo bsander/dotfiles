@@ -1,26 +1,26 @@
 scriptencoding utf-8
 
 " TODO LIST
-" - :cdo :cfdo - interactive global search replace
-" - Git and Tig and Fugitive and Merginal
+" - :cdo :cfdo - interactive global search replace (qfreplace plugin)
 " - deal with yank/paste vs system registry
-" - figure out localleader
 " - iab
 " - vimdiff
-" - vimr or alacritty?
 " - split up init.vim
 " - toggles
 " - leader group undo (C-h u)
-" - fzf/rg resume
-" - fzf vs skim?
+" - tig - rebase and un/stage keybindings
+" - customize easymotion setup
+" - proper debugging support
 " FIXME - broken
-" - skim - fuzzy matcher -> more exact
 " - fzf - empty list on no input
+" - figure out tabline (tabs - windows - buffers)
+" - NERDCommenterInsert adds extra newline
 
 let g:mapleader=' '
 let g:maplocalleader = ','
 
 call plug#begin('~/.vim/vendor')
+
   Plug 'tpope/vim-sensible'
   Plug 'liuchengxu/vim-better-default'
 
@@ -32,19 +32,21 @@ call plug#begin('~/.vim/vendor')
   Plug 'junegunn/fzf.vim'
 
   Plug 'dbakker/vim-projectroot'
+  Plug 'moll/vim-bbye'
   Plug 'rbgrouleff/bclose.vim'
   Plug 'morhetz/gruvbox'
 
   Plug 'w0rp/ale'
 
   " Text Manipulation
-  Plug 'tpope/vim-unimpaired'
-  Plug 'terryma/vim-multiple-cursors'
+  Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
+  Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
   Plug 'easymotion/vim-easymotion'
   Plug 'tpope/vim-surround'
   Plug 'terryma/vim-expand-region'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tommcdo/vim-exchange'
+  Plug 'jiangmiao/auto-pairs'
 
   " Languages
   Plug 'editorconfig/editorconfig-vim'
@@ -65,6 +67,10 @@ call plug#begin('~/.vim/vendor')
   Plug 'tpope/vim-fugitive'
   Plug 'idanarye/vim-merginal'
   Plug 'DataWraith/auto_mkdir'
+
+  " Experimental
+  Plug 'thinca/vim-qfreplace'
+
 call plug#end()
 
 
@@ -85,6 +91,7 @@ set nonumber
 set signcolumn=yes
 set timeoutlen=600
 set updatetime=600
+set formatoptions-=cro " https://superuser.com/a/271024
 
 colorscheme gruvbox
 set background=dark " Gruvbox variant
@@ -167,45 +174,50 @@ let g:ale_fixers = {
 
 
 " KEYBINDINGS
-
-" ALL
-  " Redo
-  noremap U <C-r>
-  " Clear search highlight on escape
-  nnoremap <silent> <esc> :noh<CR><esc>
-  " God damn macros (move to <Leader>xq)
-  noremap q <Nop>
-  " Move line or selection
-  nnoremap <silent> J :m+1<CR>
-  nnoremap <silent> K :m-2<CR>
-  vmap <silent> J :'<'>,m'>+1<CR>:normal gv<CR>
-  vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
-  " Duplicate line or selection
-  nnoremap gd :t.<CR>
-  vnoremap gd "ay'>"ap
-  " Yank to the end of line
-  nnoremap Y y$
-  " Quit visual mode
-  vnoremap v <Esc>
-  " Moving around in insert/command modes
-  inoremap <C-h> <Left>
-  inoremap <C-j> <Down>
-  inoremap <C-k> <Up>
-  inoremap <C-l> <Right>
-  inoremap <C-a> <Home>
-  inoremap <C-e> <End>
-  inoremap <C-d> <Delete>
-  cnoremap <C-h> <Left>
-  cnoremap <C-j> <Down>
-  cnoremap <C-k> <Up>
-  cnoremap <C-l> <Right>
-  cnoremap <C-a> <Home>
-  cnoremap <C-e> <End>
-  cnoremap <C-d> <Delete>
-  " jj | Escaping insert/command mode
-  inoremap jj <Esc>
-  cnoremap jj <C-c>
-
+" Redo
+noremap U <C-r>
+" Clear search highlight on escape
+nnoremap <silent> <esc> :noh<CR><esc>
+" God damn macros (move to <Leader>xq)
+noremap q <Nop>
+noremap Q <Nop>
+" Move line or selection
+nnoremap <silent> J :m+1<CR>
+nnoremap <silent> K :m-2<CR>
+vmap <silent> J :'<'>,m'>+1<CR>:normal gv<CR>
+vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
+" Join lines
+noremap H k:join!<CR>
+noremap L :join!<CR>
+" Duplicate line or selection
+nnoremap gd :t.<CR>
+vnoremap gd "ay'>"ap
+" Yank to the end of line
+nnoremap Y y$
+" Quit visual mode
+vnoremap v <Esc>
+" Moving around in insert/command modes
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-d> <Delete>
+cnoremap <C-h> <Left>
+cnoremap <C-j> <Down>
+cnoremap <C-k> <Up>
+cnoremap <C-l> <Right>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Delete>
+" jj | Escaping insert/command mode
+inoremap jj <Esc>
+cnoremap jj <C-c>
+" Cycle deoplete suggestions on tab
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" Exit terminal insert mode on Esc
+tnoremap <Esc><Esc> <C-\><C-n>
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -216,6 +228,8 @@ noremap <Leader><C-Space> :History:<CR>
 nnoremap <Leader><ESC> <ESC>
 nnoremap <Leader>/ :ProjectRootExe Rg<CR>
 nnoremap <Leader><Tab> :bnext<CR>
+nnoremap <Leader><S-Tab> :bprev<CR>
+noremap <Leader>' :split term://$SHELL<CR>
 let g:which_key_map['/'] = 'Search project'
 
 " BUFFER
@@ -223,8 +237,8 @@ let g:which_key_map.b = { 'name' : '+buffer' }
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bn :bnext<CR>
-nnoremap <Leader>bd :Bclose<CR>
-nnoremap <Leader>bD :Bclose!<CR>
+nnoremap <Leader>bd :Bdelete<CR>
+nnoremap <Leader>bD :Bdelete!<CR>
 nnoremap <Leader>bm :Bufferize messages<CR>
 nnoremap <Leader>br :edit<CR>
 nnoremap <Leader>bR :edit!<CR>
@@ -242,7 +256,9 @@ map <Leader>ca <Plug>NERDCommenterAppend
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <Leader>fs :write<CR>
-nnoremap <expr> <Leader>fS ':write ' .projectroot#guess() . '/' . expand('%')
+nnoremap <Leader>fS :wall<CR>
+nnoremap <expr> <Leader>fR ':write ' . expand('%:p')
+nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
 nnoremap <Leader>ff :ProjectRootExe Files<CR>
 nnoremap <Leader>fn :enew<CR>
 nnoremap <Leader>fr :History<CR>
@@ -250,33 +266,37 @@ nnoremap <Leader>ft :NERDTreeToggle<CR>
 nnoremap <Leader>fT :NERDTreeFind %<CR>
 
 " VIMRC / DOTFILE
-let g:which_key_map.f.e = { 'name' : '+vimrc' }
-nnoremap <Leader>fed :tabedit $MYVIMRC<CR>
-" nnoremap <Leader>feR :source $MYVIMRC<CR>
-nnoremap <Leader>feS :write<CR>:source $MYVIMRC<CR>
-nnoremap <Leader>feI :PlugInstall<CR>
-nnoremap <Leader>feU :PlugUpdate<CR>
-nnoremap <Leader>feC :PlugClean<CR>
+let g:which_key_map.f.v = { 'name' : '+vimrc' }
+nnoremap <Leader>fvd :edit $MYVIMRC<CR>
+nnoremap <Leader>fvS :write<CR>:source $MYVIMRC<CR>
+nnoremap <Leader>fvI :PlugInstall<CR>
+nnoremap <Leader>fvU :PlugUpdate<CR>
+nnoremap <Leader>fvC :PlugClean<CR>
 
 " GIT
 let g:which_key_map.g = { 'name': '+git' }
 " map <Leader>gs :Tig status<CR>
-map <Leader>gb :Gblame<CR>
-map <Leader>gg :Git<CR>
-map <Leader>gl :Glog!<CR>
-map <Leader>gm :Merginal<CR>
+map <Leader>gg :Tig status<CR>
+map <Leader>gf :Git fs<Space>
+map <Leader>gl :Tig<CR>
+map <Leader>gb :Tig refs<CR>
+map <Leader>gB :Gblame<CR>
+" map <Leader>gg :Git<CR>
+" map <Leader>gl :Glog!<CR>
+" map <Leader>gm :Merginal<CR>
+map <Leader>gs :terminal git sync<CR>
 
 " HELP
 let g:which_key_map.h = { 'name': '+help' }
+map <Leader>hh :Helptags<CR>
 map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
+nmap <Leader>J <Plug>(easymotion-bd-f)
 let g:which_key_map.j = { 'name': '+jump' }
-nmap <Leader>jj <Plug>(easymotion-overwin-f2)
+map <Leader>jj <Plug>(easymotion-bd-f2)
 map <Leader>jl <Plug>(easymotion-bd-jk)
-nmap <Leader>jl <Plug>(easymotion-overwin-line)
 map  <Leader>jw <Plug>(easymotion-bd-w)
-nmap <Leader>jw <Plug>(easymotion-overwin-w)
 
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
@@ -305,12 +325,12 @@ nnoremap <Leader>wo <C-W>o
 let g:which_key_map.w.o = 'only'
 nnoremap <Leader>w= <C-W>=
 let g:which_key_map.w['='] = 'equalize'
-nnoremap <Leader>wt :tabnew<CR>
 
-nnoremap <Leader>w. :tabnext<CR>
-let g:which_key_map.w['.'] = '[>] tab'
-nnoremap <Leader>w, :tabprev<CR>
-let g:which_key_map.w[','] = '[<] tab'
+" nnoremap <Leader>wt :tabedit<CR>
+" nnoremap <Leader>w. :tabnext<CR>
+" let g:which_key_map.w['.'] = '[>] tab'
+" nnoremap <Leader>w, :tabprev<CR>
+" let g:which_key_map.w[','] = '[<] tab'
 
 nnoremap <Leader>ww <C-W>w
 let g:which_key_map.w.w = '[O] focus'
@@ -429,5 +449,7 @@ command! -bang -nargs=? -complete=dir Files
 if has('autocmd')
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
+" close help window
 autocmd FileType help noremap <buffer> q :q<cr>
+" Start terminal in insert-mode
+autocmd TermOpen * startinsert
