@@ -7,7 +7,6 @@ scriptencoding utf-8
 " - figure out localleader
 " - iab
 " - vimdiff
-" - exact matching with fzf/sk and rg
 " - vimr or alacritty?
 " - split up init.vim
 " - toggles
@@ -65,6 +64,7 @@ call plug#begin('~/.vim/vendor')
   Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-fugitive'
   Plug 'idanarye/vim-merginal'
+  Plug 'DataWraith/auto_mkdir'
 call plug#end()
 
 
@@ -84,6 +84,7 @@ set norelativenumber
 set nonumber
 set signcolumn=yes
 set timeoutlen=600
+set updatetime=600
 
 colorscheme gruvbox
 set background=dark " Gruvbox variant
@@ -92,58 +93,10 @@ call deoplete#custom#option('sources', {
 \  '_': ['ale'],
 \ })
 
+" FZF
 let g:fzf_buffers_jump = 1
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-let g:NERDCreateDefaultMappings = 0
-let g:NERDSpaceDelims = 1
-let g:NERDCommentEmptyLines = 1
-let g:NERDTrimTrailingWhitespace = 1
-let g:NERDToggleCheckAllLines = 1
-let g:NERDCompactSexyComs = 0
-let g:NERDDefaultAlign = 'left'
-
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_keys = 'jfkdhgls;anvmcutiroe'
-
-let g:rainbow_active = 1
-
-let g:undotree_WindowLayout = 4
-let g:undotree_ShortIndicators = 1
-let g:undotree_SetFocusWhenToggle = 1
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-\   'auto_complete_delay': 150,
-\   'auto_refresh_delay': 150,
-\   'smart_case': v:true,
-\ })
-
-" let g:ale_set_balloons = 1
-let g:ale_fix_on_save = 1
-let g:ale_linters = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'typescript': ['tsserver', 'eslint'],
-\   'vim': ['vint']
-\ }
-
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['eslint']
-\ }
-
-" let g:deoplete#enable_at_startup = 1
-
 " Customize fzf colors to match your color scheme
 let g:fzf_colors = {
 \ 'fg':      ['fg', 'Normal'],
@@ -160,6 +113,58 @@ let g:fzf_colors = {
 \ 'spinner': ['fg', 'Label'],
 \ 'header':  ['fg', 'Comment']
 \ }
+
+" NerdCommenter
+let g:NERDCreateDefaultMappings = 0
+let g:NERDSpaceDelims = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+let g:NERDCompactSexyComs = 0
+let g:NERDDefaultAlign = 'left'
+
+" NERDTree
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+
+" EasyMotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_keys = 'jfkdhgls;anvmcutiroe'
+
+" Rainbow Parentheses
+let g:rainbow_active = 1
+
+" UndoTree
+let g:undotree_WindowLayout = 4
+let g:undotree_ShortIndicators = 1
+let g:undotree_SetFocusWhenToggle = 1
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+\   'auto_complete_delay': 150,
+\   'auto_refresh_delay': 150,
+\   'smart_case': v:true,
+\ })
+
+" ALE
+let g:ale_set_balloons = 1
+let g:ale_fix_on_save = 1
+let g:ale_linters = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'vim': ['vint'],
+\ }
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\ }
+
 
 " KEYBINDINGS
 
@@ -217,7 +222,6 @@ let g:which_key_map['/'] = 'Search project'
 let g:which_key_map.b = { 'name' : '+buffer' }
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
-nnoremap <Leader>bc :enew<CR>
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bd :Bclose<CR>
 nnoremap <Leader>bD :Bclose!<CR>
@@ -240,6 +244,7 @@ let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <Leader>fs :write<CR>
 nnoremap <expr> <Leader>fS ':write ' .projectroot#guess() . '/' . expand('%')
 nnoremap <Leader>ff :ProjectRootExe Files<CR>
+nnoremap <Leader>fn :enew<CR>
 nnoremap <Leader>fr :History<CR>
 nnoremap <Leader>ft :NERDTreeToggle<CR>
 nnoremap <Leader>fT :NERDTreeFind %<CR>
@@ -364,16 +369,6 @@ noremap <Leader>x@ :r!date<CR>
 
 " LOCAL LEADER
 let g:which_key_local_map = {}
-noremap <silent> <localleader><localleader> :ALEHover<CR>
-noremap <silent> <localleader><Leader> :ALEFix<CR>
-
-" ERRORS
-let g:which_key_local_map.e = {'name': '+errors'}
-noremap <localleader>el :lopen<CR>
-noremap <localleader>ee :lnext<CR>
-noremap <localleader>eE :lprev<CR>
-noremap <localleader>ed :lclose<CR>
-
 
 call which_key#register('<Space>', 'g:which_key_map')
 call which_key#register(',', 'g:which_key_local_map')
