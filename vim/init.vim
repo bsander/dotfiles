@@ -15,6 +15,9 @@ scriptencoding utf-8
 " - fzf - empty list on no input
 " - figure out tabline (tabs - windows - buffers)
 " - NERDCommenterInsert adds extra newline
+" - fzf extra commands not working https://github.com/junegunn/fzf.vim/issues/18
+" https://bitbucket.org/bestseller-ecom/product-catalog/pull-requests/164?t=1
+" - fzf with ripgrep - go to column
 
 let g:mapleader=' '
 let g:maplocalleader = ','
@@ -58,20 +61,29 @@ call plug#begin('~/.vim/vendor')
   Plug 'vim-airline/vim-airline'
   Plug 'airblade/vim-gitgutter'
   Plug 'luochen1990/rainbow'
+  Plug 'whiteinge/diffconflicts'
 
   " Tools
   Plug 'liuchengxu/vim-which-key'
-  Plug 'iberianpig/tig-explorer.vim'
+  " Plug 'iberianpig/tig-explorer.vim'
+  Plug '~/src/forks/tig-explorer.vim'
   Plug 'mbbill/undotree'
-  Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-fugitive'
   Plug 'idanarye/vim-merginal'
   Plug 'DataWraith/auto_mkdir'
+  Plug 'airblade/vim-matchquote'
 
   " Experimental
   Plug 'thinca/vim-qfreplace'
+  " Plug 'scrooloose/nerdtree'
+  Plug 'tpope/vim-vinegar'
+  Plug 'justinmk/vim-dirvish'
 
 call plug#end()
+
+" gx open urls with this thing
+let g:netrw_http_cmd = 'open'
+let g:netrw_gx='<cWORD>'
 
 
 let g:vim_better_default_enable_folding = 0
@@ -102,8 +114,14 @@ call deoplete#custom#option('sources', {
 
 " FZF
 let g:fzf_buffers_jump = 1
-let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+let g:fzf_commands_expect = 'alt-enter'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+let g:fzf_action = {
+  \ 'ctrl-e': 'edit',
+  \ 'ctrl-x': 'Bdelete',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 " Customize fzf colors to match your color scheme
 let g:fzf_colors = {
 \ 'fg':      ['fg', 'Normal'],
@@ -129,6 +147,9 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 let g:NERDCompactSexyComs = 0
 let g:NERDDefaultAlign = 'left'
+
+" Dirvish
+let g:dirvish_mode = ':sort ,^.*[\/],'
 
 " NERDTree
 let g:NERDTreeShowHidden = 1
@@ -161,15 +182,11 @@ call deoplete#custom#option({
 \ })
 
 " ALE
-let g:ale_set_balloons = 1
+let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
 \   'vim': ['vint'],
-\ }
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
 \ }
 
 
@@ -192,6 +209,10 @@ noremap L :join!<CR>
 " Duplicate line or selection
 nnoremap gd :t.<CR>
 vnoremap gd "ay'>"ap
+" " Swap stuff around
+" map gx <Plug>(Exchange)
+" map gxx <Plug>(ExchangeLine)
+" map gxc <Plug>(ExchangeClear)
 " Yank to the end of line
 nnoremap Y y$
 " Quit visual mode
@@ -216,17 +237,18 @@ inoremap jj <Esc>
 cnoremap jj <C-c>
 " Cycle deoplete suggestions on tab
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" Exit terminal insert mode on Esc
-tnoremap <Esc><Esc> <C-\><C-n>
+" Exit terminal insert mode
+tnoremap <C-'><C-'> <C-\><C-n>o
+" " Comment current line in insert mode
+" imap <C-/> <Plug>NERDCommenterInsert
 
 " WHICH_KEY
 let g:which_key_map =  {}
 
 " LEADER LEADER
 noremap <Leader><Space> :Commands<CR>
-noremap <Leader><C-Space> :History:<CR>
 nnoremap <Leader><ESC> <ESC>
-nnoremap <Leader>/ :ProjectRootExe Rg<CR>
+map <Leader>/ <Plug>(easymotion-bd-f2)
 nnoremap <Leader><Tab> :bnext<CR>
 nnoremap <Leader><S-Tab> :bprev<CR>
 noremap <Leader>' :split term://$SHELL<CR>
@@ -234,14 +256,19 @@ let g:which_key_map['/'] = 'Search project'
 
 " BUFFER
 let g:which_key_map.b = { 'name' : '+buffer' }
+nnoremap <Leader>bO :%bd\|e#\|bd#<CR>
+let g:which_key_map.b.O = 'only'
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
+nnoremap <Leader>bN :bprevious<CR>
 nnoremap <Leader>bn :bnext<CR>
 nnoremap <Leader>bd :Bdelete<CR>
 nnoremap <Leader>bD :Bdelete!<CR>
 nnoremap <Leader>bm :Bufferize messages<CR>
 nnoremap <Leader>br :edit<CR>
 nnoremap <Leader>bR :edit!<CR>
+nnoremap <Leader>bY :%y+<CR>
+nnoremap <Leader>bP gg"_dGP
 
 " COMMENT (NERDCommenter)
 let g:which_key_map.c = { 'name' : '+comment' }
@@ -249,8 +276,8 @@ map <Leader>cc <Plug>NERDCommenterToggle
 map <Leader>ci <Plug>NERDCommenterComment
 map <Leader>cm <Plug>NERDCommenterSexy
 map <Leader>cy <Plug>NERDCommenterYank
-nmap <Leader>cd :call NERDComment(1, 'yank')<CR>:normal p<CR>
-vmap <Leader>cd :call NERDComment(1, 'yank')<CR>:'>normal p<CR>
+nmap <Leader>cd :call NERDComment(1, 'yank') \| normal p<CR>
+vmap <Leader>cd :call NERDComment(1, 'yank') \| '>normal p<CR>
 map <Leader>ca <Plug>NERDCommenterAppend
 
 " FILE
@@ -268,14 +295,14 @@ nnoremap <Leader>fT :NERDTreeFind %<CR>
 " VIMRC / DOTFILE
 let g:which_key_map.f.v = { 'name' : '+vimrc' }
 nnoremap <Leader>fvd :edit $MYVIMRC<CR>
-nnoremap <Leader>fvS :write<CR>:source $MYVIMRC<CR>
+nnoremap <Leader>fvS :write \| source $MYVIMRC<CR>
 nnoremap <Leader>fvI :PlugInstall<CR>
 nnoremap <Leader>fvU :PlugUpdate<CR>
 nnoremap <Leader>fvC :PlugClean<CR>
 
 " GIT
 let g:which_key_map.g = { 'name': '+git' }
-" map <Leader>gs :Tig status<CR>
+" map <Leader>gg :split +Tig\ status<CR>
 map <Leader>gg :Tig status<CR>
 map <Leader>gf :Git fs<Space>
 map <Leader>gl :Tig<CR>
@@ -292,7 +319,6 @@ map <Leader>hh :Helptags<CR>
 map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
-nmap <Leader>J <Plug>(easymotion-bd-f)
 let g:which_key_map.j = { 'name': '+jump' }
 map <Leader>jj <Plug>(easymotion-bd-f2)
 map <Leader>jl <Plug>(easymotion-bd-jk)
@@ -307,13 +333,16 @@ nnoremap <Leader>qQ :qall!<CR>
 " SEARCH
 let g:which_key_map.s = { 'name': '+search' }
 nnoremap <Leader>ss :BLines<CR>
+nnoremap <Leader>sb :Lines<CR>
+nnoremap <Leader>sf :ProjectRootExe Rg<CR>
 
 " TOGGLES
 let g:which_key_map.t = { 'name': '+toggle' }
+nnoremap <Leader>tc :Colors<CR>
 nnoremap <Leader>tn :set invnumber<CR>
 nnoremap <Leader>tN :set invrelativenumber<CR>
+nnoremap <Leader>ts :Filetypes<CR>
 nnoremap <Leader>t- :let &scrolloff=999-&scrolloff<CR>
-
 
 " WINDOW (stolen from ...)
 let g:which_key_map.w = {'name': '+window' }
@@ -379,12 +408,14 @@ let g:which_key_map.x = {'name': '+transform' }
 nnoremap <Leader>xd :t.<CR>
 vnoremap <Leader>xd "ay'>pgv
 let g:which_key_map.x.d = 'duplicate'
-nmap <Leader>xo <Plug>(NetrwBrowseX)
-vmap <Leader>xo <Plug>(NetrwBrowseXVis)
+map <Leader>xo gx
 noremap <Leader>xu :<C-u>UndotreeToggle<CR>
 noremap <Leader>xq q
 let g:which_key_map.x.q = 'macro'
 noremap <Leader>x@ :r!date<CR>
+" Swap stuff around
+map <Leader>xx <Plug>(Exchange)
+map <Leader>xX <Plug>(ExchangeClear)
 
 
 " LOCAL LEADER
@@ -433,8 +464,7 @@ endfunction
 autocmd BufEnter * call <SID>AutoProjectRootCD()
 
 " Use interactive grep versions
-" command! -bang -nargs=* Ag call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
-" command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+  " \   'rg --vimgrep --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
@@ -445,11 +475,32 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+" Filter oldfiles for History command
+command! History call fzf#run(fzf#wrap({
+\ 'source':  s:filtered_recent_files(),
+\ 'sink':    'edit',
+\ 'options': '-m -x +s',
+\ 'down':    '40%' }))
+
+" Filter oldfiles and include open buffers
+function! s:filtered_recent_files()
+  return extend(
+  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'),
+  \ filter(copy(v:oldfiles),
+  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
+  \ )
+endfunction
+
 " Go to last cursor position when reopening file
 if has('autocmd')
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-" close help window
-autocmd FileType help noremap <buffer> q :q<cr>
 " Start terminal in insert-mode
-autocmd TermOpen * startinsert
+" autocmd TermOpen * startinsert
+autocmd BufWinEnter,WinEnter term://* startinsert
+
+
+" Connect to running nvim instance to avoid nested nvims
+if has('nvim')
+  let $GIT_EDITOR = 'nvr --remote-wait --servername ' . v:servername
+endif
