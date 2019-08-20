@@ -44,10 +44,18 @@ if status --is-interactive
 
     ## More stuff not heavy enough for their own files yet
 
+    ## EXP
+    function fzf-bcd-widget -d 'cd backwards'
+      pwd | awk -v RS=/ '/\n/ {exit} {p=p $0 "/"; print p}' | tac | eval (__fzfcmd) +m --select-1 --exit-0 $FZF_BCD_OPTS | read -l result
+      [ "$result" ]; and cd $result
+      commandline -f repaint
+    end
+
     ## Setup keybindings
     function my_key_bindings
       fish_hybrid_key_bindings
       bind -M insert . 'expand-dot-to-parent-directory-path'
+      bind gu 'fzf-bcd-widget'
     end
     set -g fish_key_bindings my_key_bindings
 

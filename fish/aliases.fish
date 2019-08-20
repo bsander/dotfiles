@@ -40,6 +40,9 @@ end
 abbr --add --global dcl "docker-compose logs --follow --tail=20"
 abbr --add --global dcd "docker-compose down --timeout 0"
 
+# Force of habit - consistency with vim
+abbr --add --global gg "tig status"
+
 abbr --add --global k kubectl
 abbr --add --global kx kubectx
 

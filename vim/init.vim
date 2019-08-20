@@ -11,6 +11,7 @@ scriptencoding utf-8
 " - tig - rebase and un/stage keybindings
 " - customize easymotion setup
 " - proper debugging support
+" - open gitcommit filetype in insert mode
 " FIXME - broken
 " - fzf - empty list on no input
 " - figure out tabline (tabs - windows - buffers)
@@ -35,8 +36,6 @@ call plug#begin('~/.vim/vendor')
   Plug 'junegunn/fzf.vim'
 
   Plug 'dbakker/vim-projectroot'
-  Plug 'moll/vim-bbye'
-  Plug 'rbgrouleff/bclose.vim'
   Plug 'morhetz/gruvbox'
 
   Plug 'w0rp/ale'
@@ -61,7 +60,6 @@ call plug#begin('~/.vim/vendor')
   Plug 'vim-airline/vim-airline'
   Plug 'airblade/vim-gitgutter'
   Plug 'luochen1990/rainbow'
-  Plug 'whiteinge/diffconflicts'
 
   " Tools
   Plug 'liuchengxu/vim-which-key'
@@ -76,8 +74,12 @@ call plug#begin('~/.vim/vendor')
   " Experimental
   Plug 'thinca/vim-qfreplace'
   " Plug 'scrooloose/nerdtree'
-  Plug 'tpope/vim-vinegar'
   Plug 'justinmk/vim-dirvish'
+  Plug 'tpope/vim-vinegar'
+  Plug 'whiteinge/diffconflicts'
+  " Need both?
+  Plug 'rbgrouleff/bclose.vim' " dep from tig-explorer
+  Plug 'moll/vim-bbye'
 
 call plug#end()
 
@@ -104,6 +106,7 @@ set signcolumn=yes
 set timeoutlen=600
 set updatetime=600
 set formatoptions-=cro " https://superuser.com/a/271024
+set clipboard=
 
 colorscheme gruvbox
 set background=dark " Gruvbox variant
@@ -138,6 +141,10 @@ let g:fzf_colors = {
 \ 'spinner': ['fg', 'Label'],
 \ 'header':  ['fg', 'Comment']
 \ }
+
+" Bufferize
+let g:bufferize_command = 'enew'
+
 
 " NerdCommenter
 let g:NERDCreateDefaultMappings = 0
@@ -191,6 +198,10 @@ let g:ale_linters = {
 
 
 " KEYBINDINGS
+" System clipboard integration
+map gy "+y
+map gd "+d
+map gp "+p
 " Redo
 noremap U <C-r>
 " Clear search highlight on escape
@@ -206,13 +217,6 @@ vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
 " Join lines
 noremap H k:join!<CR>
 noremap L :join!<CR>
-" Duplicate line or selection
-nnoremap gd :t.<CR>
-vnoremap gd "ay'>"ap
-" " Swap stuff around
-" map gx <Plug>(Exchange)
-" map gxx <Plug>(ExchangeLine)
-" map gxc <Plug>(ExchangeClear)
 " Yank to the end of line
 nnoremap Y y$
 " Quit visual mode
@@ -406,7 +410,7 @@ let g:which_key_map.w.v = '[|] split'
 " TRANSFORMATIONS
 let g:which_key_map.x = {'name': '+transform' }
 nnoremap <Leader>xd :t.<CR>
-vnoremap <Leader>xd "ay'>pgv
+vnoremap <Leader>xd "ay'>"apgv
 let g:which_key_map.x.d = 'duplicate'
 map <Leader>xo gx
 noremap <Leader>xu :<C-u>UndotreeToggle<CR>
@@ -416,6 +420,8 @@ noremap <Leader>x@ :r!date<CR>
 " Swap stuff around
 map <Leader>xx <Plug>(Exchange)
 map <Leader>xX <Plug>(ExchangeClear)
+map <Leader>xr :reg<CR>
+map <Leader>xR :Bufferize reg<CR>
 
 
 " LOCAL LEADER
@@ -446,6 +452,10 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" autocmd! FileType term://*
+autocmd  FileType term://* set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
