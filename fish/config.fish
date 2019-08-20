@@ -45,8 +45,11 @@ if status --is-interactive
     ## More stuff not heavy enough for their own files yet
 
     ## Setup keybindings
-    set -g fish_key_bindings hybrid_bindings
-    bind . expand-dot-to-parent-directory-path
+    function my_key_bindings
+      fish_hybrid_key_bindings
+      bind -M insert . 'expand-dot-to-parent-directory-path'
+    end
+    set -g fish_key_bindings my_key_bindings
 
     ## Setup some git subcommand completions
     ## This utilizes the alias hack from __fish_git_using_command
