@@ -60,6 +60,7 @@ call plug#begin('~/.vim/vendor')
   Plug 'vim-airline/vim-airline'
   Plug 'airblade/vim-gitgutter'
   Plug 'luochen1990/rainbow'
+  Plug 'bfontaine/Brewfile.vim'
 
   " Tools
   Plug 'liuchengxu/vim-which-key'
@@ -291,6 +292,7 @@ nnoremap <Leader>fS :wall<CR>
 nnoremap <expr> <Leader>fR ':write ' . expand('%:p')
 nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
 nnoremap <Leader>ff :ProjectRootExe Files<CR>
+nnoremap <Leader>fD :call delete(expand('%')) \| bdelete!<CR>
 nnoremap <Leader>fn :enew<CR>
 nnoremap <Leader>fr :History<CR>
 nnoremap <Leader>ft :NERDTreeToggle<CR>

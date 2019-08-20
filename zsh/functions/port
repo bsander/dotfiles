@@ -1,2 +1,0 @@
-#!/bin/bash
-lsof -n -i4TCP:$* | grep LISTEN

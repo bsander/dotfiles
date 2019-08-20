@@ -13,7 +13,7 @@ set -gx GIT_EDITOR "$EDITOR"
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
 # FZF global options
-set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --vimgrep'
+set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --vimgrep --ignore-vcs'
 
 ## kubectl: Always consider local `kube-config` file
 # set -gx KUBECONFIG "./kube-config"

@@ -1,2 +1,0 @@
-#compdef git-kill
-__gitcomp_nl "$(__git_heads '' $track)"

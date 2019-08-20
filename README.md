@@ -26,7 +26,6 @@ PROJECTS=
 - [ ] NPM "global" installs
 - [ ] Automated updates
   - [ ] weekly
-- [ ] Prompt: shortest significant paths in between
 - [ ] Repair actions
 
 ## Used

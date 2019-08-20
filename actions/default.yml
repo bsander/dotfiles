@@ -12,11 +12,9 @@
     ~/.config/kitty: kitty
     ~/.config/nvim: vim
     ~/.ripgreprc: dotfiles/ripgreprc
-    ~/.vim: vim
-    ~/.vimrc: vim/init.vim
     ~/.curlrc: dotfiles/curlrc.ini
     ~/docker-compose.yml: dotfiles/docker-compose.yml
-    # ~/.editorconfig: dotfiles/editorconfig.ini
+    $PROJECTS/.editorconfig: dotfiles/editorconfig.ini
     ~/.gitconfig: dotfiles/gitconfig.ini
     ~/.gitignore: dotfiles/gitignore.txt
     ~/.gnupg/gpg.conf: dotfiles/gpg.conf
@@ -28,9 +26,8 @@
     ~/.spacemacs: dotfiles/spacemacs.el
     ~/.skhdrc: dotfiles/skhdrc.ini
     ~/.tigrc: dotfiles/tigrc.ini
-    # Note this link is not actually in use, but the target file _is_.
-    ~/.zhistory: zhistory.txt
-    ~/.zshrc: dotfiles/zshrc.zsh
+    ~/.vim: vim
+    ~/.vimrc: vim/init.vim
 
 - clean:
     - "~"

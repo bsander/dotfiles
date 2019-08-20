@@ -13,5 +13,3 @@
       description: Updating Brewfile
     - command: zsh -ic "zgen selfupdate && zgen update"
       description: Updating zgen and zsh plugins
-# brew
-# gettext moreutil zsh cask mas

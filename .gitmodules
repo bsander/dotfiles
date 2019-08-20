@@ -1,18 +1,4 @@
 [submodule "repos/dotbot"]
 	path = repos/dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "repos/dotbot-brewfile"]
-	path = repos/dotbot-brewfile
-	url = https://github.com/sobolevn/dotbot-brewfile.git
-[submodule "repos/zplug"]
-	path = repos/zplug
-	url = https://github.com/zplug/zplug
-[submodule "repos/zgen"]
-	path = repos/zgen
-	url = https://github.com/tarjoilija/zgen
-[submodule "repos/zsh-prompt"]
-	path = repos/zsh-prompt
-	url = https://github.com/bsander/zsh-prompt
-[submodule "repos/FiraCode"]
-	path = repos/FiraCode
-	url = https://github.com/tonsky/FiraCode.git
+	branch = master
