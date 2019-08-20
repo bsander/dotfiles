@@ -4,13 +4,10 @@ barnybug/docker-fish-completion
 brgmnn/fish-docker-compose
 jethrokuan/fzf
 matchai/spacefish
-# jorgebucaran/fish-bax
 oh-my-fish/plugin-technicolor
-# Until https://github.com/kubernetes/kubectl/issues/131
 evanlucas/fish-kubectl-completions
 oh-my-fish/plugin-bang-bang
 oh-my-fish/plugin-functional
-oh-my-fish/marlin
 oh-my-fish/plugin-aws
 edc/bass
 FabioAntunes/fish-nvm
