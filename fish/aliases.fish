@@ -49,7 +49,7 @@ abbr --add --global kx kubectx
 abbr --add --global y yarn
 abbr --add --global yr "yarn run"
 abbr --add --global yw "yarn workspace"
-abbr --add --global ywr "yarn workspaces run"
+abbr --add --global yww "yarn workspaces run"
 
 ## Substitute apps
 abbr --add --global cat bat

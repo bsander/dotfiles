@@ -11,6 +11,7 @@
     ~/.config/fish: fish
     ~/.config/kitty: kitty
     ~/.config/nvim: vim
+    ~/.config/yarn/global/package.json: dotfiles/package.json
     ~/.ripgreprc: dotfiles/ripgreprc
     ~/.curlrc: dotfiles/curlrc.ini
     ~/docker-compose.yml: dotfiles/docker-compose.yml
@@ -18,7 +19,6 @@
     ~/.gitconfig: dotfiles/gitconfig.ini
     ~/.gitignore: dotfiles/gitignore.txt
     ~/.gnupg/gpg.conf: dotfiles/gpg.conf
-    # Hushes the default "Last login" message on macos
     ~/.hushlogin: dotfiles/hushlogin.txt
     ~/.hgrc: dotfiles/hgrc.ini
     ~/.ignore: dotfiles/ignore.txt
@@ -27,20 +27,25 @@
     ~/.skhdrc: dotfiles/skhdrc.ini
     ~/.tigrc: dotfiles/tigrc.ini
     ~/.vim: vim
-    ~/.vimrc: vim/init.vim
+    # ~/.vimrc: vim/init.vim
 
 - clean:
     - "~"
     - "$PROJECTS"
 
 - shell:
-    - description: Updating Homebrew
+    - description: Updating Homebrew repository
       command: brew update
-    - description: Upgrading software
+    - description: Upgrading Homebrew packages
       command: brew upgrade
-    - command: brew bundle check --file=Brewfile.sh || brew bundle --file=Brewfile.sh
-      description: Installing software
-    - command: yarn global upgrade --latest
-      description: Upgrading global npm packages
-    - command: brew cleanup
-      description: Cleaning up
+    - description: Installing new software
+      command: brew bundle check || brew bundle
+    - description: Recording current Homebrew state
+      command: brew bundle dump --describe --force
+    - description: Cleaning up
+      command: brew cleanup
+    - description: Upgrading global npm packages
+      command: yarn global upgrade --latest
+    - description: Upgrading fish shell plugins
+      command: fisher
+

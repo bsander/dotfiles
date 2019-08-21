@@ -1,7 +1,4 @@
 - defaults:
-    link:
-      create: true
-      relink: true
     shell:
       stdout: true
       stderr: true
@@ -9,15 +6,17 @@
 - shell:
     - description: Installing submodules
       command: git submodule update --init --recursive
+    - description: Installing build chain
+      command: xcode-select -p || xcode-select --install
     - description: Installing homebrew
       command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    - description: Running regular dotfiles ops
-      command: $DOTFILES/bin/dot default
-    - description: Add ZSH and fish to /etc/shells
-      command: rg -qxF '/usr/local/bin/fish' /etc/shells || echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
+    - description: Running regular dotfiles operations
+      command: $DOTFILES/bin/dotbot default
+    - description: Add fish to /etc/shells
+      command: grep -qxF $(which fish) /etc/shells || echo $(which fish) | sudo tee -a /etc/shells
     - description: Make ZSH the default shell
-      command: sudo dscl . -create /Users/$USER UserShell /usr/local/bin/zsh
+      command: chsh -s $(which fish)
     - description: Creating required directories
-      command: mkdir -p $HOME/.ssh
-    # - description: Install iterm2 utilities
-    #   command: curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
+      command: mkdir -pv -m 0700 $HOME/.ssh
+    - description: Setting up yarn global
+      command: cd $(yarn global dir) && yarn

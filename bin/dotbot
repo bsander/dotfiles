@@ -4,14 +4,13 @@
 set -euo pipefail
 # set -x
 
-## Fully resolve base directory: http://stackoverflow.com/a/246128
 # shellcheck disable=SC2030
 ACTION="${1:-default}"
 shift || :
 
 (
-  cd "$DOTFILES" && \
-  "repos/dotbot/bin/dotbot" \
+  cd "$DOTFILES" \
+  && "repos/dotbot/bin/dotbot" \
     -d "$DOTFILES" \
     -c "actions/$ACTION.yml" \
     "$@"

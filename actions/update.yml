@@ -1,15 +1,13 @@
 - defaults:
-    # link:
-    #   create: true
-    #   relink: true
     shell:
       stdout: true
       stderr: true
 
 - shell:
-    - command: dot
-      description: Installing dotfiles
-    - command: brew bundle dump --file=Brewfile.sh --force && brew leaves | awk -f bin/brewstrainer.awk - Brewfile.sh | sponge Brewfile.sh
-      description: Updating Brewfile
-    - command: zsh -ic "zgen selfupdate && zgen update"
-      description: Updating zgen and zsh plugins
+    - description: Self-updating dotbot
+      command: git submodule update --remote
+    - description: Self-updating fish plugin manager
+      command: fisher self-update
+    - description: Updating fish shell plugins
+      command: fisher
+

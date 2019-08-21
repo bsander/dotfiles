@@ -1,0 +1,1 @@
+# Hushes the default "Last login" message on MacOS

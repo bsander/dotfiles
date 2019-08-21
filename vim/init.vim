@@ -2,7 +2,6 @@ scriptencoding utf-8
 
 " TODO LIST
 " - :cdo :cfdo - interactive global search replace (qfreplace plugin)
-" - deal with yank/paste vs system registry
 " - iab
 " - vimdiff
 " - split up init.vim
@@ -12,12 +11,13 @@ scriptencoding utf-8
 " - customize easymotion setup
 " - proper debugging support
 " - open gitcommit filetype in insert mode
+" - macros
+
 " FIXME - broken
 " - fzf - empty list on no input
 " - figure out tabline (tabs - windows - buffers)
 " - NERDCommenterInsert adds extra newline
 " - fzf extra commands not working https://github.com/junegunn/fzf.vim/issues/18
-" https://bitbucket.org/bestseller-ecom/product-catalog/pull-requests/164?t=1
 " - fzf with ripgrep - go to column
 
 let g:mapleader=' '
@@ -30,8 +30,6 @@ call plug#begin('~/.vim/vendor')
 
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-  " Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-  " Plug 'lotabout/skim.vim'
   Plug '/usr/local/opt/fzf'
   Plug 'junegunn/fzf.vim'
 
@@ -74,10 +72,14 @@ call plug#begin('~/.vim/vendor')
 
   " Experimental
   Plug 'thinca/vim-qfreplace'
+
+  "" File management plugins
   " Plug 'scrooloose/nerdtree'
+  " Plug 'tpope/vim-vinegar'
   Plug 'justinmk/vim-dirvish'
-  Plug 'tpope/vim-vinegar'
+
   Plug 'whiteinge/diffconflicts'
+
   " Need both?
   Plug 'rbgrouleff/bclose.vim' " dep from tig-explorer
   Plug 'moll/vim-bbye'
@@ -243,7 +245,8 @@ cnoremap jj <C-c>
 " Cycle deoplete suggestions on tab
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " Exit terminal insert mode
-tnoremap <C-'><C-'> <C-\><C-n>o
+tnoremap <C-'><C-'> <C-\><C-n>
+tnoremap QQ <C-\><C-n>
 " " Comment current line in insert mode
 " imap <C-/> <Plug>NERDCommenterInsert
 
@@ -284,6 +287,8 @@ map <Leader>cy <Plug>NERDCommenterYank
 nmap <Leader>cd :call NERDComment(1, 'yank') \| normal p<CR>
 vmap <Leader>cd :call NERDComment(1, 'yank') \| '>normal p<CR>
 map <Leader>ca <Plug>NERDCommenterAppend
+nmap <Leader>co o<Esc><Plug>NERDCommenterAppend
+nmap <Leader>cO O<Esc><Plug>NERDCommenterAppend
 
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
@@ -362,10 +367,10 @@ nnoremap <Leader>w= <C-W>=
 let g:which_key_map.w['='] = 'equalize'
 
 " nnoremap <Leader>wt :tabedit<CR>
-" nnoremap <Leader>w. :tabnext<CR>
-" let g:which_key_map.w['.'] = '[>] tab'
-" nnoremap <Leader>w, :tabprev<CR>
-" let g:which_key_map.w[','] = '[<] tab'
+nnoremap <Leader>w. :tabnext<CR>
+let g:which_key_map.w['.'] = '[>] tab'
+nnoremap <Leader>w, :tabprev<CR>
+let g:which_key_map.w[','] = '[<] tab'
 
 nnoremap <Leader>ww <C-W>w
 let g:which_key_map.w.w = '[O] focus'

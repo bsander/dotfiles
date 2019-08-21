@@ -9,11 +9,17 @@ set -gx PAGER less
 set -gx EDITOR "nvim"
 set -gx VISUAL "vimr" # Don't wait for command completion
 
-set -gx GIT_EDITOR "$EDITOR"
+set -q GIT_EDITOR
+or set -gx GIT_EDITOR "$EDITOR"
+
 set -gx NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
 # FZF global options
-set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --vimgrep --ignore-vcs'
+set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
+set -gx FZF_PREVIEW_FILE_CMD 'bat -r :10'
+set -gx FZF_PREVIEW_DIR_CMD 'exa --tree --level 1 --group-directories-first'
+set -gx FZF_CD_COMMAND 'fd --type d'
+set -gx FZF_CD_WITH_HIDDEN_COMMAND 'fd --hidden --type d'
 
 ## kubectl: Always consider local `kube-config` file
 # set -gx KUBECONFIG "./kube-config"

@@ -3,17 +3,12 @@
 ## Init
 
 ```shell
-PROJECTS=
+git clone <this repo>
+PROJECTS=$PWD dotfiles/bin/dot init
 ```
 
 ## TODO
 - [X] Prompt configuration
-- [X] Functions from files
-  - Cleanup?
-- [X] zsh plugins configuration
-- [X] Actual dotfiles
-  - esformatter?
-  - eslintrc?
 - [X] Brewfile, Caskfile, Masfile doorlopen
   - misc. installs?
 - [X] Git-crypt
@@ -21,12 +16,11 @@ PROJECTS=
   - [X] npmfile (auth token)
 - [ ] Fresh init
 - [ ] OSX defaults
-- [ ] repos/resources
-- [X] Cleanup actions
 - [ ] NPM "global" installs
 - [ ] Automated updates
   - [ ] weekly
 - [ ] Repair actions
+- Chunkwm -> https://github.com/koekeishiya/yabai
 
 ## Used
 - https://github.com/anishathalye/dotbot
