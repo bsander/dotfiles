@@ -38,8 +38,6 @@
       command: brew update
     - description: Upgrading Homebrew packages
       command: brew upgrade
-    - description: Installing new software
-      command: brew bundle check || brew bundle
     - description: Recording current Homebrew state
       command: brew bundle dump --describe --force
     - description: Cleaning up

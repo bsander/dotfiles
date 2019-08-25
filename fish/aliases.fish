@@ -1,7 +1,6 @@
 ## Dotfiles related
 ## Reload shell environments
-# alias .r="exec $SHELL -l" ## Fails in kitty due to wrong $SHELL
-alias .r="exec fish -l"
+alias .r="exec $SHELL -l"
 alias .c="cd \$DOTFILES" # cd into this dotfiles repository
 alias .e="e \$DOTFILES" # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
@@ -24,6 +23,8 @@ abbr --add --global bcI "brew cask install"
 abbr --add --global bi "brew info"
 abbr --add --global bI "brew install"
 abbr --add --global bs "brew search"
+
+abbr --add --global c "cdh"
 
 abbr --add --global g git
 

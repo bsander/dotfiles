@@ -5,40 +5,35 @@ scriptencoding utf-8
 " - iab
 " - vimdiff
 " - split up init.vim
-" - toggles
 " - leader group undo (C-h u)
 " - tig - rebase and un/stage keybindings
 " - customize easymotion setup
 " - proper debugging support
-" - open gitcommit filetype in insert mode
 " - macros
 
 " FIXME - broken
+" - open gitcommit filetype in insert mode
 " - fzf - empty list on no input
 " - figure out tabline (tabs - windows - buffers)
 " - NERDCommenterInsert adds extra newline
 " - fzf extra commands not working https://github.com/junegunn/fzf.vim/issues/18
 " - fzf with ripgrep - go to column
 
+" GRIPES
+" - empty line unindenting: use S -- https://vi.stackexchange.com/questions/3612/how-do-i-prevent-vim-from-unindenting-empty-lines
+
 let g:mapleader=' '
 let g:maplocalleader = ','
 
 call plug#begin('~/.vim/vendor')
 
+  " Preamble
   Plug 'tpope/vim-sensible'
   Plug 'liuchengxu/vim-better-default'
 
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-  Plug '/usr/local/opt/fzf'
-  Plug 'junegunn/fzf.vim'
-
-  Plug 'dbakker/vim-projectroot'
-  Plug 'morhetz/gruvbox'
-
-  Plug 'w0rp/ale'
-
   " Text Manipulation
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'kana/vim-textobj-function' | Plug 'thinca/vim-textobj-function-javascript' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire'
   Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
   Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
   Plug 'easymotion/vim-easymotion'
@@ -47,6 +42,8 @@ call plug#begin('~/.vim/vendor')
   Plug 'scrooloose/nerdcommenter'
   Plug 'tommcdo/vim-exchange'
   Plug 'jiangmiao/auto-pairs'
+  Plug 'tyru/open-browser.vim'
+  Plug 'sickill/vim-pasta'
 
   " Languages
   Plug 'editorconfig/editorconfig-vim'
@@ -54,29 +51,38 @@ call plug#begin('~/.vim/vendor')
   Plug 'jparise/vim-graphql'
 
   " UI / Syntax
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } | Plug 'w0rp/ale'
+  Plug 'morhetz/gruvbox'
   Plug 'andrewradev/bufferize.vim'
   Plug 'vim-airline/vim-airline'
   Plug 'airblade/vim-gitgutter'
   Plug 'luochen1990/rainbow'
   Plug 'bfontaine/Brewfile.vim'
+  Plug 'ryanoasis/vim-devicons'
 
   " Tools
   Plug 'liuchengxu/vim-which-key'
   " Plug 'iberianpig/tig-explorer.vim'
   Plug '~/src/forks/tig-explorer.vim'
-  Plug 'mbbill/undotree'
   Plug 'tpope/vim-fugitive'
   Plug 'idanarye/vim-merginal'
   Plug 'DataWraith/auto_mkdir'
   Plug 'airblade/vim-matchquote'
+  Plug 'dbakker/vim-projectroot'
 
   " Experimental
+  Plug 'junegunn/vim-peekaboo'
   Plug 'thinca/vim-qfreplace'
 
+  " Undo tree vis
+  " Plug 'mbbill/undotree'
+  Plug 'simnalamburt/vim-mundo'
+
   "" File management plugins
-  " Plug 'scrooloose/nerdtree'
+  Plug 'scrooloose/nerdtree'
   " Plug 'tpope/vim-vinegar'
-  Plug 'justinmk/vim-dirvish'
+  " Plug 'justinmk/vim-dirvish'
+  " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
   Plug 'whiteinge/diffconflicts'
 
@@ -85,10 +91,6 @@ call plug#begin('~/.vim/vendor')
   Plug 'moll/vim-bbye'
 
 call plug#end()
-
-" gx open urls with this thing
-let g:netrw_http_cmd = 'open'
-let g:netrw_gx='<cWORD>'
 
 
 let g:vim_better_default_enable_folding = 0
@@ -178,6 +180,9 @@ let g:rainbow_active = 1
 let g:undotree_WindowLayout = 4
 let g:undotree_ShortIndicators = 1
 let g:undotree_SetFocusWhenToggle = 1
+" Mundo
+let g:mundo_right = 1
+let g:mundo_width = 60
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -191,6 +196,16 @@ call deoplete#custom#option({
 \   'smart_case': v:true,
 \ })
 
+let g:openbrowser_default_search = 'startpage'
+let g:openbrowser_search_engines = {
+\   'startpage': 'https://www.startpage.com/do/dsearch?query={query}&cat=web',
+\}
+
+" vim-peekaboo
+let g:peekaboo_window = 'bo 30new'
+let g:peekaboo_compact = 1
+let g:peekaboo_delay = 300
+
 " ALE
 let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
 let g:ale_fix_on_save = 1
@@ -199,12 +214,34 @@ let g:ale_linters = {
 \   'vim': ['vint'],
 \ }
 
+" vim-expand-region
+let g:expand_region_text_objects = {
+\ 'iw'  :0,
+\ 'iW'  :0,
+\ 'i"'  :0,
+\ 'i''' :0,
+\ 'i]'  :1,
+\ 'ib'  :1,
+\ 'iB'  :1,
+\ 'il'  :0,
+\ 'ip'  :0,
+\ 'ie'  :0,
+\ }
+call expand_region#custom_text_objects({
+\ "\/\\n\\n\<CR>": 1,
+\ 'a]' :1,
+\ 'ab' :1,
+\ 'aB' :1,
+\ })
 
 " KEYBINDINGS
 " System clipboard integration
 map gy "+y
+map gY "+Y
 map gd "+d
+map gD "+D
 map gp "+p
+map gP "+P
 " Redo
 noremap U <C-r>
 " Clear search highlight on escape
@@ -249,6 +286,11 @@ tnoremap <C-'><C-'> <C-\><C-n>
 tnoremap QQ <C-\><C-n>
 " " Comment current line in insert mode
 " imap <C-/> <Plug>NERDCommenterInsert
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+map gx <Plug>(openbrowser-smart-search)
+" Fast swap
+map cx <Plug>(Exchange)
+map cX <Plug>(ExchangeClear)
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -256,7 +298,8 @@ let g:which_key_map =  {}
 " LEADER LEADER
 noremap <Leader><Space> :Commands<CR>
 nnoremap <Leader><ESC> <ESC>
-map <Leader>/ <Plug>(easymotion-bd-f2)
+map <Leader>/ :BLines<CR>
+map <Leader>? :ProjectRootExe Rg<CR>
 nnoremap <Leader><Tab> :bnext<CR>
 nnoremap <Leader><S-Tab> :bprev<CR>
 noremap <Leader>' :split term://$SHELL<CR>
@@ -264,8 +307,10 @@ let g:which_key_map['/'] = 'Search project'
 
 " BUFFER
 let g:which_key_map.b = { 'name' : '+buffer' }
-nnoremap <Leader>bO :%bd\|e#\|bd#<CR>
+nnoremap <Leader>bo :%bd\|e#\|bd#<CR>
 let g:which_key_map.b.O = 'only'
+nnoremap <Leader>bO :%bd!\|e#\|bd#<CR>
+let g:which_key_map.b.O = 'only!'
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bN :bprevious<CR>
@@ -275,8 +320,8 @@ nnoremap <Leader>bD :Bdelete!<CR>
 nnoremap <Leader>bm :Bufferize messages<CR>
 nnoremap <Leader>br :edit<CR>
 nnoremap <Leader>bR :edit!<CR>
-nnoremap <Leader>bY :%y+<CR>
-nnoremap <Leader>bP gg"_dGP
+nnoremap <Leader>bY yie
+nnoremap <Leader>bP "_dieP
 
 " COMMENT (NERDCommenter)
 let g:which_key_map.c = { 'name' : '+comment' }
@@ -287,14 +332,15 @@ map <Leader>cy <Plug>NERDCommenterYank
 nmap <Leader>cd :call NERDComment(1, 'yank') \| normal p<CR>
 vmap <Leader>cd :call NERDComment(1, 'yank') \| '>normal p<CR>
 map <Leader>ca <Plug>NERDCommenterAppend
-nmap <Leader>co o<Esc><Plug>NERDCommenterAppend
-nmap <Leader>cO O<Esc><Plug>NERDCommenterAppend
+" nmap <Leader>co o<Esc><Plug>NERDCommenterAppend
+nmap <Leader>co o<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
+nmap <Leader>cO O<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <Leader>fs :write<CR>
-nnoremap <Leader>fS :wall<CR>
-nnoremap <expr> <Leader>fR ':write ' . expand('%:p')
+nnoremap <Leader>fa :wall<CR>
+nnoremap <expr> <Leader>fS ':write ' . expand('%:p')
 nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
 nnoremap <Leader>ff :ProjectRootExe Files<CR>
 nnoremap <Leader>fD :call delete(expand('%')) \| bdelete!<CR>
@@ -303,22 +349,22 @@ nnoremap <Leader>fr :History<CR>
 nnoremap <Leader>ft :NERDTreeToggle<CR>
 nnoremap <Leader>fT :NERDTreeFind %<CR>
 
-" VIMRC / DOTFILE
-let g:which_key_map.f.v = { 'name' : '+vimrc' }
-nnoremap <Leader>fvd :edit $MYVIMRC<CR>
-nnoremap <Leader>fvS :write \| source $MYVIMRC<CR>
-nnoremap <Leader>fvI :PlugInstall<CR>
-nnoremap <Leader>fvU :PlugUpdate<CR>
-nnoremap <Leader>fvC :PlugClean<CR>
+" INIT.VIM
+let g:which_key_map.v = { 'name' : '+vimrc' }
+nnoremap <Leader>ve :edit $MYVIMRC<CR>
+nnoremap <Leader>vs :write \| source $MYVIMRC<CR>
+nnoremap <Leader>vi :PlugInstall<CR>
+nnoremap <Leader>vu :PlugUpdate<CR>
+nnoremap <Leader>vc :PlugClean<CR>
 
 " GIT
 let g:which_key_map.g = { 'name': '+git' }
 " map <Leader>gg :split +Tig\ status<CR>
 map <Leader>gg :Tig status<CR>
-map <Leader>gf :Git fs<Space>
+" map <Leader>gf :Git fs<Space>
 map <Leader>gl :Tig<CR>
-map <Leader>gb :Tig refs<CR>
-map <Leader>gB :Gblame<CR>
+" map <Leader>gb :Tig refs<CR>
+map <Leader>gb :Gblame<CR>
 " map <Leader>gg :Git<CR>
 " map <Leader>gl :Glog!<CR>
 " map <Leader>gm :Merginal<CR>
@@ -331,9 +377,9 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-map <Leader>jj <Plug>(easymotion-bd-f2)
-map <Leader>jl <Plug>(easymotion-bd-jk)
-map  <Leader>jw <Plug>(easymotion-bd-w)
+map <Leader>j <Plug>(easymotion-bd-f2)
+map <Leader>l <Plug>(easymotion-bd-jk)
+" map  <Leader>jw <Plug>(easymotion-bd-w)
 
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
@@ -350,6 +396,7 @@ nnoremap <Leader>sf :ProjectRootExe Rg<CR>
 " TOGGLES
 let g:which_key_map.t = { 'name': '+toggle' }
 nnoremap <Leader>tc :Colors<CR>
+nnoremap <Leader>tl :set invlist<CR>
 nnoremap <Leader>tn :set invnumber<CR>
 nnoremap <Leader>tN :set invrelativenumber<CR>
 nnoremap <Leader>ts :Filetypes<CR>
@@ -366,7 +413,7 @@ let g:which_key_map.w.o = 'only'
 nnoremap <Leader>w= <C-W>=
 let g:which_key_map.w['='] = 'equalize'
 
-" nnoremap <Leader>wt :tabedit<CR>
+nnoremap <Leader>wt :tabedit<CR>
 nnoremap <Leader>w. :tabnext<CR>
 let g:which_key_map.w['.'] = '[>] tab'
 nnoremap <Leader>w, :tabprev<CR>
@@ -420,15 +467,14 @@ nnoremap <Leader>xd :t.<CR>
 vnoremap <Leader>xd "ay'>"apgv
 let g:which_key_map.x.d = 'duplicate'
 map <Leader>xo gx
-noremap <Leader>xu :<C-u>UndotreeToggle<CR>
+" noremap <Leader>xu :<C-u>UndotreeToggle<CR>
+noremap <Leader>xu :MundoToggle<CR>
 noremap <Leader>xq q
 let g:which_key_map.x.q = 'macro'
 noremap <Leader>x@ :r!date<CR>
 " Swap stuff around
 map <Leader>xx <Plug>(Exchange)
 map <Leader>xX <Plug>(ExchangeClear)
-map <Leader>xr :reg<CR>
-map <Leader>xR :Bufferize reg<CR>
 
 
 " LOCAL LEADER

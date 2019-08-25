@@ -21,8 +21,6 @@ brew "bat"
 brew "choose-gui"
 # The Clojure Programming Language
 brew "clojure"
-# Cross-platform make
-brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Suite of command-line tools for converting to and working with CSV
@@ -185,6 +183,7 @@ cask "firefox"
 cask "flux"
 cask "focus"
 cask "font-fira-code"
+cask "font-firacode-nerd-font"
 cask "franz"
 cask "google-backup-and-sync"
 cask "google-chrome"
@@ -232,7 +231,6 @@ cask "yed"
 cask "railwaycat/emacsmacport/emacs-mac-spacemacs-icon"
 mas "Airmail", id: 918858936
 mas "BetterSnapTool", id: 417375580
-mas "Boxy", id: 1053031090
 mas "DaisyDisk", id: 411643860
 mas "Dice Pass", id: 997688302
 mas "Fenêtre", id: 1286743037
@@ -242,8 +240,6 @@ mas "iMovie", id: 408981434
 mas "Irvue", id: 1039633667
 mas "Keynote", id: 409183694
 mas "LastPass", id: 926036361
-mas "Magnet", id: 441258766
-mas "Microsoft OneNote", id: 784801555
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "PiPifier", id: 1160374471
