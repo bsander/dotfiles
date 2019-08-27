@@ -4,22 +4,23 @@ scriptencoding utf-8
 " - :cdo :cfdo - interactive global search replace (qfreplace plugin)
 " - iab
 " - vimdiff
-" - split up init.vim
+" - split up init.vim - combine plug with config
 " - leader group undo (C-h u)
 " - tig - rebase and un/stage keybindings
 " - customize easymotion setup
 " - proper debugging support
 " - macros
+" - tabs buffers mayhem
+" - get rid of unimpaired
 
 " FIXME - broken
 " - open gitcommit filetype in insert mode
 " - fzf - empty list on no input
-" - figure out tabline (tabs - windows - buffers)
 " - NERDCommenterInsert adds extra newline
 " - fzf extra commands not working https://github.com/junegunn/fzf.vim/issues/18
 " - fzf with ripgrep - go to column
 
-" GRIPES
+" !! GRIPES
 " - empty line unindenting: use S -- https://vi.stackexchange.com/questions/3612/how-do-i-prevent-vim-from-unindenting-empty-lines
 
 let g:mapleader=' '
@@ -27,131 +28,88 @@ let g:maplocalleader = ','
 
 call plug#begin('~/.vim/vendor')
 
-  " Preamble
-  Plug 'tpope/vim-sensible'
-  Plug 'liuchengxu/vim-better-default'
-
-  " Text Manipulation
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-  Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'kana/vim-textobj-function' | Plug 'thinca/vim-textobj-function-javascript' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire'
-  Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
-  Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
-  Plug 'easymotion/vim-easymotion'
-  Plug 'tpope/vim-surround'
-  Plug 'terryma/vim-expand-region'
-  Plug 'scrooloose/nerdcommenter'
-  Plug 'tommcdo/vim-exchange'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'tyru/open-browser.vim'
-  Plug 'sickill/vim-pasta'
-
-  " Languages
-  Plug 'editorconfig/editorconfig-vim'
-  Plug 'sheerun/vim-polyglot'
-  Plug 'jparise/vim-graphql'
-
-  " UI / Syntax
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } | Plug 'w0rp/ale'
-  Plug 'morhetz/gruvbox'
-  Plug 'andrewradev/bufferize.vim'
-  Plug 'vim-airline/vim-airline'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'luochen1990/rainbow'
-  Plug 'bfontaine/Brewfile.vim'
-  Plug 'ryanoasis/vim-devicons'
-
-  " Tools
-  Plug 'liuchengxu/vim-which-key'
-  " Plug 'iberianpig/tig-explorer.vim'
-  Plug '~/src/forks/tig-explorer.vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'idanarye/vim-merginal'
-  Plug 'DataWraith/auto_mkdir'
-  Plug 'airblade/vim-matchquote'
-  Plug 'dbakker/vim-projectroot'
-
-  " Experimental
-  Plug 'junegunn/vim-peekaboo'
-  Plug 'thinca/vim-qfreplace'
-
-  " Undo tree vis
-  " Plug 'mbbill/undotree'
-  Plug 'simnalamburt/vim-mundo'
-
-  "" File management plugins
-  Plug 'scrooloose/nerdtree'
-  " Plug 'tpope/vim-vinegar'
-  " Plug 'justinmk/vim-dirvish'
-  " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-
-  Plug 'whiteinge/diffconflicts'
-
-  " Need both?
-  Plug 'rbgrouleff/bclose.vim' " dep from tig-explorer
-  Plug 'moll/vim-bbye'
-
-call plug#end()
-
-
+"" Preamble
+Plug 'tpope/vim-sensible'
+Plug 'liuchengxu/vim-better-default'
+let g:vim_better_default_key_mapping = 1
 let g:vim_better_default_enable_folding = 0
 let g:vim_better_default_persistent_undo = 0
-let g:vim_better_default_key_mapping = 1
 let g:vim_better_default_basic_key_mapping = 0
 let g:vim_better_default_buffer_key_mapping = 0
 let g:vim_better_default_file_key_mapping = 0
 let g:vim_better_default_fold_key_mapping = 0
 let g:vim_better_default_window_key_mapping = 0
-
+" Load this plugin immediately so we can overwrite its settings easier
 runtime! plugin/default.vim
 set termguicolors " make terminal colors vork in vimr
 set autoread " Auto-refresh unchanged files when content changes
 set norelativenumber
 set nonumber
 set signcolumn=yes
-set timeoutlen=600
-set updatetime=600
+set timeoutlen=800
+set updatetime=300
 set formatoptions-=cro " https://superuser.com/a/271024
 set clipboard=
+set noshowmode
+set cmdheight=2
+set shortmess+=c
 
-colorscheme gruvbox
-set background=dark " Gruvbox variant
 
-call deoplete#custom#option('sources', {
-\  '_': ['ale'],
-\ })
-
-" FZF
+"" Text Manipulation
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 let g:fzf_buffers_jump = 1
 let g:fzf_commands_expect = 'alt-enter'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-
 let g:fzf_action = {
-  \ 'ctrl-e': 'edit',
-  \ 'ctrl-x': 'Bdelete',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
-" Customize fzf colors to match your color scheme
-let g:fzf_colors = {
-\ 'fg':      ['fg', 'Normal'],
-\ 'bg':      ['bg', 'Normal'],
-\ 'hl':      ['fg', 'Comment'],
-\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-\ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-\ 'hl+':     ['fg', 'Statement'],
-\ 'info':    ['fg', 'PreProc'],
-\ 'border':  ['fg', 'Ignore'],
-\ 'prompt':  ['fg', 'Conditional'],
-\ 'pointer': ['fg', 'Exception'],
-\ 'marker':  ['fg', 'Keyword'],
-\ 'spinner': ['fg', 'Label'],
-\ 'header':  ['fg', 'Comment']
-\ }
-
-" Bufferize
-let g:bufferize_command = 'enew'
+      \ 'ctrl-e': 'edit',
+      \ 'ctrl-x': 'Bdelete',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit' }
+" let g:fzf_colors = {
+" \ 'fg':      ['fg', 'Normal'],
+" \ 'bg':      ['bg', 'Normal'],
+" \ 'hl':      ['fg', 'Comment'],
+" \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+" \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+" \ 'hl+':     ['fg', 'Statement'],
+" \ 'info':    ['fg', 'PreProc'],
+" \ 'border':  ['fg', 'Ignore'],
+" \ 'prompt':  ['fg', 'Conditional'],
+" \ 'pointer': ['fg', 'Exception'],
+" \ 'marker':  ['fg', 'Keyword'],
+" \ 'spinner': ['fg', 'Label'],
+" \ 'header':  ['fg', 'Comment']
+" \ }
 
 
-" NerdCommenter
+
+
+Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire'
+Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
+Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+
+Plug 'easymotion/vim-easymotion'
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_startofline = 0
+let g:EasyMotion_keys = 'fghjdkrtyucvbnsla;ewqiopzxm'
+
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-expand-region'
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :0,
+      \ 'ip'  :0,
+      \ 'ie'  :0,
+      \ }
+
+Plug 'scrooloose/nerdcommenter'
 let g:NERDCreateDefaultMappings = 0
 let g:NERDSpaceDelims = 1
 let g:NERDCommentEmptyLines = 1
@@ -160,79 +118,131 @@ let g:NERDToggleCheckAllLines = 1
 let g:NERDCompactSexyComs = 0
 let g:NERDDefaultAlign = 'left'
 
-" Dirvish
-let g:dirvish_mode = ':sort ,^.*[\/],'
+Plug 'tommcdo/vim-exchange'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tyru/open-browser.vim'
+let g:openbrowser_default_search = 'startpage'
+let g:openbrowser_search_engines = {
+      \   'startpage': 'https://www.startpage.com/do/dsearch?query={query}&cat=web',
+      \}
 
-" NERDTree
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
+" Languages
+Plug 'editorconfig/editorconfig-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'jparise/vim-graphql'
+Plug 'bfontaine/Brewfile.vim'
 
-" EasyMotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_keys = 'jfkdhgls;anvmcutiroe'
+" Colors
+Plug 'morhetz/gruvbox'
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_invert_selection = 0
 
-" Rainbow Parentheses
-let g:rainbow_active = 1
+" Plug 'NewProggie/NewProggie-Color-Scheme'
 
-" UndoTree
-let g:undotree_WindowLayout = 4
-let g:undotree_ShortIndicators = 1
-let g:undotree_SetFocusWhenToggle = 1
-" Mundo
-let g:mundo_right = 1
-let g:mundo_width = 60
+"" Finalize colors
+set background=dark " Let vim know about our colors
 
-" Airline
+
+"" UI / Syntax
+Plug 'andrewradev/bufferize.vim'
+let g:bufferize_command = 'enew'
+
+Plug 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
-" Deoplete
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-\   'auto_complete_delay': 150,
-\   'auto_refresh_delay': 150,
-\   'smart_case': v:true,
-\ })
+Plug 'airblade/vim-gitgutter'
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
 
-let g:openbrowser_default_search = 'startpage'
-let g:openbrowser_search_engines = {
-\   'startpage': 'https://www.startpage.com/do/dsearch?query={query}&cat=web',
-\}
+Plug 'ryanoasis/vim-devicons'
 
-" vim-peekaboo
+"" Tools
+Plug 'liuchengxu/vim-which-key'
+
+" Plug 'rbgrouleff/bclose.vim' | Plug 'iberianpig/tig-explorer.vim'
+Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
+
+Plug 'tpope/vim-fugitive'
+Plug 'DataWraith/auto_mkdir'
+Plug 'airblade/vim-matchquote'
+Plug 'dbakker/vim-projectroot'
+
+"" Experimental
+Plug 'junegunn/vim-peekaboo' " See contents of registers
 let g:peekaboo_window = 'bo 30new'
 let g:peekaboo_compact = 1
 let g:peekaboo_delay = 300
 
-" ALE
-let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
-let g:ale_fix_on_save = 1
-let g:ale_linters = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'vim': ['vint'],
-\ }
+Plug 'Olical/vim-enmasse' " Edit every line in a quickfix list at the same time
+" Plug 'thinca/vim-qfreplace'
 
-" vim-expand-region
-let g:expand_region_text_objects = {
-\ 'iw'  :0,
-\ 'iW'  :0,
-\ 'i"'  :0,
-\ 'i''' :0,
-\ 'i]'  :1,
-\ 'ib'  :1,
-\ 'iB'  :1,
-\ 'il'  :0,
-\ 'ip'  :0,
-\ 'ie'  :0,
-\ }
+Plug 'simnalamburt/vim-mundo' " Vim undo tree visualizer
+let g:mundo_right = 1
+let g:mundo_width = 60
+
+" Plug 'mbbill/undotree'
+" let g:undotree_WindowLayout = 4
+" let g:undotree_ShortIndicators = 1
+" let g:undotree_SetFocusWhenToggle = 1
+
+
+"" File management plugins
+Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+" Plug 'tpope/vim-vinegar'
+
+" Plug 'justinmk/vim-dirvish'
+" let g:dirvish_mode = ':sort ,^.*[\/],'
+
+" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'whiteinge/diffconflicts'
+
+" Error reporting
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
+
+" Plug 'w0rp/ale'
+" let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
+" let g:ale_fix_on_save = 1
+" let g:ale_linters = {
+"       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"       \   'vim': ['vint'],
+"       \ }
+
+" Plug 'autozimu/LanguageClient-neovim', {
+" \ 'branch': 'next',
+" \ 'do': 'bash install.sh',
+" \ }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+
+" Need both?
+Plug 'moll/vim-bbye'
+
+call plug#end()
+
+colorscheme gruvbox
 call expand_region#custom_text_objects({
-\ "\/\\n\\n\<CR>": 1,
-\ 'a]' :1,
-\ 'ab' :1,
-\ 'aB' :1,
-\ })
+      \ "\/\\n\\n\<CR>": 1,
+      \ 'a]' :1,
+      \ 'ab' :1,
+      \ 'aB' :1,
+      \ })
+
+call deoplete#custom#option('sources', {
+      \  '_': ['ale'],
+      \ })
+
+" Deoplete
+call deoplete#custom#option({
+      \   'auto_complete_delay': 150,
+      \   'auto_refresh_delay': 150,
+      \   'smart_case': v:true,
+      \ })
 
 " KEYBINDINGS
 " System clipboard integration
@@ -291,6 +301,8 @@ map gx <Plug>(openbrowser-smart-search)
 " Fast swap
 map cx <Plug>(Exchange)
 map cX <Plug>(ExchangeClear)
+" Show completions
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -501,15 +513,15 @@ vnoremap <silent> ] :<c-u>WhichKeyVisual ']'<CR>
 
 autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " autocmd! FileType term://*
 autocmd  FileType term://* set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
 " autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
@@ -527,31 +539,31 @@ endfunction
 autocmd BufEnter * call <SID>AutoProjectRootCD()
 
 " Use interactive grep versions
-  " \   'rg --vimgrep --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+" \   'rg --vimgrep --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
 command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', 'alt-/'),
-  \   <bang>0)
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', 'alt-/'),
+      \   <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 " Filter oldfiles for History command
 command! History call fzf#run(fzf#wrap({
-\ 'source':  s:filtered_recent_files(),
-\ 'sink':    'edit',
-\ 'options': '-m -x +s',
-\ 'down':    '40%' }))
+      \ 'source':  s:filtered_recent_files(),
+      \ 'sink':    'edit',
+      \ 'options': '-m -x +s',
+      \ 'down':    '40%' }))
 
 " Filter oldfiles and include open buffers
 function! s:filtered_recent_files()
   return extend(
-  \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'),
-  \ filter(copy(v:oldfiles),
-  \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
-  \ )
+        \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'),
+        \ filter(copy(v:oldfiles),
+        \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
+        \ )
 endfunction
 
 " Go to last cursor position when reopening file
