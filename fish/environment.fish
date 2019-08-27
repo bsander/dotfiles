@@ -16,6 +16,7 @@ set -gx NVIM_LISTEN_ADDRESS /tmp/nvimsocket
 
 # FZF global options
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
+set -gx FZF_DEFAULT_OPTS '--exact --height=40%'
 set -gx FZF_PREVIEW_FILE_CMD 'bat -r :10'
 set -gx FZF_PREVIEW_DIR_CMD 'exa --tree --level 1 --group-directories-first'
 set -gx FZF_CD_COMMAND 'fd --type d'
