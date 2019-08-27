@@ -42,6 +42,9 @@ if status --is-interactive
     test -f "$FISH_HOME/prompt.fish"
     and source "$FISH_HOME/prompt.fish"
 
+    ## Set colors
+    theme_gruvbox dark hard
+
     ## More stuff not heavy enough for their own files yet
 
     ## Setup keybindings
