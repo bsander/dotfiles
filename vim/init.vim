@@ -65,12 +65,11 @@ let g:fzf_colors = {
       \ "spinner": ["fg", "IncSearch"],
       \ "header":  ["fg", "WildMenu"] }
 
-
-
-
 Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire'
+Plug 't9md/vim-textmanip'
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
 Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+  " Plug 'coderifous/textobj-word-column.vim'
 
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -279,10 +278,8 @@ nnoremap <silent> <esc> :noh<CR><esc>
 noremap <silent> q <Nop>
 noremap <silent> Q <Nop>
 " Move line or selection
-nnoremap <silent> J :m+1<CR>
-nnoremap <silent> K :m-2<CR>
-vmap <silent> J :'<'>,m'>+1<CR>:normal gv<CR>
-vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
+map <silent> J <Plug>(textmanip-move-down)
+map <silent> K <Plug>(textmanip-move-up)
 " Join lines
 noremap <silent> H k:join!<CR>
 noremap <silent> L :join!<CR>
@@ -496,12 +493,13 @@ let g:which_key_map.w.v = '[|] split'
 
 " TRANSFORMATIONS
 let g:which_key_map.x = {'name': '+transform' }
-nnoremap <silent> <Leader>xd :t.<CR>
-vnoremap <silent> <Leader>xd "ay'>"apgv
-let g:which_key_map.x.d = 'duplicate'
+map <silent> <Leader>xd <Plug>(textmanip-duplicate-down)
+map <silent> <Leader>xD <Plug>(textmanip-duplicate-up)
+map <silent> <Leader>xh <Plug>(textmanip-duplicate-left)
+map <silent> <Leader>xl <Plug>(textmanip-duplicate-right)
 map <Leader>xo gx
-" noremap <Leader>xu :<C-u>UndotreeToggle<CR>
 noremap <silent> <Leader>xu :MundoToggle<CR>
+  " noremap <Leader>xu :<C-u>UndotreeToggle<CR>
 noremap <silent> <Leader>xq q
 let g:which_key_map.x.q = 'macro'
 noremap <silent> <Leader>x@ :r!date<CR>
