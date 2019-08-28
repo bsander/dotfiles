@@ -1,0 +1,17 @@
+{
+  "eslint.filetypes": ["javascript", "javascriptreact", "typescript"],
+  "eslint.run": "onType",
+  "eslint.autoFixOnSave": true,
+
+  "prettier.formatterPriority": -1,
+  "prettier.eslintIntegration": false,
+  "prettier.requireConfig": true,
+
+  "coc.preferences.hoverTarget": "echo",
+  "signature.target": "echo",
+  "diagnostic.messageTarget": "echo",
+  "diagnostic.errorSign": ">>",
+  "diagnostic.warningSign": "==",
+  "diagnostic.infoSign": "--",
+  "diagnostic.hintSign": "..",
+}

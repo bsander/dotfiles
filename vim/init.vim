@@ -39,21 +39,6 @@ let g:vim_better_default_buffer_key_mapping = 0
 let g:vim_better_default_file_key_mapping = 0
 let g:vim_better_default_fold_key_mapping = 0
 let g:vim_better_default_window_key_mapping = 0
-" Load this plugin immediately so we can overwrite its settings easier
-runtime! plugin/default.vim
-set termguicolors " make terminal colors vork in vimr
-set autoread " Auto-refresh unchanged files when content changes
-set norelativenumber
-set nonumber
-set signcolumn=yes
-set timeoutlen=800
-set updatetime=300
-set formatoptions-=cro " https://superuser.com/a/271024
-set clipboard=
-set noshowmode
-set cmdheight=2
-set shortmess+=c
-
 
 "" Text Manipulation
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -65,21 +50,20 @@ let g:fzf_action = {
       \ 'ctrl-x': 'Bdelete',
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit' }
-" let g:fzf_colors = {
-" \ 'fg':      ['fg', 'Normal'],
-" \ 'bg':      ['bg', 'Normal'],
-" \ 'hl':      ['fg', 'Comment'],
-" \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-" \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-" \ 'hl+':     ['fg', 'Statement'],
-" \ 'info':    ['fg', 'PreProc'],
-" \ 'border':  ['fg', 'Ignore'],
-" \ 'prompt':  ['fg', 'Conditional'],
-" \ 'pointer': ['fg', 'Exception'],
-" \ 'marker':  ['fg', 'Keyword'],
-" \ 'spinner': ['fg', 'Label'],
-" \ 'header':  ['fg', 'Comment']
-" \ }
+let g:fzf_colors = {
+      \ "fg":      ["fg", "Normal"],
+      \ "bg":      ["bg", "Normal"],
+      \ "hl":      ["fg", "IncSearch"],
+      \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
+      \ "bg+":     ["bg", "CursorLine", "CursorColumn"],
+      \ "hl+":     ["fg", "IncSearch"],
+      \ "info":    ["fg", "IncSearch"],
+      \ "border":  ["fg", "Ignore"],
+      \ "prompt":  ["fg", "Comment"],
+      \ "pointer": ["fg", "IncSearch"],
+      \ "marker":  ["fg", "IncSearch"],
+      \ "spinner": ["fg", "IncSearch"],
+      \ "header":  ["fg", "WildMenu"] }
 
 
 
@@ -126,9 +110,14 @@ let g:openbrowser_search_engines = {
       \   'startpage': 'https://www.startpage.com/do/dsearch?query={query}&cat=web',
       \}
 
-" Languages
+"" Languages
+
+" let g:polyglot_disabled = ['typescript']
+" Plug 'sheerun/vim-polyglot'
+
+Plug 'herringtondarkholme/yats.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'sheerun/vim-polyglot'
+
 Plug 'jparise/vim-graphql'
 Plug 'bfontaine/Brewfile.vim'
 
@@ -163,6 +152,7 @@ Plug 'liuchengxu/vim-which-key'
 
 " Plug 'rbgrouleff/bclose.vim' | Plug 'iberianpig/tig-explorer.vim'
 Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
+let g:bclose_no_plugin_maps = 1
 
 Plug 'tpope/vim-fugitive'
 Plug 'DataWraith/auto_mkdir'
@@ -212,18 +202,45 @@ let g:deoplete#enable_at_startup = 1
 "       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 "       \   'vim': ['vint'],
 "       \ }
-
+"
 " Plug 'autozimu/LanguageClient-neovim', {
-" \ 'branch': 'next',
-" \ 'do': 'bash install.sh',
-" \ }
+"       \ 'branch': 'next',
+"       \ 'do': 'bash install.sh',
+"       \ }
+" let g:LanguageClient_hoverPreview = "Never"
+" let g:LanguageClient_rootMarkers = {
+"       \ 'typescript': ['.git', 'tsconfig.json'],
+"       \ }
+" let g:LanguageClient_serverCommands = {
+"       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"       \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio'],
+"       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"       \ }
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-eslint',
+      \ 'coc-prettier',
+      \ ]
 
-
-" Need both?
 Plug 'moll/vim-bbye'
 
 call plug#end()
+
+runtime! plugin/default.vim
+set termguicolors " make terminal colors vork in vimr
+set autoread " Auto-refresh unchanged files when content changes
+set norelativenumber
+set nonumber
+set signcolumn=yes
+set timeoutlen=800
+set updatetime=300
+set formatoptions-=cro " https://superuser.com/a/271024
+set clipboard=
+set noshowmode
+set cmdheight=2
+set shortmess+=c
 
 colorscheme gruvbox
 call expand_region#custom_text_objects({
@@ -248,6 +265,8 @@ call deoplete#custom#option({
 " System clipboard integration
 map gy "+y
 map gY "+Y
+map gc "+c
+map gC "+C
 map gd "+d
 map gD "+D
 map gp "+p
@@ -302,7 +321,7 @@ map gx <Plug>(openbrowser-smart-search)
 map cx <Plug>(Exchange)
 map cX <Plug>(ExchangeClear)
 " Show completions
-inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <silent><expr> <c-space> coc#refresh()
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -327,8 +346,10 @@ nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bN :bprevious<CR>
 nnoremap <Leader>bn :bnext<CR>
-nnoremap <Leader>bd :Bdelete<CR>
-nnoremap <Leader>bD :Bdelete!<CR>
+nnoremap <Leader>bx :Bdelete<CR>
+nnoremap <Leader>bX :Bdelete!<CR>
+nnoremap <Leader>bd :Bclose<CR>
+nnoremap <Leader>bD :Bclose!<CR>
 nnoremap <Leader>bm :Bufferize messages<CR>
 nnoremap <Leader>br :edit<CR>
 nnoremap <Leader>bR :edit!<CR>
