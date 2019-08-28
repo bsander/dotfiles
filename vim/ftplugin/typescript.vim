@@ -44,6 +44,10 @@ map <silent> <localleader>gi <Plug>(coc-implementation)
 map <silent> <localleader>gt <Plug>(coc-type-definition)
 map <silent> <localleader>gr <Plug>(coc-references)
 
+" REFACTOR
+map <silent> <localleader>rr <Plug>(coc-rename)
+map <silent> <localleader>rx <Plug>(coc-codeaction)
+
 map <silent> <localleader>o :<C-u>CocList outline<CR>
 map <silent> <localleader>s :<C-u>CocList -I symbols<CR>
 
@@ -86,9 +90,7 @@ map <silent> <localleader>ce :<C-u>CocList extensions<CR>
 
 augroup df_typescript
     autocmd!
-    " autocmd CursorHold * silent call CocActionAsync('highlight')
-    " Update signature help on jump placeholder
-    " autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd CursorHold * silent call CocActionAsync('highlight')
     " au! CursorHold * :ALEHover " https://github.com/dense-analysis/ale/issues/1532
     autocmd BufWritePre <buffer> CocCommand prettier.formatFile
 augroup END

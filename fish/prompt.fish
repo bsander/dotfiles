@@ -21,8 +21,11 @@ function __sf_section_git_hash -d 'Show current git shorthash'
         $SPACEFISH_GIT_HASH_SUFFIX
 end
 
+# set SPACEFISH_PROMPT_ORDER exec_time exit_code jobs user dir git_hash git \
+#     node docker rust haskell kubecontext line_sep vi_mode char
+
 set SPACEFISH_PROMPT_ORDER exec_time exit_code jobs user dir git_hash git \
-    node docker rust haskell kubecontext line_sep vi_mode char
+    line_sep vi_mode char
 
 set SPACEFISH_DIR_PREFIX ''
 

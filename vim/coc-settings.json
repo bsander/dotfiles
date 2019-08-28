@@ -10,8 +10,9 @@
   "coc.preferences.hoverTarget": "echo",
   "signature.target": "echo",
   "diagnostic.messageTarget": "echo",
+
   "diagnostic.errorSign": ">>",
   "diagnostic.warningSign": "==",
   "diagnostic.infoSign": "--",
-  "diagnostic.hintSign": "..",
+  "diagnostic.hintSign": ".."
 }

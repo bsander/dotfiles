@@ -7,7 +7,6 @@ scriptencoding utf-8
 " - split up init.vim - combine plug with config
 " - leader group undo (C-h u)
 " - tig - rebase and un/stage keybindings
-" - customize easymotion setup
 " - proper debugging support
 " - macros
 " - tabs buffers mayhem
@@ -110,18 +109,14 @@ let g:openbrowser_search_engines = {
       \}
 
 "" Languages
+Plug 'sheerun/vim-polyglot'
 
-" let g:polyglot_disabled = ['typescript']
-" Plug 'sheerun/vim-polyglot'
-
-Plug 'herringtondarkholme/yats.vim'
 Plug 'editorconfig/editorconfig-vim'
-
-Plug 'jparise/vim-graphql'
 Plug 'bfontaine/Brewfile.vim'
+" Plug 'jparise/vim-graphql', { 'for': 'graphql' } " BREAKS TS
 
 " Colors
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = 0
 
@@ -138,11 +133,12 @@ let g:bufferize_command = 'enew'
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#alt_sep = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#alt_sep = 1
+let g:airline#extensions#tabline#show_tab_count = 1
 
 Plug 'airblade/vim-gitgutter'
-Plug 'luochen1990/rainbow'
-let g:rainbow_active = 1
 
 Plug 'ryanoasis/vim-devicons'
 
@@ -240,6 +236,7 @@ set clipboard=
 set noshowmode
 set cmdheight=2
 set shortmess+=c
+set scrolloff=7
 
 colorscheme gruvbox
 call expand_region#custom_text_objects({
@@ -247,6 +244,8 @@ call expand_region#custom_text_objects({
       \ 'a]' :1,
       \ 'ab' :1,
       \ 'aB' :1,
+      \ 'if' :1,
+      \ 'af' :1,
       \ })
 
 call deoplete#custom#option('sources', {
@@ -287,6 +286,9 @@ noremap <silent> L :join!<CR>
 nnoremap <silent> Y y$
 " Quit visual mode
 vnoremap <silent> v <Esc>
+" Normalize replace
+nnoremap <silent> R cl
+vnoremap <silent> R c
 " Moving around in insert/command modes
 inoremap <silent> <C-h> <Left>
 inoremap <silent> <C-j> <Down>
@@ -319,6 +321,9 @@ map cx <Plug>(Exchange)
 map cX <Plug>(ExchangeClear)
 " Show completions
 " inoremap <silent><expr> <c-space> coc#refresh()
+" Select functions
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -326,8 +331,8 @@ let g:which_key_map =  {}
 " LEADER LEADER
 noremap <silent> <Leader><Space> :Commands<CR>
 nnoremap <silent> <Leader><ESC> <ESC>
-map <Leader>/ :BLines<CR>
-map <Leader>? :ProjectRootExe Rg<CR>
+map <Leader>? :BLines<CR>
+map <Leader>/ :ProjectRootExe Rg<CR>
 nnoremap <silent> <Leader><Tab> :bnext<CR>
 nnoremap <silent> <Leader><S-Tab> :bprev<CR>
 noremap <silent> <Leader>' :split term://$SHELL<CR>
@@ -343,10 +348,10 @@ nnoremap <silent> <Leader>bb :Buffers<CR>
 nnoremap <silent> <Leader>bp :bprevious<CR>
 nnoremap <silent> <Leader>bN :bprevious<CR>
 nnoremap <silent> <Leader>bn :bnext<CR>
-nnoremap <silent> <Leader>bx :Bdelete<CR>
-nnoremap <silent> <Leader>bX :Bdelete!<CR>
-nnoremap <silent> <Leader>bd :Bclose<CR>
-nnoremap <silent> <Leader>bD :Bclose!<CR>
+" nnoremap <silent> <Leader>bx :Bdelete<CR>
+" nnoremap <silent> <Leader>bX :Bdelete!<CR>
+nnoremap <silent> <Leader>bd :Bdelete<CR>
+nnoremap <silent> <Leader>bD :Bdelete!<CR>
 nnoremap <silent> <Leader>bm :Bufferize messages<CR>
 nnoremap <silent> <Leader>br :edit<CR>
 nnoremap <silent> <Leader>bR :edit!<CR>
@@ -425,6 +430,7 @@ nnoremap <silent> <Leader>sf :ProjectRootExe Rg<CR>
 
 " TOGGLES
 let g:which_key_map.t = { 'name': '+toggle' }
+nnoremap <silent> <Leader>tb :let &background=&background==?'dark'?'light':'dark'<CR>
 nnoremap <silent> <Leader>tc :Colors<CR>
 nnoremap <silent> <Leader>tl :set invlist<CR>
 nnoremap <silent> <Leader>tn :set invnumber<CR>
@@ -590,9 +596,7 @@ if has('autocmd')
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 " Start terminal in insert-mode
-" autocmd TermOpen * startinsert
 autocmd BufWinEnter,WinEnter term://* startinsert
-
 
 " Connect to running nvim instance to avoid nested nvims
 if has('nvim')

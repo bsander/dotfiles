@@ -1,3 +1,4 @@
+tap "equalsraf/neovim-qt"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -10,6 +11,7 @@ tap "jesseduffield/lazydocker"
 tap "koekeishiya/formulae"
 tap "kryptco/tap"
 tap "railwaycat/emacsmacport"
+tap "rogual/neovim-dot-app"
 tap "wagoodman/dive"
 # Official Amazon AWS command-line interface
 brew "awscli"
@@ -147,8 +149,6 @@ brew "tig"
 brew "trash"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# Vi 'workalike' with many additional features
-brew "vim", link: false
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Show the current WiFi network password
@@ -159,6 +159,8 @@ brew "xsv"
 brew "yarn"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Neovim GUI, in Qt5
+brew "equalsraf/neovim-qt/neovim-qt"
 # Everything you need to get started with Heroku
 brew "heroku/brew/heroku"
 # A simple terminal UI for docker, written in Go
@@ -168,7 +170,8 @@ brew "koekeishiya/formulae/chunkwm"
 # Simple hotkey-daemon for macOS.
 brew "koekeishiya/formulae/skhd"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
-brew "railwaycat/emacsmacport/emacs-mac", link: false
+brew "railwaycat/emacsmacport/emacs-mac"
+brew "rogual/neovim-dot-app/neovim-dot-app"
 # A tool for exploring each layer in a docker image
 brew "wagoodman/dive/dive"
 cask "1password"
