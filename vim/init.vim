@@ -272,47 +272,47 @@ map gD "+D
 map gp "+p
 map gP "+P
 " Redo
-noremap U <C-r>
+noremap <silent> U <C-r>
 " Clear search highlight on escape
 nnoremap <silent> <esc> :noh<CR><esc>
 " God damn macros (move to <Leader>xq)
-noremap q <Nop>
-noremap Q <Nop>
+noremap <silent> q <Nop>
+noremap <silent> Q <Nop>
 " Move line or selection
 nnoremap <silent> J :m+1<CR>
 nnoremap <silent> K :m-2<CR>
 vmap <silent> J :'<'>,m'>+1<CR>:normal gv<CR>
 vmap <silent> K :'<'>,m'<-2<CR>:normal gv<CR>
 " Join lines
-noremap H k:join!<CR>
-noremap L :join!<CR>
+noremap <silent> H k:join!<CR>
+noremap <silent> L :join!<CR>
 " Yank to the end of line
-nnoremap Y y$
+nnoremap <silent> Y y$
 " Quit visual mode
-vnoremap v <Esc>
+vnoremap <silent> v <Esc>
 " Moving around in insert/command modes
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <C-a> <Home>
-inoremap <C-e> <End>
-inoremap <C-d> <Delete>
-cnoremap <C-h> <Left>
-cnoremap <C-j> <Down>
-cnoremap <C-k> <Up>
-cnoremap <C-l> <Right>
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-d> <Delete>
+inoremap <silent> <C-h> <Left>
+inoremap <silent> <C-j> <Down>
+inoremap <silent> <C-k> <Up>
+inoremap <silent> <C-l> <Right>
+inoremap <silent> <C-a> <Home>
+inoremap <silent> <C-e> <End>
+inoremap <silent> <C-d> <Delete>
+cnoremap <silent> <C-h> <Left>
+cnoremap <silent> <C-j> <Down>
+cnoremap <silent> <C-k> <Up>
+cnoremap <silent> <C-l> <Right>
+cnoremap <silent> <C-a> <Home>
+cnoremap <silent> <C-e> <End>
+cnoremap <silent> <C-d> <Delete>
 " jj | Escaping insert/command mode
-inoremap jj <Esc>
-cnoremap jj <C-c>
+inoremap <silent> jj <Esc>
+cnoremap <silent> jj <C-c>
 " Cycle deoplete suggestions on tab
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent> <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " Exit terminal insert mode
-tnoremap <C-'><C-'> <C-\><C-n>
-tnoremap QQ <C-\><C-n>
+tnoremap <silent> <C-'><C-'> <C-\><C-n>
+tnoremap <silent> QQ <C-\><C-n>
 " " Comment current line in insert mode
 " imap <C-/> <Plug>NERDCommenterInsert
 let g:netrw_nogx = 1 " disable netrw's gx mapping.
@@ -327,34 +327,34 @@ map cX <Plug>(ExchangeClear)
 let g:which_key_map =  {}
 
 " LEADER LEADER
-noremap <Leader><Space> :Commands<CR>
-nnoremap <Leader><ESC> <ESC>
+noremap <silent> <Leader><Space> :Commands<CR>
+nnoremap <silent> <Leader><ESC> <ESC>
 map <Leader>/ :BLines<CR>
 map <Leader>? :ProjectRootExe Rg<CR>
-nnoremap <Leader><Tab> :bnext<CR>
-nnoremap <Leader><S-Tab> :bprev<CR>
-noremap <Leader>' :split term://$SHELL<CR>
+nnoremap <silent> <Leader><Tab> :bnext<CR>
+nnoremap <silent> <Leader><S-Tab> :bprev<CR>
+noremap <silent> <Leader>' :split term://$SHELL<CR>
 let g:which_key_map['/'] = 'Search project'
 
 " BUFFER
 let g:which_key_map.b = { 'name' : '+buffer' }
-nnoremap <Leader>bo :%bd\|e#\|bd#<CR>
+nnoremap <silent> <Leader>bo :%bd\|e#\|bd#<CR>
 let g:which_key_map.b.O = 'only'
-nnoremap <Leader>bO :%bd!\|e#\|bd#<CR>
+nnoremap <silent> <Leader>bO :%bd!\|e#\|bd#<CR>
 let g:which_key_map.b.O = 'only!'
-nnoremap <Leader>bb :Buffers<CR>
-nnoremap <Leader>bp :bprevious<CR>
-nnoremap <Leader>bN :bprevious<CR>
-nnoremap <Leader>bn :bnext<CR>
-nnoremap <Leader>bx :Bdelete<CR>
-nnoremap <Leader>bX :Bdelete!<CR>
-nnoremap <Leader>bd :Bclose<CR>
-nnoremap <Leader>bD :Bclose!<CR>
-nnoremap <Leader>bm :Bufferize messages<CR>
-nnoremap <Leader>br :edit<CR>
-nnoremap <Leader>bR :edit!<CR>
-nnoremap <Leader>bY yie
-nnoremap <Leader>bP "_dieP
+nnoremap <silent> <Leader>bb :Buffers<CR>
+nnoremap <silent> <Leader>bp :bprevious<CR>
+nnoremap <silent> <Leader>bN :bprevious<CR>
+nnoremap <silent> <Leader>bn :bnext<CR>
+nnoremap <silent> <Leader>bx :Bdelete<CR>
+nnoremap <silent> <Leader>bX :Bdelete!<CR>
+nnoremap <silent> <Leader>bd :Bclose<CR>
+nnoremap <silent> <Leader>bD :Bclose!<CR>
+nnoremap <silent> <Leader>bm :Bufferize messages<CR>
+nnoremap <silent> <Leader>br :edit<CR>
+nnoremap <silent> <Leader>bR :edit!<CR>
+nnoremap <silent> <Leader>bY yie
+nnoremap <silent> <Leader>bP "_dieP
 
 " COMMENT (NERDCommenter)
 let g:which_key_map.c = { 'name' : '+comment' }
@@ -371,24 +371,24 @@ nmap <Leader>cO O<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
-nnoremap <Leader>fs :write<CR>
-nnoremap <Leader>fa :wall<CR>
-nnoremap <expr> <Leader>fS ':write ' . expand('%:p')
-nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
-nnoremap <Leader>ff :ProjectRootExe Files<CR>
-nnoremap <Leader>fD :call delete(expand('%')) \| bdelete!<CR>
-nnoremap <Leader>fn :enew<CR>
-nnoremap <Leader>fr :History<CR>
-nnoremap <Leader>ft :NERDTreeToggle<CR>
-nnoremap <Leader>fT :NERDTreeFind %<CR>
+nnoremap <silent> <Leader>fs :write<CR>
+nnoremap <silent> <Leader>fa :wall<CR>
+nnoremap <silent> <expr> <Leader>fS ':write ' . expand('%:p')
+nnoremap <silent> <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
+nnoremap <silent> <Leader>ff :ProjectRootExe Files<CR>
+nnoremap <silent> <Leader>fD :call delete(expand('%')) \| bdelete!<CR>
+nnoremap <silent> <Leader>fn :enew<CR>
+nnoremap <silent> <Leader>fr :History<CR>
+nnoremap <silent> <Leader>ft :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>fT :NERDTreeFind %<CR>
 
 " INIT.VIM
 let g:which_key_map.v = { 'name' : '+vimrc' }
-nnoremap <Leader>ve :edit $MYVIMRC<CR>
-nnoremap <Leader>vs :write \| source $MYVIMRC<CR>
-nnoremap <Leader>vi :PlugInstall<CR>
-nnoremap <Leader>vu :PlugUpdate<CR>
-nnoremap <Leader>vc :PlugClean<CR>
+nnoremap <silent> <Leader>ve :edit $MYVIMRC<CR>
+nnoremap <silent> <Leader>vs :write \| source $MYVIMRC<CR>
+nnoremap <silent> <Leader>vi :PlugInstall<CR>
+nnoremap <silent> <Leader>vu :PlugUpdate<CR>
+nnoremap <silent> <Leader>vc :PlugClean<CR>
 
 " GIT
 let g:which_key_map.g = { 'name': '+git' }
@@ -416,95 +416,95 @@ map <Leader>l <Plug>(easymotion-bd-jk)
 
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
-nnoremap <Leader>qq :confirm qall<CR>
-nnoremap <Leader>qs :wqall<CR>
-nnoremap <Leader>qQ :qall!<CR>
+nnoremap <silent> <Leader>qq :confirm qall<CR>
+nnoremap <silent> <Leader>qs :wqall<CR>
+nnoremap <silent> <Leader>qQ :qall!<CR>
 
 " SEARCH
 let g:which_key_map.s = { 'name': '+search' }
-nnoremap <Leader>ss :BLines<CR>
-nnoremap <Leader>sb :Lines<CR>
-nnoremap <Leader>sf :ProjectRootExe Rg<CR>
+nnoremap <silent> <Leader>ss :BLines<CR>
+nnoremap <silent> <Leader>sb :Lines<CR>
+nnoremap <silent> <Leader>sf :ProjectRootExe Rg<CR>
 
 " TOGGLES
 let g:which_key_map.t = { 'name': '+toggle' }
-nnoremap <Leader>tc :Colors<CR>
-nnoremap <Leader>tl :set invlist<CR>
-nnoremap <Leader>tn :set invnumber<CR>
-nnoremap <Leader>tN :set invrelativenumber<CR>
-nnoremap <Leader>ts :Filetypes<CR>
-nnoremap <Leader>t- :let &scrolloff=999-&scrolloff<CR>
+nnoremap <silent> <Leader>tc :Colors<CR>
+nnoremap <silent> <Leader>tl :set invlist<CR>
+nnoremap <silent> <Leader>tn :set invnumber<CR>
+nnoremap <silent> <Leader>tN :set invrelativenumber<CR>
+nnoremap <silent> <Leader>ts :Filetypes<CR>
+nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
 
 " WINDOW (stolen from ...)
 let g:which_key_map.w = {'name': '+window' }
-nnoremap <Leader>wr <C-W>r
+nnoremap <silent> <Leader>wr <C-W>r
 let g:which_key_map.w.r = 'rotate'
-nnoremap <Leader>wd <C-W>c
+nnoremap <silent> <Leader>wd <C-W>c
 let g:which_key_map.w.d = 'close'
-nnoremap <Leader>wo <C-W>o
+nnoremap <silent> <Leader>wo <C-W>o
 let g:which_key_map.w.o = 'only'
-nnoremap <Leader>w= <C-W>=
+nnoremap <silent> <Leader>w= <C-W>=
 let g:which_key_map.w['='] = 'equalize'
 
-nnoremap <Leader>wt :tabedit<CR>
-nnoremap <Leader>w. :tabnext<CR>
+nnoremap <silent> <Leader>wt :tabedit<CR>
+nnoremap <silent> <Leader>w. :tabnext<CR>
 let g:which_key_map.w['.'] = '[>] tab'
-nnoremap <Leader>w, :tabprev<CR>
+nnoremap <silent> <Leader>w, :tabprev<CR>
 let g:which_key_map.w[','] = '[<] tab'
 
-nnoremap <Leader>ww <C-W>w
+nnoremap <silent> <Leader>ww <C-W>w
 let g:which_key_map.w.w = '[O] focus'
-nnoremap <Leader>wj <C-W>j
+nnoremap <silent> <Leader>wj <C-W>j
 let g:which_key_map.w.j = '[v] focus'
-nnoremap <Leader>wk <C-W>k
+nnoremap <silent> <Leader>wk <C-W>k
 let g:which_key_map.w.k = '[^] focus'
-nnoremap <Leader>wh <C-W>h
+nnoremap <silent> <Leader>wh <C-W>h
 let g:which_key_map.w.h = '[<] focus'
-nnoremap <Leader>wl <C-W>l
+nnoremap <silent> <Leader>wl <C-W>l
 let g:which_key_map.w.l = '[>] focus'
 " double-map
 if has('nvim') || has('terminal')
-  tnoremap <Leader>wj <C-W>j
-  tnoremap <Leader>wk <C-W>k
-  tnoremap <Leader>wh <C-W>h
-  tnoremap <Leader>wl <C-W>l
+  tnoremap <silent> <Leader>wj <C-W>j
+  tnoremap <silent> <Leader>wk <C-W>k
+  tnoremap <silent> <Leader>wh <C-W>h
+  tnoremap <silent> <Leader>wl <C-W>l
 endif
 
-nnoremap <Leader>wJ <C-W>J
+nnoremap <silent> <Leader>wJ <C-W>J
 let g:which_key_map.w.J = '[v] move'
-nnoremap <Leader>wK <C-W>K
+nnoremap <silent> <Leader>wK <C-W>K
 let g:which_key_map.w.K = '[^] move'
-nnoremap <Leader>wH <C-W>H
+nnoremap <silent> <Leader>wH <C-W>H
 let g:which_key_map.w.H = '[<] move'
-nnoremap <Leader>wL <C-W>L
+nnoremap <silent> <Leader>wL <C-W>L
 let g:which_key_map.w.L = '[>] move'
 
-nnoremap <Leader>w[ <C-W>5<
+nnoremap <silent> <Leader>w[ <C-W>5<
 let g:which_key_map.w['['] = '[<] resize'
-nnoremap <Leader>w] <C-W>5>
+nnoremap <silent> <Leader>w] <C-W>5>
 let g:which_key_map.w[']'] = '[>] resize'
-nnoremap <Leader>w{ :resize +5<CR>
+nnoremap <silent> <Leader>w{ :resize +5<CR>
 let g:which_key_map.w['{'] = '[^] resize'
-nnoremap <Leader>w} :resize -5<CR>
+nnoremap <silent> <Leader>w} :resize -5<CR>
 let g:which_key_map.w['}'] = '[v] resize'
 
-nnoremap <Leader>ws <C-W>s
+nnoremap <silent> <Leader>ws <C-W>s
 let g:which_key_map.w.s = '[-] split'
-nnoremap <Leader>wv <C-W>v
+nnoremap <silent> <Leader>wv <C-W>v
 let g:which_key_map.w.v = '[|] split'
 
 
 " TRANSFORMATIONS
 let g:which_key_map.x = {'name': '+transform' }
-nnoremap <Leader>xd :t.<CR>
-vnoremap <Leader>xd "ay'>"apgv
+nnoremap <silent> <Leader>xd :t.<CR>
+vnoremap <silent> <Leader>xd "ay'>"apgv
 let g:which_key_map.x.d = 'duplicate'
 map <Leader>xo gx
 " noremap <Leader>xu :<C-u>UndotreeToggle<CR>
-noremap <Leader>xu :MundoToggle<CR>
-noremap <Leader>xq q
+noremap <silent> <Leader>xu :MundoToggle<CR>
+noremap <silent> <Leader>xq q
 let g:which_key_map.x.q = 'macro'
-noremap <Leader>x@ :r!date<CR>
+noremap <silent> <Leader>x@ :r!date<CR>
 " Swap stuff around
 map <Leader>xx <Plug>(Exchange)
 map <Leader>xX <Plug>(ExchangeClear)
