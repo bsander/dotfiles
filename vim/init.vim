@@ -373,8 +373,8 @@ nmap <Leader>cO O<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <silent> <Leader>fs :write<CR>
 nnoremap <silent> <Leader>fa :wall<CR>
-nnoremap <silent> <expr> <Leader>fS ':write ' . expand('%:p')
-nnoremap <silent> <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
+nnoremap <expr> <Leader>fS ':write ' . expand('%:p')
+nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
 nnoremap <silent> <Leader>ff :ProjectRootExe Files<CR>
 nnoremap <silent> <Leader>fD :call delete(expand('%')) \| bdelete!<CR>
 nnoremap <silent> <Leader>fn :enew<CR>
