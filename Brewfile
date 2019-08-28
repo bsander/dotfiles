@@ -44,13 +44,15 @@ brew "fd"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
 # User-friendly command-line shell for UNIX-like operating systems
-brew "fish"
+brew "fish", args: ["HEAD"]
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Distributed revision control system
 brew "git"
 # Enable transparent encryption/decryption of files in a git repo
 brew "git-crypt"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
 # Generic library support script
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
@@ -127,6 +129,8 @@ brew "rename"
 brew "ripgrep"
 # The Rust toolchain installer
 brew "rustup-init"
+# Intuitive find & replace CLI
+brew "sd"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -139,6 +143,8 @@ brew "tee-clc"
 brew "terraform"
 # Text interface for Git repositories
 brew "tig"
+# CLI tool that moves files or folder to the trash
+brew "trash"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Vi 'workalike' with many additional features
