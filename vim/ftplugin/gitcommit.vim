@@ -1,9 +1,6 @@
-augroup df_gitcommit
-  autocmd! * <buffer>
-  " noremap <silent> <localleader><localleader> :w \| bd \| startinsert<CR>
-  " noremap <silent> <localleader>x gg"gdG:w \| bd \| startinsert<CR>
-  noremap <silent> <localleader><localleader> :w \| bd<CR>
-  noremap <silent> <localleader>x gg"gdG:w \| bd<CR>
-  " " Always open in insert mode
-  autocmd BufEnter <buffer> startinsert!
-augroup END
+" augroup df_gitcommit
+"   autocmd! * <buffer>
+" augroup END
+
+noremap <buffer> <silent> <localleader><localleader> :w \| bd<CR>
+noremap <buffer> <silent> <localleader>x gg"gdG:w \| bd<CR>

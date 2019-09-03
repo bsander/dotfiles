@@ -22,6 +22,10 @@ scriptencoding utf-8
 " !! GRIPES
 " - empty line unindenting: use S -- https://vi.stackexchange.com/questions/3612/how-do-i-prevent-vim-from-unindenting-empty-lines
 
+" INFO
+" - https://vi.stackexchange.com/a/13456
+" - https://vimways.org/2018/from-vimrc-to-vim/
+
 let g:mapleader=' '
 let g:maplocalleader = ','
 
@@ -50,25 +54,25 @@ let g:fzf_action = {
       \ 'ctrl-s': 'split',
       \ 'ctrl-v': 'vsplit' }
 let g:fzf_colors = {
-      \ "fg":      ["fg", "Normal"],
-      \ "bg":      ["bg", "Normal"],
-      \ "hl":      ["fg", "IncSearch"],
-      \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
-      \ "bg+":     ["bg", "CursorLine", "CursorColumn"],
-      \ "hl+":     ["fg", "IncSearch"],
-      \ "info":    ["fg", "IncSearch"],
-      \ "border":  ["fg", "Ignore"],
-      \ "prompt":  ["fg", "Comment"],
-      \ "pointer": ["fg", "IncSearch"],
-      \ "marker":  ["fg", "IncSearch"],
-      \ "spinner": ["fg", "IncSearch"],
-      \ "header":  ["fg", "WildMenu"] }
+      \ 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'IncSearch'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'IncSearch'],
+      \ 'info':    ['fg', 'IncSearch'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Comment'],
+      \ 'pointer': ['fg', 'IncSearch'],
+      \ 'marker':  ['fg', 'IncSearch'],
+      \ 'spinner': ['fg', 'IncSearch'],
+      \ 'header':  ['fg', 'WildMenu'] }
 
 Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire'
 Plug 't9md/vim-textmanip'
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
 Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
-  " Plug 'coderifous/textobj-word-column.vim'
+" Plug 'coderifous/textobj-word-column.vim'
 
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -78,14 +82,14 @@ let g:EasyMotion_keys = 'hjkl;uinmyopb,.gfdsarevctwqxz'
 
 Plug 'chaoren/vim-wordmotion'
 let g:wordmotion_mappings = {
-\ 'w' : '<C-W>',
-\ 'b' : '<C-B>',
-\ 'e' : '<C-E>',
-\ 'ge' : 'g<C-E>',
-\ 'aw' : 'a<C-W>',
-\ 'iw' : 'i<C-W>',
-\ '<C-R><C-W>' : '<C-R><M-w>'
-\ }
+      \ 'w' : '<C-W>',
+      \ 'b' : '<C-B>',
+      \ 'e' : '<C-E>',
+      \ 'ge' : 'g<C-E>',
+      \ 'aw' : 'a<C-W>',
+      \ 'iw' : 'i<C-W>',
+      \ '<C-R><C-W>' : '<C-R><M-w>'
+      \ }
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-expand-region'
 let g:expand_region_text_objects = {
@@ -202,13 +206,16 @@ Plug 'whiteinge/diffconflicts'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 let g:deoplete#enable_at_startup = 1
 
-" Plug 'w0rp/ale'
-" let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
-" let g:ale_fix_on_save = 1
-" let g:ale_linters = {
-"       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"       \   'vim': ['vint'],
-"       \ }
+Plug 'dense-analysis/ale'
+let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
+let g:ale_fix_on_save = 1
+let g:ale_lint_delay = 0
+let g:ale_sign_error =  '>>'
+let g:ale_sign_warning =  '=='
+let g:ale_linters = {
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'vim': ['vint'],
+      \ }
 "
 " Plug 'autozimu/LanguageClient-neovim', {
 "       \ 'branch': 'next',
@@ -224,13 +231,13 @@ let g:deoplete#enable_at_startup = 1
 "       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
 "       \ }
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [
-      \ 'coc-tsserver',
-      \ 'coc-eslint',
-      \ 'coc-prettier',
-      \ 'coc-rls',
-      \ ]
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" let g:coc_global_extensions = [
+"       \ 'coc-tsserver',
+"       \ 'coc-eslint',
+"       \ 'coc-prettier',
+"       \ 'coc-rls',
+"       \ ]
 
 Plug 'moll/vim-bbye'
 
@@ -239,7 +246,8 @@ Plug 'moll/vim-bbye'
 " let g:nv_search_paths = ['~/src/notes']
 " " let g:nv_use_short_pathnames = 1
 
-Plug 'roman/golden-ratio' " Do I use this?
+Plug 'milkypostman/vim-togglelist' " Functions to toggle the [Location List] and the [Quickfix List] windows.
+let g:toggle_list_no_mappings = 1
 
 call plug#end()
 
@@ -254,10 +262,12 @@ set updatetime=300
 set formatoptions-=cro " https://superuser.com/a/271024
 set clipboard=
 set noshowmode
-set cmdheight=2
 set shortmess+=c
 set scrolloff=7
 set linebreak
+set noshowcmd
+" set cmdheight=2
+" set noruler
 " set nohlsearch
 
 colorscheme gruvbox
@@ -273,11 +283,15 @@ call expand_region#custom_text_objects({
 call deoplete#custom#option('sources', {
       \  '_': ['ale'],
       \ })
+call deoplete#custom#option('ignore_sources', {'_': ['around', 'buffer']})
 
 " Deoplete
+" call deoplete#custom#option({
+"       \   'auto_complete_delay': 150,
+"       \   'auto_refresh_delay': 150,
+"       \   'smart_case': v:true,
+"       \ })
 call deoplete#custom#option({
-      \   'auto_complete_delay': 150,
-      \   'auto_refresh_delay': 150,
       \   'smart_case': v:true,
       \ })
 
@@ -450,6 +464,11 @@ map <Leader>jw <Plug>(easymotion-bd-W)
 map <Leader>je <Plug>(easymotion-bd-E)
 map <Leader>jl <Plug>(easymotion-bd-jk)
 
+" LISTS
+let g:which_key_map.l = { 'name': '+lists' }
+map <silent> <Leader>ll :call ToggleLocationList()<CR>
+map <silent> <Leader>lq :call ToggleQuickfixList()<CR>
+
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
 nnoremap <silent> <Leader>qq :confirm qall<CR>
@@ -540,7 +559,7 @@ map <silent> <Leader>xh <Plug>(textmanip-duplicate-left)
 map <silent> <Leader>xl <Plug>(textmanip-duplicate-right)
 map <Leader>xo gx
 noremap <silent> <Leader>xu :MundoToggle<CR>
-  " noremap <Leader>xu :<C-u>UndotreeToggle<CR>
+" noremap <Leader>xu :<C-u>UndotreeToggle<CR>
 noremap <silent> <Leader>xq q
 let g:which_key_map.x.q = 'macro'
 noremap <silent> <Leader>x@ :r!date<CR>
@@ -588,7 +607,7 @@ autocmd  FileType term://* set laststatus=0 noshowmode noruler
 
 function! <SID>AutoProjectRootCD()
   try
-    if &filetype != 'help'
+    if &filetype !=? 'help'
       ProjectRootCD
     endif
   catch
@@ -622,7 +641,7 @@ function! s:filtered_recent_files()
   return extend(
         \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'),
         \ filter(copy(v:oldfiles),
-        \        "v:val !~ 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
+        \        "v:val !~? 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
         \ )
 endfunction
 
@@ -637,3 +656,10 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 if has('nvim')
   let $GIT_EDITOR = 'nvr --remote-wait --servername ' . v:servername
 endif
+
+
+augroup ActiveWindowHighlight
+    autocmd!
+    autocmd WinEnter * set signcolumn=yes
+    autocmd WinLeave * set signcolumn=no
+augroup END
