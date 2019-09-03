@@ -19,8 +19,6 @@ brew "awscli"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Fuzzy matcher that uses std{in,out} and a native GUI
-brew "choose-gui"
 # The Clojure Programming Language
 brew "clojure"
 # GNU File, Shell, and Text utilities
@@ -33,12 +31,8 @@ brew "diceware"
 brew "direnv"
 # Docker Credential Helper for Amazon ECR
 brew "docker-credential-helper-ecr"
-# Intelligent archive extraction
-brew "dtrx"
 # Select default apps for documents and URL schemes on macOS
 brew "duti"
-# International domain name library (IDNA2008, Punycode and TR46)
-brew "libidn2"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
@@ -53,8 +47,8 @@ brew "fzf"
 brew "git"
 # Enable transparent encryption/decryption of files in a git repo
 brew "git-crypt"
-# GNU implementation of the famous stream editor
-brew "gnu-sed"
+# International domain name library (IDNA2008, Punycode and TR46)
+brew "libidn2"
 # Generic library support script
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
@@ -77,8 +71,6 @@ brew "interactive-rebase-tool"
 brew "jq"
 # Generic command-line non-JVM Apache Kafka producer and consumer
 brew "kafkacat"
-# Selection-based modal text editor
-brew "kakoune"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Tool that can switch between kubectl contexts easily and create aliases
@@ -91,8 +83,6 @@ brew "lftp"
 brew "loc"
 # Swiss Army Knife for macOS
 brew "m-cli"
-# Text-to-HTML conversion tool
-brew "markdown"
 # Mac App Store command-line interface
 brew "mas"
 # Intercept, modify, replay, save HTTP/S traffic
@@ -101,48 +91,30 @@ brew "mitmproxy"
 brew "moreutils"
 # NCurses Disk Usage
 brew "ncdu"
-# E-mail reader with support for Notmuch, NNTP and much more
-brew "neomutt"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
 # Port scanning utility for large networks
 brew "nmap"
-# Tiny, lightning fast, feature-packed file manager
-brew "nnn"
 # Platform built on V8 to build network applications
 brew "node@10"
 # Manage multiple Node.js versions
 brew "nvm"
-# Simplistic interactive filtering tool
-brew "peco"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
-# Monitor data's progress through a pipe
-brew "pv"
 # Command-line YAML and XML processor that wraps jq
 brew "python-yq"
 # Treat text as a database
 brew "q"
-# File browser
-brew "ranger"
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # The Rust toolchain installer
 brew "rustup-init"
-# Intuitive find & replace CLI
-brew "sd"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
-# Fuzzy Finder in rust!
-brew "sk"
-# Microsoft Team Explorer Everywhere command-line Client
-brew "tee-clc"
-# Tool to build, change, and version infrastructure
-brew "terraform"
 # Text interface for Git repositories
 brew "tig"
 # CLI tool that moves files or folder to the trash
@@ -159,10 +131,6 @@ brew "xsv"
 brew "yarn"
 # UNIX shell (command interpreter)
 brew "zsh"
-# Neovim GUI, in Qt5
-brew "equalsraf/neovim-qt/neovim-qt"
-# Everything you need to get started with Heroku
-brew "heroku/brew/heroku"
 # A simple terminal UI for docker, written in Go
 brew "jesseduffield/lazydocker/lazydocker"
 # Tiling window manager for macOS based on plugin architecture
@@ -171,46 +139,35 @@ brew "koekeishiya/formulae/chunkwm"
 brew "koekeishiya/formulae/skhd"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 brew "railwaycat/emacsmacport/emacs-mac"
-brew "rogual/neovim-dot-app/neovim-dot-app"
 # A tool for exploring each layer in a docker image
 brew "wagoodman/dive/dive"
 cask "1password"
 cask "alacritty"
 cask "alfred"
-cask "amethyst"
 cask "appcleaner"
 cask "bitwarden"
 cask "brave-browser"
 cask "brewservicesmenubar"
-cask "contexts"
-cask "cyberduck"
 cask "dbeaver-community"
 cask "docker"
 cask "dropbox"
 cask "evernote"
 cask "firefox"
 cask "flux"
-cask "focus"
 cask "font-fira-code"
 cask "font-firacode-nerd-font"
 cask "franz"
-cask "google-backup-and-sync"
 cask "google-chrome"
 cask "google-cloud-sdk"
 cask "gpg-suite"
-cask "graphql-playground"
 cask "helium"
 cask "imageoptim"
 cask "iterm2"
 cask "java8"
-cask "joplin"
 cask "kafka-tool"
 cask "karabiner-elements"
-cask "keepassxc"
 cask "keybase"
 cask "kitty"
-cask "macvim"
-cask "moom"
 cask "ngrok"
 cask "numi"
 cask "onedrive"
@@ -220,23 +177,18 @@ cask "pgadmin4"
 cask "postman"
 cask "qlstephen"
 cask "skitch"
-cask "softu2f"
 cask "sonos"
 cask "spotify"
 cask "standard-notes"
 cask "steam"
-cask "syncthing"
-cask "tagspaces"
 cask "textexpander"
 cask "torbrowser"
 cask "trailer"
 cask "transmission"
 cask "typinator"
-cask "veonim"
 cask "vimr"
 cask "viscosity"
 cask "visual-studio-code"
-cask "yed"
 cask "railwaycat/emacsmacport/emacs-mac-spacemacs-icon"
 mas "Airmail", id: 918858936
 mas "BetterSnapTool", id: 417375580

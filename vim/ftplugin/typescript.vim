@@ -92,5 +92,6 @@ augroup df_typescript
     autocmd!
     autocmd CursorHold * silent call CocActionAsync('highlight')
     " au! CursorHold * :ALEHover " https://github.com/dense-analysis/ale/issues/1532
-    autocmd BufWritePre <buffer> CocCommand prettier.formatFile
+    " autocmd FileWritePre,BufWritePre <buffer> CocCommand prettier.formatFile
+    autocmd FileWritePre,BufWritePre * CocCommand prettier.formatFile
 augroup END

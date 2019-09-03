@@ -73,9 +73,19 @@ Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-n
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_keys = 'fghjdkrtyucvbnsla;ewqiopzxm'
+let g:EasyMotion_startofline = 1
+let g:EasyMotion_keys = 'hjkl;uinmyopb,.gfdsarevctwqxz'
 
+Plug 'chaoren/vim-wordmotion'
+let g:wordmotion_mappings = {
+\ 'w' : '<C-W>',
+\ 'b' : '<C-B>',
+\ 'e' : '<C-E>',
+\ 'ge' : 'g<C-E>',
+\ 'aw' : 'a<C-W>',
+\ 'iw' : 'i<C-W>',
+\ '<C-R><C-W>' : '<C-R><M-w>'
+\ }
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-expand-region'
 let g:expand_region_text_objects = {
@@ -101,7 +111,7 @@ let g:NERDCompactSexyComs = 0
 let g:NERDDefaultAlign = 'left'
 
 Plug 'tommcdo/vim-exchange'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs' " Do I really want this?
 Plug 'tyru/open-browser.vim'
 let g:openbrowser_default_search = 'startpage'
 let g:openbrowser_search_engines = {
@@ -117,13 +127,15 @@ Plug 'bfontaine/Brewfile.vim'
 
 " Colors
 Plug 'gruvbox-community/gruvbox'
+set background=dark " Gruvbox variant
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_invert_selection = 0
+let g:gruvbox_hls_highlight = 'neutral_yellow'
+let g:gruvbox_hls_cursor = 'neutral_orange'
 
 " Plug 'NewProggie/NewProggie-Color-Scheme'
 
 "" Finalize colors
-set background=dark " Let vim know about our colors
 
 
 "" UI / Syntax
@@ -217,9 +229,17 @@ let g:coc_global_extensions = [
       \ 'coc-tsserver',
       \ 'coc-eslint',
       \ 'coc-prettier',
+      \ 'coc-rls',
       \ ]
 
 Plug 'moll/vim-bbye'
+
+
+" Plug 'alok/notational-fzf-vim'
+" let g:nv_search_paths = ['~/src/notes']
+" " let g:nv_use_short_pathnames = 1
+
+Plug 'roman/golden-ratio' " Do I use this?
 
 call plug#end()
 
@@ -237,6 +257,8 @@ set noshowmode
 set cmdheight=2
 set shortmess+=c
 set scrolloff=7
+set linebreak
+" set nohlsearch
 
 colorscheme gruvbox
 call expand_region#custom_text_objects({
@@ -280,8 +302,8 @@ noremap <silent> Q <Nop>
 map <silent> J <Plug>(textmanip-move-down)
 map <silent> K <Plug>(textmanip-move-up)
 " Join lines
-noremap <silent> H k:join!<CR>
-noremap <silent> L :join!<CR>
+noremap <silent> H k:join<CR>
+noremap <silent> L :join<CR>
 " Yank to the end of line
 nnoremap <silent> Y y$
 " Quit visual mode
@@ -289,6 +311,11 @@ vnoremap <silent> v <Esc>
 " Normalize replace
 nnoremap <silent> R cl
 vnoremap <silent> R c
+" " move thru camelcase
+" map <silent> <C-w> <Plug>CamelCaseMotion_w
+" map <silent> <C-b> <Plug>CamelCaseMotion_b
+" map <silent> <C-e> <Plug>CamelCaseMotion_e
+" map <silent> g<C-e> <Plug>CamelCaseMotion_ge
 " Moving around in insert/command modes
 inoremap <silent> <C-h> <Left>
 inoremap <silent> <C-j> <Down>
@@ -324,6 +351,10 @@ map cX <Plug>(ExchangeClear)
 " Select functions
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
+" COnsistency in search direction
+nmap n /<CR>
+nmap N ?<CR>
+
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -341,7 +372,7 @@ let g:which_key_map['/'] = 'Search project'
 " BUFFER
 let g:which_key_map.b = { 'name' : '+buffer' }
 nnoremap <silent> <Leader>bo :%bd\|e#\|bd#<CR>
-let g:which_key_map.b.O = 'only'
+let g:which_key_map.b.o = 'only'
 nnoremap <silent> <Leader>bO :%bd!\|e#\|bd#<CR>
 let g:which_key_map.b.O = 'only!'
 nnoremap <silent> <Leader>bb :Buffers<CR>
@@ -355,8 +386,10 @@ nnoremap <silent> <Leader>bD :Bdelete!<CR>
 nnoremap <silent> <Leader>bm :Bufferize messages<CR>
 nnoremap <silent> <Leader>br :edit<CR>
 nnoremap <silent> <Leader>bR :edit!<CR>
-nnoremap <silent> <Leader>bY yie
-nnoremap <silent> <Leader>bP "_dieP
+nnoremap <silent> <Leader>bY "+yie
+nnoremap <silent> <Leader>bP "_die"+P
+nnoremap <silent> <Leader>by yie
+nnoremap <silent> <Leader>bp "_dieP
 
 " COMMENT (NERDCommenter)
 let g:which_key_map.c = { 'name' : '+comment' }
@@ -412,9 +445,10 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-map <Leader>j <Plug>(easymotion-bd-f2)
-map <Leader>l <Plug>(easymotion-bd-jk)
-" map  <Leader>jw <Plug>(easymotion-bd-w)
+map <Leader>jj <Plug>(easymotion-bd-wl)
+map <Leader>jw <Plug>(easymotion-bd-W)
+map <Leader>je <Plug>(easymotion-bd-E)
+map <Leader>jl <Plug>(easymotion-bd-jk)
 
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
@@ -437,6 +471,7 @@ nnoremap <silent> <Leader>tn :set invnumber<CR>
 nnoremap <silent> <Leader>tN :set invrelativenumber<CR>
 nnoremap <silent> <Leader>ts :Filetypes<CR>
 nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
+nnoremap <silent> <Leader>tw :set invwrap<CR>
 
 " WINDOW (stolen from ...)
 let g:which_key_map.w = {'name': '+window' }
@@ -593,7 +628,7 @@ endfunction
 
 " Go to last cursor position when reopening file
 if has('autocmd')
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"zz" | endif
 endif
 " Start terminal in insert-mode
 autocmd BufWinEnter,WinEnter term://* startinsert
