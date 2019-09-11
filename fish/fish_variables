@@ -1,7 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR FZF_COMPLETE:2
-SETUVAR FZF_DEFAULT_OPTS:\x2d\x2dheight\x2040\x25
+SETUVAR FZF_DEFAULT_OPTS:\x2040\x25
 SETUVAR FZF_LEGACY_KEYBINDINGS:1
 SETUVAR FZF_PREVIEW_DIR_CMD:ls
 SETUVAR FZF_PREVIEW_FILE_CMD:head\x20\x2dn\x2010
@@ -10,7 +10,7 @@ SETUVAR __fish_cd_direction:prev
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
-SETUVAR dirprev:/Users/sanderb/src/bestseller\x1e/Users/sanderb/src/bestseller/sfcc\x2dcatalog\x2dexport\x2dservice\x1e/Users/sanderb\x1e/Users/sanderb\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb/src/dotfiles\x1e/Users/sanderb\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb\x1e/Users/sanderb\x1e/Users/sanderb/src/bestseller\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb/src/bestseller/product\x2dcatalog/migrations\x1e/Users/sanderb/src/bestseller/product\x2dcatalog/migrations/src/db/migrations\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb\x1e/Users/sanderb/src\x1e/Users/sanderb\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb/src/bestseller\x1e/Users/sanderb/src/bestseller/browse\x2dfrontend\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb/src/dotfiles\x1e/Users/sanderb/src\x1e/Users/sanderb/src/Reaktor/rtl/cdp
+SETUVAR dirprev:/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb\x1e/Users/sanderb\x1e/Users/sanderb/src/bestseller\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb/src/bestseller/product\x2dcatalog/migrations\x1e/Users/sanderb/src/bestseller/product\x2dcatalog/migrations/src/db/migrations\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb\x1e/Users/sanderb/src\x1e/Users/sanderb\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb/src/bestseller\x1e/Users/sanderb/src/bestseller/browse\x2dfrontend\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb/src/dotfiles\x1e/Users/sanderb/src\x1e/Users/sanderb/src/Reaktor/rtl/cdp\x1e/Users/sanderb\x1e/Users/sanderb/src/bestseller/product\x2dcatalog\x1e/Users/sanderb\x1e/Users/sanderb/src\x1e/Users/sanderb/src/Enrise/ABNAMRO\x2dSitesearch\x1e/Users/sanderb/src/Enrise\x1e/Users/sanderb
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:005fd7

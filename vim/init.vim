@@ -68,11 +68,24 @@ let g:fzf_colors = {
       \ 'spinner': ['fg', 'IncSearch'],
       \ 'header':  ['fg', 'WildMenu'] }
 
-Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire'
-Plug 't9md/vim-textmanip'
+Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire' | Plug 'coderifous/textobj-word-column.vim'
+" Motions conflict with textobj-comment https://github.com/glts/vim-textobj-comment/issues/1
+let g:skip_default_textobj_word_column_mappings = 1
+xnoremap <silent> av :<C-U>call TextObjWordBasedColumn("aw")<CR>
+onoremap <silent> av :call TextObjWordBasedColumn("aw")<CR>
+xnoremap <silent> iv :<C-U>call TextObjWordBasedColumn("iw")<CR>
+onoremap <silent> iv :call TextObjWordBasedColumn("iw")<CR>
+xnoremap <silent> aV :<C-U>call TextObjWordBasedColumn("aW")<CR>
+onoremap <silent> aV :call TextObjWordBasedColumn("aW")<CR>
+xnoremap <silent> iV :<C-U>call TextObjWordBasedColumn("iW")<CR>
+onoremap <silent> iV :call TextObjWordBasedColumn("iW")<CR>
+
+Plug 'wellle/targets.vim' " Vim plugin that provides additional text objects
+let g:targets_nl = 'nN' " Conflict with vim-textobj-line motion
+
+Plug 't9md/vim-textmanip' " Move/Duplicate text intuitively
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
 Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
-" Plug 'coderifous/textobj-word-column.vim'
 
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -202,9 +215,7 @@ let g:NERDTreeMinimalUI = 1
 
 Plug 'whiteinge/diffconflicts'
 
-" Error reporting
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
+Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2' | Plug 'ncm2/ncm2-path'
 
 Plug 'dense-analysis/ale'
 let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
@@ -216,20 +227,22 @@ let g:ale_linters = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'vim': ['vint'],
       \ }
-"
-" Plug 'autozimu/LanguageClient-neovim', {
-"       \ 'branch': 'next',
-"       \ 'do': 'bash install.sh',
-"       \ }
-" let g:LanguageClient_hoverPreview = "Never"
-" let g:LanguageClient_rootMarkers = {
-"       \ 'typescript': ['.git', 'tsconfig.json'],
-"       \ }
-" let g:LanguageClient_serverCommands = {
-"       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"       \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio'],
-"       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"       \ }
+
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+let g:LanguageClient_hoverPreview = 'Never'
+" let g:LanguageClient_diagnosticsList = 'location-list'
+" let g:LanguageClient_useVirtualText = 1
+let g:LanguageClient_rootMarkers = {
+      \ 'typescript': ['.git', 'tsconfig.json'],
+      \ }
+let g:LanguageClient_serverCommands = {
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio', '--tsserver-path=./node_modules/.bin/tsserver'],
+      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+      \ }
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " let g:coc_global_extensions = [
@@ -241,13 +254,15 @@ let g:ale_linters = {
 
 Plug 'moll/vim-bbye'
 
-
 " Plug 'alok/notational-fzf-vim'
 " let g:nv_search_paths = ['~/src/notes']
 " " let g:nv_use_short_pathnames = 1
 
 Plug 'milkypostman/vim-togglelist' " Functions to toggle the [Location List] and the [Quickfix List] windows.
 let g:toggle_list_no_mappings = 1
+
+Plug 'vim-scripts/scrollfix'
+let g:scrollfix = -1
 
 call plug#end()
 
@@ -260,6 +275,7 @@ set signcolumn=yes
 set timeoutlen=800
 set updatetime=300
 set formatoptions-=cro " https://superuser.com/a/271024
+set completeopt=menu,menuone,noinsert,noselect
 set clipboard=
 set noshowmode
 set shortmess+=c
@@ -278,21 +294,6 @@ call expand_region#custom_text_objects({
       \ 'aB' :1,
       \ 'if' :1,
       \ 'af' :1,
-      \ })
-
-call deoplete#custom#option('sources', {
-      \  '_': ['ale'],
-      \ })
-call deoplete#custom#option('ignore_sources', {'_': ['around', 'buffer']})
-
-" Deoplete
-" call deoplete#custom#option({
-"       \   'auto_complete_delay': 150,
-"       \   'auto_refresh_delay': 150,
-"       \   'smart_case': v:true,
-"       \ })
-call deoplete#custom#option({
-      \   'smart_case': v:true,
       \ })
 
 " KEYBINDINGS
@@ -345,11 +346,14 @@ cnoremap <silent> <C-l> <Right>
 cnoremap <silent> <C-a> <Home>
 cnoremap <silent> <C-e> <End>
 cnoremap <silent> <C-d> <Delete>
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <silent> <C-c> <ESC>
 " jj | Escaping insert/command mode
 inoremap <silent> jj <Esc>
 cnoremap <silent> jj <C-c>
-" Cycle deoplete suggestions on tab
-inoremap <silent> <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" " Use <TAB> to select the popup menu:
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Exit terminal insert mode
 tnoremap <silent> <C-'><C-'> <C-\><C-n>
 tnoremap <silent> QQ <C-\><C-n>
@@ -489,7 +493,8 @@ nnoremap <silent> <Leader>tl :set invlist<CR>
 nnoremap <silent> <Leader>tn :set invnumber<CR>
 nnoremap <silent> <Leader>tN :set invrelativenumber<CR>
 nnoremap <silent> <Leader>ts :Filetypes<CR>
-nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
+" nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
+nnoremap <silent> <Leader>t- :let g:scrollfix=g:scrollfix < 0 ? 60 : -1<CR>
 nnoremap <silent> <Leader>tw :set invwrap<CR>
 
 " WINDOW (stolen from ...)
@@ -655,6 +660,7 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 " Connect to running nvim instance to avoid nested nvims
 if has('nvim')
   let $GIT_EDITOR = 'nvr --remote-wait --servername ' . v:servername
+  let $FZF_DEFAULT_OPTS .= ' --exact'
 endif
 
 
@@ -663,3 +669,7 @@ augroup ActiveWindowHighlight
     autocmd WinEnter * set signcolumn=yes
     autocmd WinLeave * set signcolumn=no
 augroup END
+
+autocmd BufEnter  *  call ncm2#enable_for_buffer()
+
+let g:python3_host_prog = '/usr/local/bin/python3'

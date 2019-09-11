@@ -5,8 +5,8 @@
 
 " LOCAL LEADER
 map <buffer> <silent> <localleader><localleader> <Plug>(ale_hover)
-map <buffer> <silent> <localleader>= <Plug>(ale_fix)
-map <buffer> <silent> <localleader>? <Plug>(ale_documentation)
+map <buffer> <silent> <localleader>f <Plug>(ale_fix)
+map <buffer> <silent> <localleader>d <Plug>(ale_documentation)
 
 " ERRORS
 let g:which_key_local_map.e = {'name': '+errors'}
@@ -27,8 +27,14 @@ map <buffer> <silent> <localleader>gt <Plug>(ale_go_to_type_definition)
 map <buffer> <silent> <localleader>gr <Plug>(ale_find_references)
 
 " META
+let g:which_key_local_map.x = {'name': '+meta'}
 map <buffer> <silent> <localleader>xx :ALEStopAllLSPs<CR>
 map <buffer> <silent> <localleader>xi :Bufferize ALEInfo<CR>
 map <buffer> <silent> <localleader>xl <Plug>(ale_lint)
 map <buffer> <silent> <localleader>xt <Plug>(ale_toggle_buffer)
 
+" ALE specific key
+let g:which_key_local_map.a = {'name': '+ALE Plugin'}
+map <buffer> <silent> <localleader>af <Plug>(ale_fix)
+map <buffer> <silent> <localleader>ae <Plug>(ale_detail)
+map <buffer> <silent> <localleader>ai :Bufferize ALEInfo<CR>

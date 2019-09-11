@@ -7,10 +7,12 @@ augroup df_typescript
   " autocmd FileWritePre,BufWritePre * CocCommand prettier.formatFile
 augroup END
 
-let b:ale_linters = ['tsserver', 'eslint']
+" let b:ale_linters = ['tsserver', 'eslint']
+let b:ale_linters = ['eslint']
 let b:ale_fixers = ['eslint', 'prettier']
 
 runtime local/ale.vim
+runtime local/lsp.vim
 
 " " Generic COC bindings
 " " LOCAL LEADER
@@ -46,34 +48,5 @@ runtime local/ale.vim
 " map <silent> <localleader>cq :<C-u>CocRestart<CR>
 " map <silent> <localleader>cc :<C-u>CocList commands<CR>
 " map <silent> <localleader>ce :<C-u>CocList extensions<CR>
-
-
-" " Generic LanguageClient bindings
-" " LOCAL LEADER
-" map <silent> <localleader><localleader> :call LanguageClient#textDocument_hover()<CR>
-" map <silent> <localleader>= :call LanguageClient#textDocument_codeAction()<CR>
-"
-" " ERRORS
-" let g:which_key_local_map.e = {'name': '+errors'}
-" map <localleader>ee :<C-u>CocList --auto-preview diagnostics<CR>
-" map <localleader>e; :<C-u>CocListResume<CR>
-" map <localleader>eN <Plug>(coc-diagnostic-prev)
-" map <localleader>ep <Plug>(coc-diagnostic-prev)
-" map <localleader>en <Plug>(coc-diagnostic-next)
-" map <localleader>eq :lclose<CR>
-"
-" " GOTO
-" let g:which_key_local_map.g = {'name': '+goto'}
-" map <silent> <localleader>gg :call LanguageClient#textDocument_definition()<CR>
-" map <silent> <localleader>gi <Plug>(coc-implementation)
-" map <silent> <localleader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
-" map <silent> <localleader>gr :call LanguageClient#textDocument_references()<CR>
-"
-" map <silent> <localleader>o :<C-u>CocList outline<CR>
-" map <silent> <localleader>s :<C-u>CocList -I symbols<CR>
-"
-" " REFACTOR
-" map <silent> <localleader>rr :call LanguageClient#textDocument_rename()<CR>
-
 
 
