@@ -1,0 +1,38 @@
+prompt_order=[
+  "cmd_duration",
+  "jobs",
+  "directory",
+  "git_state",
+  "git_branch",
+  "git_status",
+  "line_break",
+  "character",
+]
+
+[character]
+symbol = "$"
+use_symbol_for_status = false
+vicmd_symbol = "█"
+style_failure = "red"
+
+[cmd_duration]
+min_time = 5
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+
+[git_status]
+style = "bold white"
+untracked = "✦"
+added = "●"
+modified = "⊙"
+renamed = "↪"
+deleted = "✘"
+stashed = "⚑"
+unmerged = "⁉"
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇡⇣"
+
+

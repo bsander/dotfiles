@@ -12,6 +12,7 @@
     ~/.config/kitty: kitty
     ~/.config/nvim: vim
     ~/.config/yarn/global/package.json: dotfiles/package.json
+    ~/.config/starship.toml: dotfiles/starship.toml
     ~/.ripgreprc: dotfiles/ripgreprc
     ~/.curlrc: dotfiles/curlrc.ini
     ~/docker-compose.yml: dotfiles/docker-compose.yml

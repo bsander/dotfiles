@@ -39,8 +39,7 @@ if status --is-interactive
     and source "$FISH_HOME/aliases.fish"
 
     ## Load prompt settings
-    test -f "$FISH_HOME/prompt.fish"
-    and source "$FISH_HOME/prompt.fish"
+    eval (starship init fish)
 
     ## Set colors
     theme_gruvbox dark hard

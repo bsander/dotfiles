@@ -115,6 +115,8 @@ brew "rustup-init"
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
+# The cross-shell prompt for astronauts
+brew "starship"
 # Text interface for Git repositories
 brew "tig"
 # CLI tool that moves files or folder to the trash
