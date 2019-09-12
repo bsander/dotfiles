@@ -1,12 +1,8 @@
 scriptencoding utf-8
 
 " TODO LIST
-" - :cdo :cfdo - interactive global search replace (qfreplace plugin)
 " - iab
 " - vimdiff
-" - split up init.vim - combine plug with config
-" - leader group undo (C-h u)
-" - tig - rebase and un/stage keybindings
 " - proper debugging support
 " - macros
 " - tabs buffers mayhem
@@ -217,40 +213,40 @@ Plug 'whiteinge/diffconflicts'
 
 Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2' | Plug 'ncm2/ncm2-path'
 
-Plug 'dense-analysis/ale'
-let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
-let g:ale_fix_on_save = 1
-let g:ale_lint_delay = 0
-let g:ale_sign_error =  '>>'
-let g:ale_sign_warning =  '=='
-let g:ale_linters = {
-      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'vim': ['vint'],
-      \ }
+" Plug 'dense-analysis/ale'
+" let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
+" let g:ale_fix_on_save = 1
+" let g:ale_lint_delay = 0
+" let g:ale_sign_error =  '>>'
+" let g:ale_sign_warning =  '=='
+" let g:ale_linters = {
+"       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"       \   'vim': ['vint'],
+"       \ }
+"
+" Plug 'autozimu/LanguageClient-neovim', {
+"       \ 'branch': 'next',
+"       \ 'do': 'bash install.sh',
+"       \ }
+" let g:LanguageClient_hoverPreview = 'Never'
+" let g:LanguageClient_rootMarkers = {
+"       \ 'typescript': ['.git', 'tsconfig.json'],
+"       \ }
+" let g:LanguageClient_serverCommands = {
+"       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+"       \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio', '--tsserver-path=./node_modules/.bin/tsserver'],
+"       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+"       \ }
 
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
-let g:LanguageClient_hoverPreview = 'Never'
-" let g:LanguageClient_diagnosticsList = 'location-list'
-" let g:LanguageClient_useVirtualText = 1
-let g:LanguageClient_rootMarkers = {
-      \ 'typescript': ['.git', 'tsconfig.json'],
-      \ }
-let g:LanguageClient_serverCommands = {
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio', '--tsserver-path=./node_modules/.bin/tsserver'],
-      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-      \ }
-
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" let g:coc_global_extensions = [
-"       \ 'coc-tsserver',
-"       \ 'coc-eslint',
-"       \ 'coc-prettier',
-"       \ 'coc-rls',
-"       \ ]
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-eslint',
+      \ 'coc-prettier',
+      \ 'coc-rls',
+      \ 'coc-vimlsp',
+      \ 'coc-marketplace',
+      \ ]
 
 Plug 'moll/vim-bbye'
 
@@ -369,9 +365,12 @@ map cX <Plug>(ExchangeClear)
 " Select functions
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
-" COnsistency in search direction
+" Consistency in search direction
 nmap n /<CR>
 nmap N ?<CR>
+" Use Tab for buffer navigation
+nmap <silent> <Tab> :bnext<CR>
+nmap <silent> <S-Tab> :bprev<CR>
 
 
 " WHICH_KEY
@@ -382,8 +381,6 @@ noremap <silent> <Leader><Space> :Commands<CR>
 nnoremap <silent> <Leader><ESC> <ESC>
 map <Leader>? :BLines<CR>
 map <Leader>/ :ProjectRootExe Rg<CR>
-nnoremap <silent> <Leader><Tab> :bnext<CR>
-nnoremap <silent> <Leader><S-Tab> :bprev<CR>
 noremap <silent> <Leader>' :split term://$SHELL<CR>
 let g:which_key_map['/'] = 'Search project'
 
@@ -423,6 +420,15 @@ nmap <Leader>co o<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 nmap <Leader>cO O<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 
 " FILE
+let g:which_key_map.d = { 'name' : '+diff' }
+noremap <silent> <Leader>dd :DiffConflicts<CR>:windo set modifiable<CR><C-W>t
+noremap <silent> <Leader>dx <C-W>t<C-W>o:diffoff!<CR>
+noremap <silent> <Leader>dg :diffget<CR>
+noremap <silent> <Leader>dp :diffput<CR>
+noremap <silent> <Leader>dn ]c
+noremap <silent> <Leader>dN [c
+
+" FILE
 let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <silent> <Leader>fs :write<CR>
 nnoremap <silent> <Leader>fa :wall<CR>
@@ -434,6 +440,8 @@ nnoremap <silent> <Leader>fn :enew<CR>
 nnoremap <silent> <Leader>fr :History<CR>
 nnoremap <silent> <Leader>ft :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>fT :NERDTreeFind %<CR>
+nnoremap <silent> <Leader>fy :let @* = expand("%")<CR>
+nnoremap <silent> <Leader>fY :let @* = expand("%:p")<CR>
 
 " INIT.VIM
 let g:which_key_map.v = { 'name' : '+vimrc' }
@@ -463,10 +471,11 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-map <Leader>jj <Plug>(easymotion-bd-wl)
-map <Leader>jw <Plug>(easymotion-bd-W)
-map <Leader>je <Plug>(easymotion-bd-E)
-map <Leader>jl <Plug>(easymotion-bd-jk)
+map <silent> <Leader>J <Plug>(easymotion-bd-f2)
+map <silent> <Leader>jj <Plug>(easymotion-bd-wl)
+map <silent> <Leader>jw <Plug>(easymotion-bd-W)
+map <silent> <Leader>je <Plug>(easymotion-bd-E)
+map <silent> <Leader>jl <Plug>(easymotion-bd-jk)
 
 " LISTS
 let g:which_key_map.l = { 'name': '+lists' }
@@ -660,14 +669,15 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 " Connect to running nvim instance to avoid nested nvims
 if has('nvim')
   let $GIT_EDITOR = 'nvr --remote-wait --servername ' . v:servername
+  let $NVIM_LISTEN_ADDRESS = v:servername
   let $FZF_DEFAULT_OPTS .= ' --exact'
 endif
 
 
 augroup ActiveWindowHighlight
-    autocmd!
-    autocmd WinEnter * set signcolumn=yes
-    autocmd WinLeave * set signcolumn=no
+  autocmd!
+  autocmd WinEnter * set signcolumn=yes
+  autocmd WinLeave * set signcolumn=no
 augroup END
 
 autocmd BufEnter  *  call ncm2#enable_for_buffer()
