@@ -51,11 +51,11 @@ if status --is-interactive
       fish_hybrid_key_bindings
       bind -M insert . 'expand-dot-to-parent-directory-path'
 
-      bind \cU 'fzf-bcd-widget'
-      bind -M insert \cU 'fzf-bcd-widget'
+      # bind \cU 'fzf-bcd-widget'
+      # bind -M insert \cU 'fzf-bcd-widget'
 
-      bind \cO '__fzf_cd'
-      bind -M insert \cO '__fzf_cd'
+      # bind \cO '__fzf_cd'
+      # bind -M insert \cO '__fzf_cd'
 
       bind \cI '__fzf_complete'
       bind -M insert \cI '__fzf_complete'

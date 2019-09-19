@@ -53,6 +53,8 @@ brew "libidn2"
 brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
+# Make JSON greppable
+brew "gron"
 # Idempotent command-line utility for managing your /etc/hosts file
 brew "hostess"
 # Improved top (interactive process viewer)

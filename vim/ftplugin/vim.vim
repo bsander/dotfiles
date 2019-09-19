@@ -1,4 +1,5 @@
-let b:ale_linters = ['vint']
-let b:ale_fixers = []
+" let b:ale_linters = ['vint']
+" let b:ale_fixers = []
+" runtime local/ale.vim
 
-runtime local/ale.vim
+runtime local/coc.vim

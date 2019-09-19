@@ -6,6 +6,10 @@ alias .e="e \$DOTFILES" # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
 alias .f="\$DOTFILES/bin/dotbot" # Run update script
 
+## z aliases
+alias z="cd (__z --list 2>/dev/null | awk '{print \$2}' | fzf --exact --inline-info --reverse --no-sort --tac)"
+alias c="cd (__z --list 2>/dev/null | awk '{print \$2}' | grep $PROJECTS | fzf --exact --inline-info --reverse --no-sort --tac)"
+
 function e
     ## Open current directory when no arguments are given
     if not count $argv >/dev/null
@@ -23,8 +27,6 @@ abbr --add --global bcI "brew cask install"
 abbr --add --global bi "brew info"
 abbr --add --global bI "brew install"
 abbr --add --global bs "brew search"
-
-abbr --add --global c "cdh"
 
 abbr --add --global g git
 
@@ -51,6 +53,7 @@ abbr --add --global y yarn
 abbr --add --global yr "yarn run"
 abbr --add --global yw "yarn workspace"
 abbr --add --global yww "yarn workspaces run"
+
 
 ## Substitute apps
 abbr --add --global cat bat

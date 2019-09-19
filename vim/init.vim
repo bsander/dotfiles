@@ -38,6 +38,8 @@ let g:vim_better_default_buffer_key_mapping = 0
 let g:vim_better_default_file_key_mapping = 0
 let g:vim_better_default_fold_key_mapping = 0
 let g:vim_better_default_window_key_mapping = 0
+"" Dependencies
+Plug 'tpope/vim-repeat'
 
 "" Text Manipulation
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -83,11 +85,20 @@ Plug 't9md/vim-textmanip' " Move/Duplicate text intuitively
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
 Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
 
+" Plug 'justinmk/vim-sneak'
+" let g:sneak#label = 1
+" let g:sneak#use_ic_scs = 1
+" let g:sneak#absolute_dir = 1
+" let g:sneak#target_labels = 'hjkl;uinmyopb,.gfdsarevctwqxz'
+
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 1
-let g:EasyMotion_keys = 'hjkl;uinmyopb,.gfdsarevctwqxz'
+let g:EasyMotion_use_upper = 1
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
+let g:EasyMotion_keys = 'DKSLA;RUEIWOCNXMGHFJ'
 
 Plug 'chaoren/vim-wordmotion'
 let g:wordmotion_mappings = {
@@ -158,9 +169,7 @@ let g:bufferize_command = 'enew'
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#alt_sep = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#alt_sep = 1
 let g:airline#extensions#tabline#show_tab_count = 1
 
 Plug 'airblade/vim-gitgutter'
@@ -271,7 +280,7 @@ set signcolumn=yes
 set timeoutlen=800
 set updatetime=300
 set formatoptions-=cro " https://superuser.com/a/271024
-set completeopt=menu,menuone,noinsert,noselect
+set completeopt=menuone,preview,noinsert,noselect
 set clipboard=
 set noshowmode
 set shortmess+=c
@@ -360,8 +369,6 @@ map gx <Plug>(openbrowser-smart-search)
 " Fast swap
 map cx <Plug>(Exchange)
 map cX <Plug>(ExchangeClear)
-" Show completions
-" inoremap <silent><expr> <c-space> coc#refresh()
 " Select functions
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
@@ -369,8 +376,8 @@ omap af <Plug>(coc-funcobj-a)
 nmap n /<CR>
 nmap N ?<CR>
 " Use Tab for buffer navigation
-nmap <silent> <Tab> :bnext<CR>
-nmap <silent> <S-Tab> :bprev<CR>
+nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprev<CR>
 
 
 " WHICH_KEY
@@ -394,8 +401,6 @@ nnoremap <silent> <Leader>bb :Buffers<CR>
 nnoremap <silent> <Leader>bp :bprevious<CR>
 nnoremap <silent> <Leader>bN :bprevious<CR>
 nnoremap <silent> <Leader>bn :bnext<CR>
-" nnoremap <silent> <Leader>bx :Bdelete<CR>
-" nnoremap <silent> <Leader>bX :Bdelete!<CR>
 nnoremap <silent> <Leader>bd :Bdelete<CR>
 nnoremap <silent> <Leader>bD :Bdelete!<CR>
 nnoremap <silent> <Leader>bm :Bufferize messages<CR>
@@ -471,11 +476,12 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-map <silent> <Leader>J <Plug>(easymotion-bd-f2)
-map <silent> <Leader>jj <Plug>(easymotion-bd-wl)
-map <silent> <Leader>jw <Plug>(easymotion-bd-W)
-map <silent> <Leader>je <Plug>(easymotion-bd-E)
+map <silent> <Leader>jj <Plug>(easymotion-bd-f2)
 map <silent> <Leader>jl <Plug>(easymotion-bd-jk)
+" Experiment with some native motions
+map <silent> f <Plug>(easymotion-bd-fl)
+map <silent> t <Plug>(easymotion-bd-tl)
+map <silent> / <Plug>(easymotion-sn)
 
 " LISTS
 let g:which_key_map.l = { 'name': '+lists' }
@@ -503,10 +509,10 @@ nnoremap <silent> <Leader>tn :set invnumber<CR>
 nnoremap <silent> <Leader>tN :set invrelativenumber<CR>
 nnoremap <silent> <Leader>ts :Filetypes<CR>
 " nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
-nnoremap <silent> <Leader>t- :let g:scrollfix=g:scrollfix < 0 ? 60 : -1<CR>
+nnoremap <silent> <Leader>t- :let g:scrollfix=g:scrollfix < 0 ? 60 : -1<CR>hl
 nnoremap <silent> <Leader>tw :set invwrap<CR>
 
-" WINDOW (stolen from ...)
+" WINDOW
 let g:which_key_map.w = {'name': '+window' }
 nnoremap <silent> <Leader>wr <C-W>r
 let g:which_key_map.w.r = 'rotate'
