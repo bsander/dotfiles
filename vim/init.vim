@@ -307,9 +307,9 @@ map gD "+D
 map gp "+p
 map gP "+P
 " Redo
-noremap <silent> U <C-r>
+nnoremap <silent> U <C-r>
 " Clear search highlight on escape
-nnoremap <silent> <esc> :noh<CR><esc>
+noremap <silent> <esc> :noh<CR><esc>
 " God damn macros (move to <Leader>xq)
 noremap <silent> q <Nop>
 noremap <silent> Q <Nop>
@@ -319,6 +319,9 @@ map <silent> K <Plug>(textmanip-move-up)
 " Join lines
 noremap <silent> H k:join<CR>
 noremap <silent> L :join<CR>
+" Split lines
+nmap <C-H> moi<CR><Esc>`o
+nmap <C-L> i<CR><Esc>
 " Yank to the end of line
 nnoremap <silent> Y y$
 " Quit visual mode
@@ -665,9 +668,9 @@ endif
 
 
 augroup ActiveWindowHighlight
-    autocmd!
-    autocmd WinEnter * set signcolumn=yes
-    autocmd WinLeave * set signcolumn=no
+  autocmd!
+  autocmd WinEnter * set signcolumn=yes
+  autocmd WinLeave * set signcolumn=no
 augroup END
 
 autocmd BufEnter  *  call ncm2#enable_for_buffer()
