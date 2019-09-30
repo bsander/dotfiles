@@ -259,15 +259,16 @@ let g:coc_global_extensions = [
 
 Plug 'moll/vim-bbye'
 
-" Plug 'alok/notational-fzf-vim'
-" let g:nv_search_paths = ['~/src/notes']
-" " let g:nv_use_short_pathnames = 1
+Plug 'alok/notational-fzf-vim'
+let g:nv_search_paths = ['~/src/notes']
+let g:nv_use_short_pathnames = 1
+let g:nv_create_note_window = 'edit'
 
 Plug 'milkypostman/vim-togglelist' " Functions to toggle the [Location List] and the [Quickfix List] windows.
 let g:toggle_list_no_mappings = 1
 
-Plug 'vim-scripts/scrollfix'
-let g:scrollfix = -1
+" Plug 'vim-scripts/scrollfix'
+" let g:scrollfix = 60 " Experiment with default on
 
 call plug#end()
 
@@ -508,8 +509,8 @@ nnoremap <silent> <Leader>tl :set invlist<CR>
 nnoremap <silent> <Leader>tn :set invnumber<CR>
 nnoremap <silent> <Leader>tN :set invrelativenumber<CR>
 nnoremap <silent> <Leader>ts :Filetypes<CR>
-" nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
-nnoremap <silent> <Leader>t- :let g:scrollfix=g:scrollfix < 0 ? 60 : -1<CR>hl
+nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
+" nnoremap <silent> <Leader>t- :let g:scrollfix=g:scrollfix < 0 ? 60 : -1<CR>hl
 nnoremap <silent> <Leader>tw :set invwrap<CR>
 
 " WINDOW
