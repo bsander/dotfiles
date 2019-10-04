@@ -137,10 +137,10 @@ brew "yarn"
 brew "zsh"
 # A simple terminal UI for docker, written in Go
 brew "jesseduffield/lazydocker/lazydocker"
-# Tiling window manager for macOS based on plugin architecture
-brew "koekeishiya/formulae/chunkwm"
 # Simple hotkey-daemon for macOS.
 brew "koekeishiya/formulae/skhd"
+# A tiling window manager for macOS based on binary space partitioning.
+brew "koekeishiya/formulae/yabai"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 brew "railwaycat/emacsmacport/emacs-mac"
 # A tool for exploring each layer in a docker image
@@ -185,6 +185,7 @@ cask "skype-for-business"
 cask "sonos"
 cask "spotify"
 cask "standard-notes"
+cask "station"
 cask "steam"
 cask "textexpander"
 cask "torbrowser"

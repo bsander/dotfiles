@@ -7,7 +7,6 @@
       stderr: true
 
 - link:
-    ~/.chunkwmrc: dotfiles/chunkwmrc.sh
     ~/.config/fish: fish
     ~/.config/kitty: kitty
     ~/.config/nvim: vim
@@ -27,8 +26,8 @@
     ~/.spacemacs: dotfiles/spacemacs.el
     ~/.skhdrc: dotfiles/skhdrc.ini
     ~/.tigrc: dotfiles/tigrc.ini
+    ~/.yabairc: dotfiles/yabairc.sh
     ~/.vim: vim
-    # ~/.vimrc: vim/init.vim
 
 - clean:
     - "~"
