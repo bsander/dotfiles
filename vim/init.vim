@@ -395,6 +395,11 @@ map <Leader>/ :ProjectRootExe Rg<CR>
 noremap <silent> <Leader>' :split term://$SHELL<CR>
 let g:which_key_map['/'] = 'Search project'
 
+" APPLICATIONS
+let g:which_key_map.a = { 'name' : '+apps' }
+nnoremap <silent> <Leader>an :NV<CR>
+
+
 " BUFFER
 let g:which_key_map.b = { 'name' : '+buffer' }
 nnoremap <silent> <Leader>bo :%bd\|e#\|bd#<CR>
