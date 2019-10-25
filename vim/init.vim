@@ -255,6 +255,7 @@ let g:coc_global_extensions = [
       \ 'coc-rls',
       \ 'coc-vimlsp',
       \ 'coc-marketplace',
+      \ 'coc-json',
       \ ]
 
 Plug 'moll/vim-bbye'

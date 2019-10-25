@@ -49,8 +49,6 @@ brew "git"
 brew "git-crypt"
 # International domain name library (IDNA2008, Punycode and TR46)
 brew "libidn2"
-# Generic library support script
-brew "libtool"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # Make JSON greppable
@@ -81,6 +79,8 @@ brew "kubectx"
 brew "leiningen"
 # Sophisticated file transfer program
 brew "lftp"
+# Generic library support script
+brew "libtool"
 # Count lines of code quickly
 brew "loc"
 # Swiss Army Knife for macOS
@@ -94,7 +94,7 @@ brew "moreutils"
 # NCurses Disk Usage
 brew "ncdu"
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim", args: ["HEAD"]
+brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
 # Platform built on V8 to build network applications

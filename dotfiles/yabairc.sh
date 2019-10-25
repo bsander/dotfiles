@@ -5,7 +5,7 @@ yabai -m config status_bar                   off
 
 # global settff775759ff505050ffd75f5fings
 yabai -m config mouse_follows_focus          off
-yabai -m config focus_follows_mouse          autofocus
+yabai -m config focus_follows_mouse autofocus
 yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config window_shadow                on

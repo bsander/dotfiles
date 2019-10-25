@@ -1,7 +1,6 @@
 augroup df_typescript
   autocmd! * <buffer>
   autocmd FileWritePre,BufWritePre <buffer> CocCommand prettier.formatFile
-  " autocmd FileWritePre,BufWritePre * CocCommand prettier.formatFile
 augroup END
 
 " let b:ale_linters = ['eslint']
