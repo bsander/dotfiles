@@ -20,3 +20,6 @@
       command: mkdir -pv -m 0700 $HOME/.ssh
     - description: Setting up yarn global
       command: cd $(yarn global dir) && yarn
+    - description: Set file associations
+      command: bin/set-file-associations.sh
+
