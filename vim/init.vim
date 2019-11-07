@@ -449,6 +449,7 @@ nnoremap <silent> <Leader>fs :write<CR>
 nnoremap <silent> <Leader>fa :wall<CR>
 nnoremap <expr> <Leader>fS ':write ' . expand('%:p')
 nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
+nnoremap <silent> <Leader>fa :w<CR>:call AltCommand(expand('%'), ':e')<CR>
 nnoremap <silent> <Leader>ff :ProjectRootExe Files<CR>
 nnoremap <silent> <Leader>fD :call delete(expand('%')) \| bdelete!<CR>
 nnoremap <silent> <Leader>fn :enew<CR>
@@ -689,6 +690,16 @@ if has('nvim')
   let $FZF_DEFAULT_OPTS .= ' --exact'
 endif
 
+" Run a given vim command on the results of alt from a given path.
+" See usage below.
+function! AltCommand(path, vim_command)
+  let l:alternate = system("alt " . a:path)
+  if empty(l:alternate)
+    echo "No alternate file for " . a:path . " exists!"
+  else
+    exec a:vim_command . " " . l:alternate
+  endif
+endfunction
 
 augroup ActiveWindowHighlight
   autocmd!

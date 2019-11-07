@@ -12,6 +12,7 @@ tap "koekeishiya/formulae"
 tap "kryptco/tap"
 tap "railwaycat/emacsmacport"
 tap "rogual/neovim-dot-app"
+tap "uptech/oss"
 tap "wagoodman/dive"
 # Official Amazon AWS command-line interface
 brew "awscli"
@@ -143,6 +144,8 @@ brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 brew "railwaycat/emacsmacport/emacs-mac"
+# command-line utility to find alternate file
+brew "uptech/oss/alt"
 # A tool for exploring each layer in a docker image
 brew "wagoodman/dive/dive"
 cask "1password"
