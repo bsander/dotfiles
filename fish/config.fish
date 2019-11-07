@@ -39,7 +39,7 @@ if status --is-interactive
     and source "$FISH_HOME/aliases.fish"
 
     ## Load prompt settings
-    eval (starship init fish)
+    starship init fish | source
 
     ## Set colors
     theme_gruvbox dark hard
@@ -57,8 +57,8 @@ if status --is-interactive
       # bind \cO '__fzf_cd'
       # bind -M insert \cO '__fzf_cd'
 
-      bind \cI '__fzf_complete'
-      bind -M insert \cI '__fzf_complete'
+      # bind \cI '__fzf_complete'
+      # bind -M insert \cI '__fzf_complete'
     end
     set -g fish_key_bindings my_key_bindings
 

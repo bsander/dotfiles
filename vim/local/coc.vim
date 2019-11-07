@@ -3,12 +3,14 @@
 augroup df_coc
   autocmd! * <buffer>
   autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
 
 " GENERIC
 inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <silent><expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " LOCAL LEADER
 map <silent> <localleader><localleader> :call CocAction('doHover')<CR>
 map <silent> <localleader>f <Plug>(coc-codeaction)

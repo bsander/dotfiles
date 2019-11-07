@@ -152,6 +152,7 @@ cask "1password"
 cask "alacritty"
 cask "alfred"
 cask "appcleaner"
+cask "arq"
 cask "bitwarden"
 cask "brave-browser"
 cask "brewservicesmenubar"
@@ -210,6 +211,7 @@ mas "iMovie", id: 408981434
 mas "Irvue", id: 1039633667
 mas "Keynote", id: 409183694
 mas "LastPass", id: 926036361
+mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "PiPifier", id: 1160374471
