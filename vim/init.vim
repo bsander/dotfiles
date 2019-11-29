@@ -220,7 +220,7 @@ let g:NERDTreeMinimalUI = 1
 
 Plug 'whiteinge/diffconflicts'
 
-Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2' | Plug 'ncm2/ncm2-path'
+" Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2' | Plug 'ncm2/ncm2-path'
 
 " Plug 'dense-analysis/ale'
 " let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
@@ -707,6 +707,6 @@ augroup ActiveWindowHighlight
   autocmd WinLeave * set signcolumn=no
 augroup END
 
-autocmd BufEnter  *  call ncm2#enable_for_buffer()
+" autocmd BufEnter  *  call ncm2#enable_for_buffer()
 
 let g:python3_host_prog = '/usr/local/bin/python3'
