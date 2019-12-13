@@ -7,8 +7,5 @@
   "prettier.eslintIntegration": false,
   "prettier.requireConfig": true,
 
-  "diagnostic.errorSign": ">>",
-  "diagnostic.warningSign": "==",
-  "diagnostic.infoSign": "--",
-  "diagnostic.hintSign": ".."
+  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "json"]
 }

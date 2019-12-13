@@ -50,6 +50,8 @@ brew "git"
 brew "git-crypt"
 # International domain name library (IDNA2008, Punycode and TR46)
 brew "libidn2"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
 # Graph visualization software from AT&T and Bell Labs
 brew "graphviz"
 # Make JSON greppable
@@ -136,6 +138,8 @@ brew "xsv"
 brew "yarn"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Neovim GUI, in Qt5
+brew "equalsraf/neovim-qt/neovim-qt"
 # A simple terminal UI for docker, written in Go
 brew "jesseduffield/lazydocker/lazydocker"
 # Simple hotkey-daemon for macOS.
@@ -159,6 +163,7 @@ cask "brewservicesmenubar"
 cask "dbeaver-community"
 cask "docker"
 cask "dropbox"
+cask "emacs-mac-spacemacs-icon"
 cask "evernote"
 cask "firefox"
 cask "flux"
@@ -180,6 +185,7 @@ cask "ngrok"
 cask "numi"
 cask "onedrive"
 cask "oni"
+cask "oracle-jdk"
 cask "osxfuse"
 cask "pgadmin4"
 cask "postman"
@@ -189,17 +195,17 @@ cask "skype-for-business"
 cask "sonos"
 cask "spotify"
 cask "standard-notes"
-cask "station"
 cask "steam"
+cask "tableplus"
 cask "textexpander"
 cask "torbrowser"
 cask "trailer"
 cask "transmission"
 cask "typinator"
+cask "typora"
 cask "vimr"
 cask "viscosity"
 cask "visual-studio-code"
-cask "railwaycat/emacsmacport/emacs-mac-spacemacs-icon"
 mas "Airmail", id: 918858936
 mas "BetterSnapTool", id: 417375580
 mas "DaisyDisk", id: 411643860
@@ -211,7 +217,6 @@ mas "iMovie", id: 408981434
 mas "Irvue", id: 1039633667
 mas "Keynote", id: 409183694
 mas "LastPass", id: 926036361
-mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "PiPifier", id: 1160374471

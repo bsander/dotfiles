@@ -247,6 +247,8 @@ Plug 'whiteinge/diffconflicts'
 "       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
 "       \ }
 
+set guifont=FuraCode\ Nerd\ Font:h16
+set linespace=4
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
       \ 'coc-tsserver',
@@ -658,7 +660,8 @@ command! -bang -nargs=* Rg
       \   <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+      \ call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', 'alt-/'), <bang>0)
 
 " Filter oldfiles for History command
 command! History call fzf#run(fzf#wrap({
