@@ -18,7 +18,7 @@ map <silent> <localleader>d <Plug>(coc-diagnostic-info)
 
 " ERRORS
 let g:which_key_local_map.e = {'name': '+errors'}
-map <silent> <localleader>ee :<C-u>CocList --auto-preview diagnostics<CR>
+map <silent> <localleader>ee :<C-u>CocList diagnostics<CR>
 map <silent> <localleader>e; :<C-u>CocListResume<CR>
 map <silent> <localleader>eN <Plug>(coc-diagnostic-prev)
 map <silent> <localleader>ep <Plug>(coc-diagnostic-prev)

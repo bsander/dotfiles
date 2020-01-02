@@ -7,8 +7,8 @@ alias .ce="cd \$DOTFILES; e"
 alias .f="\$DOTFILES/bin/dotbot" # Run update script
 
 ## z aliases
-alias z="cd (__z --list 2>/dev/null | awk '{print \$2}' | fzf --exact --inline-info --reverse --no-sort --tac)"
-alias c="cd (__z --list 2>/dev/null | awk '{print \$2}' | grep $PROJECTS | fzf --exact --inline-info --reverse --no-sort --tac)"
+alias z="cd (__z --list 2>/dev/null | awk '{print \$2}' | fzf --exact --inline-info --reverse --no-sort )"
+alias c="cd (__z --list 2>/dev/null | awk '{print \$2}' | grep $PROJECTS | fzf --exact --inline-info --reverse --no-sort )"
 
 function e
     ## Open current directory when no arguments are given

@@ -247,8 +247,6 @@ Plug 'whiteinge/diffconflicts'
 "       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
 "       \ }
 
-set guifont=FuraCode\ Nerd\ Font:h16
-set linespace=4
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
       \ 'coc-tsserver',
@@ -360,9 +358,6 @@ cnoremap <silent> <C-e> <End>
 cnoremap <silent> <C-d> <Delete>
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <silent> <C-c> <ESC>
-" jj | Escaping insert/command mode
-inoremap <silent> jj <Esc>
-cnoremap <silent> jj <C-c>
 " " Use <TAB> to select the popup menu:
 " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
