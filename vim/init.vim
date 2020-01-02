@@ -260,7 +260,7 @@ let g:coc_global_extensions = [
 
 Plug 'moll/vim-bbye'
 
-Plug 'alok/notational-fzf-vim'
+" Plug 'alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/src/notes']
 let g:nv_use_short_pathnames = 1
 let g:nv_create_note_window = 'edit'
