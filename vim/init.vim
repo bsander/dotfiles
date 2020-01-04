@@ -41,32 +41,17 @@ let g:vim_better_default_window_key_mapping = 0
 "" Dependencies
 Plug 'tpope/vim-repeat'
 
-"" Text Manipulation
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-let g:fzf_buffers_jump = 1
-let g:fzf_commands_expect = 'alt-enter'
-let g:fzf_history_dir = '~/.local/share/fzf-history'
-let g:fzf_action = {
-      \ 'ctrl-e': 'edit',
-      \ 'ctrl-x': 'Bdelete',
-      \ 'ctrl-s': 'split',
-      \ 'ctrl-v': 'vsplit' }
-let g:fzf_colors = {
-      \ 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'IncSearch'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'IncSearch'],
-      \ 'info':    ['fg', 'IncSearch'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Comment'],
-      \ 'pointer': ['fg', 'IncSearch'],
-      \ 'marker':  ['fg', 'IncSearch'],
-      \ 'spinner': ['fg', 'IncSearch'],
-      \ 'header':  ['fg', 'WildMenu'] }
+runtime fzf.vim
 
-Plug 'kana/vim-textobj-user' | Plug 'kana/vim-textobj-line' | Plug 'glts/vim-textobj-comment' | Plug 'kana/vim-textobj-entire' | Plug 'coderifous/textobj-word-column.vim'
+Plug 'kana/vim-textobj-user'
+  \ | Plug 'kana/vim-textobj-line'
+  \ | Plug 'glts/vim-textobj-comment'
+  \ | Plug 'beloglazov/vim-textobj-quotes'
+  \ | Plug 'rhysd/vim-textobj-anyblock'
+  \ | Plug 'kana/vim-textobj-entire'
+  \ | Plug 'coderifous/textobj-word-column.vim'
+
 " Motions conflict with textobj-comment https://github.com/glts/vim-textobj-comment/issues/1
 let g:skip_default_textobj_word_column_mappings = 1
 xnoremap <silent> av :<C-U>call TextObjWordBasedColumn("aw")<CR>
@@ -78,18 +63,16 @@ onoremap <silent> aV :call TextObjWordBasedColumn("aW")<CR>
 xnoremap <silent> iV :<C-U>call TextObjWordBasedColumn("iW")<CR>
 onoremap <silent> iV :call TextObjWordBasedColumn("iW")<CR>
 
-Plug 'wellle/targets.vim' " Vim plugin that provides additional text objects
-let g:targets_nl = 'nN' " Conflict with vim-textobj-line motion
+" Plug 'wellle/targets.vim' " Vim plugin that provides additional text objects
+" let g:targets_nl = 'nN' " Conflict with vim-textobj-line motion
 
+Plug 'michaeljsmith/vim-indent-object' " defines a new text object representing lines of code at the same indent level
+
+Plug 'tmsvg/pear-tree' " A Vim auto-pair plugin that supports multi-character pairs, intelligent matching, and more
+Plug 'rhysd/clever-f.vim' " Extended f, F, t and T key mappings
 Plug 't9md/vim-textmanip' " Move/Duplicate text intuitively
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
 Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
-
-" Plug 'justinmk/vim-sneak'
-" let g:sneak#label = 1
-" let g:sneak#use_ic_scs = 1
-" let g:sneak#absolute_dir = 1
-" let g:sneak#target_labels = 'hjkl;uinmyopb,.gfdsarevctwqxz'
 
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -178,6 +161,7 @@ Plug 'ryanoasis/vim-devicons'
 
 "" Tools
 Plug 'liuchengxu/vim-which-key'
+let g:which_key_use_floating_win = 1
 
 " Plug 'rbgrouleff/bclose.vim' | Plug 'iberianpig/tig-explorer.vim'
 Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
@@ -260,7 +244,7 @@ let g:coc_global_extensions = [
 
 Plug 'moll/vim-bbye'
 
-" Plug 'alok/notational-fzf-vim'
+Plug 'alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/src/notes']
 let g:nv_use_short_pathnames = 1
 let g:nv_create_note_window = 'edit'
@@ -279,7 +263,7 @@ set autoread " Auto-refresh unchanged files when content changes
 set norelativenumber
 set nonumber
 set signcolumn=yes
-set timeoutlen=800
+set timeoutlen=500
 set updatetime=300
 set formatoptions-=cro " https://superuser.com/a/271024
 set completeopt=menuone,preview,noinsert,noselect
@@ -289,6 +273,8 @@ set shortmess+=c
 set scrolloff=7
 set linebreak
 set noshowcmd
+set undodir=~/.vim/undodir
+set undofile
 " set cmdheight=2
 " set noruler
 " set nohlsearch
@@ -380,6 +366,10 @@ nmap N ?<CR>
 " Use Tab for buffer navigation
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprev<CR>
+" Experiment with some native motions
+" map <silent> f <Plug>(easymotion-bd-fl)
+" map <silent> t <Plug>(easymotion-bd-tl)
+map <silent> / <Plug>(easymotion-sn)
 
 
 " WHICH_KEY
@@ -486,10 +476,6 @@ map <Leader>hb :Maps<CR>
 let g:which_key_map.j = { 'name': '+jump' }
 map <silent> <Leader>jj <Plug>(easymotion-bd-f2)
 map <silent> <Leader>jl <Plug>(easymotion-bd-jk)
-" Experiment with some native motions
-map <silent> f <Plug>(easymotion-bd-fl)
-map <silent> t <Plug>(easymotion-bd-tl)
-map <silent> / <Plug>(easymotion-sn)
 
 " LISTS
 let g:which_key_map.l = { 'name': '+lists' }
@@ -622,16 +608,9 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
 " autocmd! FileType term://*
 autocmd  FileType term://* set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-" " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
-" autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 function! <SID>AutoProjectRootCD()
   try
@@ -644,35 +623,6 @@ function! <SID>AutoProjectRootCD()
 endfunction
 
 autocmd BufEnter * call <SID>AutoProjectRootCD()
-
-" Use interactive grep versions
-" \   'rg --vimgrep --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', 'alt-/'),
-      \   <bang>0)
-
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', 'alt-/'), <bang>0)
-
-" Filter oldfiles for History command
-command! History call fzf#run(fzf#wrap({
-      \ 'source':  s:filtered_recent_files(),
-      \ 'sink':    'edit',
-      \ 'options': '-m -x +s',
-      \ 'down':    '40%' }))
-
-" Filter oldfiles and include open buffers
-function! s:filtered_recent_files()
-  return extend(
-        \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'),
-        \ filter(copy(v:oldfiles),
-        \        "v:val !~? 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
-        \ )
-endfunction
 
 " Go to last cursor position when reopening file
 if has('autocmd')
