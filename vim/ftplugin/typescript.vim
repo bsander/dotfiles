@@ -3,6 +3,9 @@ augroup df_typescript
   autocmd FileWritePre,BufWritePre <buffer> CocCommand prettier.formatFile
 augroup END
 
+setlocal foldmethod=syntax
+setlocal foldlevel=4
+
 " let b:ale_linters = ['eslint']
 " let b:ale_fixers = ['eslint', 'prettier']
 

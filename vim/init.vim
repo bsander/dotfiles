@@ -13,7 +13,6 @@ scriptencoding utf-8
 " - fzf - empty list on no input
 " - NERDCommenterInsert adds extra newline
 " - fzf extra commands not working https://github.com/junegunn/fzf.vim/issues/18
-" - fzf with ripgrep - go to column
 
 " !! GRIPES
 " - empty line unindenting: use S -- https://vi.stackexchange.com/questions/3612/how-do-i-prevent-vim-from-unindenting-empty-lines
@@ -27,7 +26,7 @@ let g:maplocalleader = ','
 
 call plug#begin('~/.vim/vendor')
 
-"" Preamble
+" Preamble
 Plug 'tpope/vim-sensible'
 Plug 'liuchengxu/vim-better-default'
 let g:vim_better_default_key_mapping = 1
@@ -38,11 +37,12 @@ let g:vim_better_default_buffer_key_mapping = 0
 let g:vim_better_default_file_key_mapping = 0
 let g:vim_better_default_fold_key_mapping = 0
 let g:vim_better_default_window_key_mapping = 0
+
 "" Dependencies
 Plug 'tpope/vim-repeat'
 
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-runtime fzf.vim
+runtime local/fzf.vim
 
 Plug 'kana/vim-textobj-user'
   \ | Plug 'kana/vim-textobj-line'
@@ -162,6 +162,7 @@ Plug 'ryanoasis/vim-devicons'
 "" Tools
 Plug 'liuchengxu/vim-which-key'
 let g:which_key_use_floating_win = 1
+let g:which_key_timeout = 200
 
 " Plug 'rbgrouleff/bclose.vim' | Plug 'iberianpig/tig-explorer.vim'
 Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
@@ -173,10 +174,11 @@ Plug 'airblade/vim-matchquote'
 Plug 'dbakker/vim-projectroot'
 
 "" Experimental
-Plug 'junegunn/vim-peekaboo' " See contents of registers
-let g:peekaboo_window = 'bo 30new'
-let g:peekaboo_compact = 1
-let g:peekaboo_delay = 300
+" Plug 'junegunn/vim-peekaboo' " See contents of registers
+" let g:peekaboo_window = 'bo 30new'
+" let g:peekaboo_compact = 1
+" let g:peekaboo_delay = 300
+Plug 'svermeulen/vim-cutlass' " Plugin that adds a 'cut' operation separate from 'delete'
 
 Plug 'Olical/vim-enmasse' " Edit every line in a quickfix list at the same time
 " Plug 'thinca/vim-qfreplace'
@@ -255,8 +257,12 @@ let g:toggle_list_no_mappings = 1
 " Plug 'vim-scripts/scrollfix'
 " let g:scrollfix = 60 " Experiment with default on
 
+Plug 'blueyed/vim-diminactive' " dim inactive windows
+Plug 'vim-scripts/restore_view.vim' " automatically restore one file's cursor position and folding information after restart vim
+
 call plug#end()
 
+" Default environment settings
 runtime! plugin/default.vim
 set termguicolors " make terminal colors vork in vimr
 set autoread " Auto-refresh unchanged files when content changes
@@ -275,8 +281,12 @@ set linebreak
 set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
+set viewoptions=cursor,folds,slash,unix
+set foldenable
+set foldlevel=0
+set foldmethod=manual
+set foldlevelstart=99
 " set cmdheight=2
-" set noruler
 " set nohlsearch
 
 colorscheme gruvbox
@@ -367,10 +377,12 @@ nmap N ?<CR>
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprev<CR>
 " Experiment with some native motions
-" map <silent> f <Plug>(easymotion-bd-fl)
-" map <silent> t <Plug>(easymotion-bd-tl)
 map <silent> / <Plug>(easymotion-sn)
-
+" [m]ove instead of [d]elete
+nnoremap m d
+xnoremap m d
+nnoremap mm dd
+nnoremap M D
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -582,6 +594,15 @@ map <Leader>xx <Plug>(Exchange)
 map <Leader>xX <Plug>(ExchangeClear)
 
 
+" CLIPBOARD / YANK
+let g:which_key_map.y = {'name': '+clipboard/yank' }
+map <Leader>yX :let @+ = @0<CR>
+let g:which_key_map.y.X = 'from clipboard'
+map <Leader>yx :let @0 = @+<CR>
+let g:which_key_map.y.x = 'to clipboard'
+map <silent> <Leader>yy :FZFYank<CR>
+map <silent> <Leader>yp :FZFPaste<CR>
+
 " LOCAL LEADER
 let g:which_key_local_map = {}
 
@@ -594,11 +615,11 @@ vnoremap <silent> <Leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 vnoremap <silent> <localleader> :<c-u>WhichKeyVisual ','<CR>
 
-nnoremap <silent> [ :<c-u>WhichKey '['<CR>
-vnoremap <silent> [ :<c-u>WhichKeyVisual '['<CR>
+" nnoremap <silent> [ :<c-u>WhichKey '['<CR>
+" vnoremap <silent> [ :<c-u>WhichKeyVisual '['<CR>
 
-nnoremap <silent> ] :<c-u>WhichKey ']'<CR>
-vnoremap <silent> ] :<c-u>WhichKeyVisual ']'<CR>
+" nnoremap <silent> ] :<c-u>WhichKey ']'<CR>
+" vnoremap <silent> ] :<c-u>WhichKeyVisual ']'<CR>
 
 " nnoremap <silent> g :<c-u>WhichKey  'g'<CR> " Kills gg
 " nnoremap <silent> s :<c-u>WhichKey  's'<CR>
@@ -624,10 +645,11 @@ endfunction
 
 autocmd BufEnter * call <SID>AutoProjectRootCD()
 
-" Go to last cursor position when reopening file
-if has('autocmd')
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"zz" | endif
-endif
+" " Go to last cursor position when reopening file
+" if has('autocmd')
+"   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"zz" | endif
+" endif
+
 " Start terminal in insert-mode
 autocmd BufWinEnter,WinEnter term://* startinsert
 
@@ -635,7 +657,6 @@ autocmd BufWinEnter,WinEnter term://* startinsert
 if has('nvim')
   let $GIT_EDITOR = 'nvr --remote-wait --servername ' . v:servername
   let $NVIM_LISTEN_ADDRESS = v:servername
-  let $FZF_DEFAULT_OPTS .= ' --exact'
 endif
 
 " Run a given vim command on the results of alt from a given path.
@@ -649,12 +670,14 @@ function! AltCommand(path, vim_command)
   endif
 endfunction
 
-augroup ActiveWindowHighlight
-  autocmd!
-  autocmd WinEnter * set signcolumn=yes
-  autocmd WinLeave * set signcolumn=no
-augroup END
-
-" autocmd BufEnter  *  call ncm2#enable_for_buffer()
-
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+function! ToggleVerbose()
+    if !&verbose
+        set verbosefile=~/.log/vim/verbose.log
+        set verbose=15
+    else
+        set verbose=0
+        set verbosefile=
+    endif
+endfunction
