@@ -2,19 +2,33 @@
 
 augroup df_coc
   autocmd! * <buffer>
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " autocmd CursorHold * silent call CocActionAsync('highlight')
   autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
 
 " GENERIC
 inoremap <silent><expr> <C-Space> coc#refresh()
 inoremap <silent><expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " LOCAL LEADER
+noremap <silent> <CR> :call CocAction('doHover')<CR>
 map <silent> <localleader><localleader> :call CocAction('doHover')<CR>
 map <silent> <localleader>f <Plug>(coc-codeaction)
 map <silent> <localleader>d <Plug>(coc-diagnostic-info)
+map <silent> <localleader>h :call <SID>show_documentation()<CR>
 
 " ERRORS
 let g:which_key_local_map.e = {'name': '+errors'}

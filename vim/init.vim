@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-" TODO LIST
+"" TODO LIST
 " - iab
 " - vimdiff
 " - proper debugging support
@@ -8,16 +8,16 @@ scriptencoding utf-8
 " - tabs buffers mayhem
 " - get rid of unimpaired
 
-" FIXME - broken
+"" FIXME - broken
 " - open gitcommit filetype in insert mode
 " - fzf - empty list on no input
 " - NERDCommenterInsert adds extra newline
 " - fzf extra commands not working https://github.com/junegunn/fzf.vim/issues/18
 
-" !! GRIPES
+"" GRIPES
 " - empty line unindenting: use S -- https://vi.stackexchange.com/questions/3612/how-do-i-prevent-vim-from-unindenting-empty-lines
 
-" INFO
+"" INFO
 " - https://vi.stackexchange.com/a/13456
 " - https://vimways.org/2018/from-vimrc-to-vim/
 
@@ -26,7 +26,7 @@ let g:maplocalleader = ','
 
 call plug#begin('~/.vim/vendor')
 
-" Preamble
+"" Preamble
 Plug 'tpope/vim-sensible'
 Plug 'liuchengxu/vim-better-default'
 let g:vim_better_default_key_mapping = 1
@@ -174,10 +174,10 @@ Plug 'airblade/vim-matchquote'
 Plug 'dbakker/vim-projectroot'
 
 "" Experimental
-" Plug 'junegunn/vim-peekaboo' " See contents of registers
-" let g:peekaboo_window = 'bo 30new'
-" let g:peekaboo_compact = 1
-" let g:peekaboo_delay = 300
+Plug 'junegunn/vim-peekaboo' " See contents of registers
+let g:peekaboo_window = 'bo 30new'
+let g:peekaboo_compact = 1
+let g:peekaboo_delay = 300
 Plug 'svermeulen/vim-cutlass' " Plugin that adds a 'cut' operation separate from 'delete'
 
 Plug 'Olical/vim-enmasse' " Edit every line in a quickfix list at the same time
@@ -282,10 +282,10 @@ set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
 set viewoptions=cursor,folds,slash,unix
-set foldenable
-set foldlevel=0
-set foldmethod=manual
-set foldlevelstart=99
+" set foldenable
+" set foldlevel=0
+" set foldmethod=manual
+" set foldlevelstart=99
 " set cmdheight=2
 " set nohlsearch
 
