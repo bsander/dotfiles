@@ -1,11 +1,15 @@
 " Connect to running nvim instance to avoid nested nvims
 if has('nvim')
-  let $FZF_DEFAULT_OPTS = '--exact --cycle'
+  let $FZF_DEFAULT_OPTS = '--exact --cycle --border'
 endif
 
 
 " " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
 " autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+
+" Terminal buffer options for fzf
+autocmd! FileType fzf
+autocmd  FileType fzf set noshowmode noruler nonu
 
 function! s:copy_results(lines)
   let joined_lines = join(a:lines, "\n")
@@ -109,26 +113,14 @@ function! s:filtered_recent_files()
 endfunction
 
 function! FloatingFZF()
-  let buf = nvim_create_buf(v:false, v:true)
-  " call setbufvar(buf, '&signcolumn', 'no')
-
-  let height = float2nr(&lines * 0.4)
-  let row = float2nr(&lines - height)
-
-  let width = float2nr(&columns - 2)
-  let col = float2nr(&columns - width)
-  " let width = float2nr(&columns - (&columns * 2 / 10))
-  " let col = float2nr((&columns - width) / 2)
-
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': row,
-        \ 'col': col,
+  let width = float2nr(&columns * 0.9)
+  let height = float2nr(&lines * 0.6)
+  let opts = { 'relative': 'editor',
+        \ 'row': (&lines - height) / 2,
+        \ 'col': (&columns - width) / 2,
         \ 'width': width,
-        \ 'height': height,
-        \ 'style': 'minimal'
-        \ }
+        \ 'height': height }
 
-  let win = nvim_open_win(buf, v:true, opts)
-  call setwinvar(win, '&winhighlight', 'NormalFloat:TabLine')
+  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
 endfunction
+

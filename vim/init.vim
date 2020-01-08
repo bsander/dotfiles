@@ -270,6 +270,7 @@ set norelativenumber
 set nonumber
 set signcolumn=yes
 set timeoutlen=500
+set ttimeoutlen=10
 set updatetime=300
 set formatoptions-=cro " https://superuser.com/a/271024
 set completeopt=menuone,preview,noinsert,noselect
@@ -282,6 +283,7 @@ set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
 set viewoptions=cursor,folds,slash,unix
+set winblend=10
 " set foldenable
 " set foldlevel=0
 " set foldmethod=manual
@@ -390,8 +392,8 @@ let g:which_key_map =  {}
 " LEADER LEADER
 noremap <silent> <Leader><Space> :Commands<CR>
 nnoremap <silent> <Leader><ESC> <ESC>
-map <Leader>? :BLines<CR>
-map <Leader>/ :ProjectRootExe Rg<CR>
+noremap <silent> <Leader>? :BLines<CR>
+noremap <silent> <Leader>/ :ProjectRootExe Rg<CR>
 noremap <silent> <Leader>' :split term://$SHELL<CR>
 let g:which_key_map['/'] = 'Search project'
 
@@ -433,7 +435,7 @@ map <Leader>ca <Plug>NERDCommenterAppend
 nmap <Leader>co o<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 nmap <Leader>cO O<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 
-" FILE
+" DIFF
 let g:which_key_map.d = { 'name' : '+diff' }
 noremap <silent> <Leader>dd :DiffConflicts<CR>:windo set modifiable<CR><C-W>t
 noremap <silent> <Leader>dx <C-W>t<C-W>o:diffoff!<CR>
@@ -441,6 +443,13 @@ noremap <silent> <Leader>dg :diffget<CR>
 noremap <silent> <Leader>dp :diffput<CR>
 noremap <silent> <Leader>dn ]c
 noremap <silent> <Leader>dN [c
+
+" DEBUG
+let g:which_key_map.D = { 'name' : '+debug' }
+nnoremap <silent> <leader>DD :exe ":profile start profile.log"<CR>:exe ":profile func *"<CR>:exe ":profile file *"<CR>
+nnoremap <silent> <leader>DP :exe ":profile pause"<CR>
+nnoremap <silent> <leader>DC :exe ":profile continue"<CR>
+nnoremap <silent> <leader>DQ :exe ":profile pause"<CR>:noautocmd qall!<CR>
 
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
@@ -596,10 +605,10 @@ map <Leader>xX <Plug>(ExchangeClear)
 
 " CLIPBOARD / YANK
 let g:which_key_map.y = {'name': '+clipboard/yank' }
-map <Leader>yX :let @+ = @0<CR>
-let g:which_key_map.y.X = 'from clipboard'
-map <Leader>yx :let @0 = @+<CR>
-let g:which_key_map.y.x = 'to clipboard'
+map <Leader>yt :let @+ = @0<CR>
+let g:which_key_map.y.t = 'to clipboard'
+map <Leader>yf :let @0 = @+<CR>
+let g:which_key_map.y.f = 'from clipboard'
 map <silent> <Leader>yy :FZFYank<CR>
 map <silent> <Leader>yp :FZFPaste<CR>
 
