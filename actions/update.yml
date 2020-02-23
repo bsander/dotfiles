@@ -6,8 +6,12 @@
 - shell:
     - description: Self-updating dotbot
       command: git submodule update --remote
-    - description: Self-updating fish plugin manager
-      command: fisher self-update
-    - description: Updating fish shell plugins
-      command: fisher
+    # - description: Self-updating fish plugin manager
+    #   command: fisher self-update
+    # - description: Updating fish shell plugins
+    #   command: fisher
+    - description: Self-updating zsh plugin manager
+      command: zinit self-update
+    - description: Updating zsh shell plugins
+      command: zinit update --all
 

@@ -2,3 +2,6 @@
 	path = repos/dotbot
 	url = https://github.com/anishathalye/dotbot
 	branch = master
+[submodule "repos/zplug"]
+	path = repos/zplug
+	url = https://github.com/zplug/zplug

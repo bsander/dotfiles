@@ -1,0 +1,2 @@
+#compdef git-lcheckout
+__gitcomp_nl "$(__git_heads '' $track)"

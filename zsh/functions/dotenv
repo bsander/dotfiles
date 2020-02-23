@@ -1,0 +1,4 @@
+#!/bin/bash
+  set -ax
+  [ -f .env ] && source .env
+  set +ax
