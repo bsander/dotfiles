@@ -41,7 +41,9 @@ let g:vim_better_default_window_key_mapping = 0
 "" Dependencies
 Plug 'tpope/vim-repeat'
 
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+  \| Plug 'junegunn/fzf.vim'
+  \| Plug 'jesseleite/vim-agriculture'
 runtime local/fzf.vim
 
 Plug 'kana/vim-textobj-user'
@@ -68,7 +70,7 @@ onoremap <silent> iV :call TextObjWordBasedColumn("iW")<CR>
 
 Plug 'michaeljsmith/vim-indent-object' " defines a new text object representing lines of code at the same indent level
 
-Plug 'tmsvg/pear-tree' " A Vim auto-pair plugin that supports multi-character pairs, intelligent matching, and more
+Plug 'jiangmiao/auto-pairs' " insert or delete brackets, parens, quotes in pair
 Plug 'rhysd/clever-f.vim' " Extended f, F, t and T key mappings
 Plug 't9md/vim-textmanip' " Move/Duplicate text intuitively
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
@@ -127,6 +129,7 @@ let g:openbrowser_search_engines = {
 
 "" Languages
 Plug 'sheerun/vim-polyglot'
+Plug 'liuchengxu/graphviz.vim'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'bfontaine/Brewfile.vim'
@@ -146,6 +149,7 @@ let g:gruvbox_hls_cursor = 'neutral_orange'
 
 
 "" UI / Syntax
+Plug 'rhysd/vim-gfm-syntax' " GitHub Flavored Markdown syntax highlight extension for Vim
 Plug 'andrewradev/bufferize.vim'
 let g:bufferize_command = 'enew'
 
@@ -157,7 +161,7 @@ let g:airline#extensions#tabline#show_tab_count = 1
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons' " Adds file type icons to Vim plugins
 
 "" Tools
 Plug 'liuchengxu/vim-which-key'
@@ -168,7 +172,8 @@ let g:which_key_timeout = 200
 Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
 let g:bclose_no_plugin_maps = 1
 
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plug 'DataWraith/auto_mkdir'
 Plug 'airblade/vim-matchquote'
 Plug 'dbakker/vim-projectroot'
@@ -283,7 +288,7 @@ set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
 set viewoptions=cursor,folds,slash,unix
-set winblend=10
+" set winblend=10
 " set foldenable
 " set foldlevel=0
 " set foldmethod=manual
@@ -554,13 +559,13 @@ nnoremap <silent> <Leader>wh <C-W>h
 let g:which_key_map.w.h = '[<] focus'
 nnoremap <silent> <Leader>wl <C-W>l
 let g:which_key_map.w.l = '[>] focus'
-" double-map
-if has('nvim') || has('terminal')
-  tnoremap <silent> <Leader>wj <C-W>j
-  tnoremap <silent> <Leader>wk <C-W>k
-  tnoremap <silent> <Leader>wh <C-W>h
-  tnoremap <silent> <Leader>wl <C-W>l
-endif
+" " double-map
+" if has('nvim') || has('terminal')
+"   tnoremap <silent> <Leader>wj <C-W>j
+"   tnoremap <silent> <Leader>wk <C-W>k
+"   tnoremap <silent> <Leader>wh <C-W>h
+"   tnoremap <silent> <Leader>wl <C-W>l
+" endif
 
 nnoremap <silent> <Leader>wJ <C-W>J
 let g:which_key_map.w.J = '[v] move'

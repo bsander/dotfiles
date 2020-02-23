@@ -7,7 +7,7 @@ set -gx PAGER less
 # set -gx EDITOR "$BASE_EDITOR -w"
 # set -gx VISUAL "$BASE_VISUAL -w"
 set -gx EDITOR "nvim"
-set -gx VISUAL "vimr" # Don't wait for command completion
+set -gx VISUAL "vimr -n" # Don't wait for command completion
 
 set -q GIT_EDITOR
 or set -gx GIT_EDITOR "$EDITOR"

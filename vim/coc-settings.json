@@ -7,5 +7,8 @@
   "prettier.eslintIntegration": false,
   "prettier.requireConfig": true,
 
+  "suggest.triggerAfterInsertEnter": true,
+  "coc.source.around.priority": 0,
+
   "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "json"]
 }

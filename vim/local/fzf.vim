@@ -1,8 +1,6 @@
-" Connect to running nvim instance to avoid nested nvims
-if has('nvim')
-  let $FZF_DEFAULT_OPTS = '--exact --cycle --border'
-endif
 
+" let $FZF_DEFAULT_OPTS = '--exact --cycle --border'
+let $FZF_DEFAULT_OPTS = '--cycle'
 
 " " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
 " autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
@@ -19,7 +17,6 @@ function! s:copy_results(lines)
   let @+ = joined_lines
 endfunction
 
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 let g:fzf_buffers_jump = 1
 let g:fzf_commands_expect = 'ctrl-x'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
@@ -129,15 +126,14 @@ function! s:filtered_recent_files()
         \ )
 endfunction
 
-function! FloatingFZF()
-  let width = float2nr(&columns * 0.9)
-  let height = float2nr(&lines * 0.6)
-  let opts = { 'relative': 'editor',
-        \ 'row': (&lines - height) / 2,
-        \ 'col': (&columns - width) / 2,
-        \ 'width': width,
-        \ 'height': height }
-
-  call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-endfunction
-
+" function! FloatingFZF()
+"   let width = float2nr(&columns * 0.9)
+"   let height = float2nr(&lines * 0.6)
+"   let opts = { 'relative': 'editor',
+"         \ 'row': (&lines - height) / 2,
+"         \ 'col': (&columns - width) / 2,
+"         \ 'width': width,
+"         \ 'height': height }
+"   call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+" endfunction
+" let g:fzf_layout = { 'window': 'call FloatingFZF()' }
