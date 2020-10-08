@@ -2,10 +2,7 @@
 
 ## Frequent actions
 e ()  { ${BASE_VISUAL:-$VISUAL} "${@:-.}"; }
-# alias ls="gls --color --group-directories-first -Fh"
-alias g="git"
-alias y="yarn"
-# alias rgf="rg --files -g"
+c () { cd $(fd --hidden --type d . "$PROJECTS" 2> /dev/null | fzf +m || echo "." ) }
 
 ## Dotfiles related
 alias .r='exec $SHELL -l' # Reload shell environment
@@ -19,13 +16,6 @@ alias .d="direnv allow"
 alias .z="rm -f ~/.zcompdump && compinit"
 alias .f="\$DOTFILES/bin/dotbot" # Run update script
 
-## RTL Related
-w () {
-  # Runs arguments as command through a workspace docker container
-  (cd "${PROJECTS}/RTL/CDP" && set -x && "./workspace" "$@" )
-}
-
-
 # ZSH completion/globbing madness
 # alias curl="noglob curl"
 
@@ -34,76 +24,53 @@ alias serve="http-server -o" # Statically serve directory
 # Print and copy last n commands
 last () { fc -ln -"${1:-1}" | awk '{$1=$1}1' | tee >(pbcopy); }
 
-# Docker and docker-compose
-alias d="docker"
-alias dr="docker run --rm --interactive --tty"
-alias dc="docker-compose"
-alias dcl="docker-compose logs --follow --tail=20"
-alias dcd="docker-compose down --timeout 0"
-
-ds() {
-  # Stop all running docker containers
-  docker ps -a -q | gxargs --no-run-if-empty docker stop
-}
-dk() {
-  # Kill all running docker containers
-  docker ps -a -q | gxargs --no-run-if-empty docker kill
-}
-dx() {
-  # remove all stopped containers
-  docker ps -a -q --filter "status=exited" | gxargs --no-run-if-empty docker rm
-}
-dxi() {
-  # Remove all dangling docker images
-  docker images --filter "dangling=true" -q | gxargs --no-run-if-empty docker rmi
+gcd() {
+  cd "$(git rev-parse --show-toplevel)"
 }
 
 gdc() {
   docker-compose -f "$HOME/.docker-compose.yml" "$@"
 }
 
-# Kubernetes
-alias k="kubectl"
-alias kc="kubectl config get-contexts"
-alias kn="kubectl config get-contexts"
-alias ksc="kubectl config use-context"
-alias kd="kp; open localhost:8001/ui"
-alias kx="killall kubectl"
-alias kd="open http://localhost:8001/ui"
-alias kpd="kp;kd"
-kp () {
-  (
-    set -x; kubectl proxy --address='0.0.0.0' --accept-hosts '(docker.for.mac.|)localhost'
-  ) &
- sleep 0.5
-}
-ksn() {
-  kubectl config set-context "$(kubectl config current-context)" --namespace "$@"
-}
+## Frequently used apps
+alias b=brew
+alias bc="brew cask"
+alias bci="brew cask info"
+alias bcI="brew cask install"
+alias bi="brew info"
+alias bI="brew install"
+alias bs="brew search"
 
-## development related
-addtype () {
-  set -x
-  # See if type definitions exist already
-  yarn add "@types/${1:?}" || \
-  # Try to generate them from the package
-  ypx dts-gen -m "$1" -f "${2:-types}/$1.d.ts" || \
-  # If all else fails, produce a generic declaration
-  echo "declare module '$1'" > "${2:-types}/$1.d.ts"
-}
+alias g=git
 
-alias stderred="DYLD_INSERT_LIBRARIES=\$HOME/.ghq/github.com/sickill/stderred/build/libstderred.dylib${DYLD_INSERT_LIBRARIES:+:$DYLD_INSERT_LIBRARIES}"
+alias d=docker
+alias dr="docker run --rm -it"
 
-## Speelcheck
-alias brwe=brew
-alias ypc=ypx
+alias dc=docker-compose
+alias dcr="docker-compose run --rm"
+alias dcs="docker-compose stop"
+alias dcu="docker-compose up"
+alias dcud="docker-compose up -d"
+alias dcl="docker-compose logs --follow --tail=20"
+alias dcd="docker-compose down --timeout 0"
 
-## Experimental CLI replacements
-export EXA_GRID_ROWS=20
-alias ls="exa --group-directories-first --sort=name"
-alias ll="exa --long --grid --header --group-directories-first --sort=name"
-lt () { exa --tree --group-directories-first --level="${1:-2}" --ignore-glob="$(git ign-glob || echo '^$')" "${@:2}"; }
+# Force of habit - consistency with vim
+alias gg="tig status"
+
+alias y=yarn
+alias yr="yarn run"
+alias yw="yarn workspace"
+alias yww="yarn workspaces run"
+
+
+## Substitute apps
 alias cat=bat
 alias grep=rg
 alias find=fd
-alias tree=lt
+
+# Do not expand these aliases
+ls() { exa --group-directories-first --sort=name "$@" }
+ll() { exa --long --grid --header --group-directories-first --sort=name "$@" }
+
+## Typos
+alias brwe=brew

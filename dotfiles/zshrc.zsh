@@ -4,7 +4,7 @@
 # set -euo pipefail
 
 ## Profiling
-# zmodload zsh/zprof
+zmodload zsh/zprof
 
 ## Verbosity
 # set -x
@@ -24,13 +24,13 @@ export DOTFILES="${DOTFILES:-$PROJECTS/dotfiles}"
 ## Autoload functions and completions
 # shellcheck disable=SC2206
 fpath=("$DOTFILES/zsh/functions" "$DOTFILES/zsh/completions" "$(brew --prefix)/share/zsh/site-functions" $fpath)
-# shellcheck source=../zsh/completion.zsh
-source "$DOTFILES/zsh/completion.zsh"
-autoload -U "$DOTFILES/zsh"/functions/*(:t)
-autoload -U "$DOTFILES/zsh"/completions/*(:t)
+# # shellcheck source=../zsh/completion.zsh
+# source "$DOTFILES/zsh/completion.zsh"
+# autoload -U "$DOTFILES/zsh"/functions/*(:t)
+# autoload -U "$DOTFILES/zsh"/completions/*(:t)
 
 # shellcheck source=../zsh/zgen.zsh
-source "$DOTFILES/zsh/zgen.zsh"
+source "$DOTFILES/zsh/zinit.zsh"
 
 ## compinit has now been called.
 
@@ -41,8 +41,6 @@ source "$DOTFILES/zsh/preferences.zsh"
 # shellcheck source=../zsh/environment.zsh
 source "$DOTFILES/zsh/environment.zsh"
 ## Install iTerm2 shell integration if available
-# shellcheck source=/dev/null
-[[ -e "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 # shellcheck source=../zsh/path.zsh
 source "$DOTFILES/zsh/path.zsh"
 # shellcheck source=../zsh/alias.zsh
@@ -50,4 +48,8 @@ source "$DOTFILES/zsh/alias.zsh"
 # shellcheck source=../zsh/announce.zsh
 source "$DOTFILES/zsh/announce.zsh"
 
-# zprof
+# # Setup prompt
+# eval "$(starship init zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

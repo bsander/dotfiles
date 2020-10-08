@@ -23,6 +23,7 @@
     ~/.hgrc: dotfiles/hgrc.ini
     ~/.ignore: dotfiles/ignore.txt
     ~/.npmrc: dotfiles/npmrc.ini
+    ~/.p10k.zsh: dotfiles/p10k.zsh
     ~/.spacemacs: dotfiles/spacemacs.el
     ~/.skhdrc: dotfiles/skhdrc.ini
     ~/.tigrc: dotfiles/tigrc.ini
@@ -31,6 +32,7 @@
     # Note this link is not actually in use, but the target file _is_.
     ~/.zhistory: zhistory.txt
     ~/.zshrc: dotfiles/zshrc.zsh
+    ~/.zshenv: zsh/path.zsh
 
 - clean:
     - "~"
@@ -47,6 +49,10 @@
       command: brew cleanup
     - description: Upgrading global npm packages
       command: yarn global upgrade --latest
-    - description: Upgrading fish shell plugins
-      command: fisher
+    - description: 'Now manually upgrade ZSH plugins:'
+      command: echo 'zinit self-update && zinit update --all'
+    # - description: Self-updating zsh plugin manager
+    #   command: zsh -c "zinit self-update"
+    # - description: Updating zsh shell plugins
+    #   command: zsh -c "zinit update --all"
 

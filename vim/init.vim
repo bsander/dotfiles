@@ -21,13 +21,40 @@ scriptencoding utf-8
 " - https://vi.stackexchange.com/a/13456
 " - https://vimways.org/2018/from-vimrc-to-vim/
 
+if exists('g:vv')
+  VVset fontfamily=Dank\ Mono
+  VVset fontsize=14
+endif
+
+" goneovim: ~/.goneovim/setting.toml
+
+if exists('g:neovide')
+  set guifont=Dank\ Mono:h16
+  " set guifont=MonoLisa:h16
+  " set guifont=Courier_new:h16
+  let g:neovide_cursor_antialiasing=v:true
+  set linespace=5
+endif
+
+if exists('g:fvim_loaded')
+  set guifont=Dank\ Mono:h16
+  FVimCursorSmoothMove v:true
+  " FVimCursorSmoothBlink v:true
+  FVimFontLigature v:true
+endif
+
 let g:mapleader=' '
 let g:maplocalleader = ','
 
+
 call plug#begin('~/.vim/vendor')
+
+"" Neovide
+" let g:neovide_cursor_trail_length = 0
 
 "" Preamble
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-eunuch' " Helpers for UNIX
 Plug 'liuchengxu/vim-better-default'
 let g:vim_better_default_key_mapping = 1
 let g:vim_better_default_enable_folding = 0
@@ -43,38 +70,41 @@ Plug 'tpope/vim-repeat'
 
 Plug 'junegunn/fzf', { 'do': './install --bin' }
   \| Plug 'junegunn/fzf.vim'
-  \| Plug 'jesseleite/vim-agriculture'
+  \| Plug 'chengzeyi/fzf-preview.vim'
+  \| Plug 'antoinemadec/coc-fzf'
+
 runtime local/fzf.vim
 
 Plug 'kana/vim-textobj-user'
   \ | Plug 'kana/vim-textobj-line'
   \ | Plug 'glts/vim-textobj-comment'
-  \ | Plug 'beloglazov/vim-textobj-quotes'
   \ | Plug 'rhysd/vim-textobj-anyblock'
   \ | Plug 'kana/vim-textobj-entire'
-  \ | Plug 'coderifous/textobj-word-column.vim'
-
-" Motions conflict with textobj-comment https://github.com/glts/vim-textobj-comment/issues/1
-let g:skip_default_textobj_word_column_mappings = 1
-xnoremap <silent> av :<C-U>call TextObjWordBasedColumn("aw")<CR>
-onoremap <silent> av :call TextObjWordBasedColumn("aw")<CR>
-xnoremap <silent> iv :<C-U>call TextObjWordBasedColumn("iw")<CR>
-onoremap <silent> iv :call TextObjWordBasedColumn("iw")<CR>
-xnoremap <silent> aV :<C-U>call TextObjWordBasedColumn("aW")<CR>
-onoremap <silent> aV :call TextObjWordBasedColumn("aW")<CR>
-xnoremap <silent> iV :<C-U>call TextObjWordBasedColumn("iW")<CR>
-onoremap <silent> iV :call TextObjWordBasedColumn("iW")<CR>
+  \ | Plug 'beloglazov/vim-textobj-quotes'
 
 " Plug 'wellle/targets.vim' " Vim plugin that provides additional text objects
 " let g:targets_nl = 'nN' " Conflict with vim-textobj-line motion
 
 Plug 'michaeljsmith/vim-indent-object' " defines a new text object representing lines of code at the same indent level
 
-Plug 'jiangmiao/auto-pairs' " insert or delete brackets, parens, quotes in pair
+" Plug 'jiangmiao/auto-pairs' " insert or delete brackets, parens, quotes in pair
+Plug 'rstacruz/vim-closer' " Closes brackets - only on <CR> - https://github.com/rstacruz/vim-closer/issues/25
 Plug 'rhysd/clever-f.vim' " Extended f, F, t and T key mappings
 Plug 't9md/vim-textmanip' " Move/Duplicate text intuitively
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
-Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+
+Plug 'takac/vim-hardtime' " Stop using hjkl
+" let g:hardtime_default_on = 1
+let g:hardtime_showmsg = 1
+let g:hardtime_ignore_buffer_patterns = ["term://*"]
+let g:hardtime_ignore_quickfix = 1
+let g:hardtime_allow_different_key = 1
+let g:hardtime_maxcount = 2
+
+
+" Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
 
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
@@ -83,7 +113,7 @@ let g:EasyMotion_startofline = 1
 let g:EasyMotion_use_upper = 1
 let g:EasyMotion_enter_jump_first = 1
 let g:EasyMotion_space_jump_first = 1
-let g:EasyMotion_keys = 'DKSLA;RUEIWOCNXMGHFJ'
+let g:EasyMotion_keys = 'jfkdls;aytnburmvie,cow.xpqz/5647382910gh' " gh last for combo keys
 
 Plug 'chaoren/vim-wordmotion'
 let g:wordmotion_mappings = {
@@ -96,19 +126,26 @@ let g:wordmotion_mappings = {
       \ '<C-R><C-W>' : '<C-R><M-w>'
       \ }
 Plug 'tpope/vim-surround'
-Plug 'terryma/vim-expand-region'
-let g:expand_region_text_objects = {
-      \ 'iw'  :0,
-      \ 'iW'  :0,
-      \ 'i"'  :0,
-      \ 'i''' :0,
-      \ 'i]'  :1,
-      \ 'ib'  :1,
-      \ 'iB'  :1,
-      \ 'il'  :0,
-      \ 'ip'  :0,
-      \ 'ie'  :0,
-      \ }
+
+" Plug 'terryma/vim-expand-region'
+" let g:expand_region_text_objects = {
+"       \ 'iq'  :1,
+"       \ 'aq'  :1,
+"       \ 'ib'  :1,
+"       \ 'ab'  :1,
+"       \ 'ip'  :0
+"       \ }
+
+"" Smooth scrolling
+Plug 'psliwka/vim-smoothie'
+
+" Plug 'junegunn/rainbow_parentheses.vim'
+" let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
+
+" Plug 'luochen1990/rainbow'
+" let g:rainbow_active = 1
+
+Plug 'bounceme/poppy.vim'
 
 Plug 'scrooloose/nerdcommenter'
 let g:NERDCreateDefaultMappings = 0
@@ -120,7 +157,6 @@ let g:NERDCompactSexyComs = 0
 let g:NERDDefaultAlign = 'left'
 
 Plug 'tommcdo/vim-exchange'
-" Plug 'jiangmiao/auto-pairs' " Do I really want this?
 Plug 'tyru/open-browser.vim'
 let g:openbrowser_default_search = 'startpage'
 let g:openbrowser_search_engines = {
@@ -129,29 +165,32 @@ let g:openbrowser_search_engines = {
 
 "" Languages
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter'
+
 Plug 'liuchengxu/graphviz.vim'
 
 Plug 'editorconfig/editorconfig-vim'
 Plug 'bfontaine/Brewfile.vim'
-" Plug 'jparise/vim-graphql', { 'for': 'graphql' } " BREAKS TS
+Plug 'jparise/vim-graphql', { 'for': 'graphql' } " BREAKS TS
 
-" Colors
-Plug 'gruvbox-community/gruvbox'
-set background=dark " Gruvbox variant
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_invert_selection = 0
-let g:gruvbox_hls_highlight = 'neutral_yellow'
-let g:gruvbox_hls_cursor = 'neutral_orange'
+"" Colors
+Plug 'sainnhe/gruvbox-material'
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_disable_italic_comment = 1
+let g:gruvbox_material_enable_italic = 0
 
-" Plug 'NewProggie/NewProggie-Color-Scheme'
-
-"" Finalize colors
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'lifepillar/vim-solarized8'
+Plug 'atelierbram/Base2Tone-vim'
+Plug 'patstockwell/vim-monokai-tasty'
 
 
 "" UI / Syntax
 Plug 'rhysd/vim-gfm-syntax' " GitHub Flavored Markdown syntax highlight extension for Vim
 Plug 'andrewradev/bufferize.vim'
 let g:bufferize_command = 'enew'
+
+Plug 'jaxbot/semantic-highlight.vim'
 
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
@@ -161,16 +200,22 @@ let g:airline#extensions#tabline#show_tab_count = 1
 
 Plug 'airblade/vim-gitgutter'
 
+Plug 'mhinz/vim-startify'
+
 " Plug 'ryanoasis/vim-devicons' " Adds file type icons to Vim plugins
 
 "" Tools
 Plug 'liuchengxu/vim-which-key'
 let g:which_key_use_floating_win = 1
-let g:which_key_timeout = 200
+let g:which_key_disable_default_offset = 1
+let g:which_key_floating_opts = { 'row': '+1' }
+
+" let g:which_key_timeout = 200
 
 " Plug 'rbgrouleff/bclose.vim' | Plug 'iberianpig/tig-explorer.vim'
-Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
-let g:bclose_no_plugin_maps = 1
+" Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
+" let g:bclose_no_plugin_maps = 1
+Plug 'codeindulgence/vim-tig'
 
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
@@ -186,6 +231,11 @@ let g:peekaboo_delay = 300
 Plug 'svermeulen/vim-cutlass' " Plugin that adds a 'cut' operation separate from 'delete'
 
 Plug 'Olical/vim-enmasse' " Edit every line in a quickfix list at the same time
+
+" Plug 'nathanaelkane/vim-indent-guides' " Indent Guides is a plugin for visually displaying indent levels in Vim.
+
+" Plug 'Yggdroot/indentLine'
+
 " Plug 'thinca/vim-qfreplace'
 
 Plug 'simnalamburt/vim-mundo' " Vim undo tree visualizer
@@ -210,35 +260,11 @@ let g:NERDTreeMinimalUI = 1
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'whiteinge/diffconflicts'
+Plug 'andrewradev/linediff.vim'
 
-" Plug 'roxma/nvim-yarp' | Plug 'ncm2/ncm2' | Plug 'ncm2/ncm2-path'
-
-" Plug 'dense-analysis/ale'
-" let g:ale_linters_explicit = 1 " Only run linters named in ale_linters settings.
-" let g:ale_fix_on_save = 1
-" let g:ale_lint_delay = 0
-" let g:ale_sign_error =  '>>'
-" let g:ale_sign_warning =  '=='
-" let g:ale_linters = {
-"       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"       \   'vim': ['vint'],
-"       \ }
-"
-" Plug 'autozimu/LanguageClient-neovim', {
-"       \ 'branch': 'next',
-"       \ 'do': 'bash install.sh',
-"       \ }
-" let g:LanguageClient_hoverPreview = 'Never'
-" let g:LanguageClient_rootMarkers = {
-"       \ 'typescript': ['.git', 'tsconfig.json'],
-"       \ }
-" let g:LanguageClient_serverCommands = {
-"       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-"       \ 'typescript': ['/usr/local/bin/typescript-language-server', '--stdio', '--tsserver-path=./node_modules/.bin/tsserver'],
-"       \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-"       \ }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_disable_transparent_cursor = 1
 let g:coc_global_extensions = [
       \ 'coc-tsserver',
       \ 'coc-eslint',
@@ -269,13 +295,14 @@ call plug#end()
 
 " Default environment settings
 runtime! plugin/default.vim
+set mouse=a
 set termguicolors " make terminal colors vork in vimr
 set autoread " Auto-refresh unchanged files when content changes
 set norelativenumber
 set nonumber
 set signcolumn=yes
 set timeoutlen=500
-set ttimeoutlen=10
+set ttimeoutlen=0
 set updatetime=300
 set formatoptions-=cro " https://superuser.com/a/271024
 set completeopt=menuone,preview,noinsert,noselect
@@ -287,7 +314,10 @@ set linebreak
 set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
+set background=light
 set viewoptions=cursor,folds,slash,unix
+" colorscheme Base2Tone_MorningLight
+colorscheme gruvbox-material
 " set winblend=10
 " set foldenable
 " set foldlevel=0
@@ -295,16 +325,6 @@ set viewoptions=cursor,folds,slash,unix
 " set foldlevelstart=99
 " set cmdheight=2
 " set nohlsearch
-
-colorscheme gruvbox
-call expand_region#custom_text_objects({
-      \ "\/\\n\\n\<CR>": 1,
-      \ 'a]' :1,
-      \ 'ab' :1,
-      \ 'aB' :1,
-      \ 'if' :1,
-      \ 'af' :1,
-      \ })
 
 " KEYBINDINGS
 " System clipboard integration
@@ -375,8 +395,8 @@ map gx <Plug>(openbrowser-smart-search)
 map cx <Plug>(Exchange)
 map cX <Plug>(ExchangeClear)
 " Select functions
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
+" omap if <Plug>(coc-funcobj-i)
+" omap af <Plug>(coc-funcobj-a)
 " Consistency in search direction
 nmap n /<CR>
 nmap N ?<CR>
@@ -384,12 +404,17 @@ nmap N ?<CR>
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprev<CR>
 " Experiment with some native motions
-map <silent> / <Plug>(easymotion-sn)
+" map <silent> / <Plug>(easymotion-sn)
 " [m]ove instead of [d]elete
 nnoremap m d
 xnoremap m d
 nnoremap mm dd
 nnoremap M D
+ " Mouse wheel scrolling
+" map <ScrollWheelUp> <C-Y>
+" map <S-ScrollWheelUp> <C-U>
+" map <ScrollWheelDown> <C-E>
+" map <S-ScrollWheelDown> <C-D>
 
 " WHICH_KEY
 let g:which_key_map =  {}
@@ -397,8 +422,9 @@ let g:which_key_map =  {}
 " LEADER LEADER
 noremap <silent> <Leader><Space> :Commands<CR>
 nnoremap <silent> <Leader><ESC> <ESC>
-noremap <silent> <Leader>? :BLines<CR>
-noremap <silent> <Leader>/ :ProjectRootExe Rg<CR>
+noremap <silent> <Leader><Tab> :Buffers<CR>
+nnoremap <silent> <Leader>; :FZFBLines<CR>
+noremap <silent> <Leader>/ :ProjectRootExe FZFRg<CR>
 noremap <silent> <Leader>' :split term://$SHELL<CR>
 let g:which_key_map['/'] = 'Search project'
 
@@ -413,30 +439,20 @@ nnoremap <silent> <Leader>bo :%bd\|e#\|bd#<CR>
 let g:which_key_map.b.o = 'only'
 nnoremap <silent> <Leader>bO :%bd!\|e#\|bd#<CR>
 let g:which_key_map.b.O = 'only!'
-nnoremap <silent> <Leader>bb :Buffers<CR>
-nnoremap <silent> <Leader>bp :bprevious<CR>
-nnoremap <silent> <Leader>bN :bprevious<CR>
-nnoremap <silent> <Leader>bn :bnext<CR>
 nnoremap <silent> <Leader>bd :Bdelete<CR>
 nnoremap <silent> <Leader>bD :Bdelete!<CR>
 nnoremap <silent> <Leader>bm :Bufferize messages<CR>
 nnoremap <silent> <Leader>br :edit<CR>
 nnoremap <silent> <Leader>bR :edit!<CR>
-nnoremap <silent> <Leader>bY "+yie
-nnoremap <silent> <Leader>bP "_die"+P
-nnoremap <silent> <Leader>by yie
-nnoremap <silent> <Leader>bp "_dieP
 
 " COMMENT (NERDCommenter)
 let g:which_key_map.c = { 'name' : '+comment' }
 map <Leader>cc <Plug>NERDCommenterToggle
 map <Leader>ci <Plug>NERDCommenterComment
 map <Leader>cm <Plug>NERDCommenterSexy
-map <Leader>cy <Plug>NERDCommenterYank
 nmap <Leader>cd :call NERDComment(1, 'yank') \| normal p<CR>
 vmap <Leader>cd :call NERDComment(1, 'yank') \| '>normal p<CR>
 map <Leader>ca <Plug>NERDCommenterAppend
-" nmap <Leader>co o<Esc><Plug>NERDCommenterAppend
 nmap <Leader>co o<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 nmap <Leader>cO O<ESC><Plug>NERDCommenterComment==:startinsert!<CR><Space>
 
@@ -462,11 +478,12 @@ nnoremap <silent> <Leader>fs :write<CR>
 nnoremap <silent> <Leader>fa :wall<CR>
 nnoremap <expr> <Leader>fS ':write ' . expand('%:p')
 nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
+nnoremap <silent> <Leader>fp :FZFDirs<CR>
 nnoremap <silent> <Leader>fa :w<CR>:call AltCommand(expand('%'), ':e')<CR>
-nnoremap <silent> <Leader>ff :ProjectRootExe Files<CR>
+nnoremap <silent> <Leader>ff :ProjectRootExe FZFFiles<CR>
 nnoremap <silent> <Leader>fD :call delete(expand('%')) \| bdelete!<CR>
 nnoremap <silent> <Leader>fn :enew<CR>
-nnoremap <silent> <Leader>fr :History<CR>
+nnoremap <silent> <Leader>fr :FZFHistory<CR>
 nnoremap <silent> <Leader>ft :NERDTreeToggle<CR>
 nnoremap <silent> <Leader>fT :NERDTreeFind %<CR>
 nnoremap <silent> <Leader>fy :let @* = expand("%")<CR>
@@ -500,54 +517,40 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-map <silent> <Leader>jj <Plug>(easymotion-bd-f2)
-map <silent> <Leader>jl <Plug>(easymotion-bd-jk)
+" map <silent> <Leader>j <Plug>(easymotion-bd-f2)
+map <silent> <Leader>j <Plug>(easymotion-bd-f)
+map <silent> <Leader>l <Plug>(easymotion-bd-jk)
 
 " LISTS
-let g:which_key_map.l = { 'name': '+lists' }
-map <silent> <Leader>ll :call ToggleLocationList()<CR>
-map <silent> <Leader>lq :call ToggleQuickfixList()<CR>
+" let g:which_key_map.l = { 'name': '+lists' }
+" map <silent> <Leader>ll :call ToggleLocationList()<CR>
+" map <silent> <Leader>lq :call ToggleQuickfixList()<CR>
 
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
 nnoremap <silent> <Leader>qq :confirm qall<CR>
-nnoremap <silent> <Leader>qs :wqall<CR>
-nnoremap <silent> <Leader>qQ :qall!<CR>
-
-" SEARCH
-let g:which_key_map.s = { 'name': '+search' }
-nnoremap <silent> <Leader>ss :BLines<CR>
-nnoremap <silent> <Leader>sb :Lines<CR>
-nnoremap <silent> <Leader>sf :ProjectRootExe Rg<CR>
 
 " TOGGLES
 let g:which_key_map.t = { 'name': '+toggle' }
-nnoremap <silent> <Leader>tb :let &background=&background==?'dark'?'light':'dark'<CR>
+" nnoremap <silent> <Leader>tc :let ayucolor=ayucolor==?'dark'?'light':'dark'<CR>:colorscheme ayu<CR>:mode<CR>
+nnoremap <silent> <Leader>tb :let &background=&background==?'dark'?'light':'dark'<CR>:mode<CR>
 nnoremap <silent> <Leader>tc :Colors<CR>
 nnoremap <silent> <Leader>tl :set invlist<CR>
 nnoremap <silent> <Leader>tn :set invnumber<CR>
 nnoremap <silent> <Leader>tN :set invrelativenumber<CR>
-nnoremap <silent> <Leader>ts :Filetypes<CR>
+nnoremap <silent> <Leader>tf :Filetypes<CR>
 nnoremap <silent> <Leader>t- :let &scrolloff=999-&scrolloff<CR>
 " nnoremap <silent> <Leader>t- :let g:scrollfix=g:scrollfix < 0 ? 60 : -1<CR>hl
 nnoremap <silent> <Leader>tw :set invwrap<CR>
 
 " WINDOW
 let g:which_key_map.w = {'name': '+window' }
-nnoremap <silent> <Leader>wr <C-W>r
-let g:which_key_map.w.r = 'rotate'
 nnoremap <silent> <Leader>wd <C-W>c
 let g:which_key_map.w.d = 'close'
 nnoremap <silent> <Leader>wo <C-W>o
 let g:which_key_map.w.o = 'only'
 nnoremap <silent> <Leader>w= <C-W>=
 let g:which_key_map.w['='] = 'equalize'
-
-nnoremap <silent> <Leader>wt :tabedit<CR>
-nnoremap <silent> <Leader>w. :tabnext<CR>
-let g:which_key_map.w['.'] = '[>] tab'
-nnoremap <silent> <Leader>w, :tabprev<CR>
-let g:which_key_map.w[','] = '[<] tab'
 
 nnoremap <silent> <Leader>ww <C-W>w
 let g:which_key_map.w.w = '[O] focus'
@@ -586,7 +589,9 @@ nnoremap <silent> <Leader>w} :resize -5<CR>
 let g:which_key_map.w['}'] = '[v] resize'
 
 nnoremap <silent> <Leader>ws <C-W>s
+nnoremap <silent> <Leader>w- <C-W>s
 let g:which_key_map.w.s = '[-] split'
+nnoremap <silent> <Leader>w_ <C-W>v
 nnoremap <silent> <Leader>wv <C-W>v
 let g:which_key_map.w.v = '[|] split'
 
@@ -642,11 +647,11 @@ vnoremap <silent> <localleader> :<c-u>WhichKeyVisual ','<CR>
 autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-" autocmd! FileType term://*
-autocmd  FileType term://* set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
+" "
+" " autocmd! FileType term://*
+" autocmd  FileType term://* set laststatus=0 noshowmode noruler
+"       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+"
 function! <SID>AutoProjectRootCD()
   try
     if &filetype !=? 'help'
@@ -684,6 +689,16 @@ function! AltCommand(path, vim_command)
   endif
 endfunction
 
+
+" autocmd InsertEnter * highlight CursorLine guibg=g:terminal_color_15
+" autocmd InsertLeave * highlight CursorLine guibg=g:terminal_color_3
+
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_auto_colors = 0
+" let g:indent_guides_start_level = 1
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#cdc4b1   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#e3dcce ctermbg=15
+
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 function! ToggleVerbose()
@@ -695,3 +710,73 @@ function! ToggleVerbose()
         set verbosefile=
     endif
 endfunction
+
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"     highlight = {
+"         enable = true,                    -- false will disable the whole extension
+"         disable = { 'c', 'rust' },        -- list of language that will be disabled
+"     },
+"     incremental_selection = {
+"         enable = true,
+"         disable = { 'cpp', 'lua' },
+"         keymaps = {                       -- mappings for incremental selection (visual mappings)
+"           init_selection = '+',         -- maps in normal mode to init the node/scope selection
+"           node_incremental = "+",       -- increment to the upper named parent
+"           scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
+"           node_decremental = "_",       -- decrement to the previous node
+"         }
+"     },
+"     refactor = {
+"       highlight_definitions = {
+"         enable = true
+"       },
+"       highlight_current_scope = :TSUpdate{
+"         enable = true
+"       },
+"       smart_rename = {
+"         enable = true,
+"         keymaps = {
+"           smart_rename = "grr"            -- mapping to rename reference under cursor
+"         }
+"       },
+"       navigation = {
+"         enable = true,
+"         keymaps = {
+"           goto_definition = "gnd",        -- mapping to go to definition of symbol under cursor
+"           list_definitions = "gnD"        -- mapping to list all definitions in current file
+"         }
+"       }
+"     },
+"     textobjects = { -- syntax-aware textobjects
+"   enable = true,
+"   disable = {},
+"   keymaps = {
+"       ["iL"] = { -- you can define your own textobjects directly here
+"     typescript = "(function_definition) @function",
+"     python = "(function_definition) @function",
+"     cpp = "(function_definition) @function",
+"     c = "(function_definition) @function",
+"     java = "(method_declaration) @function"
+"       },
+"       -- or you use the queries from supported languages with textobjects.scm
+"       ["af"] = "@function.outer",
+"       ["if"] = "@function.inner",
+"       ["aC"] = "@class.outer",
+"       ["iC"] = "@class.inner",
+"       ["ac"] = "@conditional.outer",
+"       ["ic"] = "@conditional.inner",
+"       ["ae"] = "@block.outer",
+"       ["ie"] = "@block.inner",
+"       ["al"] = "@loop.outer",
+"       ["il"] = "@loop.inner",
+"       ["is"] = "@statement.inner",
+"       ["as"] = "@statement.outer",
+"       ["ad"] = "@comment.outer",
+"       ["am"] = "@call.outer",
+"       ["im"] = "@call.inner"
+"   }
+"     },
+"     ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
+" }
+" EOF

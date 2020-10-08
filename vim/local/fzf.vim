@@ -1,13 +1,17 @@
 
 " let $FZF_DEFAULT_OPTS = '--exact --cycle --border'
-let $FZF_DEFAULT_OPTS = '--cycle'
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow'
+let $FZF_DEFAULT_OPTS = '--cycle --reverse --exact --inline-info --no-sort'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" let g:fzf_preview_window = 'top:60%'
 
 " " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577
 " autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 
 " Terminal buffer options for fzf
-autocmd! FileType fzf
-autocmd  FileType fzf set noshowmode noruler nonu
+" autocmd! FileType fzf
+" autocmd  FileType fzf set noshowmode noruler nonu
+
 
 function! s:copy_results(lines)
   let joined_lines = join(a:lines, "\n")
@@ -43,12 +47,12 @@ let g:fzf_colors = {
       \ 'header':  ['fg', 'WildMenu']
       \ }
 
-function! FZFRg(command_fmt, query, preview, fullscreen)
-  let initial_command = printf(a:command_fmt, shellescape(a:query))
-  let reload_command = printf(a:command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, a:preview ? fzf#vim#with_preview(spec) : spec, a:fullscreen)
-endfunction
+" function! FZFRg(command_fmt, query, preview, fullscreen)
+"   let initial_command = printf(a:command_fmt, shellescape(a:query))
+"   let reload_command = printf(a:command_fmt, '{q}')
+"   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+"   call fzf#vim#grep(initial_command, 1, a:preview ? fzf#vim#with_preview(spec) : spec, a:fullscreen)
+" endfunction
 
 " function! FZFFiles(command_fmt, query, preview, fullscreen)
 "   let initial_command = printf(a:command_fmt, shellescape(a:query), shellescape(a:query))
@@ -57,11 +61,11 @@ endfunction
 "   call fzf#vim#files(initial_command, 1, a:preview ? fzf#vim#with_preview(spec) : spec, a:fullscreen)
 " endfunction
 
-command! -nargs=* -bang Rg call FZFRg(
-  \ 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true',
-  \ <q-args>,
-  \ <bang>0,
-  \ 0)
+" command! -nargs=* -bang Rg call FZFRg(
+"   \ 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true',
+"   \ <q-args>,
+"   \ <bang>0,
+"   \ 0)
 
 " command! -nargs=* -bang Files call FZFFiles(
 "   \ 'rg --files --hidden --follow --color=always --smart-case -g "**/*%s*/**" -g "*%s*" -- . || true',
@@ -69,17 +73,16 @@ command! -nargs=* -bang Rg call FZFRg(
 "   \ <bang>0,
 "   \ 0)
 
-command! -bang -nargs=? -complete=dir Files
-      \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" command! -bang -nargs=? -complete=dir Files
+"       \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-" Filter oldfiles for History command
-command! History call fzf#run(
-      \ fzf#wrap({
-      \ 'source':  s:filtered_recent_files(),
-      \ 'sink':    'edit',
-      \ 'options': '-m -x +s',
-      \ 'down':    '40%' }
-      \ ))
+" " Filter oldfiles for History command
+" command! History call fzf#run(
+"       \ fzf#wrap({
+"       \ 'source':  s:filtered_recent_files(),
+"       \ 'sink':    'edit',
+"       \ 'options': '-m -x +s'
+"       \ }))
 
 " Filter through yanks
 function! s:yank_list()
@@ -107,6 +110,11 @@ function! s:yank_handler(reg)
   endif
 endfunction
 
+command! FZFDirs call fzf#run(fzf#wrap({
+      \ 'source': 'fd --hidden --type d . "$HOME/src"',
+      \ 'options': ['--preview', 'exa --tree --level=2 --group-directories-first --git-ignore --colour=always {}']
+      \ }))
+
 command! FZFYank call fzf#run(fzf#wrap({
       \ 'source': <sid>yank_list(),
       \ 'sink': function('<sid>yank_handler'),
@@ -117,23 +125,11 @@ command! FZFPaste call fzf#run(fzf#wrap({
       \ 'sink': function('<sid>paste_handler'),
       \ }))
 
-" Filter oldfiles and include open buffers
-function! s:filtered_recent_files()
-  return extend(
-        \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'),
-        \ filter(copy(v:oldfiles),
-        \        "v:val !~? 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
-        \ )
-endfunction
-
-" function! FloatingFZF()
-"   let width = float2nr(&columns * 0.9)
-"   let height = float2nr(&lines * 0.6)
-"   let opts = { 'relative': 'editor',
-"         \ 'row': (&lines - height) / 2,
-"         \ 'col': (&columns - width) / 2,
-"         \ 'width': width,
-"         \ 'height': height }
-"   call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+" " Filter oldfiles and include open buffers
+" function! s:filtered_recent_files()
+"   return extend(
+"         \ map(filter(range(1, bufnr('$')), 'buflisted(v:val)'), 'bufname(v:val)'),
+"         \ filter(copy(v:oldfiles),
+"         \        "v:val !~? 'fugitive:\\|NERD_tree\\|^/tmp/\\|^/private/var/\\|.git/\\|NvimView\\|^term:'"),
+"         \ )
 " endfunction
-" let g:fzf_layout = { 'window': 'call FloatingFZF()' }

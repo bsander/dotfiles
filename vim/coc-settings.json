@@ -1,14 +1,20 @@
 {
-  "eslint.filetypes": ["javascript", "javascriptreact", "typescript"],
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "eslint.run": "onType",
   "eslint.autoFixOnSave": true,
-
   "prettier.formatterPriority": -1,
   "prettier.eslintIntegration": false,
   "prettier.requireConfig": true,
-
   "suggest.triggerAfterInsertEnter": true,
   "coc.source.around.priority": 0,
-
-  "coc.preferences.formatOnSaveFiletypes": ["css", "Markdown", "json"]
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "Markdown",
+    "json"
+  ]
 }

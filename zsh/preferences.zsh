@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 ## Don't expand globs to all matches on <tab>, but cycle.
 setopt GLOB_COMPLETE
@@ -131,6 +131,11 @@ zstyle ':completion:*:history-words' menu yes
 # Environmental Variables
 zstyle ':completion::*:(-command-|export):*' fake-parameters ${${${_comps[(I)-value-*]#*,}%%,*}:#-*-}
 
+
+## Set preferred keybinding mode
+bindkey -v # Vi mode
+# bindkey -e # Emacs mode
+
 ## Use "waiting dots" in completion
 expand-or-complete-with-dots() {
   echo -n "\\e[31m…\\e[0m"
@@ -147,17 +152,16 @@ bindkey "^I" expand-or-complete-with-dots
 # CLICOLOR=true
 
 ## Keys for history navigation
-# if zplug check zsh-users/zsh-history-substring-search; then
-  bindkey '^[[A' history-substring-search-up
-  bindkey '^[[B' history-substring-search-down
-  bindkey -M vicmd 'k' history-substring-search-up
-  bindkey -M vicmd 'j' history-substring-search-down
-# fi
+bindkey -M viins '^[[A' history-substring-search-up
+bindkey -M viins '^[[B' history-substring-search-down
+bindkey -M viins '^K' history-substring-search-up
+bindkey -M viins '^J' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 ## Pick item but stay in the menu (=:lowercase `+`)
 zmodload zsh/complist
-bindkey -M menuselect "+" accept-and-menu-complete
-bindkey -M menuselect "=" accept-and-menu-complete
+bindkey -M menuselect "," accept-and-menu-complete
 
 ## Reverse autocomplete cycling order (shift tab)
 bindkey -M menuselect '^[[Z' reverse-menu-complete
@@ -174,8 +178,8 @@ bindkey "^[[3~" delete-char
 # Skip forward/back a word with opt-arrow
 bindkey '[C' forward-word
 bindkey '[D' backward-word
-# bindkey '^[^[[C' forward-word
-# bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[^[[D' backward-word
 # Skip to start/end of line with cmd-arrow
 bindkey '[E' beginning-of-line
 bindkey '[F' end-of-line
@@ -207,6 +211,7 @@ copy-to-clipboard() {
 }
 zle -N copy-to-clipboard
 bindkey "^Xc" copy-to-clipboard
+bindkey -M vicmd "yy" copy-to-clipboard
 
 ## allow comments with #
 setopt interactive_comments
@@ -248,92 +253,5 @@ setopt CHECK_JOBS
 ## Disown background jobs instead of killing them (disabled)
 # setopt NO_HUP
 
-## Set preferred keybinding mode
-# bindkey -v # Vi mode
-bindkey -e # Emacs mode
-bindkey -M emacs '^j' vi-cmd-mode # Quickly switch from emacs
-
-## Prompt configuration
-# GEOMETRY_PROMPT_PLUGINS=(exec_time git node)
-# GEOMETRY_PROMPT_SUFFIX="$ "
-# GEOMETRY_SYMBOL_JOBS="⚙ "
-# PROMPT_GEOMETRY_COLORIZE_ROOT=true
-# PROMPT_GEOMETRY_GIT_TIME=false
-
-PURE_CMD_MAX_EXEC_TIME=5
-PURE_PROMPT_SYMBOL='%(!.#.$)' # $ for regular, # for root
-
 export PROMPT_EOL_MARK='%'
 
-## Spaceship theme settings
-
-SPACESHIP_PROMPT_ORDER=(
-  exit_code     # Exit code section
-  exec_time     # Execution time
-  jobs          # Backgound jobs indicator
-  # battery       # Battery level and status
-  # time          # Time stamps section
-  user          # Username section
-  host          # Hostname section
-  # package       # Package version
-  node          # Node.js section
-  # ruby          # Ruby section
-  # elixir        # Elixir section
-  # xcode         # Xcode section
-  # swift         # Swift section
-  # golang        # Go section
-  # php           # PHP section
-  # rust          # Rust section
-  # haskell       # Haskell Stack section
-  # julia         # Julia section
-  docker        # Docker section
-  # aws           # Amazon Web Services section
-  # venv          # virtualenv section
-  # conda         # conda virtualenv section
-  # pyenv         # Pyenv section
-  # dotnet        # .NET section
-  # ember         # Ember.js section
-  kubecontext   # Kubectl context section
-  dir           # Current directory section
-  git           # Git section (git_branch + git_status)
-  # hg            # Mercurial section (hg_branch  + hg_status)
-  line_sep      # Line break
-  # vi_mode       # Vi-mode indicator
-  char          # Prompt character
-)
-
-SPACESHIP_PROMPT_SYMBOL='%(!.#.$)'
-SPACESHIP_PROMPT_PREFIXES_SHOW=false
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_DIR_TRUNC=0
-# Thin space after for width: " "
-SPACESHIP_JOBS_SYMBOL="⚙ "
-SPACESHIP_EXIT_CODE_SHOW=true
-SPACESHIP_EXIT_CODE_SYMBOl="✘("
-SPACESHIP_EXIT_CODE_SUFFIX="%F{red})%f "
-
-SPACESHIP_NODE_SYMBOL_ONLY=true
-SPACESHIP_DOCKER_SYMBOL_ONLY=true
-SPACESHIP_PACKAGE_SYMBOL_ONLY=true
-SPACESHIP_KUBECONTEXT_SYMBOL_ONLY=true
-
-SPACESHIP_GIT_SHA_PREFIX="@ "
-SPACESHIP_GIT_SHA_SUFFIX=" "
-SPACESHIP_GIT_BRANCH_SUFFIX=" "
-SPACESHIP_GIT_SHA_COLOR="magenta"
-SPACESHIP_GIT_BRANCH_COLOR="magenta"
-SPACESHIP_GIT_STATUS_SHOW=true
-SPACESHIP_GIT_STATUS_PREFIX=""
-SPACESHIP_GIT_STATUS_SUFFIX=" "
-
-SPACESHIP_GIT_STATUS_UNTRACKED=' %F{white}✦%f'
-SPACESHIP_GIT_STATUS_ADDED=' %F{green}●%f'
-SPACESHIP_GIT_STATUS_MODIFIED=' %F{magenta}⊙%f'
-SPACESHIP_GIT_STATUS_RENAMED=' %F{magenta}↪%f'
-SPACESHIP_GIT_STATUS_DELETED=' %F{red}✘%f'
-SPACESHIP_GIT_STATUS_STASHED=' %F{blue}⚑%f'
-SPACESHIP_GIT_STATUS_UNMERGED=' %F{red}⁉%f'
-SPACESHIP_GIT_STATUS_AHEAD=' %F{yellow}⇡%f'
-SPACESHIP_GIT_STATUS_BEHIND=' %F{yellow}⇣%f'
-SPACESHIP_GIT_STATUS_DIVERGED=' %F{red}⇡⇣%f'
-SPACESHIP_GIT_STATUS_CLEAN=' %F{green}✓%f'

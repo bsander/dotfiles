@@ -30,9 +30,9 @@ set -gx HOMEBREW_CASK_OPTS "--appdir=/Applications"
 ## Per-dir environment configuration
 # eval (direnv hook fish)
 
-## NVM Setup
-set -gx NVM_DIR "$HOME/.nvm"
-set -gx nvm_prefix /usr/local/opt/nvm
+# ## NVM Setup
+# set -gx NVM_DIR "$HOME/.nvm"
+# set -gx nvm_prefix /usr/local/opt/nvm
 
 ## Set locale properties
 set -q LANG

@@ -1,3 +1,4 @@
+tap "apenngrace/vulkan"
 tap "equalsraf/neovim-qt"
 tap "heroku/brew"
 tap "homebrew/bundle"
@@ -20,8 +21,12 @@ brew "awscli"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# The Clojure Programming Language
+# Dynamic, general-purpose programming language
 brew "clojure"
+# Cross-platform make
+brew "cmake"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Suite of command-line tools for converting to and working with CSV
@@ -40,14 +45,16 @@ brew "exa"
 brew "fd"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
-# User-friendly command-line shell for UNIX-like operating systems
-brew "fish", args: ["HEAD"]
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Distributed revision control system
 brew "git"
 # Enable transparent encryption/decryption of files in a git repo
 brew "git-crypt"
+# Native sequence editor for Git interactive rebase
+brew "git-interactive-rebase-tool"
+# Generic library support script
+brew "libtool"
 # International domain name library (IDNA2008, Punycode and TR46)
 brew "libidn2"
 # Open source programming language to build simple/reliable/efficient software
@@ -68,8 +75,6 @@ brew "httpstat"
 brew "hub"
 # Improved colored diff
 brew "icdiff"
-# Native sequence editor for Git interactive rebase
-brew "interactive-rebase-tool"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Generic command-line non-JVM Apache Kafka producer and consumer
@@ -82,8 +87,6 @@ brew "kubectx"
 brew "leiningen"
 # Sophisticated file transfer program
 brew "lftp"
-# Generic library support script
-brew "libtool"
 # Count lines of code quickly
 brew "loc"
 # Swiss Army Knife for macOS
@@ -97,7 +100,7 @@ brew "moreutils"
 # NCurses Disk Usage
 brew "ncdu"
 # Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
+brew "neovim", args: ["HEAD"]
 # Port scanning utility for large networks
 brew "nmap"
 # Platform built on V8 to build network applications
@@ -108,19 +111,19 @@ brew "nvm"
 brew "pgcli"
 # Command-line YAML and XML processor that wraps jq
 brew "python-yq"
-# Treat text as a database
+# Run SQL directly on CSV or TSV files
 brew "q"
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# The Rust toolchain installer
+# Rust toolchain installer
 brew "rustup-init"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
-# The cross-shell prompt for astronauts
+# Cross-shell prompt for astronauts
 brew "starship"
 # Text interface for Git repositories
 brew "tig"
@@ -130,6 +133,8 @@ brew "trash"
 brew "tree"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
+# Watch files and take action when they change
+brew "watchman"
 # Show the current WiFi network password
 brew "wifi-password"
 # Fast CSV toolkit written in Rust
@@ -138,8 +143,6 @@ brew "xsv"
 brew "yarn"
 # UNIX shell (command interpreter)
 brew "zsh"
-# Neovim GUI, in Qt5
-brew "equalsraf/neovim-qt/neovim-qt"
 # A simple terminal UI for docker, written in Go
 brew "jesseduffield/lazydocker/lazydocker"
 # Simple hotkey-daemon for macOS.
@@ -147,7 +150,7 @@ brew "koekeishiya/formulae/skhd"
 # A tiling window manager for macOS based on binary space partitioning.
 brew "koekeishiya/formulae/yabai"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
-brew "railwaycat/emacsmacport/emacs-mac"
+brew "railwaycat/emacsmacport/emacs-mac", link: false
 # command-line utility to find alternate file
 brew "uptech/oss/alt"
 # A tool for exploring each layer in a docker image
@@ -155,6 +158,7 @@ brew "wagoodman/dive/dive"
 cask "1password"
 cask "alacritty"
 cask "alfred"
+cask "android-studio"
 cask "appcleaner"
 cask "arq"
 cask "bitwarden"
@@ -165,6 +169,8 @@ cask "docker"
 cask "dropbox"
 cask "emacs-mac-spacemacs-icon"
 cask "evernote"
+cask "ferdi"
+cask "figma"
 cask "firefox"
 cask "flux"
 cask "font-fira-code"
@@ -182,7 +188,11 @@ cask "kafka-tool"
 cask "karabiner-elements"
 cask "keybase"
 cask "kitty"
+cask "mark-text"
+cask "microsoft-teams"
+cask "miro-formerly-realtimeboard"
 cask "ngrok"
+cask "notion"
 cask "numi"
 cask "onedrive"
 cask "oni"
@@ -191,6 +201,7 @@ cask "osxfuse"
 cask "pgadmin4"
 cask "postman"
 cask "qlstephen"
+cask "raindropio"
 cask "skitch"
 cask "skype-for-business"
 cask "slack"
@@ -198,20 +209,28 @@ cask "sonos"
 cask "spotify"
 cask "standard-notes"
 cask "steam"
+cask "syncthing"
 cask "tableplus"
+cask "tandem"
 cask "textexpander"
 cask "torbrowser"
 cask "trailer"
 cask "transmission"
 cask "typinator"
 cask "typora"
+cask "veonim"
 cask "vimr"
 cask "viscosity"
 cask "visual-studio-code"
+cask "vmware-horizon-client"
+cask "vulkan-sdk"
+cask "vv"
+cask "zoomus"
 mas "Airmail", id: 918858936
 mas "BetterSnapTool", id: 417375580
 mas "DaisyDisk", id: 411643860
 mas "Dice Pass", id: 997688302
+mas "F5Access", id: 1243219105
 mas "Fenêtre", id: 1286743037
 mas "Folder Tidy", id: 486626129
 mas "GarageBand", id: 682658836
@@ -224,4 +243,5 @@ mas "Pages", id: 409201541
 mas "PiPifier", id: 1160374471
 mas "Pomo Timer", id: 1447569061
 mas "Shazam", id: 897118787
+mas "Shush", id: 496437906
 mas "Xcode", id: 497799835

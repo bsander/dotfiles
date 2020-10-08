@@ -10,7 +10,7 @@ yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config window_shadow                on
 yabai -m config window_border                on
-yabai -m config window_border_width          2
+yabai -m config window_border_width          5
 yabai -m config active_window_border_color   "#FF000000"
 yabai -m config normal_window_border_color   "#00000000"
 # yabai -m config insert_window_border_color   "#00000000"

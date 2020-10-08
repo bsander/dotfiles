@@ -2,8 +2,8 @@
 
 yarn.lock
 package-lock.json
-node_modules
-.git
+node_modules/
+.git/
 
 ## Some uninteresting macos dirs
 Library/
