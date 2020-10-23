@@ -44,11 +44,11 @@ nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
 nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 
 " LOCAL LEADER
-noremap <silent> <CR> :call CocAction('doHover')<CR>
+" noremap <silent> <CR> :call CocAction('doHover')<CR>
 map <silent> <localleader><localleader> :call CocAction('doHover')<CR>
 map <silent> <localleader>f <Plug>(coc-codeaction)
 map <silent> <localleader>d <Plug>(coc-diagnostic-info)
-map <silent> <localleader>h :call <SID>show_documentation()<CR>
+" map <silent> <localleader>h :call <SID>show_documentation()<CR>
 
 " ERRORS
 let g:which_key_local_map.e = {'name': '+errors'}
@@ -64,27 +64,28 @@ let g:which_key_local_map.g = {'name': '+goto'}
 map <silent> <localleader>gg <Plug>(coc-definition)
 map <silent> <localleader>gi <Plug>(coc-implementation)
 map <silent> <localleader>gt <Plug>(coc-type-definition)
-map <silent> <localleader>gs :CocFzfList --auto-preview outline<CR>
 map <silent> <localleader>gr <Plug>(coc-references)
 
 " REFACTOR
 let g:which_key_local_map.r = {'name': '+refactor'}
 map <silent> <localleader>rr <Plug>(coc-rename)
-map <silent> <localleader>rx <Plug>(coc-codeaction)
 
 " SEARCH
 let g:which_key_local_map.s = {'name': '+search'}
-map <silent> <localleader>ss :<C-u>CocFzfList symbols<CR>
+map <silent> <localleader>sp :<C-u>CocFzfList symbols<CR>
+map <silent> <localleader>sf :CocFzfList outline<CR>
+map <silent> <localleader>ss :CocFzfList outline<CR>
 
 " META
 let g:which_key_local_map.x = {'name': '+meta'}
 map <silent> <localleader>xi :<C-u>CocInfo<CR>
+map <silent> <localleader>cc :<C-u>CocConfig<CR>
 map <silent> <localleader>xx :<C-u>CocRestart<CR>
 
-" COC - Meta
+" LISTS
 let g:which_key_local_map.c = {'name': '+coc'}
-map <silent> <localleader>cc :<C-u>CocConfig<CR>
-map <silent> <localleader>cf :<C-u>CocRebuild<CR>
-map <silent> <localleader>cx :<C-u>CocRestart<CR>
-map <silent> <localleader>cr :<C-u>CocFzfList commands<CR>
+map <silent> <localleader>cc :<C-u>CocFzfList commands<CR>
 map <silent> <localleader>ce :<C-u>CocFzfList extensions<CR>
+map <silent> <localleader>cm :<C-u>CocFzfList marketplace<CR>
+map <silent> <localleader>cl :<C-u>CocFzfList<CR>
+map <silent> <localleader>c; :<C-u>CocFzfListResume<CR>

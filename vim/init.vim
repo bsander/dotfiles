@@ -37,10 +37,13 @@ if exists('g:neovide')
 endif
 
 if exists('g:fvim_loaded')
-  set guifont=Dank\ Mono:h16
+  set guifont=JuliaMono:h16
+  " set guifont=Dank\ Mono:h16
   FVimCursorSmoothMove v:true
-  " FVimCursorSmoothBlink v:true
+  FVimCursorSmoothBlink v:true
   FVimFontLigature v:true
+  " FVimUIPopupMenu v:false
+  " FVimCustomTitleBar v:true
 endif
 
 let g:mapleader=' '
@@ -76,11 +79,11 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 runtime local/fzf.vim
 
 Plug 'kana/vim-textobj-user'
-  \ | Plug 'kana/vim-textobj-line'
   \ | Plug 'glts/vim-textobj-comment'
-  \ | Plug 'rhysd/vim-textobj-anyblock'
-  \ | Plug 'kana/vim-textobj-entire'
-  \ | Plug 'beloglazov/vim-textobj-quotes'
+  " \ | Plug 'kana/vim-textobj-line'
+  " \ | Plug 'rhysd/vim-textobj-anyblock'
+  " \ | Plug 'kana/vim-textobj-entire'
+  " \ | Plug 'beloglazov/vim-textobj-quotes'
 
 " Plug 'wellle/targets.vim' " Vim plugin that provides additional text objects
 " let g:targets_nl = 'nN' " Conflict with vim-textobj-line motion
@@ -166,6 +169,9 @@ let g:openbrowser_search_engines = {
 "" Languages
 Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
+" Plug 'romgrk/nvim-treesitter-context' " Show code context
 
 Plug 'liuchengxu/graphviz.vim'
 
@@ -199,8 +205,6 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#tabline#show_tab_count = 1
 
 Plug 'airblade/vim-gitgutter'
-
-Plug 'mhinz/vim-startify'
 
 " Plug 'ryanoasis/vim-devicons' " Adds file type icons to Vim plugins
 
@@ -273,6 +277,7 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ 'coc-marketplace',
       \ 'coc-json',
+      \ 'coc-diagnostic',
       \ ]
 
 Plug 'moll/vim-bbye'
@@ -292,6 +297,10 @@ Plug 'blueyed/vim-diminactive' " dim inactive windows
 Plug 'vim-scripts/restore_view.vim' " automatically restore one file's cursor position and folding information after restart vim
 
 call plug#end()
+
+" Configure treesitter
+" packadd! treesitter
+lua require('vimrc-treesitter')
 
 " Default environment settings
 runtime! plugin/default.vim
@@ -314,15 +323,18 @@ set linebreak
 set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
-set background=light
+" set background=light
+call Bg_light()
 set viewoptions=cursor,folds,slash,unix
 " colorscheme Base2Tone_MorningLight
 colorscheme gruvbox-material
+let $BAT_THEME = 'gruvbox-light'
 " set winblend=10
 " set foldenable
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 " set foldlevel=0
-" set foldmethod=manual
-" set foldlevelstart=99
+set foldlevelstart=99
 " set cmdheight=2
 " set nohlsearch
 
@@ -339,7 +351,7 @@ map gP "+P
 " Redo
 nnoremap <silent> U <C-r>
 " Clear search highlight on escape
-noremap <silent> <esc> :noh<CR><esc>
+nnoremap <silent> <esc> :noh<CR><esc>
 " God damn macros (move to <Leader>xq)
 noremap <silent> q <Nop>
 noremap <silent> Q <Nop>
@@ -517,8 +529,8 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-" map <silent> <Leader>j <Plug>(easymotion-bd-f2)
-map <silent> <Leader>j <Plug>(easymotion-bd-f)
+map <silent> <Leader>j <Plug>(easymotion-bd-f2)
+" map <silent> <Leader>j <Plug>(easymotion-bd-f)
 map <silent> <Leader>l <Plug>(easymotion-bd-jk)
 
 " LISTS
@@ -533,7 +545,7 @@ nnoremap <silent> <Leader>qq :confirm qall<CR>
 " TOGGLES
 let g:which_key_map.t = { 'name': '+toggle' }
 " nnoremap <silent> <Leader>tc :let ayucolor=ayucolor==?'dark'?'light':'dark'<CR>:colorscheme ayu<CR>:mode<CR>
-nnoremap <silent> <Leader>tb :let &background=&background==?'dark'?'light':'dark'<CR>:mode<CR>
+nnoremap <silent> <Leader>tb :call ToggleBackground()<CR>
 nnoremap <silent> <Leader>tc :Colors<CR>
 nnoremap <silent> <Leader>tl :set invlist<CR>
 nnoremap <silent> <Leader>tn :set invnumber<CR>
@@ -711,72 +723,22 @@ function! ToggleVerbose()
     endif
 endfunction
 
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"     highlight = {
-"         enable = true,                    -- false will disable the whole extension
-"         disable = { 'c', 'rust' },        -- list of language that will be disabled
-"     },
-"     incremental_selection = {
-"         enable = true,
-"         disable = { 'cpp', 'lua' },
-"         keymaps = {                       -- mappings for incremental selection (visual mappings)
-"           init_selection = '+',         -- maps in normal mode to init the node/scope selection
-"           node_incremental = "+",       -- increment to the upper named parent
-"           scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
-"           node_decremental = "_",       -- decrement to the previous node
-"         }
-"     },
-"     refactor = {
-"       highlight_definitions = {
-"         enable = true
-"       },
-"       highlight_current_scope = :TSUpdate{
-"         enable = true
-"       },
-"       smart_rename = {
-"         enable = true,
-"         keymaps = {
-"           smart_rename = "grr"            -- mapping to rename reference under cursor
-"         }
-"       },
-"       navigation = {
-"         enable = true,
-"         keymaps = {
-"           goto_definition = "gnd",        -- mapping to go to definition of symbol under cursor
-"           list_definitions = "gnD"        -- mapping to list all definitions in current file
-"         }
-"       }
-"     },
-"     textobjects = { -- syntax-aware textobjects
-"   enable = true,
-"   disable = {},
-"   keymaps = {
-"       ["iL"] = { -- you can define your own textobjects directly here
-"     typescript = "(function_definition) @function",
-"     python = "(function_definition) @function",
-"     cpp = "(function_definition) @function",
-"     c = "(function_definition) @function",
-"     java = "(method_declaration) @function"
-"       },
-"       -- or you use the queries from supported languages with textobjects.scm
-"       ["af"] = "@function.outer",
-"       ["if"] = "@function.inner",
-"       ["aC"] = "@class.outer",
-"       ["iC"] = "@class.inner",
-"       ["ac"] = "@conditional.outer",
-"       ["ic"] = "@conditional.inner",
-"       ["ae"] = "@block.outer",
-"       ["ie"] = "@block.inner",
-"       ["al"] = "@loop.outer",
-"       ["il"] = "@loop.inner",
-"       ["is"] = "@statement.inner",
-"       ["as"] = "@statement.outer",
-"       ["ad"] = "@comment.outer",
-"       ["am"] = "@call.outer",
-"       ["im"] = "@call.inner"
-"   }
-"     },
-"     ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
-" }
-" EOF
+function! ToggleBackground()
+  if &background==?'light'
+    call Bg_dark()
+  else
+    call Bg_light()
+  endif
+  mode
+endfunction
+
+function! Bg_light()
+  set background=light
+  let $BAT_THEME = 'gruvbox-light'
+endfunction
+
+function! Bg_dark()
+  set background=dark
+  let $BAT_THEME = 'gruvbox'
+endfunction
+
