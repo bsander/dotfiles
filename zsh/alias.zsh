@@ -15,6 +15,9 @@ alias .options="setopt ksh_option_print && setopt"
 alias .d="direnv allow"
 alias .z="rm -f ~/.zcompdump && compinit"
 alias .f="\$DOTFILES/bin/dotbot" # Run update script
+.env () {
+  env $(< .env | rg -v '^\s*#') "$@"
+}
 
 # ZSH completion/globbing madness
 # alias curl="noglob curl"
