@@ -32,7 +32,7 @@
     # Note this link is not actually in use, but the target file _is_.
     ~/.zhistory: zhistory.txt
     ~/.zshrc: dotfiles/zshrc.zsh
-    ~/.zshenv: zsh/path.zsh
+    ~/.zshenv: dotfiles/zshenv.zsh
 
 - clean:
     - "~"

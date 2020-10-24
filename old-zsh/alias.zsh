@@ -52,10 +52,12 @@ alias dr="docker run --rm -it"
 alias dc=docker-compose
 alias dcr="docker-compose run --rm"
 alias dcs="docker-compose stop"
-alias dcu="docker-compose up"
-alias dcud="docker-compose up -d"
+alias dcu="docker-compose up -d"
+# alias dcud="docker-compose up -d"
 alias dcl="docker-compose logs --follow --tail=20"
 alias dcd="docker-compose down --timeout 0"
+alias dcD="docker-compose down --timeout 0 --volumes --remove-orphans"
+alias dcdd="docker-compose down --timeout 0 --volumes --remove-orphans"
 
 # Force of habit - consistency with vim
 alias gg="tig status"

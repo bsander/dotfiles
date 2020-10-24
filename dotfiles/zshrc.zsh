@@ -23,33 +23,18 @@ export DOTFILES="${DOTFILES:-$PROJECTS/dotfiles}"
 # set -x
 ## Autoload functions and completions
 # shellcheck disable=SC2206
-fpath=("$DOTFILES/zsh/functions" "$DOTFILES/zsh/completions" "$(brew --prefix)/share/zsh/site-functions" $fpath)
-# # shellcheck source=../zsh/completion.zsh
-# source "$DOTFILES/zsh/completion.zsh"
-# autoload -U "$DOTFILES/zsh"/functions/*(:t)
-# autoload -U "$DOTFILES/zsh"/completions/*(:t)
 
-# shellcheck source=../zsh/zgen.zsh
-source "$DOTFILES/zsh/zinit.zsh"
+z4h source "$DOTFILES/zsh/010-zstyle.zsh"
+z4h source "$DOTFILES/zsh/020-install-plugins.zsh"
 
-## compinit has now been called.
+# Install or update core components (fzf, zsh-autosuggestions, etc.) and
+# initialize Zsh. After this point console I/O is unavailable until Zsh
+# is fully initialized. Everything that requires user interaction or can
+# perform network I/O must be done above. Everything else is best done below.
+z4h init || return
 
-# shellcheck source=../zsh/plumbing.zsh
-source "$DOTFILES/zsh/plumbing.zsh"
-# shellcheck source=../zsh/preferences.zsh
-source "$DOTFILES/zsh/preferences.zsh"
-# shellcheck source=../zsh/environment.zsh
-source "$DOTFILES/zsh/environment.zsh"
-## Install iTerm2 shell integration if available
-# shellcheck source=../zsh/path.zsh
-source "$DOTFILES/zsh/path.zsh"
-# shellcheck source=../zsh/alias.zsh
-source "$DOTFILES/zsh/alias.zsh"
-# shellcheck source=../zsh/announce.zsh
-source "$DOTFILES/zsh/announce.zsh"
+z4h source "$DOTFILES/zsh/030-environment-variables.zsh"
+z4h source "$DOTFILES/zsh/040-path.zsh"
+z4h source "$DOTFILES/zsh/050-load-plugins.zsh"
 
-# # Setup prompt
-# eval "$(starship init zsh)"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+z4h source "$DOTFILES/zsh/070-functions-aliases.zsh"
