@@ -1,5 +1,6 @@
 path=(
   "$DOTFILES/bin"
+  "$HOME/.fnm" # Node version manager
   "$GOPATH/bin"
   "/usr/local/opt/python/libexec/bin"
   "/usr/local/bin"
