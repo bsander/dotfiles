@@ -1,7 +1,6 @@
 scriptencoding utf-8
 
 "" TODO LIST
-" - iab
 " - vimdiff
 " - proper debugging support
 " - macros
@@ -9,8 +8,6 @@ scriptencoding utf-8
 " - get rid of unimpaired
 
 "" FIXME - broken
-" - open gitcommit filetype in insert mode
-" - fzf - empty list on no input
 " - NERDCommenterInsert adds extra newline
 " - fzf extra commands not working https://github.com/junegunn/fzf.vim/issues/18
 
@@ -324,7 +321,6 @@ set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
 " set background=light
-call Bg_light()
 set viewoptions=cursor,folds,slash,unix
 " colorscheme Base2Tone_MorningLight
 colorscheme gruvbox-material
@@ -742,3 +738,4 @@ function! Bg_dark()
   let $BAT_THEME = 'gruvbox'
 endfunction
 
+call Bg_light()

@@ -10,8 +10,9 @@ export LC_CTYPE="C"
 export PROMPT_EOL_MARK='%'
 
 export BROWSER="open"
-# export PAGER=less
-
+# export PAGER=less # Z4H does this better
+# export PAGER="nvim"
+# export MANPAGER="nvim -c 'set ft=man' -"
 
 export EDITOR="nvim"
 export VISUAL="vimr -n" # Don't wait for command completion
@@ -20,8 +21,11 @@ export GIT_EDITOR="${GIT_EDITOR:-$EDITOR}"
 
 
 # FZF global options
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
-export FZF_DEFAULT_OPTS='--height=40%'
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow"
+export FZF_DEFAULT_OPTS="--height=40%"
+# export FZF_DEFAULT_OPTS="--height=40% --color=fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color=info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
+
+export BAT_THEME="gruvbox"
 
 # kubectl: Always consider local `kube-config` file
 # export KUBECONFIG="./kube-config"
@@ -38,16 +42,20 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 # export ANDROID_HOME=/Applications/ADT/sdk
 export ANDROID_HOME="/Users/sanderb/Library/Android/sdk"
 
-# # Per-dir environment configuration
-# eval "$(direnv hook zsh)"
-
 # # NVM Setup
 # export NVM_DIR="$HOME/.nvm"
 #   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 #   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-# export ZSH_THEME=gruvbox
+## Use FNM instead - https://github.com/Schniz/fnm
+eval "$(fnm env --shell zsh)"
 
 # vicmd/viins swwitch mode timeout
 # https://www.johnhawthorn.com/2012/09/vi-escape-delays/
 export KEYTIMEOUT=1
+
+## Don't show Prompt autosuggestions
+export ZSH_AUTOSUGGEST_STRATEGY=()
+
+## Word characters (alt-backspace will not break on these)
+export WORDCHARS='*?$'

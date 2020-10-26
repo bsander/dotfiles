@@ -31,10 +31,12 @@ z4h source "$DOTFILES/zsh/020-install-plugins.zsh"
 # initialize Zsh. After this point console I/O is unavailable until Zsh
 # is fully initialized. Everything that requires user interaction or can
 # perform network I/O must be done above. Everything else is best done below.
+z4h source "$DOTFILES/zsh/100-announce.zsh"
 z4h init || return
 
 z4h source "$DOTFILES/zsh/030-environment-variables.zsh"
 z4h source "$DOTFILES/zsh/040-path.zsh"
 z4h source "$DOTFILES/zsh/050-load-plugins.zsh"
-
+z4h source "$DOTFILES/zsh/060-key-bindings.zsh"
 z4h source "$DOTFILES/zsh/070-functions-aliases.zsh"
+z4h source "$DOTFILES/zsh/080-shell-options.zsh"

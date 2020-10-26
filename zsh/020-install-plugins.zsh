@@ -5,3 +5,4 @@
 # example. If you don't plan to use Oh My Zsh, delete this line.
 z4h install ohmyzsh/ohmyzsh || return
 z4h install knu/zsh-manydots-magic || return
+z4h install sainnhe/dotfiles || return

@@ -13,6 +13,7 @@ tap "koekeishiya/formulae"
 tap "kryptco/tap"
 tap "railwaycat/emacsmacport"
 tap "rogual/neovim-dot-app"
+tap "schniz/tap"
 tap "uptech/oss"
 tap "wagoodman/dive"
 # Official Amazon AWS command-line interface
@@ -105,8 +106,6 @@ brew "neovim", args: ["HEAD"]
 brew "nmap"
 # Platform built on V8 to build network applications
 brew "node@10"
-# Manage multiple Node.js versions
-brew "nvm"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # Command-line YAML and XML processor that wraps jq
@@ -151,6 +150,8 @@ brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 brew "railwaycat/emacsmacport/emacs-mac", link: false
+# Fast and simple Node.js version manager
+brew "schniz/tap/fnm"
 # command-line utility to find alternate file
 brew "uptech/oss/alt"
 # A tool for exploring each layer in a docker image
@@ -187,6 +188,7 @@ cask "iterm2"
 cask "java8"
 cask "kafka-tool"
 cask "karabiner-elements"
+cask "key-codes"
 cask "keybase"
 cask "kitty"
 cask "krisp"
