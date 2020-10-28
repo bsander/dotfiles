@@ -18,12 +18,16 @@ scriptencoding utf-8
 " - https://vi.stackexchange.com/a/13456
 " - https://vimways.org/2018/from-vimrc-to-vim/
 
+"" Editor-specific settings
 if exists('g:vv')
   VVset fontfamily=Dank\ Mono
   VVset fontsize=14
 endif
 
 " goneovim: ~/.goneovim/setting.toml
+
+" Neovide
+" let g:neovide_cursor_trail_length = 0
 
 if exists('g:neovide')
   set guifont=Dank\ Mono:h16
@@ -46,11 +50,8 @@ endif
 let g:mapleader=' '
 let g:maplocalleader = ','
 
-
+"" LOAD PLUGINS
 call plug#begin('~/.vim/vendor')
-
-"" Neovide
-" let g:neovide_cursor_trail_length = 0
 
 "" Preamble
 Plug 'tpope/vim-sensible'
@@ -82,25 +83,20 @@ Plug 'kana/vim-textobj-user'
   " \ | Plug 'kana/vim-textobj-entire'
   " \ | Plug 'beloglazov/vim-textobj-quotes'
 
-" Plug 'wellle/targets.vim' " Vim plugin that provides additional text objects
-" let g:targets_nl = 'nN' " Conflict with vim-textobj-line motion
-
-Plug 'michaeljsmith/vim-indent-object' " defines a new text object representing lines of code at the same indent level
-
-" Plug 'jiangmiao/auto-pairs' " insert or delete brackets, parens, quotes in pair
-Plug 'rstacruz/vim-closer' " Closes brackets - only on <CR> - https://github.com/rstacruz/vim-closer/issues/25
 Plug 'rhysd/clever-f.vim' " Extended f, F, t and T key mappings
 Plug 't9md/vim-textmanip' " Move/Duplicate text intuitively
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
 
-Plug 'takac/vim-hardtime' " Stop using hjkl
+" Plug 'takac/vim-hardtime' " Stop using hjkl
 " let g:hardtime_default_on = 1
-let g:hardtime_showmsg = 1
-let g:hardtime_ignore_buffer_patterns = ["term://*"]
-let g:hardtime_ignore_quickfix = 1
-let g:hardtime_allow_different_key = 1
-let g:hardtime_maxcount = 2
+" let g:hardtime_showmsg = 1
+" let g:hardtime_ignore_buffer_patterns = ["term://*"]
+" let g:hardtime_ignore_quickfix = 1
+" let g:hardtime_allow_different_key = 1
+" let g:hardtime_maxcount = 5
 
+" Instead, embrace jjjj kkkk
+Plug 'rhysd/accelerated-jk'
 
 " Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -127,15 +123,6 @@ let g:wordmotion_mappings = {
       \ }
 Plug 'tpope/vim-surround'
 
-" Plug 'terryma/vim-expand-region'
-" let g:expand_region_text_objects = {
-"       \ 'iq'  :1,
-"       \ 'aq'  :1,
-"       \ 'ib'  :1,
-"       \ 'ab'  :1,
-"       \ 'ip'  :0
-"       \ }
-
 "" Smooth scrolling
 Plug 'psliwka/vim-smoothie'
 
@@ -144,8 +131,6 @@ Plug 'psliwka/vim-smoothie'
 
 " Plug 'luochen1990/rainbow'
 " let g:rainbow_active = 1
-
-Plug 'bounceme/poppy.vim'
 
 Plug 'scrooloose/nerdcommenter'
 let g:NERDCreateDefaultMappings = 0
@@ -164,7 +149,7 @@ let g:openbrowser_search_engines = {
       \}
 
 "" Languages
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
@@ -178,22 +163,25 @@ Plug 'jparise/vim-graphql', { 'for': 'graphql' } " BREAKS TS
 
 "" Colors
 Plug 'sainnhe/gruvbox-material'
+let g:gruvbox_material_palette = 'original'
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_disable_italic_comment = 1
 let g:gruvbox_material_enable_italic = 0
+let g:gruvbox_material_cursor = 'orange'
+let g:gruvbox_material_menu_selection_background = 'orange'
+let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_current_word = 'bold'
+let g:gruvbox_material_better_performance = 1
 
 " Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'lifepillar/vim-solarized8'
 Plug 'atelierbram/Base2Tone-vim'
-Plug 'patstockwell/vim-monokai-tasty'
-
+Plug 'cideM/yui'
+Plug 'rakr/vim-two-firewatch'
 
 "" UI / Syntax
 Plug 'rhysd/vim-gfm-syntax' " GitHub Flavored Markdown syntax highlight extension for Vim
 Plug 'andrewradev/bufferize.vim'
 let g:bufferize_command = 'enew'
-
-Plug 'jaxbot/semantic-highlight.vim'
 
 Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
@@ -203,7 +191,7 @@ let g:airline#extensions#tabline#show_tab_count = 1
 
 Plug 'airblade/vim-gitgutter'
 
-" Plug 'ryanoasis/vim-devicons' " Adds file type icons to Vim plugins
+Plug 'ryanoasis/vim-devicons' " Adds file type icons to Vim plugins
 
 "" Tools
 Plug 'liuchengxu/vim-which-key'
@@ -227,8 +215,10 @@ Plug 'dbakker/vim-projectroot'
 "" Experimental
 Plug 'junegunn/vim-peekaboo' " See contents of registers
 let g:peekaboo_window = 'bo 30new'
-let g:peekaboo_compact = 1
-let g:peekaboo_delay = 300
+let g:peekaboo_compact = 0
+let g:peekaboo_delay = 0
+let g:peekaboo_window="call CreateCenteredFloatingWindow()"
+
 Plug 'svermeulen/vim-cutlass' " Plugin that adds a 'cut' operation separate from 'delete'
 
 Plug 'Olical/vim-enmasse' " Edit every line in a quickfix list at the same time
@@ -296,7 +286,6 @@ Plug 'vim-scripts/restore_view.vim' " automatically restore one file's cursor po
 call plug#end()
 
 " Configure treesitter
-" packadd! treesitter
 lua require('vimrc-treesitter')
 
 " Default environment settings
@@ -402,12 +391,17 @@ map gx <Plug>(openbrowser-smart-search)
 " Fast swap
 map cx <Plug>(Exchange)
 map cX <Plug>(ExchangeClear)
-" Select functions
-" omap if <Plug>(coc-funcobj-i)
-" omap af <Plug>(coc-funcobj-a)
+" Embrace the jjjj kkkk
+nmap j <Plug>(accelerated_jk_gj_position)
+nmap k <Plug>(accelerated_jk_gk_position)
+" Incremental search w/ Easymotion
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map ? /<CR>
+
 " Consistency in search direction
-nmap n /<CR>
-nmap N ?<CR>
+noremap n /<CR>
+noremap N ?<CR>
 " Use Tab for buffer navigation
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprev<CR>
@@ -525,14 +519,14 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-map <silent> <Leader>j <Plug>(easymotion-bd-f2)
-" map <silent> <Leader>j <Plug>(easymotion-bd-f)
-map <silent> <Leader>l <Plug>(easymotion-bd-jk)
+map <silent> <Leader>jw <Plug>(easymotion-bd-w)
+map <silent> <Leader>jj <Plug>(easymotion-bd-f2)
+map <silent> <Leader>jl <Plug>(easymotion-bd-jk)
 
 " LISTS
-" let g:which_key_map.l = { 'name': '+lists' }
-" map <silent> <Leader>ll :call ToggleLocationList()<CR>
-" map <silent> <Leader>lq :call ToggleQuickfixList()<CR>
+let g:which_key_map.l = { 'name': '+lists' }
+map <silent> <Leader>ll :call ToggleLocationList()<CR>
+map <silent> <Leader>lq :call ToggleQuickfixList()<CR>
 
 " QUIT
 let g:which_key_map.q = { 'name' : '+quit' }
@@ -570,13 +564,6 @@ nnoremap <silent> <Leader>wh <C-W>h
 let g:which_key_map.w.h = '[<] focus'
 nnoremap <silent> <Leader>wl <C-W>l
 let g:which_key_map.w.l = '[>] focus'
-" " double-map
-" if has('nvim') || has('terminal')
-"   tnoremap <silent> <Leader>wj <C-W>j
-"   tnoremap <silent> <Leader>wk <C-W>k
-"   tnoremap <silent> <Leader>wh <C-W>h
-"   tnoremap <silent> <Leader>wl <C-W>l
-" endif
 
 nnoremap <silent> <Leader>wJ <C-W>J
 let g:which_key_map.w.J = '[v] move'
@@ -698,16 +685,30 @@ function! AltCommand(path, vim_command)
 endfunction
 
 
-" autocmd InsertEnter * highlight CursorLine guibg=g:terminal_color_15
-" autocmd InsertLeave * highlight CursorLine guibg=g:terminal_color_3
-
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_auto_colors = 0
-" let g:indent_guides_start_level = 1
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#cdc4b1   ctermbg=3
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#e3dcce ctermbg=15
-
 let g:python3_host_prog = '/usr/local/bin/python3'
+
+function! CreateCenteredFloatingWindow()
+    let width = float2nr(&columns * 0.9)
+    let height = float2nr(&lines * 0.6)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    au BufWipeout <buffer> exe 'bw '.s:buf
+endfunction
 
 function! ToggleVerbose()
     if !&verbose

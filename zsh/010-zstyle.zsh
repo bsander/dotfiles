@@ -7,7 +7,7 @@ zstyle ':z4h:'                auto-update-days '28'
 zstyle ':z4h:bindkey'         keyboard         'mac'
 # When fzf menu opens on TAB, another TAB moves the cursor down ('tab:down')
 # or accepts the selection and triggers another TAB-completion ('tab:repeat')?
-zstyle ':z4h:fzf-complete'    fzf-bindings     'tab:down'
+zstyle ':z4h:fzf-complete'    fzf-bindings     'tab:repeat'
 # When fzf menu opens on Shift+Down, TAB moves the cursor down ('tab:down')
 # or accepts the selection and triggers another Shift+Down ('tab:repeat')?
 zstyle ':z4h:cd-down'         fzf-bindings     'tab:down'

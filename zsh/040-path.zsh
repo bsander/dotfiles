@@ -19,3 +19,4 @@ fpath=(
   $fpath
 )
 
+autoload ${fpath[1]}/*(:t)

@@ -2,16 +2,16 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",     -- one of "all", "language", or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
-    use_languagetree = false, -- Use this to enable language injection (this is very unstable)
+    use_languagetree = true, -- Use this to enable language injection (this is very unstable)
     -- disable = { "c", "rust" },  -- list of language that will be disabled
   },
   incremental_selection = {
     enable = true,
     keymaps = {
       init_selection = "+",
-      node_incremental = "+",
+      node_incremental = "]",
       scope_incremental = "grc",
-      node_decremental = "_",
+      node_decremental = "[",
     },
   },
   indent = {

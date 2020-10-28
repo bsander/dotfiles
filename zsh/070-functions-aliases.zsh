@@ -79,12 +79,11 @@ alias ssh="z4h ssh"
 alias cat=bat
 alias grep=rg
 alias find=fd
-alias ls=exa
+alias ls="exa --group-directories-first --sort=name --classify"
+alias ll="ls --long --header"
+alias tree="ls --tree"
+alias stree="tree --level=2"
 
-# Do not expand these aliases
-l() { exa --group-directories-first --sort=name "$@"; }
-ll() { exa --long --grid --header --group-directories-first --sort=name "$@"; }
-tree() { exa --tree --level=2 --group-directories-first --sort=name "$@"; }
 
 ## Typos
 alias brwe=brew
