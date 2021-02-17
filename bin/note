@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+# usage:
+#   note something interesting happened  # don't forget to escape ` etc.
+#   note # opens vim with the time append and in insert mode
+
+mkdir -p "${PROJECTS:=$HOME/src}/notes"
+local -r note_file="$PROJECTS/notes/$(date '+%F')-journal.md"
+echo -e "- $(date "+%H:%M") ${*}" >> "$note_file";
+if [[ -z $1 ]]; then
+  ${EDITOR:-$PROJECTS/dotfiles/bin/vimr --nvim} "+normal G$" +startinsert "$note_file"
+fi

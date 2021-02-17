@@ -1,5 +1,6 @@
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow'
-let $FZF_DEFAULT_OPTS = '--cycle --reverse --exact --inline-info --no-sort --tiebreak=begin,length,index'
+" let $FZF_DEFAULT_OPTS = '--cycle --reverse --exact --inline-info --no-sort --tiebreak=begin,length,index'
+let $FZF_DEFAULT_OPTS = '--cycle --reverse --exact --inline-info --tiebreak=begin,length,index'
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " " https://github.com/junegunn/fzf/issues/1393#issuecomment-426576577

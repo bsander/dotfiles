@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+# pretty prints the current log file
+# usage:
+#  notes     # prints today's file
+#  notes -1  # prints yesterday's file
+
+local when="$(gdate '+%F')"
+if [[ -n $1 ]]; then
+  when=$(gdate --date="$when $1 day" '+%F')
+fi
+local -r note_file="${PROJECTS:=$HOME/src}/notes/$when-journal.md"
+if [[ -e "$note_file" ]]; then
+  cat < "$note_file"
+else
+  echo "No journal file for $when"
+fi

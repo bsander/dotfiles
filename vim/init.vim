@@ -20,20 +20,23 @@ scriptencoding utf-8
 
 "" Editor-specific settings
 if exists('g:vv')
-  VVset fontfamily=Dank\ Mono
-  VVset fontsize=14
+  VVset fontfamily=JuliaMono
+  VVset fontsize=16
+  VVset quitoncloselastwindow=1
+  " Opens in new instance
+  VVset openinproject=0
 endif
 
 " goneovim: ~/.goneovim/setting.toml
 
 " Neovide
-" let g:neovide_cursor_trail_length = 0
 
 if exists('g:neovide')
-  set guifont=Dank\ Mono:h16
+  set guifont=JuliaMono:h16
   " set guifont=MonoLisa:h16
   " set guifont=Courier_new:h16
-  let g:neovide_cursor_antialiasing=v:true
+  let g:neovide_cursor_trail_length = 0
+  let g:neovide_cursor_antialiasing=v:false
   set linespace=5
 endif
 
@@ -76,16 +79,19 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 
 runtime local/fzf.vim
 
+Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-user'
   \ | Plug 'glts/vim-textobj-comment'
-  " \ | Plug 'kana/vim-textobj-line'
+  \ | Plug 'kana/vim-textobj-entire'
+  \ | Plug 'kana/vim-textobj-line'
+  \ | Plug 'sgur/vim-textobj-parameter'
   " \ | Plug 'rhysd/vim-textobj-anyblock'
-  " \ | Plug 'kana/vim-textobj-entire'
-  " \ | Plug 'beloglazov/vim-textobj-quotes'
+  " \ | Plug 'beloglazov/vim-textobj-quotes' " Doesn't work right (sometimes skips quote chars)
 
-Plug 'rhysd/clever-f.vim' " Extended f, F, t and T key mappings
+" Plug 'rhysd/clever-f.vim' " Extended f, F, t and T key mappings
 Plug 't9md/vim-textmanip' " Move/Duplicate text intuitively
 Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
+Plug 'bronson/vim-visual-star-search' " Start a * or # search from a visual block
 
 " Plug 'takac/vim-hardtime' " Stop using hjkl
 " let g:hardtime_default_on = 1
@@ -96,31 +102,33 @@ Plug 'tpope/vim-unimpaired' " Would like to replace with custom setup
 " let g:hardtime_maxcount = 5
 
 " Instead, embrace jjjj kkkk
-Plug 'rhysd/accelerated-jk'
+" Plug 'rhysd/accelerated-jk'
 
 " Plug 'terryma/vim-multiple-cursors' " https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
+Plug 'zsugabubus/vim-jumpmotion'
+" Plug 'easymotion/vim-easymotion'
+" let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_startofline = 1
+" let g:EasyMotion_use_upper = 1
+" let g:EasyMotion_enter_jump_first = 1
+" let g:EasyMotion_space_jump_first = 1
+" let g:EasyMotion_keys = 'jfkdls;aytnburmvie,cow.xpqz/5647382910gh' " gh last for combo keys
 
-Plug 'easymotion/vim-easymotion'
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 1
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_enter_jump_first = 1
-let g:EasyMotion_space_jump_first = 1
-let g:EasyMotion_keys = 'jfkdls;aytnburmvie,cow.xpqz/5647382910gh' " gh last for combo keys
+" Plug 'chaoren/vim-wordmotion'
+" let g:wordmotion_mappings = {
+"       \ 'w' : '<C-W>',
+"       \ 'b' : '<C-B>',
+"       \ 'e' : '<C-E>',
+"       \ 'ge' : 'g<C-E>',
+"       \ 'aw' : 'a<C-W>',
+"       \ 'iw' : 'i<C-W>',
+"       \ '<C-R><C-W>' : '<C-R><M-w>'
+"       \ }
 
-Plug 'chaoren/vim-wordmotion'
-let g:wordmotion_mappings = {
-      \ 'w' : '<C-W>',
-      \ 'b' : '<C-B>',
-      \ 'e' : '<C-E>',
-      \ 'ge' : 'g<C-E>',
-      \ 'aw' : 'a<C-W>',
-      \ 'iw' : 'i<C-W>',
-      \ '<C-R><C-W>' : '<C-R><M-w>'
-      \ }
+Plug 'kana/vim-smartword'
 Plug 'tpope/vim-surround'
 
 "" Smooth scrolling
@@ -148,15 +156,16 @@ let g:openbrowser_search_engines = {
       \   'startpage': 'https://www.startpage.com/do/dsearch?query={query}&cat=web',
       \}
 
-"" Languages
-" Plug 'sheerun/vim-polyglot'
+" Languages
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
+      \| Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+      \| Plug 'nvim-treesitter/nvim-treesitter-refactor'
+      \| Plug 'nvim-treesitter/playground'
 " Plug 'romgrk/nvim-treesitter-context' " Show code context
 
-Plug 'liuchengxu/graphviz.vim'
+Plug 'sheerun/vim-polyglot'
 
+Plug 'liuchengxu/graphviz.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'bfontaine/Brewfile.vim'
 Plug 'jparise/vim-graphql', { 'for': 'graphql' } " BREAKS TS
@@ -170,24 +179,49 @@ let g:gruvbox_material_enable_italic = 0
 let g:gruvbox_material_cursor = 'orange'
 let g:gruvbox_material_menu_selection_background = 'orange'
 let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_transparent_background = 0
 let g:gruvbox_material_current_word = 'bold'
 let g:gruvbox_material_better_performance = 1
 
-" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug '~/src/nvim-colorscheme-tainted'
+Plug 'sdothum/vim-colors-duochrome'
+Plug 'reedes/vim-colors-pencil'
+Plug 'andreypopp/vim-colors-plain'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'sjl/badwolf'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'atelierbram/Base2Tone-vim'
-Plug 'cideM/yui'
-Plug 'rakr/vim-two-firewatch'
+" Plug 'rakr/vim-two-firewatch'
+Plug 'https://git.sr.ht/~romainl/vim-bruin'
+Plug 'glepnir/zephyr-nvim', { 'branch': 'main' }
 
 "" UI / Syntax
 Plug 'rhysd/vim-gfm-syntax' " GitHub Flavored Markdown syntax highlight extension for Vim
 Plug 'andrewradev/bufferize.vim'
 let g:bufferize_command = 'enew'
 
-Plug 'vim-airline/vim-airline'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#tabline#show_tab_count = 1
+" Plug 'vim-airline/vim-airline'
+" let g:airline_extensions = ['tabline']
+" let g:airline_powerline_fonts = 0
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
+" let g:airline#extensions#tabline#show_tab_count = 1
+" let g:airline#extensions#tabline#enabled = 0
+" let g:airline_theme='Base2Tone_EarthLight'
+
+Plug 'bling/vim-bufferline'
+let g:bufferline_show_bufnr = 0
+let g:bufferline_rotate = 0
+let g:bufferline_fname_mod = ':p:.'
+let g:bufferline_pathshorten = 1
+" Statusline integration
+let g:bufferline_echo = 0
+  autocmd VimEnter *
+    \ let &statusline='%{bufferline#refresh_status()}'
+      \ .bufferline#get_status_string()
+
+" Plug 'akinsho/nvim-bufferline.lua'
+" Plug 'romgrk/barbar.nvim'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -209,12 +243,12 @@ Plug 'codeindulgence/vim-tig'
 Plug 'tpope/vim-fugitive' " A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plug 'DataWraith/auto_mkdir'
-Plug 'airblade/vim-matchquote'
+Plug 'airblade/vim-matchquote' " A Vim plugin to provide %-style motion for single / double quotation marks, backticks and pipe.
 Plug 'dbakker/vim-projectroot'
 
 "" Experimental
 Plug 'junegunn/vim-peekaboo' " See contents of registers
-let g:peekaboo_window = 'bo 30new'
+" let g:peekaboo_window = 'bo 30new'
 let g:peekaboo_compact = 0
 let g:peekaboo_delay = 0
 let g:peekaboo_window="call CreateCenteredFloatingWindow()"
@@ -223,7 +257,11 @@ Plug 'svermeulen/vim-cutlass' " Plugin that adds a 'cut' operation separate from
 
 Plug 'Olical/vim-enmasse' " Edit every line in a quickfix list at the same time
 
-" Plug 'nathanaelkane/vim-indent-guides' " Indent Guides is a plugin for visually displaying indent levels in Vim.
+Plug 'nathanaelkane/vim-indent-guides' " Indent Guides is a plugin for visually displaying indent levels in Vim.
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi link IndentGuidesOdd Normal
+autocmd VimEnter,Colorscheme * :hi link IndentGuidesEven CursorLine
 
 " Plug 'Yggdroot/indentLine'
 
@@ -267,7 +305,7 @@ let g:coc_global_extensions = [
       \ 'coc-diagnostic',
       \ ]
 
-Plug 'moll/vim-bbye'
+" Plug 'moll/vim-bbye'
 
 Plug 'alok/notational-fzf-vim'
 let g:nv_search_paths = ['~/src/notes']
@@ -280,19 +318,21 @@ let g:toggle_list_no_mappings = 1
 " Plug 'vim-scripts/scrollfix'
 " let g:scrollfix = 60 " Experiment with default on
 
-Plug 'blueyed/vim-diminactive' " dim inactive windows
+" Plug 'blueyed/vim-diminactive' " dim inactive windows
 Plug 'vim-scripts/restore_view.vim' " automatically restore one file's cursor position and folding information after restart vim
 
 call plug#end()
 
-" Configure treesitter
-lua require('vimrc-treesitter')
+" Configure lua plugins
+" lua require('vimrc-treesitter')
+" lua require('vimrc-bufferline')
 
 " Default environment settings
 runtime! plugin/default.vim
 set mouse=a
 set termguicolors " make terminal colors vork in vimr
 set autoread " Auto-refresh unchanged files when content changes
+" set lazyredraw
 set norelativenumber
 set nonumber
 set signcolumn=yes
@@ -309,15 +349,16 @@ set linebreak
 set noshowcmd
 set undodir=~/.vim/undodir
 set undofile
+set hidden
+set synmaxcol=400
 " set background=light
 set viewoptions=cursor,folds,slash,unix
 " colorscheme Base2Tone_MorningLight
-colorscheme gruvbox-material
-let $BAT_THEME = 'gruvbox-light'
+" let $BAT_THEME = 'gruvbox-light'
 " set winblend=10
 " set foldenable
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
 " set foldlevel=0
 set foldlevelstart=99
 " set cmdheight=2
@@ -326,13 +367,17 @@ set foldlevelstart=99
 " KEYBINDINGS
 " System clipboard integration
 map gy "+y
+map gyy "+yy
 map gY "+Y
 map gc "+c
+map gcc "+cc
 map gC "+C
-map gd "+d
-map gD "+D
+map gm "+m
+map gmm "+mm
+map gM "+M
 map gp "+p
 map gP "+P
+
 " Redo
 nnoremap <silent> U <C-r>
 " Clear search highlight on escape
@@ -356,11 +401,11 @@ vnoremap <silent> v <Esc>
 " Normalize replace
 nnoremap <silent> R cl
 vnoremap <silent> R c
-" " move thru camelcase
-" map <silent> <C-w> <Plug>CamelCaseMotion_w
-" map <silent> <C-b> <Plug>CamelCaseMotion_b
-" map <silent> <C-e> <Plug>CamelCaseMotion_e
-" map <silent> g<C-e> <Plug>CamelCaseMotion_ge
+" Moving through smartwords
+map w <Plug>(smartword-w)
+map b <Plug>(smartword-b)
+map e <Plug>(smartword-e)
+map ge <Plug>(smartword-ge)
 " Moving around in insert/command modes
 inoremap <silent> <C-h> <Left>
 inoremap <silent> <C-j> <Down>
@@ -392,18 +437,24 @@ map gx <Plug>(openbrowser-smart-search)
 map cx <Plug>(Exchange)
 map cX <Plug>(ExchangeClear)
 " Embrace the jjjj kkkk
-nmap j <Plug>(accelerated_jk_gj_position)
-nmap k <Plug>(accelerated_jk_gk_position)
+" nmap j <Plug>(accelerated_jk_gj_position)
+" nmap k <Plug>(accelerated_jk_gk_position)
 " Incremental search w/ Easymotion
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 map ? /<CR>
+" Swap 0 and ^
+noremap 0 ^
+noremap ^ 0
+
 
 " Consistency in search direction
 noremap n /<CR>
 noremap N ?<CR>
 " Use Tab for buffer navigation
 nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> gt :bnext<CR>
+nnoremap <silent> gT :bprevious<CR>
 nnoremap <silent> <S-Tab> :bprev<CR>
 " Experiment with some native motions
 " map <silent> / <Plug>(easymotion-sn)
@@ -441,8 +492,8 @@ nnoremap <silent> <Leader>bo :%bd\|e#\|bd#<CR>
 let g:which_key_map.b.o = 'only'
 nnoremap <silent> <Leader>bO :%bd!\|e#\|bd#<CR>
 let g:which_key_map.b.O = 'only!'
-nnoremap <silent> <Leader>bd :Bdelete<CR>
-nnoremap <silent> <Leader>bD :Bdelete!<CR>
+nnoremap <silent> <Leader>bd :bdelete<CR>
+nnoremap <silent> <Leader>bD :bdelete!<CR>
 nnoremap <silent> <Leader>bm :Bufferize messages<CR>
 nnoremap <silent> <Leader>br :edit<CR>
 nnoremap <silent> <Leader>bR :edit!<CR>
@@ -469,16 +520,16 @@ noremap <silent> <Leader>dN [c
 
 " DEBUG
 let g:which_key_map.D = { 'name' : '+debug' }
-nnoremap <silent> <leader>DD :exe ":profile start profile.log"<CR>:exe ":profile func *"<CR>:exe ":profile file *"<CR>
-nnoremap <silent> <leader>DP :exe ":profile pause"<CR>
-nnoremap <silent> <leader>DC :exe ":profile continue"<CR>
-nnoremap <silent> <leader>DQ :exe ":profile pause"<CR>:noautocmd qall!<CR>
+nnoremap <leader>DD :exe ":profile start profile.log"<CR>:exe ":profile func *"<CR>:exe ":profile file *"<CR>
+nnoremap <leader>DP :exe ":profile pause"<CR>
+nnoremap <leader>DC :exe ":profile continue"<CR>
+nnoremap <leader>DQ :exe ":profile pause"<CR>:noautocmd qall!<CR>
 
 " FILE
 let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <silent> <Leader>fs :write<CR>
 nnoremap <silent> <Leader>fa :wall<CR>
-nnoremap <expr> <Leader>fS ':write ' . expand('%:p')
+nnoremap <expr> <Leader>fS ':saveas ' . expand('%:p')
 nnoremap <expr> <Leader>fo ':e ' . expand('%:p:h') . '/'
 nnoremap <silent> <Leader>fp :FZFDirs<CR>
 nnoremap <silent> <Leader>fa :w<CR>:call AltCommand(expand('%'), ':e')<CR>
@@ -519,9 +570,10 @@ map <Leader>hb :Maps<CR>
 
 " JUMP (EasyMotion)
 let g:which_key_map.j = { 'name': '+jump' }
-map <silent> <Leader>jw <Plug>(easymotion-bd-w)
-map <silent> <Leader>jj <Plug>(easymotion-bd-f2)
-map <silent> <Leader>jl <Plug>(easymotion-bd-jk)
+map <silent> <Leader>j <Plug>(JumpMotion)
+" map <silent> <Leader>jw <Plug>(easymotion-bd-w)
+" map <silent> <Leader>jj <Plug>(easymotion-bd-f2)
+" map <silent> <Leader>jl <Plug>(easymotion-bd-jk)
 
 " LISTS
 let g:which_key_map.l = { 'name': '+lists' }
@@ -721,7 +773,7 @@ function! ToggleVerbose()
 endfunction
 
 function! ToggleBackground()
-  if &background==?'light'
+  if &background==? 'light'
     call Bg_dark()
   else
     call Bg_light()
@@ -739,4 +791,14 @@ function! Bg_dark()
   let $BAT_THEME = 'gruvbox'
 endfunction
 
+function! SynStack ()
+    for i1 in synstack(line("."), col("."))
+        let i2 = synIDtrans(i1)
+        let n1 = synIDattr(i1, "name")
+        let n2 = synIDattr(i2, "name")
+        echo n1 "->" n2
+    endfor
+endfunction
+
+colorscheme tainted
 call Bg_light()

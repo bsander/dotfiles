@@ -36,8 +36,7 @@ gdc() {
 ## Global aliases (use anywhere)
 alias -g P='| $PAGER'
 alias -g E='| $EDITOR'
-alias -g V='| $VISUAL'
-alias -g F='| fzf'
+alias -g F='| fzf --reverse --no-sort'
 
 
 ## Frequently used apps

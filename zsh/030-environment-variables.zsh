@@ -15,7 +15,8 @@ export BROWSER="open"
 # export MANPAGER="nvim -c 'set ft=man' -"
 
 export EDITOR="nvim"
-export VISUAL="vimr -n" # Don't wait for command completion
+# export VISUAL="vimr -n" # Don't wait for command completion
+export VISUAL="/Applications/FVim.app/Contents/MacOS/fvim-osx-launcher"
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 export GIT_EDITOR="${GIT_EDITOR:-$EDITOR}"
 
@@ -46,9 +47,6 @@ export ANDROID_HOME="/Users/sanderb/Library/Android/sdk"
 # export NVM_DIR="$HOME/.nvm"
 #   [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 #   [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-## Use FNM instead - https://github.com/Schniz/fnm
-eval "$(fnm env --shell zsh)"
 
 # vicmd/viins swwitch mode timeout
 # https://www.johnhawthorn.com/2012/09/vi-escape-delays/

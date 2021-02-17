@@ -2,7 +2,7 @@
 
 augroup df_coc
   autocmd! * <buffer>
-  " autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd CursorHold * silent call CocActionAsync('highlight')
   autocmd CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup END
 
@@ -38,6 +38,12 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" FUNCOBJ TEXTOBJ
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
 
 " SCROLL FLOATING WINDOWS
 nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"

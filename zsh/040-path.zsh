@@ -20,3 +20,6 @@ fpath=(
 )
 
 autoload ${fpath[1]}/*(:t)
+
+## FNM (like NVM) - https://github.com/Schniz/fnm
+eval "$(fnm env --shell zsh)"

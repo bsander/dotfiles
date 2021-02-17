@@ -8,6 +8,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "jason0x43/neovim-nightly"
 tap "jesseduffield/lazydocker"
 tap "koekeishiya/formulae"
 tap "kryptco/tap"
@@ -22,6 +23,8 @@ brew "awscli"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Decentralized dependency manager for Cocoa
+brew "carthage"
 # Dynamic, general-purpose programming language
 brew "clojure"
 # Cross-platform make
@@ -37,7 +40,7 @@ brew "diceware"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # Docker Credential Helper for Amazon ECR
-brew "docker-credential-helper-ecr"
+brew "docker-credential-helper-ecr", link: false
 # Select default apps for documents and URL schemes on macOS
 brew "duti"
 # Modern replacement for 'ls'
@@ -46,6 +49,8 @@ brew "exa"
 brew "fd"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
+# Fast and simple Node.js version manager
+brew "fnm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Distributed revision control system
@@ -54,6 +59,12 @@ brew "git"
 brew "git-crypt"
 # Native sequence editor for Git interactive rebase
 brew "git-interactive-rebase-tool"
+# Git extension for versioning large files
+brew "git-lfs"
+# Blazing fast terminal-ui for git written in rust
+brew "gitui"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
 # Generic library support script
 brew "libtool"
 # International domain name library (IDNA2008, Punycode and TR46)
@@ -100,14 +111,14 @@ brew "mitmproxy"
 brew "moreutils"
 # NCurses Disk Usage
 brew "ncdu"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim", args: ["HEAD"]
+# Small build system for use with gyp or CMake
+brew "ninja"
 # Port scanning utility for large networks
 brew "nmap"
-# Platform built on V8 to build network applications
-brew "node@10"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
+# Object-relational database system
+brew "postgresql"
 # Command-line YAML and XML processor that wraps jq
 brew "python-yq"
 # Run SQL directly on CSV or TSV files
@@ -150,91 +161,162 @@ brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 brew "railwaycat/emacsmacport/emacs-mac", link: false
-# Fast and simple Node.js version manager
-brew "schniz/tap/fnm"
 # command-line utility to find alternate file
 brew "uptech/oss/alt"
 # A tool for exploring each layer in a docker image
 brew "wagoodman/dive/dive"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# GPU-accelerated terminal emulator
 cask "alacritty"
+# Application launcher and productivity software
 cask "alfred"
+# Tools for building Android applications
 cask "android-studio"
+# Application uninstaller
 cask "appcleaner"
+# Multi-cloud backup application
 cask "arq"
+# Desktop password and login vault
 cask "bitwarden"
+# Web browser focusing on privacy
 cask "brave-browser"
 cask "brewservicesmenubar"
+# GUI app for Homebrew
+cask "cakebrew"
+# Free universal database tool and SQL client
 cask "dbeaver-community"
+# App to build and share containerized applications and microservices
 cask "docker"
+# Client for the Dropbox cloud storage service
 cask "dropbox"
 cask "emacs-mac-spacemacs-icon"
+# App for note taking, organizing, task lists, and archiving
 cask "evernote"
+# Free messaging app for popular messengers
 cask "ferdi"
 cask "figma"
+# Web browser
 cask "firefox"
+# Screen color temperature controller
 cask "flux"
 cask "font-fira-code"
 cask "font-firacode-nerd-font"
+# Monospaced typeface designed for programming in Julia
 cask "font-juliamono"
+# Messaging app for WhatsApp, Facebook Messenger, Slack, Telegram and more
 cask "franz"
+# Notes manager
+cask "fsnotes"
+# Web browser
 cask "google-chrome"
+# Set of tools to manage resources and applications hosted on Google Cloud
 cask "google-cloud-sdk"
+# Client for the Google Drive storage service
+cask "google-drive"
+# Client for the Google Drive storage service
 cask "google-drive-file-stream"
+# Tools to protect your emails and files
 cask "gpg-suite"
 cask "helium"
+# Access the HEY email service
+cask "hey"
+# Tool to optimize images to a smaller size
 cask "imageoptim"
+# Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Optimise and personalise your Jabra headset
+cask "jabra-direct"
 cask "java8"
 cask "kafka-tool"
+# Keyboard customizer
 cask "karabiner-elements"
 cask "key-codes"
+# End-to-end encryption software
 cask "keybase"
+# GPU-based terminal emulator
 cask "kitty"
 cask "krisp"
+# Clipboard manager
+cask "maccy"
 cask "mark-text"
 cask "microsoft-teams"
 cask "miro-formerly-realtimeboard"
+# Utility to move and zoom windows—on one display
+cask "moom"
+cask "neovim-nightly"
+# Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
+# App to write, plan, collaborate, and get organized
 cask "notion"
+# Calculator and converter application
 cask "numi"
+# Cloud storage client
 cask "onedrive"
 cask "oni"
 cask "oracle-jdk"
+# File system integration
 cask "osxfuse"
 cask "pgadmin4"
+# Home media server
+cask "plex"
+# Collaboration platform for API development
 cask "postman"
 cask "qlstephen"
+# All-in-one bookmark manager
 cask "raindropio"
+# Move and resize windows using keyboard shortcuts or snap areas
+cask "rectangle"
+# Screen capture tool with mark up and sharing features
 cask "skitch"
+# Microsofts instant messaging enterprise software
 cask "skype-for-business"
+# Team communication and collaboration software
 cask "slack"
 cask "sonos"
+# Music streaming service
 cask "spotify"
+# Free, open-source, and completely encrypted notes app
 cask "standard-notes"
+# Video game digital distribution service
 cask "steam"
+# Real time file synchronization software
 cask "syncthing"
+# Native GUI tool for relational databases
 cask "tableplus"
+# Virtual office for remote teams
 cask "tandem"
+# Inserts pre-made snippets of text anywhere
 cask "textexpander"
 cask "torbrowser"
+# Managing Pull Requests and Issues For GitHub & GitHub Enterprise
 cask "trailer"
+# Open-source BitTorrent client
 cask "transmission"
+# Tool to automate the insertion of frequently used text and graphics
 cask "typinator"
+# Configurable document editor that supports Markdown
 cask "typora"
+# Modal IDE built on neovim
 cask "veonim"
+# GUI for the Neovim text editor
 cask "vimr"
+# VPN client for secure internet access and private browsing
 cask "viscosity"
+# Open-source code editor
 cask "visual-studio-code"
+# Virtual machine client
 cask "vmware-horizon-client"
 cask "vulkan-sdk"
+# Neovim client
 cask "vv"
-cask "zoomus"
-mas "Airmail", id: 918858936
+# Desktop client for WhatsApp
+cask "whatsapp"
+# Video communication and virtual meeting platform
+cask "zoom"
 mas "BetterSnapTool", id: 417375580
 mas "DaisyDisk", id: 411643860
 mas "Dice Pass", id: 997688302
-mas "F5Access", id: 1243219105
 mas "Fenêtre", id: 1286743037
 mas "Folder Tidy", id: 486626129
 mas "GarageBand", id: 682658836
@@ -247,5 +329,4 @@ mas "Pages", id: 409201541
 mas "PiPifier", id: 1160374471
 mas "Pomo Timer", id: 1447569061
 mas "Shazam", id: 897118787
-mas "Shush", id: 496437906
 mas "Xcode", id: 497799835

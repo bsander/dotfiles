@@ -21,6 +21,9 @@ if [ -n "${ZSH_VERSION-}" ]; then
   #   export GOPATH=$HOME/go
   #
   # Do not change anything else in this file.
+
+  export PATH="/usr/local/bin:$PATH"
+
 fi
 
 Z4H_URL="https://raw.githubusercontent.com/romkatv/zsh4humans/v4"
