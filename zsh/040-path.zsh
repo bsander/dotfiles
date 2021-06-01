@@ -11,7 +11,6 @@ path=(
   $path
 )
 
-
 fpath=(
   "$DOTFILES/zsh/functions"
   "$DOTFILES/zsh/completions"
@@ -21,5 +20,4 @@ fpath=(
 
 autoload ${fpath[1]}/*(:t)
 
-## FNM (like NVM) - https://github.com/Schniz/fnm
-eval "$(fnm env --shell zsh)"
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"

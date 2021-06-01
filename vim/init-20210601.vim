@@ -183,6 +183,10 @@ let g:gruvbox_material_transparent_background = 0
 let g:gruvbox_material_current_word = 'bold'
 let g:gruvbox_material_better_performance = 1
 
+Plug 'kamwitsta/flatwhite-vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'sdothum/vim-colors-duochrome'
+Plug 'pgdouyon/vim-yin-yang'
 Plug '~/src/nvim-colorscheme-tainted'
 Plug 'sdothum/vim-colors-duochrome'
 Plug 'reedes/vim-colors-pencil'
@@ -235,7 +239,7 @@ let g:which_key_floating_opts = { 'row': '+1' }
 
 " let g:which_key_timeout = 200
 
-" Plug 'rbgrouleff/bclose.vim' | Plug 'iberianpig/tig-explorer.vim'
+" Plug 'rbgrouleff/bclose.vim' | Plug 'iberianpig/tig-explorer.vim
 " Plug 'rbgrouleff/bclose.vim' | Plug '~/src/forks/tig-explorer.vim'
 " let g:bclose_no_plugin_maps = 1
 Plug 'codeindulgence/vim-tig'
@@ -289,6 +293,7 @@ let g:NERDTreeMinimalUI = 1
 " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'whiteinge/diffconflicts'
+Plug 'mkotha/conflict3'
 Plug 'andrewradev/linediff.vim'
 
 
@@ -402,8 +407,11 @@ vnoremap <silent> v <Esc>
 nnoremap <silent> R cl
 vnoremap <silent> R c
 " Moving through smartwords
+noremap <C-w> w
 map w <Plug>(smartword-w)
+noremap <C-b> b
 map b <Plug>(smartword-b)
+noremap <C-e> e
 map e <Plug>(smartword-e)
 map ge <Plug>(smartword-ge)
 " Moving around in insert/command modes

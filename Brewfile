@@ -1,3 +1,4 @@
+tap "agrinman/tap"
 tap "apenngrace/vulkan"
 tap "equalsraf/neovim-qt"
 tap "heroku/brew"
@@ -15,14 +16,24 @@ tap "kryptco/tap"
 tap "railwaycat/emacsmacport"
 tap "rogual/neovim-dot-app"
 tap "schniz/tap"
+tap "thoughtbot/formulae"
+tap "trinitronx/pcloud"
 tap "uptech/oss"
 tap "wagoodman/dive"
+# Improved shell history for zsh and bash
+brew "atuin"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Microsoft Azure CLI 2.0
+brew "azure-cli"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Core application library for C
+brew "glib"
+# Vector graphics library with cross-device output support
+brew "cairo"
 # Decentralized dependency manager for Cocoa
 brew "carthage"
 # Dynamic, general-purpose programming language
@@ -43,16 +54,30 @@ brew "direnv"
 brew "docker-credential-helper-ecr", link: false
 # Select default apps for documents and URL schemes on macOS
 brew "duti"
+# Build automation tool for the container era
+brew "earthly"
+# LLVM bytecode to JavaScript compiler
+brew "emscripten"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Generic library support script
+brew "libtool"
+# International domain name library (IDNA2008, Punycode and TR46)
+brew "libidn2"
+# Generate introspection data for GObject libraries
+brew "gobject-introspection"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
 # Fast and simple Node.js version manager
 brew "fnm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# Toolkit for image loading and pixel buffer manipulation
+brew "gdk-pixbuf"
 # Distributed revision control system
 brew "git"
 # Enable transparent encryption/decryption of files in a git repo
@@ -65,10 +90,6 @@ brew "git-lfs"
 brew "gitui"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
-# Generic library support script
-brew "libtool"
-# International domain name library (IDNA2008, Punycode and TR46)
-brew "libidn2"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Graph visualization software from AT&T and Bell Labs
@@ -79,6 +100,8 @@ brew "gron"
 brew "hostess"
 # Improved top (interactive process viewer)
 brew "htop"
+# Simple zero-configuration command-line HTTP server
+brew "http-server"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
 # Curl statistics made simple
@@ -91,6 +114,8 @@ brew "icdiff"
 brew "jq"
 # Generic command-line non-JVM Apache Kafka producer and consumer
 brew "kafkacat"
+# Selection-based modal text editor
+brew "kakoune"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Tool that can switch between kubectl contexts easily and create aliases
@@ -115,6 +140,8 @@ brew "ncdu"
 brew "ninja"
 # Port scanning utility for large networks
 brew "nmap"
+# Development kit for the Java programming language
+brew "openjdk@11"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # Object-relational database system
@@ -127,14 +154,20 @@ brew "q"
 brew "rename"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Safe, concurrent, practical language
+brew "rust"
 # Rust toolchain installer
 brew "rustup-init"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
+# Tool to create intelligent and beautiful documentation
+brew "sphinx-doc"
 # Cross-shell prompt for astronauts
 brew "starship"
+# Tool to build, change, and version infrastructure
+brew "terraform"
 # Text interface for Git repositories
 brew "tig"
 # CLI tool that moves files or folder to the trash
@@ -151,17 +184,19 @@ brew "wifi-password"
 brew "xsv"
 # JavaScript package manager
 brew "yarn"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Expose your local web server to the internet with a public url: https://tunnelto.dev
+brew "agrinman/tap/tunnelto"
 # A simple terminal UI for docker, written in Go
 brew "jesseduffield/lazydocker/lazydocker"
-# Simple hotkey-daemon for macOS.
-brew "koekeishiya/formulae/skhd"
-# A tiling window manager for macOS based on binary space partitioning.
-brew "koekeishiya/formulae/yabai"
 # YAMAMOTO Mitsuharu's Mac port of GNU Emacs
 brew "railwaycat/emacsmacport/emacs-mac", link: false
-# command-line utility to find alternate file
+# Identify complex code
+brew "thoughtbot/formulae/complexity"
+# Command-line utility to find alternate file
 brew "uptech/oss/alt"
 # A tool for exploring each layer in a docker image
 brew "wagoodman/dive/dive"
@@ -181,9 +216,12 @@ cask "arq"
 cask "bitwarden"
 # Web browser focusing on privacy
 cask "brave-browser"
+# Menu item for starting and stopping homebrew services
 cask "brewservicesmenubar"
 # GUI app for Homebrew
 cask "cakebrew"
+# Keyboard-centric application and window switcher
+cask "command-tab-plus"
 # Free universal database tool and SQL client
 cask "dbeaver-community"
 # App to build and share containerized applications and microservices
@@ -195,6 +233,7 @@ cask "emacs-mac-spacemacs-icon"
 cask "evernote"
 # Free messaging app for popular messengers
 cask "ferdi"
+# Collaborative team software
 cask "figma"
 # Web browser
 cask "firefox"
@@ -204,6 +243,8 @@ cask "font-fira-code"
 cask "font-firacode-nerd-font"
 # Monospaced typeface designed for programming in Julia
 cask "font-juliamono"
+# GIT client
+cask "fork"
 # Messaging app for WhatsApp, Facebook Messenger, Slack, Telegram and more
 cask "franz"
 # Notes manager
@@ -223,23 +264,30 @@ cask "helium"
 cask "hey"
 # Tool to optimize images to a smaller size
 cask "imageoptim"
+# HTTP and GraphQL Client
+cask "insomnia"
+# Java IDE by JetBrains
+cask "intellij-idea"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
-# Optimise and personalise your Jabra headset
-cask "jabra-direct"
 cask "java8"
 cask "kafka-tool"
 # Keyboard customizer
 cask "karabiner-elements"
+# Display key code, unicode value and modifier keys state for any key combination
 cask "key-codes"
 # End-to-end encryption software
 cask "keybase"
 # GPU-based terminal emulator
 cask "kitty"
+# Sound clear in online meetings
 cask "krisp"
 # Clipboard manager
 cask "maccy"
+# File system integration
+cask "macfuse"
 cask "mark-text"
+# Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 cask "miro-formerly-realtimeboard"
 # Utility to move and zoom windows—on one display
@@ -251,28 +299,42 @@ cask "ngrok"
 cask "notion"
 # Calculator and converter application
 cask "numi"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
 # Cloud storage client
 cask "onedrive"
 cask "oni"
+# JDK from Oracle
 cask "oracle-jdk"
 # File system integration
 cask "osxfuse"
+# HTTP client that helps testing and describing APIs
+cask "paw"
+# Client for the pCloud virtual cloud storage service
+cask "pcloud-drive"
+# Administration and development platform for PostgreSQL
 cask "pgadmin4"
-# Home media server
+# Home media player
 cask "plex"
+# GUI client for PostgreSQL databases
+cask "postico"
 # Collaboration platform for API development
 cask "postman"
-cask "qlstephen"
+# Modern and intuitive HTTP Debugging Proxy app
+cask "proxyman"
 # All-in-one bookmark manager
 cask "raindropio"
 # Move and resize windows using keyboard shortcuts or snap areas
 cask "rectangle"
+# Instant messaging application focusing on security
+cask "signal"
 # Screen capture tool with mark up and sharing features
 cask "skitch"
 # Microsofts instant messaging enterprise software
 cask "skype-for-business"
 # Team communication and collaboration software
 cask "slack"
+# Control your Sonos system
 cask "sonos"
 # Music streaming service
 cask "spotify"
@@ -297,7 +359,6 @@ cask "transmission"
 cask "typinator"
 # Configurable document editor that supports Markdown
 cask "typora"
-# Modal IDE built on neovim
 cask "veonim"
 # GUI for the Neovim text editor
 cask "vimr"
@@ -324,9 +385,11 @@ mas "iMovie", id: 408981434
 mas "Irvue", id: 1039633667
 mas "Keynote", id: 409183694
 mas "LastPass", id: 926036361
+mas "Menu Bar Controller for Sonos", id: 1357379892
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "PiPifier", id: 1160374471
 mas "Pomo Timer", id: 1447569061
 mas "Shazam", id: 897118787
+mas "Todoist", id: 585829637
 mas "Xcode", id: 497799835

@@ -11,25 +11,18 @@
     ~/.config/kitty: kitty
     ~/.config/nvim: vim
     ~/.config/yarn/global/package.json: dotfiles/package.json
-    ~/.config/starship.toml: dotfiles/starship.toml
     ~/.ripgreprc: dotfiles/ripgreprc
     ~/.curlrc: dotfiles/curlrc.ini
     ~/docker-compose.yml: dotfiles/docker-compose.yml
     $PROJECTS/.editorconfig: dotfiles/editorconfig.ini
     ~/.gitconfig: dotfiles/gitconfig.ini
     ~/.gitignore: dotfiles/gitignore.txt
-    ~/.gnupg/gpg.conf: dotfiles/gpg.conf
     ~/.hushlogin: dotfiles/hushlogin.txt
-    ~/.hgrc: dotfiles/hgrc.ini
     ~/.ignore: dotfiles/ignore.txt
-    ~/.npmrc: dotfiles/npmrc.ini
     ~/.p10k.zsh: dotfiles/p10k.zsh
     ~/.spacemacs: dotfiles/spacemacs.el
-    ~/.skhdrc: dotfiles/skhdrc.ini
     ~/.tigrc: dotfiles/tigrc.ini
-    ~/.yabairc: dotfiles/yabairc.sh
     ~/.vim: vim
-    ~/.zhistory: zhistory.txt
     ~/.zshrc: dotfiles/zshrc.zsh
     ~/.zshenv: dotfiles/zshenv.zsh
 
@@ -50,4 +43,3 @@
       command: yarn global upgrade --latest
     - description: Updating ZSH for Humans
       command: zsh -ic 'z4h update'
-
