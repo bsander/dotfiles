@@ -14,8 +14,6 @@
       command: launchctl config user path "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
     - description: Running regular dotfiles operations
       command: $DOTFILES/bin/dotbot default
-    - description: Add fish to /etc/shells
-      command: grep -qxF $(which fish) /etc/shells || echo $(which fish) | sudo tee -a /etc/shells
     - description: Add ZSH to /etc/shells
       command: grep -qxF $(which zsh) /etc/shells || echo $(which zsh) | sudo tee -a /etc/shells
     - description: Make ZSH the default shell

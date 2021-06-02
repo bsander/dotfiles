@@ -42,7 +42,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # https://stackoverflow.com/a/28296325
 # export ANDROID_HOME=/Applications/ADT/sdk
-export ANDROID_HOME="/Users/sanderb/Library/Android/sdk"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 # # NVM Setup
 # export NVM_DIR="$HOME/.nvm"
