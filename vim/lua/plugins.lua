@@ -88,7 +88,7 @@ require('packer').startup({ function()
     'kabouzeid/nvim-lspinstall',
     requires = {'neovim/nvim-lspconfig'},
     config = function()
-      require'lspinstall'.setup() -- important
+      require'lspinstall'.setup()
       local servers = require'lspinstall'.installed_servers()
       for _, server in pairs(servers) do
         require'lspconfig'[server].setup{}
@@ -100,6 +100,14 @@ require('packer').startup({ function()
     requires = {'neovim/nvim-lspconfig'},
     config = function()
       require 'lspsaga'.init_lsp_saga()
+    end
+  }
+
+  -- https://www.reddit.com/r/neovim/comments/nq70dt/signature_help_using_new_open_floating_preview_api/
+  use {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require'lsp_signature'.on_attach()
     end
   }
 
