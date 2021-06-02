@@ -118,9 +118,20 @@ map('n', '<Leader>bM', '<CMD>BufferCloseAllButCurrent<CR>', options) -- Close ot
 map('n', '<Leader>br', '<CMD>edit<CR>', options)
 map('n', '<Leader>bR', '<CMD>edit!<CR>', options)
 
+-- Toggles between hover doc
+-- Kinda slow
+function toggleHover()
+  local lsp = require('lspsaga.hover')
+  if lsp.has_saga_hover() then
+    return lsp.close_hover_window()
+  else
+    return lsp.render_hover_doc()
+  end
+end
 -- LSP
 -- This can be smarter: https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-map('n', 'gh', '<CMD>lua require("lspsaga.hover").render_hover_doc()<CR>', options) -- Show hover information
+map('n', 'gh', '<CMD>lua toggleHover()<CR>', options) -- Toggle hover doc
+-- map('n', 'gh', '<CMD>lua require("lspsaga.hover").render_hover_doc()<CR>', options) -- Show hover information
 map('n', '<C-j>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', options) -- scroll down hover doc
 map('n', '<C-k>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', options) -- scroll up hover doc
 -- map('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', options) -- Show hover information
@@ -132,6 +143,9 @@ map('n', 'gt', '<CMD>lua vim.lsp.buf.type_definition()<CR>', options) -- Type de
 map('n', 'gr', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], options) -- Go to references
 map('n', 'gR', '<CMD>lua vim.lsp.buf.rename()<CR>', options) -- Rename
 map('n', 'g.', '<CMD>lua vim.lsp.buf.code_action()<CR>', options) -- Code action
+
+-- Git
+map('n', '<Leader>gg', '<CMD>Neogit<CR>', options)
 
 
 -- Quit

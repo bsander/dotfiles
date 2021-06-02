@@ -103,6 +103,15 @@ require('packer').startup({ function()
     end
   }
 
+  -- Git repository management: 
+  use { 
+    'TimUntersberger/neogit', 
+    requires = { 
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim' 
+    }
+  }
+
   -- Black and White color scheme: https://github.com/pgdouyon/vim-yin-yang
   use 'pgdouyon/vim-yin-yang'
 

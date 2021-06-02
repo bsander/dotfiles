@@ -1,12 +1,9 @@
-
 -- order matters
 local modules = {
   "settings",    -- `set` stuff
   "plugins",
   "mappings",
 }
-
-vim.cmd [[colorscheme one-nvim]]
 
 local errors = {}
 for _, v in pairs(modules) do
@@ -24,3 +21,5 @@ if not vim.tbl_isempty(errors) then
     print(v)
   end
 end
+
+vim.cmd [[colorscheme one-nvim]]
