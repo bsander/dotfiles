@@ -118,9 +118,31 @@ map('n', '<Leader>bM', '<CMD>BufferCloseAllButCurrent<CR>', options) -- Close ot
 map('n', '<Leader>br', '<CMD>edit<CR>', options)
 map('n', '<Leader>bR', '<CMD>edit!<CR>', options)
 
+-- Commands
+map('n', '<Leader><Leader>', '<CMD>Telescope command_history<CR>', options)
+map('n', '::', '<CMD>Telescope commands<CR>', options)
+
+-- Messages
+map('n', '<Leader>bm', '<CMD>Bufferize messages<CR>', options)
+
+-- "Windows"
+map('n', '<Leader>wd', '<C-W>c', options) -- Close window
+map('n', '<Leader>wM', '<C-W>o', options) -- Maximize window
+-- Focus window
+map('n', '<Leader>wh', '<C-W>h', options) -- Focus window left
+map('n', '<Leader>wj', '<C-W>j', options) -- Focus window down
+map('n', '<Leader>wk', '<C-W>k', options) -- Focus window up
+map('n', '<Leader>wl', '<C-W>l', options) -- Focus window right
+-- Move window
+map('n', '<Leader>wH', '<C-W>H', options) -- Move window left
+map('n', '<Leader>wJ', '<C-W>J', options) -- Move window down
+map('n', '<Leader>wK', '<C-W>K', options) -- Move window up
+map('n', '<Leader>wL', '<C-W>L', options) -- Move window right
+
+
 -- Toggles between hover doc
 -- Kinda slow
-function toggleHover()
+function ToggleHover()
   local lsp = require('lspsaga.hover')
   if lsp.has_saga_hover() then
     return lsp.close_hover_window()
@@ -130,7 +152,7 @@ function toggleHover()
 end
 -- LSP
 -- This can be smarter: https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-map('n', 'gh', '<CMD>lua toggleHover()<CR>', options) -- Toggle hover doc
+map('n', 'gh', '<CMD>lua ToggleHover()<CR>', options) -- Toggle hover doc
 -- map('n', 'gh', '<CMD>lua require("lspsaga.hover").render_hover_doc()<CR>', options) -- Show hover information
 map('n', '<C-j>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', options) -- scroll down hover doc
 map('n', '<C-k>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', options) -- scroll up hover doc

@@ -120,6 +120,9 @@ require('packer').startup({ function()
     }
   }
 
+  -- Bufferize command output (like :messages): https://github.com/AndrewRadev/bufferize.vim
+  use 'AndrewRadev/bufferize.vim'
+
   -- Black and White color scheme: https://github.com/pgdouyon/vim-yin-yang
   use 'pgdouyon/vim-yin-yang'
 

@@ -1,3 +1,4 @@
 vim/vendor
 .swp
 vim/plugin/packer_compiled.vim
+Brewfile.lock.json
