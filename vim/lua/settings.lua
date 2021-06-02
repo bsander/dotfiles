@@ -14,8 +14,8 @@ g.loaded_matchparen   = 1
 g.loaded_spec         = 1
 
 
-
 o.autoindent     = true -- enable autoindent
+o.autoread = true -- Auto-refresh unchanged files when content changes
 o.background = "light"
 o.backup         = false -- disable backup
 o.cursorline     = true -- enable cursorline
@@ -26,8 +26,8 @@ o.hlsearch       = true -- don't highlight matching search
 o.ignorecase     = true -- case insensitive on search
 o.lazyredraw     = true -- lazyredraw to make macro faster
 o.list           = true -- display listchars
-  -- number         = true, -- enable number
-  -- relativenumber = true, -- enable relativenumber
+o.number         = false -- show line number in gutter 
+o.relativenumber = false -- use relative file numbers
 o.showmode       = false -- don't show mode
 o.smartcase      = true -- improve searching using '/'
 o.smartindent    = true -- smarter indentation
@@ -54,11 +54,11 @@ o.foldmethod     = "marker"
 o.foldopen       = "percent,search" -- don't open fold if I don't tell it to do so
   -- foldcolumn     = "1", -- enable fold column for better visualisation
 o.inccommand     = "split" -- incrementally show result of command
-o.listchars      = { eol = "↲", tab= "» " } -- set listchars
+-- o.listchars      = { eol = "↲", tab= "» " } -- set listchars
 o.mouse          = "a" -- enable mouse support
 o.shortmess      = "csa" -- disable some stuff on shortmess
 o.signcolumn     = "yes" -- enable sign column all the time, 4 column
-o.shell          = "/usr/bin/bash" -- use bash instead of zsh
+-- o.shell          = "/usr/bin/bash" -- use bash instead of zsh
 -- o.colorcolumn    = { "80" } -- 80 chars color column
 o.colorcolumn    = { } -- no color column
 o.laststatus     = 2 -- always enable statusline

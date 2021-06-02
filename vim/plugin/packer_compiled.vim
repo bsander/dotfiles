@@ -71,13 +71,89 @@ end
 time("try_loadstring definition", false)
 time("Defining packer_plugins", true)
 _G.packer_plugins = {
+  ["astronauta.nvim"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/astronauta.nvim"
+  },
+  ["barbar.nvim"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/barbar.nvim"
+  },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0" },
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
+  ["lspsaga.nvim"] = {
+    config = { "\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\18init_lsp_saga\flspsaga\frequire\0" },
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-lspinstall"] = {
+    config = { "\27LJ\2\n¢\1\0\0\t\0\6\0\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\1\0B\0\2\0029\0\3\0B\0\1\0026\1\4\0\18\3\0\0B\1\2\4H\4\a€6\6\0\0'\b\5\0B\6\2\0028\6\5\0069\6\2\0064\b\0\0B\6\2\1F\4\3\3R\4÷K\0\1\0\14lspconfig\npairs\22installed_servers\nsetup\15lspinstall\frequire\0" },
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
+  },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+  },
+  ["one-nvim"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/one-nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  },
+  playground = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/playground"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/plenary.nvim"
+  },
+  ["popup.nvim"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/popup.nvim"
+  },
+  ["telescope-z.nvim"] = {
+    config = { "\27LJ\2\nF\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\6z\19load_extension\14telescope\frequire\0" },
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/telescope-z.nvim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["vim-projectroot"] = {
+    loaded = true,
+    path = "/Users/sanderb/.local/share/nvim/site/pack/packer/start/vim-projectroot"
   }
 }
 
 time("Defining packer_plugins", false)
+-- Config for: nvim-lspinstall
+time("Config for nvim-lspinstall", true)
+try_loadstring("\27LJ\2\n¢\1\0\0\t\0\6\0\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\0\0'\2\1\0B\0\2\0029\0\3\0B\0\1\0026\1\4\0\18\3\0\0B\1\2\4H\4\a€6\6\0\0'\b\5\0B\6\2\0028\6\5\0069\6\2\0064\b\0\0B\6\2\1F\4\3\3R\4÷K\0\1\0\14lspconfig\npairs\22installed_servers\nsetup\15lspinstall\frequire\0", "config", "nvim-lspinstall")
+time("Config for nvim-lspinstall", false)
+-- Config for: telescope-z.nvim
+time("Config for telescope-z.nvim", true)
+try_loadstring("\27LJ\2\nF\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\6z\19load_extension\14telescope\frequire\0", "config", "telescope-z.nvim")
+time("Config for telescope-z.nvim", false)
+-- Config for: lspsaga.nvim
+time("Config for lspsaga.nvim", true)
+try_loadstring("\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\18init_lsp_saga\flspsaga\frequire\0", "config", "lspsaga.nvim")
+time("Config for lspsaga.nvim", false)
+-- Config for: gitsigns.nvim
+time("Config for gitsigns.nvim", true)
+try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time("Config for gitsigns.nvim", false)
 if should_profile then save_profiles() end
 
 END
