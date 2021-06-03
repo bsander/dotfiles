@@ -52,6 +52,11 @@ map('n', 'gP', '"+P', {noremap = false})
 map('x', 'gp', '"_d"+P', options) -- Keep yanked value after paste: https://stackoverflow.com/a/11993928
 map('v', 'gp', '"_d"+P', options)
 
+-- Completions
+map('i', '<C-Space>', 'compe#complete()', {noremap = true, expr = true})
+map('i', '<CR>', 'compe#confirm("<CR>")', {noremap = true, expr = true})
+map('i', '<C-x>', 'compe#close("<C-x>")', {noremap = true, expr = true})
+
 -- Navigate in insert mode
 map('!', '<C-h>', '<Left>', options)
 map('!', '<C-l>', '<Right>', options)
@@ -83,7 +88,8 @@ map('n', '<leader>vi', ':PackerInstall<CR>', options)
 map('n', '<leader>vu', ':PackerSync<CR>', options)
 
 -- Save files
-map('n', 'gs', '<CMD>update<CR>', options) -- quick save (only writes on change)
+map('n', 'gs', '<CMD>write<CR>', options)
+map('', '<C-s>', '<CMD>write<CR>', options)
 map('n', '<leader>fs', '<CMD>write<CR>', options)
 -- map('n', '<leader>fS', ':saveas', options) -- how to implement this in lua? ':saveas ' . expand('%:p')
 map('n', '<leader>fa', ':wall<CR>', options)
@@ -95,6 +101,7 @@ map('n', '<leader>fD', ':call delete(expand("%")) | BufferClose!<CR>', options)
 map('n', '<leader>fr', ':Telescope oldfiles<CR>', options) -- Recently opened
 map('n', '<leader>ff', ':Telescope find_files<CR>', options) -- in cwd
 map('n', '<leader>fp', [[<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '--list', '--score'} }<CR>]], options) -- go to directory from `z`
+map('n', '<leader>fb', ':Telescope file_browser<CR>', options) -- Browse files
 
 -- Find inside files
 map('n', '<leader>/', ':Telescope live_grep<CR>', options) -- in cwd
@@ -150,19 +157,19 @@ function ToggleHover()
     return lsp.render_hover_doc()
   end
 end
+
 -- LSP
 -- This can be smarter: https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
 map('n', 'gh', '<CMD>lua ToggleHover()<CR>', options) -- Toggle hover doc
--- map('n', 'gh', '<CMD>lua require("lspsaga.hover").render_hover_doc()<CR>', options) -- Show hover information
-map('n', '<C-j>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', options) -- scroll down hover doc
-map('n', '<C-k>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', options) -- scroll up hover doc
+-- map('n', '<C-j>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', options) -- scroll down hover doc
+-- map('n', '<C-k>', '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', options) -- scroll up hover doc
 -- map('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', options) -- Show hover information
 map('n', 'gH', '<CMD>lua vim.lsp.buf.signature_help()<CR>', options) -- Signature help?
 map('n', 'gd', '<CMD>lua vim.lsp.buf.definition()<CR>', options) -- Go to definition
 map('n', 'gi', '<CMD>lua vim.lsp.buf.implementation()<CR>', options) -- Go to implementation(s)
 map('n', 'gt', '<CMD>lua vim.lsp.buf.type_definition()<CR>', options) -- Type definition
--- map('n', 'gr', '<CMD>lua vim.lsp.buf.references()<CR>', options) -- Go to references
-map('n', 'gr', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], options) -- Go to references
+map('n', 'gr', '<CMD>lua vim.lsp.buf.references()<CR>', options) -- Go to references
+-- map('n', 'gr', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], options) -- Go to references
 map('n', 'gR', '<CMD>lua vim.lsp.buf.rename()<CR>', options) -- Rename
 map('n', 'g.', '<CMD>lua vim.lsp.buf.code_action()<CR>', options) -- Code action
 

@@ -12,6 +12,7 @@ end
 vim.cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 
 require('packer').startup({ function()
+  local use = use
   -- Packer can manage itself: https://github.com/wbthomason/packer.nvim
   use 'wbthomason/packer.nvim'
 
@@ -45,14 +46,25 @@ require('packer').startup({ function()
       require'telescope'.load_extension'z'
     end,
   }
+
   -- Tabline plugin: https://github.com/romgrk/barbar.nvim
   use {
     'romgrk/barbar.nvim',
-    -- requires = {'kyazdani42/nvim-web-devicons'} -- Only load icons when using nerd fonts
+    requires = {'kyazdani42/nvim-web-devicons'} -- Only load icons when using nerd fonts
+  }
+
+  -- Statusline plugin: https://github.com/Famiu/feline.nvim
+  use {
+    'Famiu/feline.nvim',
+    config = function()
+      require('feline').setup()
+    end
   }
 
   -- One colorscheme: https://github.com/Th3Whit3Wolf/one-nvim
   use 'Th3Whit3Wolf/one-nvim'
+  -- Minimal color scheme: https://github.com/cideM/yui
+  use 'cideM/yui'
 
   -- Git signs in gutter: https://github.com/lewis6991/gitsigns.nvim/
   use {
@@ -125,6 +137,28 @@ require('packer').startup({ function()
 
   -- Black and White color scheme: https://github.com/pgdouyon/vim-yin-yang
   use 'pgdouyon/vim-yin-yang'
+
+  -- Autocompletion: https://github.com/hrsh7th/nvim-compe
+  use 'hrsh7th/nvim-compe'
+
+  -- Autopairing: https://github.com/windwp/nvim-autopairs
+  use {
+    'windwp/nvim-autopairs',
+    config = function ()
+      require('nvim-autopairs').setup()
+    end
+  }
+
+  -- File formatter: https://github.com/mhartington/formatter.nvim
+  use 'mhartington/formatter.nvim'
+
+  -- Smooth scrolling: https://github.com/karb94/neoscroll.nvim
+  use {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('neoscroll').setup()
+    end
+  }
 
   end, -- End of plugin definitions
   config = {

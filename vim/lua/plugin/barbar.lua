@@ -1,3 +1,3 @@
 vim.g.bufferline = {
-  icons = false
+  icons = true
 }

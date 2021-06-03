@@ -69,5 +69,5 @@ o.sidescroll     = 2 -- make scrolling better
 o.shiftwidth     = 2 -- set indentation width
 o.sidescrolloff  = 15 -- make scrolling better
 o.tabstop        = 2 -- tabsize
-o.timeoutlen     = 400 -- faster timeout wait time
+o.timeoutlen     = 600 -- faster timeout wait time
 o.updatetime     = 100 -- set faster update time
