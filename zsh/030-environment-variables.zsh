@@ -17,10 +17,9 @@ export BROWSER="open"
 export EDITOR="nvim"
 # export VISUAL="vimr -n" # Don't wait for command completion
 # export VISUAL="/Applications/FVim.app/Contents/MacOS/fvim-osx-launcher"
-export VISUAL="code"
+export VISUAL="vv"
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
-# export GIT_EDITOR="${GIT_EDITOR:-$EDITOR}"
-export GIT_EDITOR="code --wait"
+export GIT_EDITOR="${GIT_EDITOR:-$EDITOR}"
 
 # FZF global options
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow"

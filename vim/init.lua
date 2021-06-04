@@ -1,8 +1,8 @@
 -- order matters
 local modules = {
-  "settings",    -- `set` stuff
+  "settings", -- `set` stuff
   "plugins",
-  "mappings",
+  "mappings"
 }
 
 local errors = {}
