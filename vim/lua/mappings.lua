@@ -19,9 +19,10 @@ map("n", "U", "<C-r>", options)
 -- Clear current search
 map("n", "<S-Esc>", ':let @/ = ""<CR><Esc>', options)
 -- Consistency in search direction
-map("n", "n", "/<CR>", options)
-map("n", "N", "?<CR>", options)
-map("n", "?", "/<CR>", options)
+-- Conflicts with pulse plugin https://github.com/inside/vim-search-pulse
+-- -- map("n", "n", "/<CR>", options)
+-- map("n", "N", "?<CR>", options)
+-- map("n", "?", "/<CR>", options)
 -- Swap 0 and ^
 map("n", "0", "^", options)
 map("n", "^", "0", options)
@@ -92,9 +93,9 @@ map("n", "<leader>vu", ":PackerSync<CR>", options)
 
 -- Save files
 map("n", "gs", "<CMD>write<CR>", options)
-map("", "<C-s>", "<CMD>write<CR>", options)
+map("", "<D-s>", "<CMD>write<CR>", options) -- Cmd+s on mac for habit
 map("n", "<leader>fs", "<CMD>write<CR>", options)
--- map('n', '<leader>fS', ':saveas', options) -- how to implement this in lua? ':saveas ' . expand('%:p')
+-- map("n", "<leader>fS", ":saveas ' . expand('%:p')", options) -- how to implement this in lua? Maybe :exe?
 map("n", "<leader>fa", ":wall<CR>", options)
 
 -- Delete files
@@ -169,10 +170,10 @@ end
 -- LSP
 -- This can be smarter: https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
 map("n", "gh", "<CMD>lua ToggleHover()<CR>", options) -- Toggle hover doc
-map("n", "<C-j>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', options) -- scroll down hover doc
-map("n", "<C-k>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', options) -- scroll up hover doc
+map("n", "<C-n>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', options) -- scroll down hover doc
+map("n", "<C-N>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', options) -- scroll up hover doc
 -- map('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', options) -- Show hover information
-map("n", "gH", "<CMD>lua vim.lsp.buf.signature_help()<CR>", options) -- Signature help?
+-- map("n", "gH", "<CMD>lua vim.lsp.buf.signature_help()<CR>", options) -- Signature help?
 map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", options) -- Go to definition
 map("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", options) -- Go to implementation(s)
 map("n", "gt", "<CMD>lua vim.lsp.buf.type_definition()<CR>", options) -- Type definition
@@ -185,8 +186,9 @@ map("n", "g.", '<CMD>lua require("lspsaga.codeaction").code_action()<CR>', optio
 map("v", "g.", '<CMD>lua require("lspsaga.codeaction").range_code_action()<CR>', options) -- Code action
 
 -- Navigate errors/diagnostics
-map("n", "[e", '<CMD>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>', options) -- Code action
-map("n", "]e", '<CMD>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>', options) -- Code action
+map("n", "gH", "<CMD>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", options) -- Code action
+map("n", "[e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", options) -- Code action
+map("n", "]e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", options) -- Code action
 
 -- Git
 map("n", "<Leader>gg", "<CMD>Neogit<CR>", options)

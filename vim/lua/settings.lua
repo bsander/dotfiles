@@ -31,7 +31,7 @@ o.inccommand = "split" -- incrementally show result of command
 -- o.listchars      = { eol = "↲", tab= "» " } -- set listchars
 o.lazyredraw = true -- lazyredraw to make macro faster
 o.laststatus = 2 -- always enable statusline
-o.list = true -- display listchars
+o.list = false -- display listchars
 o.mouse = "a" -- enable mouse support
 o.number = false -- show line number in gutter
 o.pumheight = 10 -- limit completion items

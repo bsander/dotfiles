@@ -49,6 +49,9 @@ require("packer").startup(
         end
       }
 
+      -- Flash line when navigating search results
+      use "inside/vim-search-pulse"
+
       -- Tabline plugin: https://github.com/romgrk/barbar.nvim
       use {
         "romgrk/barbar.nvim",
@@ -56,12 +59,13 @@ require("packer").startup(
       }
 
       -- Statusline plugin: https://github.com/Famiu/feline.nvim
-      use {
-        "Famiu/feline.nvim",
-        config = function()
-          require("feline").setup()
-        end
-      }
+      -- use {"beauwilliams/statusline.lua"} -- Doesn't work so well with barbar
+      -- use {
+      --   "Famiu/feline.nvim",
+      --   config = function()
+      --     require("feline").setup()
+      --   end
+      -- }
 
       -- One colorscheme: https://github.com/Th3Whit3Wolf/one-nvim
       use "Th3Whit3Wolf/one-nvim"
@@ -102,14 +106,7 @@ require("packer").startup(
       }
       use {
         "kabouzeid/nvim-lspinstall",
-        requires = {"neovim/nvim-lspconfig"},
-        config = function()
-          require "lspinstall".setup()
-          local servers = require "lspinstall".installed_servers()
-          for _, server in pairs(servers) do
-            require "lspconfig"[server].setup {}
-          end
-        end
+        requires = {"neovim/nvim-lspconfig"}
       }
       use {
         "glepnir/lspsaga.nvim",
@@ -153,6 +150,16 @@ require("packer").startup(
         end
       }
 
+      -- Surround stuff: https://github.com/blackCauldron7/surround.nvim
+      use {
+        "blackCauldron7/surround.nvim",
+        config = function()
+          require "surround".setup {
+            mappings_style = "surround"
+          }
+        end
+      }
+
       -- File formatter: https://github.com/mhartington/formatter.nvim
       use "mhartington/formatter.nvim"
 
@@ -165,7 +172,13 @@ require("packer").startup(
       }
 
       -- Manage comments: https://github.com/terrortylor/nvim-comment
-      use "preservim/nerdcommenter"
+      use {
+        "terrortylor/nvim-comment",
+        config = function()
+          require("nvim_comment").setup()
+        end
+      }
+      -- use "preservim/nerdcommenter"
     end, -- End of plugin definitions
     config = {
       display = {

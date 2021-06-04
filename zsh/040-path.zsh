@@ -1,7 +1,6 @@
 ## FNM (like NVM) - https://github.com/Schniz/fnm
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/usr/local/bin/brew shellenv)"
 eval "$(fnm env --shell zsh)"
-source "/opt/homebrew/etc/profile.d/z.sh"
 
 path=(
   "$DOTFILES/bin"
