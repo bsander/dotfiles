@@ -178,6 +178,10 @@ require("packer").startup(
           require("nvim_comment").setup()
         end
       }
+
+      -- Swap textobjects: https://github.com/mizlan/iswap.nvim
+      use "mizlan/iswap.nvim"
+
       -- use "preservim/nerdcommenter"
     end, -- End of plugin definitions
     config = {
