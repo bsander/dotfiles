@@ -99,6 +99,10 @@ require("packer").startup(
         "nvim-treesitter/playground",
         requires = {"nvim-treesitter/nvim-treesitter"}
       }
+      use {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        requires = {"nvim-treesitter/nvim-treesitter"}
+      }
 
       -- LSP: https://github.com/neovim/nvim-lspconfig
       use {
