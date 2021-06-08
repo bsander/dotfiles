@@ -7,7 +7,8 @@
 ## Fix for `tr: Illegal byte sequence`: https://unix.stackexchange.com/a/141434
 export LC_CTYPE="C"
 
-export PROMPT_EOL_MARK='%'
+## Indicate no trailing newline on command output
+PROMPT_EOL_MARK='%K{red} %k'
 
 export BROWSER="open"
 # export PAGER=less # Z4H does this better
