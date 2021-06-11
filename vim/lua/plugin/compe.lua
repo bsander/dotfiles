@@ -12,7 +12,7 @@ require "compe".setup {
   max_menu_width = 100,
   documentation = true,
   source = {
-    path = true,
+    path = false,
     buffer = false,
     calc = true,
     nvim_lsp = true,

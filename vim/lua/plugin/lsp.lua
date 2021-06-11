@@ -3,7 +3,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.diagnostic.on_publish_diagnostics,
   {
     underline = true,
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
     update_in_insert = true
   }
@@ -18,7 +18,22 @@ local eslint = {
   formatStdin = true
 }
 
+local tsconfig = require "lspinstall/util".extract_config("tsserver")
+tsconfig.default_config.cmd[1] = "./node_modules/.bin/typescript-language-server"
+tsconfig.default_config.cmd[3] = "--tsserver-path=node_modules/.bin/tsserver"
+-- print(vim.inspect(tsconfig))
+require "lspinstall/servers".typescript = tsconfig
+
+-- -- specify the path from where to look for the graphql config
+-- tsconfig.default_config.on_new_config = function(new_config, new_root_dir)
+--   local new_cmd = vim.deepcopy(tsconfig.default_config.cmd)
+--   table.insert(new_cmd, "---tsserver-path=node_modules/.bin/tsserver")
+--   new_config.cmd = new_cmd
+--   print(vim.inspect(new_config))
+-- end
+
 local server_setups = {
+  -- typescript = tsconfig,
   efm = {
     settings = {
       languages = {
@@ -44,5 +59,9 @@ local server_setups = {
 require "lspinstall".setup()
 local servers = require "lspinstall".installed_servers()
 for _, server in pairs(servers) do
-  require "lspconfig"[server].setup(server_setups[server] or {})
+  if server_setups[server] then
+    require "lspconfig"[server].setup(server_setups[server])
+  else
+    require "lspconfig"[server].setup({})
+  end
 end

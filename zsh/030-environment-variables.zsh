@@ -13,7 +13,7 @@ PROMPT_EOL_MARK='%K{red} %k'
 export BROWSER="open"
 # export PAGER=less # Z4H does this better
 # export PAGER="nvim"
-# export MANPAGER="nvim -c 'set ft=man' -"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export EDITOR="nvim"
 # export VISUAL="vimr -n" # Don't wait for command completion
@@ -27,7 +27,7 @@ export FZF_DEFAULT_COMMAND="rg --files --hidden --follow"
 export FZF_DEFAULT_OPTS="--height=40%"
 # export FZF_DEFAULT_OPTS="--height=40% --color=fg:#ebdbb2,bg:#282828,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color=info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
 
-# export BAT_THEME="gruvbox"
+export BAT_THEME="gruvbox-light"
 
 # kubectl: Always consider local `kube-config` file
 # export KUBECONFIG="./kube-config"

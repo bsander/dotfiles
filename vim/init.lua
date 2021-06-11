@@ -21,5 +21,3 @@ if not vim.tbl_isempty(errors) then
     print(v)
   end
 end
-
-vim.cmd [[colorscheme one-nvim]]

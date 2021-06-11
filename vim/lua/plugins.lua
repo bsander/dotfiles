@@ -21,6 +21,9 @@ require("packer").startup(
       -- use lua keymaps and autoload lua plugins: https://github.com/tjdevries/astronauta.nvim
       use "tjdevries/astronauta.nvim"
 
+      -- Unix helpers: https://github.com/tpope/vim-eunuch
+      use "tpope/vim-eunuch"
+
       -- use lua keymaps: https://github.com/svermeulen/vimpeccable
       -- use 'svermeulen/vimpeccable'
 
@@ -73,6 +76,10 @@ require("packer").startup(
       use "cideM/yui"
       -- Monotone color scheme: https://github.com/Lokaltog/vim-monotone
       use "Lokaltog/vim-monotone"
+      -- Gruvbox: https://github.com/gruvbox-community/gruvbox
+      use "gruvbox-community/gruvbox"
+      -- `Community edition, waiting for https://github.com/npxbr/gruvbox.nvim/issues/16`
+      -- use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
 
       -- Git signs in gutter: https://github.com/lewis6991/gitsigns.nvim/
       use {
@@ -104,20 +111,44 @@ require("packer").startup(
         requires = {"nvim-treesitter/nvim-treesitter"}
       }
 
+      -- Glow for markdown: https://github.com/npxbr/glow.nvim
+      -- use {"npxbr/glow.nvim", branch = "main", run = ":GlowInstall"}
+
       -- LSP: https://github.com/neovim/nvim-lspconfig
       use {
         "neovim/nvim-lspconfig"
       }
+
       use {
         "kabouzeid/nvim-lspinstall",
         requires = {"neovim/nvim-lspconfig"}
       }
+
       use {
         "glepnir/lspsaga.nvim",
         requires = {"neovim/nvim-lspconfig"},
         config = function()
           require "lspsaga".init_lsp_saga()
         end
+      }
+
+      -- FZF for LSP
+      use {
+        "ojroques/nvim-lspfuzzy",
+        requires = {
+          {"junegunn/fzf"},
+          {"junegunn/fzf.vim"} -- to enable preview (optional)
+        },
+        config = function()
+          require("lspfuzzy").setup {}
+        end
+      }
+      use {
+        "chengzeyi/fzf-preview.vim",
+        requires = {
+          {"junegunn/fzf"},
+          {"junegunn/fzf.vim"}
+        }
       }
 
       -- https://www.reddit.com/r/neovim/comments/nq70dt/signature_help_using_new_open_floating_preview_api/
@@ -167,13 +198,14 @@ require("packer").startup(
       -- File formatter: https://github.com/mhartington/formatter.nvim
       use "mhartington/formatter.nvim"
 
-      -- Smooth scrolling: https://github.com/karb94/neoscroll.nvim
-      use {
-        "karb94/neoscroll.nvim",
-        config = function()
-          require("neoscroll").setup()
-        end
-      }
+      -- -- Smooth scrolling: https://github.com/karb94/neoscroll.nvim
+      -- -- Disabled for slow
+      -- use {
+      --   "karb94/neoscroll.nvim",
+      --   config = function()
+      --     require("neoscroll").setup()
+      --   end
+      -- }
 
       -- Manage comments: https://github.com/terrortylor/nvim-comment
       use {

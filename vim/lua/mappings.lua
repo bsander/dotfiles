@@ -95,15 +95,19 @@ map("n", "<leader>vu", ":PackerSync<CR>", options)
 map("n", "gs", "<CMD>write<CR>", options)
 map("", "<D-s>", "<CMD>write<CR>", options) -- Cmd+s on mac for habit
 map("n", "<leader>fs", "<CMD>write<CR>", options)
--- map("n", "<leader>fS", ":saveas ' . expand('%:p')", options) -- how to implement this in lua? Maybe :exe?
+map("n", "<leader>fS", "':saveas ' . expand('%:p')", {noremap = true, expr = true})
+map("n", "<leader>fR", ":Rename ", options)
 map("n", "<leader>fa", ":wall<CR>", options)
 
 -- Delete files
 map("n", "<leader>fD", ':call delete(expand("%")) | BufferClose!<CR>', options)
 
 -- Find files
-map("n", "<leader>fr", ":Telescope oldfiles<CR>", options) -- Recently opened
-map("n", "<leader>ff", ":Telescope find_files<CR>", options) -- in cwd
+-- map("n", "<leader>fr", ":Telescope oldfiles<CR>", options) -- Recently opened
+map("n", "<leader>fr", ":FZFHistory<CR>", options) -- Recently opened
+map("n", "<leader>fg", ":GFiles?<CR>", options) -- Changed files in Git
+-- map("n", "<leader>ff", ":Telescope find_files<CR>", options) -- in cwd
+map("n", "<leader>ff", ":FZFFiles<CR>", options) -- in cwd
 map(
   "n",
   "<leader>fp",
@@ -112,12 +116,19 @@ map(
 ) -- go to directory from `z`
 map("n", "<leader>fb", ":Telescope file_browser<CR>", options) -- Browse files
 
+-- Lists of files
+map("n", "<leader>fq", ":FZFQuickFix<CR>", options) -- Navigate quickfix content
+map("n", "<leader>fl", ":FZFLocList<CR>", options) -- Navigate loclist content
+
 -- Find inside files
-map("n", "<leader>/", ":Telescope live_grep<CR>", options) -- in cwd
-map("n", "<leader>;", ":Telescope current_buffer_fuzzy_find<CR>", options) -- Current buffer
+-- map("n", "<leader>/", ":Telescope live_grep<CR>", options) -- in cwd
+map("n", "<leader>/", ":FZFRg<CR>", options) -- in cwd
+-- map("n", "<leader>;", ":Telescope current_buffer_fuzzy_find<CR>", options) -- Current buffer
+map("n", "<leader>;", ":FZFBLines<CR>", options) -- Current buffer
 
 -- Navigate buffers
-map("n", "<leader><Tab>", ":Telescope buffers<CR>", options)
+-- map("n", "<leader><Tab>", ":Telescope buffers<CR>", options)
+map("n", "<leader><Tab>", ":Buffers<CR>", options)
 map("n", "<Tab>", "<CMD>BufferNext<CR>", options)
 map("n", "<S-Tab>", "<CMD>BufferPrevious<CR>", options)
 
@@ -135,7 +146,8 @@ map("n", "<Leader>br", "<CMD>edit<CR>", options)
 map("n", "<Leader>bR", "<CMD>edit!<CR>", options)
 
 -- Commands
-map("n", "<Leader><Leader>", "<CMD>Telescope command_history<CR>", options)
+-- map("n", "<Leader><Leader>", "<CMD>Telescope command_history<CR>", options)
+map("n", "<Leader><Leader>", "<CMD>History:<CR>", options)
 map("n", "<Leader>h", "<CMD>Telescope help_tags<CR>", options)
 map("n", "::", "<CMD>Telescope commands<CR>", options)
 
@@ -194,8 +206,10 @@ map("n", "]e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<
 map("n", "<Leader>gg", "<CMD>Neogit<CR>", options)
 
 -- Toggles and UI
-map("n", "<Leader>tc", "<CMD>Telescope colorscheme<CR>", options)
+-- map("n", "<Leader>tc", "<CMD>Telescope colorscheme<CR>", options)
+map("n", "<Leader>tc", "<CMD>Colors<CR>", options)
 map("n", "<Leader>tn", "<CMD>set invnumber<CR>", options)
+map("n", "<Leader>tw", "<CMD>set invwrap<CR>", options)
 
 -- Commenting
 map("n", "gca", "<Plug>NERDCommenterAppend", options)
