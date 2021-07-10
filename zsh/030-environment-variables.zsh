@@ -58,3 +58,8 @@ export ZSH_AUTOSUGGEST_STRATEGY=()
 
 ## Word characters (alt-backspace will not break on these)
 export WORDCHARS='*?$'
+
+## DO NOT TRACK collection https://consoledonottrack.com/
+export DO_NOT_TRACK=1
+export HOMEBREW_NO_ANALYTICS=1
+export AZURE_CORE_COLLECT_TELEMETRY=0
