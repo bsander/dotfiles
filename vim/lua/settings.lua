@@ -73,9 +73,11 @@ g.loaded_matchparen = 1
 g.loaded_spec = 1
 
 -- Flash what is yanked
-vim.cmd([[
+vim.cmd(
+  [[
 augroup HighlightOnYank
   autocmd!
-  autocmd TextYankPost * lua vim.highlight.on_yank {}
+  autocmd TextYankPost * lua vim.highlight.on_yank {higroup="Search", on_visual=true}
 augroup END
-]])
+]]
+)

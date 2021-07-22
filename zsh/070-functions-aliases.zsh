@@ -78,6 +78,11 @@ alias ssh="z4h ssh"
 alias cat=bat
 alias grep=rg
 alias find=fd
+alias ping=gping
+alias dig=dog
+alias http=xh
+alias curl=curlie
+
 unalias ls
 ls() {
   exa --group-directories-first --sort=name --classify "$@"
@@ -89,6 +94,7 @@ tree() {
 }
 
 alias lt="tree --level=2"
+
 # https://localtunnel.github.io/www/ conflicts with my happy alias
 alias localtunnel="\lt"
 

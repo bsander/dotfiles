@@ -138,10 +138,10 @@ require("packer").startup(
         requires = {
           {"junegunn/fzf"},
           {"junegunn/fzf.vim"} -- to enable preview (optional)
-        },
-        config = function()
-          require("lspfuzzy").setup {}
-        end
+        }
+        -- config = function()
+        --   require("lspfuzzy").setup {}
+        -- end
       }
       use {
         "chengzeyi/fzf-preview.vim",

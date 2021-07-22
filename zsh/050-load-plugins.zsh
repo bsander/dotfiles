@@ -21,6 +21,7 @@ z4h source "$Z4H/knu/zsh-manydots-magic/manydots-magic"
 autoload -Uz manydots-magic
 manydots-magic
 
+## Z: jumping to recently used directories
 eval "$(zoxide init zsh --hook prompt)"
 
 ## FNM (like NVM) - https://github.com/Schniz/fnm

@@ -139,7 +139,7 @@ map("n", "<Leader>fn", "<CMD>enew<CR>", options) -- or mnemonically "file new"
 -- Close buffers
 map("n", "<Leader>bd", "<CMD>BufferClose<CR>", options)
 map("n", "<Leader>bD", "<CMD>BufferClose!<CR>", options)
-map("n", "<Leader>bM", "<CMD>BufferCloseAllButCurrent<CR>", options) -- Close other buffers
+map("n", "<Leader>bo", "<CMD>BufferCloseAllButCurrent<CR>", options) -- Close other buffers
 
 -- Reload buffer
 map("n", "<Leader>br", "<CMD>edit<CR>", options)
@@ -156,7 +156,7 @@ map("n", "<Leader>bm", "<CMD>Bufferize messages<CR>", options)
 
 -- "Windows"
 map("n", "<Leader>wd", "<C-W>c", options) -- Close window
-map("n", "<Leader>wM", "<C-W>o", options) -- Maximize window
+map("n", "<Leader>wo", "<C-W>o", options) -- Maximize window
 -- Focus window
 map("n", "<Leader>wh", "<C-W>h", options) -- Focus window left
 map("n", "<Leader>wj", "<C-W>j", options) -- Focus window down
@@ -189,8 +189,8 @@ map("n", "<C-N>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)
 map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", options) -- Go to definition
 map("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", options) -- Go to implementation(s)
 map("n", "gt", "<CMD>lua vim.lsp.buf.type_definition()<CR>", options) -- Type definition
--- map('n', 'gr', '<CMD>lua vim.lsp.buf.references()<CR>', options) -- Go to references
-map("n", "gr", [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], options) -- Go to references
+map("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", options) -- Go to references
+-- map("n", "gr", [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], options) -- Go to references
 -- map('n', 'gR', '<CMD>lua vim.lsp.buf.rename()<CR>', options) -- Rename
 map("n", "gR", '<CMD>lua require("lspsaga.rename").rename()<CR>', options) -- Rename
 -- map('n', 'g.', '<CMD>lua vim.lsp.buf.code_action()<CR>', options) -- Code action

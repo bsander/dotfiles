@@ -37,7 +37,13 @@ require("formatter").setup(
         -- eslint_d,
         prettier
       },
+      typescriptreact = {
+        prettier
+      },
       javascript = {
+        prettier
+      },
+      javascriptreact = {
         prettier
       },
       rust = {
@@ -59,3 +65,4 @@ augroup END
 ]],
   true
 )
+-- autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.rs,*.lua silent! FormatWrite

@@ -2,3 +2,4 @@ vim/vendor
 .swp
 vim/plugin/packer_compiled.vim
 Brewfile.lock.json
+vim/plugin/packer_compiled.lua
