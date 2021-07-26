@@ -108,12 +108,13 @@ map("n", "<leader>fr", ":FZFHistory<CR>", options) -- Recently opened
 map("n", "<leader>fg", ":GFiles?<CR>", options) -- Changed files in Git
 -- map("n", "<leader>ff", ":Telescope find_files<CR>", options) -- in cwd
 map("n", "<leader>ff", ":FZFFiles<CR>", options) -- in cwd
-map(
-  "n",
-  "<leader>fp",
-  [[<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '--list', '--score'} }<CR>]],
-  options
-) -- go to directory from `z`
+-- map(
+--   "n",
+--   "<leader>fp",
+--   [[<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '--list', '--score'} }<CR>]],
+--   options
+-- ) -- go to directory from `z`
+map("n", "<leader>fp", [[<cmd>lua FZFProject()<CR>]], options) -- go to directory from `z`
 map("n", "<leader>fb", ":Telescope file_browser<CR>", options) -- Browse files
 
 -- Lists of files

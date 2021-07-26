@@ -151,6 +151,15 @@ require("packer").startup(
         }
       }
 
+      -- Improved fzf.vim written in lua https://github.com/ibhagwan/fzf-lua
+      use {
+        "ibhagwan/fzf-lua",
+        requires = {
+          "vijaymarupudi/nvim-fzf",
+          "kyazdani42/nvim-web-devicons"
+        } -- optional for icons
+      }
+      --
       -- https://www.reddit.com/r/neovim/comments/nq70dt/signature_help_using_new_open_floating_preview_api/
       use {
         "ray-x/lsp_signature.nvim",
