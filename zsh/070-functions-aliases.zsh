@@ -83,6 +83,9 @@ alias dig=dog
 alias http=xh
 alias curl=curlie
 
+
+alias awsp="source _awsp"
+
 unalias ls
 ls() {
   exa --group-directories-first --sort=name --classify "$@"

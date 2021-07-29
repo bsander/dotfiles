@@ -7,6 +7,28 @@ env.FZF_DEFAULT_OPTS = "--cycle --reverse --exact --inline-info --tiebreak=begin
 g.fzf_preview_window = {"down:50%:+{2}-/2", "ctrl-o"}
 g.fzf_layout = {window = {width = 0.8, height = 0.8}}
 g.fzf_history_dir = "~/.local/share/fzf-history"
+-- g.fzf_action = {
+--   ["ctrl-l"] = function(lines)
+--     local items = {}
+--     for key, value in pairs(lines) do
+--       table.insert(items, {filename = value})
+--     end
+--     vim.fn.setqflist(
+--       {},
+--       " ",
+--       {
+--         title = "FZF",
+--         items = items
+--       }
+--     )
+--     vim.cmd('copen') -- Open qflist
+--     vim.cmd('cc') -- Focus first item
+--   end
+-- }
+
+_G.BuildQFList = function()
+  print("lol")
+end
 
 -- Load LSP-Fuzzy only after the above values are set
 require("lspfuzzy").setup {}

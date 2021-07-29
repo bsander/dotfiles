@@ -46,6 +46,9 @@ require("formatter").setup(
       javascriptreact = {
         prettier
       },
+      json = {
+        prettier
+      },
       rust = {
         rustfmt
       },
@@ -56,13 +59,10 @@ require("formatter").setup(
   }
 )
 
-vim.api.nvim_exec(
-  [[
+vim.api.nvim_exec([[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.rs,*.lua silent! FormatWrite
 augroup END
-]],
-  true
-)
+]], true)
+-- autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.rs,*.lua FormatWrite
 -- autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx,*.rs,*.lua silent! FormatWrite

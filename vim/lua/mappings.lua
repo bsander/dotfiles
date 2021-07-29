@@ -130,8 +130,10 @@ map("n", "<leader>;", ":FZFBLines<CR>", options) -- Current buffer
 -- Navigate buffers
 -- map("n", "<leader><Tab>", ":Telescope buffers<CR>", options)
 map("n", "<leader><Tab>", ":Buffers<CR>", options)
-map("n", "<Tab>", "<CMD>BufferNext<CR>", options)
-map("n", "<S-Tab>", "<CMD>BufferPrevious<CR>", options)
+map("n", "<C-->", "<CMD>BufferPrevious<CR>", options)
+map("n", "<C-=>", "<CMD>BufferNext<CR>", options)
+-- map("n", "<Tab>", "<CMD>BufferNext<CR>", options)
+-- map("n", "<S-Tab>", "<CMD>BufferPrevious<CR>", options)
 
 -- New buffer
 map("n", "<Leader>bn", "<CMD>enew<CR>", options)
@@ -203,6 +205,8 @@ map("n", "gH", "<CMD>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 map("n", "[e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", options) -- Code action
 map("n", "]e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", options) -- Code action
 
+-- Format buffer
+map("n", "<Leader>F", "<CMD>Format<CR>", options)
 -- Git
 map("n", "<Leader>gg", "<CMD>Neogit<CR>", options)
 

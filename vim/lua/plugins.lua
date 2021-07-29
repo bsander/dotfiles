@@ -100,6 +100,7 @@ require("packer").startup(
       -- Building block for syntax highlighting and more: https://github.com/nvim-treesitter/nvim-treesitter
       use {
         "nvim-treesitter/nvim-treesitter",
+        branch = "0.5-compat",
         run = ":TSUpdate"
       }
       use {
@@ -159,12 +160,24 @@ require("packer").startup(
           "kyazdani42/nvim-web-devicons"
         } -- optional for icons
       }
-      --
+
+      -- Better quickfix interaction
+      use {"kevinhwang91/nvim-bqf"}
+
       -- https://www.reddit.com/r/neovim/comments/nq70dt/signature_help_using_new_open_floating_preview_api/
       use {
         "ray-x/lsp_signature.nvim",
         config = function()
           require "lsp_signature".on_attach()
+        end
+      }
+
+      -- Generate web links to current line in repo
+      use {
+        "ruifm/gitlinker.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+          require "gitlinker".setup()
         end
       }
 
@@ -180,19 +193,28 @@ require("packer").startup(
       -- Bufferize command output (like :messages): https://github.com/AndrewRadev/bufferize.vim
       use "AndrewRadev/bufferize.vim"
 
+      -- HTTP client
+      use {
+        "NTBBloodbath/rest.nvim",
+        requires = {"nvim-lua/plenary.nvim"},
+        config = function()
+          require("rest-nvim").setup()
+        end
+      }
+
       -- Black and White color scheme: https://github.com/pgdouyon/vim-yin-yang
       use "pgdouyon/vim-yin-yang"
 
       -- Autocompletion: https://github.com/hrsh7th/nvim-compe
       use "hrsh7th/nvim-compe"
 
-      -- Autopairing: https://github.com/windwp/nvim-autopairs
-      use {
-        "windwp/nvim-autopairs",
-        config = function()
-          require("nvim-autopairs").setup()
-        end
-      }
+      -- -- Autopairing: https://github.com/windwp/nvim-autopairs
+      -- use {
+      --   "windwp/nvim-autopairs",
+      --   config = function()
+      --     require("nvim-autopairs").setup()
+      --   end
+      -- }
 
       -- Surround stuff: https://github.com/blackCauldron7/surround.nvim
       use {
