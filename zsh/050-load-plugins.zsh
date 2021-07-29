@@ -26,3 +26,8 @@ eval "$(zoxide init zsh --hook prompt)"
 
 ## FNM (like NVM) - https://github.com/Schniz/fnm
 eval "$(fnm env --shell zsh)"
+
+path=(
+  "$Z4H/bigH/git-fuzzy/bin"
+  $path
+)

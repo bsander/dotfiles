@@ -8,3 +8,4 @@ z4h install ohmyzsh/ohmyzsh || return
 z4h install knu/zsh-manydots-magic || return
 # z4h install sainnhe/dotfiles || return
 z4h install chitoku-k/fzf-zsh-completions || return
+z4h install bigH/git-fuzzy || return

@@ -41,13 +41,13 @@ alias -g F='| fzf --reverse --no-sort'
 
 ## Frequently used apps
 alias b=brew
-alias bc="brew cask"
-alias bci="brew cask info"
-alias bcI="brew cask install"
 alias bi="brew info"
-alias -s bi="brew info"
-alias bI="brew install"
 alias bs="brew search"
+alias bI=bii # Backwards compatibility
+
+bii() {
+  brew install "${@:-!$}"
+}
 
 alias g=git
 
