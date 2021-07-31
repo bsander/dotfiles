@@ -34,8 +34,8 @@ require("packer").startup(
       use {
         "nvim-telescope/telescope.nvim",
         requires = {
-          {"nvim-lua/popup.nvim"},
-          {"nvim-lua/plenary.nvim"}
+          "nvim-lua/popup.nvim",
+          "nvim-lua/plenary.nvim"
         }
       }
 
@@ -43,9 +43,9 @@ require("packer").startup(
       use {
         "nvim-telescope/telescope-z.nvim",
         requires = {
-          {"nvim-lua/plenary.nvim"},
-          {"nvim-lua/popup.nvim"},
-          {"nvim-telescope/telescope.nvim"}
+          "nvim-lua/plenary.nvim",
+          "nvim-lua/popup.nvim",
+          "nvim-telescope/telescope.nvim"
         },
         config = function()
           require "telescope".load_extension "z"
@@ -55,10 +55,32 @@ require("packer").startup(
       -- Flash line when navigating search results
       use "inside/vim-search-pulse"
 
-      -- Tabline plugin: https://github.com/romgrk/barbar.nvim
+      -- -- Tabline plugin: https://github.com/romgrk/barbar.nvim
+      -- use {
+      --   "romgrk/barbar.nvim",
+      --   requires = "kyazdani42/nvim-web-devicons" -- Only load icons when using nerd fonts
+      -- }
+
+      -- Delete buffers without messing up layout
+      use "famiu/bufdelete.nvim"
+
+      -- Bufferline
       use {
-        "romgrk/barbar.nvim",
-        requires = {"kyazdani42/nvim-web-devicons"} -- Only load icons when using nerd fonts
+        "akinsho/nvim-bufferline.lua",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+          require("bufferline").setup(
+            {
+              diagnostics = "nvim_lsp",
+              sort_by = "directory",
+              custom_filter = function(buf_number)
+                if vim.bo[buf_number].filetype == "qf" then
+                  return true
+                end
+              end
+            }
+          )
+        end
       }
 
       -- Statusline plugin: https://github.com/Famiu/feline.nvim
@@ -79,12 +101,12 @@ require("packer").startup(
       -- Gruvbox: https://github.com/gruvbox-community/gruvbox
       use "gruvbox-community/gruvbox"
       -- `Community edition, waiting for https://github.com/npxbr/gruvbox.nvim/issues/16`
-      -- use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+      -- use {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"}
 
       -- Git signs in gutter: https://github.com/lewis6991/gitsigns.nvim/
       use {
         "lewis6991/gitsigns.nvim",
-        requires = {"nvim-lua/plenary.nvim"},
+        requires = "nvim-lua/plenary.nvim",
         config = function()
           require("gitsigns").setup()
         end
@@ -105,11 +127,11 @@ require("packer").startup(
       }
       use {
         "nvim-treesitter/playground",
-        requires = {"nvim-treesitter/nvim-treesitter"}
+        requires = "nvim-treesitter/nvim-treesitter"
       }
       use {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        requires = {"nvim-treesitter/nvim-treesitter"}
+        requires = "nvim-treesitter/nvim-treesitter"
       }
 
       -- Glow for markdown: https://github.com/npxbr/glow.nvim
@@ -122,12 +144,12 @@ require("packer").startup(
 
       use {
         "kabouzeid/nvim-lspinstall",
-        requires = {"neovim/nvim-lspconfig"}
+        requires = "neovim/nvim-lspconfig"
       }
 
       use {
         "glepnir/lspsaga.nvim",
-        requires = {"neovim/nvim-lspconfig"},
+        requires = "neovim/nvim-lspconfig",
         config = function()
           require "lspsaga".init_lsp_saga()
         end
@@ -137,8 +159,8 @@ require("packer").startup(
       use {
         "ojroques/nvim-lspfuzzy",
         requires = {
-          {"junegunn/fzf"},
-          {"junegunn/fzf.vim"} -- to enable preview (optional)
+          "junegunn/fzf",
+          "junegunn/fzf.vim" -- to enable preview (optional)
         }
         -- config = function()
         --   require("lspfuzzy").setup {}
@@ -147,8 +169,8 @@ require("packer").startup(
       use {
         "chengzeyi/fzf-preview.vim",
         requires = {
-          {"junegunn/fzf"},
-          {"junegunn/fzf.vim"}
+          "junegunn/fzf",
+          "junegunn/fzf.vim"
         }
       }
 
@@ -181,13 +203,13 @@ require("packer").startup(
         end
       }
 
-      -- Git repository management:
+      -- Git features
       use {
-        "TimUntersberger/neogit",
-        requires = {
-          "nvim-lua/plenary.nvim",
-          "sindrets/diffview.nvim"
-        }
+        "tanvirtin/vgit.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+          require("vgit").setup()
+        end
       }
 
       -- Bufferize command output (like :messages): https://github.com/AndrewRadev/bufferize.vim
@@ -196,7 +218,7 @@ require("packer").startup(
       -- HTTP client
       use {
         "NTBBloodbath/rest.nvim",
-        requires = {"nvim-lua/plenary.nvim"},
+        requires = "nvim-lua/plenary.nvim",
         config = function()
           require("rest-nvim").setup()
         end
@@ -216,15 +238,19 @@ require("packer").startup(
       --   end
       -- }
 
-      -- Surround stuff: https://github.com/blackCauldron7/surround.nvim
-      use {
-        "blackCauldron7/surround.nvim",
-        config = function()
-          require "surround".setup {
-            mappings_style = "surround"
-          }
-        end
-      }
+      -- -- Surround stuff: https://github.com/blackCauldron7/surround.nvim
+      -- -- This doesn't really appear to work.
+      -- use q{
+      --   "blackCauldron7/surround.nvim",
+      --   config = function()
+      --     require "surround".setup {
+      --       mappings_style = "surround"
+      --     }
+      --   end
+      -- }
+
+      -- Vimscript-based surround stuff
+      use "tpope/vim-surround"
 
       -- File formatter: https://github.com/mhartington/formatter.nvim
       use "mhartington/formatter.nvim"

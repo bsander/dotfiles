@@ -130,23 +130,30 @@ map("n", "<leader>;", ":FZFBLines<CR>", options) -- Current buffer
 -- Navigate buffers
 -- map("n", "<leader><Tab>", ":Telescope buffers<CR>", options)
 map("n", "<leader><Tab>", ":Buffers<CR>", options)
-map("n", "<C-->", "<CMD>BufferPrevious<CR>", options)
-map("n", "<C-=>", "<CMD>BufferNext<CR>", options)
--- map("n", "<Tab>", "<CMD>BufferNext<CR>", options)
--- map("n", "<S-Tab>", "<CMD>BufferPrevious<CR>", options)
+-- map("n", "<C-->", "<CMD>BufferPrevious<CR>", options)
+-- map("n", "<C-=>", "<CMD>BufferNext<CR>", options)
+map("n", "<Leader>B", "<CMD>BufferLinePick<CR>", options)
+map("n", "<Tab>", "<CMD>BufferLineCycleNext<CR>", options)
+map("n", "<S-Tab>", "<CMD>BufferLineCyclePrev<CR>", options)
 
 -- New buffer
 map("n", "<Leader>bn", "<CMD>enew<CR>", options)
 map("n", "<Leader>fn", "<CMD>enew<CR>", options) -- or mnemonically "file new"
 
 -- Close buffers
-map("n", "<Leader>bd", "<CMD>BufferClose<CR>", options)
+map("n", "<Leader>bd", "<CMD>Bdelete<CR>", options)
 map("n", "<Leader>bD", "<CMD>BufferClose!<CR>", options)
 map("n", "<Leader>bo", "<CMD>BufferCloseAllButCurrent<CR>", options) -- Close other buffers
 
 -- Reload buffer
 map("n", "<Leader>br", "<CMD>edit<CR>", options)
 map("n", "<Leader>bR", "<CMD>edit!<CR>", options)
+
+-- Git
+map("n", "[g", ":VGit hunk_up<CR>", options)
+map("n", "]g", ":VGit hunk_down<CR>", options)
+map("n", "<Leader>gh", ":VGit buffer_history<CR>", options)
+map("n", "<Leader>gq", ":VGit hunks_quickfix_list<CR>", options)
 
 -- Commands
 -- map("n", "<Leader><Leader>", "<CMD>Telescope command_history<CR>", options)
