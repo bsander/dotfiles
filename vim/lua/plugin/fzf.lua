@@ -56,3 +56,23 @@ function _G.FZFProject()
     end
   )()
 end
+
+function _G.FZFGrepDir()
+  coroutine.wrap(
+  function()
+    local choice =
+      fzf.fzf(
+        fzf_helpers.cmd_line_transformer(
+          "zoxide query --list",
+          function(x)
+            return x
+          end
+        )
+      )
+    if choice then
+      vim.cmd(string.format("cd %s", choice[1]))
+      vim.cmd(":FZFRg")
+    end
+  end
+  )()
+end

@@ -115,6 +115,7 @@ map("n", "<leader>ff", ":FZFFiles<CR>", options) -- in cwd
 --   options
 -- ) -- go to directory from `z`
 map("n", "<leader>fp", [[<cmd>lua FZFProject()<CR>]], options) -- go to directory from `z`
+map("n", "<leader>f/", [[<cmd>lua FZFGrepDir()<CR>]], options) -- go to directory from `z`
 map("n", "<leader>fb", ":Telescope file_browser<CR>", options) -- Browse files
 
 -- Lists of files
@@ -143,7 +144,8 @@ map("n", "<Leader>fn", "<CMD>enew<CR>", options) -- or mnemonically "file new"
 -- Close buffers
 map("n", "<Leader>bd", "<CMD>Bdelete<CR>", options)
 map("n", "<Leader>bD", "<CMD>BufferClose!<CR>", options)
-map("n", "<Leader>bo", "<CMD>BufferCloseAllButCurrent<CR>", options) -- Close other buffers
+-- map("n", "<Leader>bo", "<CMD>BufferCloseAllButCurrent<CR>", options) -- Close other buffers
+map("n", "<Leader>bo", "<CMD>BufferLineCloseLeft<CR><CMD>BufferLineCloseRight<CR>", options) -- Close other buffers
 
 -- Reload buffer
 map("n", "<Leader>br", "<CMD>edit<CR>", options)
