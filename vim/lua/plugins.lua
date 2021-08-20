@@ -52,6 +52,9 @@ require("packer").startup(
         end
       }
 
+      -- Wildmenu upgrade
+      use "gelguy/wilder.nvim"
+
       -- Flash line when navigating search results
       use "inside/vim-search-pulse"
 
@@ -104,13 +107,13 @@ require("packer").startup(
       -- use {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"}
 
       -- Git signs in gutter: https://github.com/lewis6991/gitsigns.nvim/
-      use {
-        "lewis6991/gitsigns.nvim",
-        requires = "nvim-lua/plenary.nvim",
-        config = function()
-          require("gitsigns").setup()
-        end
-      }
+      -- use {
+      --   "lewis6991/gitsigns.nvim",
+      --   requires = "nvim-lua/plenary.nvim",
+      --   config = function()
+      --     require("gitsigns").setup()
+      --   end
+      -- }
 
       --- Auto-cwd to project root directory:
       -- https://github.com/ygm2/rooter.nvim
@@ -203,14 +206,10 @@ require("packer").startup(
         end
       }
 
-      -- Git features
-      use {
-        "tanvirtin/vgit.nvim",
-        requires = "nvim-lua/plenary.nvim",
-        config = function()
-          require("vgit").setup()
-        end
-      }
+      -- -- Git features
+      use "kdheepak/lazygit.nvim"
+      use "tpope/vim-fugitive"
+      use "rhysd/git-messenger.vim"
 
       -- Bufferize command output (like :messages): https://github.com/AndrewRadev/bufferize.vim
       use "AndrewRadev/bufferize.vim"

@@ -77,7 +77,15 @@ vim.cmd(
   [[
 augroup HighlightOnYank
   autocmd!
-  autocmd TextYankPost * lua vim.highlight.on_yank {higroup="Search", on_visual=true}
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup="Search", on_visual=true}
 augroup END
 ]]
 )
+
+-- Trigger autoread at the right moment
+vim.cmd([[
+  augroup AutoReadOnFocus
+    autocmd!
+    autocmd FocusGained * silent! checktime
+  augroup END
+  ]])

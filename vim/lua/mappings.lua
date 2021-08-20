@@ -152,10 +152,8 @@ map("n", "<Leader>br", "<CMD>edit<CR>", options)
 map("n", "<Leader>bR", "<CMD>edit!<CR>", options)
 
 -- Git
-map("n", "[g", ":VGit hunk_up<CR>", options)
-map("n", "]g", ":VGit hunk_down<CR>", options)
-map("n", "<Leader>gh", ":VGit buffer_history<CR>", options)
-map("n", "<Leader>gq", ":VGit hunks_quickfix_list<CR>", options)
+map("n", "<Leader>gb", ":Git blame<CR>", options)
+-- <Leader>gm: Git messenger (show line history info)
 
 -- Commands
 -- map("n", "<Leader><Leader>", "<CMD>Telescope command_history<CR>", options)
@@ -217,7 +215,7 @@ map("n", "]e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<
 -- Format buffer
 map("n", "<Leader>F", "<CMD>Format<CR>", options)
 -- Git
-map("n", "<Leader>gg", "<CMD>Neogit<CR>", options)
+map("n", "<Leader>gg", "<CMD>LazyGit<CR>", options)
 
 -- Toggles and UI
 -- map("n", "<Leader>tc", "<CMD>Telescope colorscheme<CR>", options)

@@ -6,19 +6,15 @@ e() { ${BASE_VISUAL:-$VISUAL} "${@:-.}"; }
 
 ## Dotfiles related
 alias c=zi
-alias .reload='exec $SHELL -l'          # Reload shell environment
-alias .pub="pbcopy < ~/.ssh/id_rsa.pub" # Copy SSH public key
-alias .ssh="e ~/.ssh/config"            # Edit SSH configuration
+alias .r='exec $SHELL -l'          # Reload shell environment
+# alias .pub="pbcopy < ~/.ssh/id_rsa.pub" # Copy SSH public key
+# alias .ssh="e ~/.ssh/config"            # Edit SSH configuration
 alias .c="cd \$DOTFILES"                # cd into this dotfiles repository
 alias .e="e \$DOTFILES"                 # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
-alias .options="setopt ksh_option_print && setopt"
 alias .zcomp="rm -f ~/.zcompdump && compinit"
 alias .tips="grep -v '^#' '$DOTFILES/tipstricks.ini' | $PAGER"
-alias .update="\$DOTFILES/bin/dotbot" # Run update script
-.env() {
-  env $(<.env | rg -v '^\s*#') "$@"
-}
+alias .u="\$DOTFILES/bin/dotbot" # Run update script
 
 ## Misc. ops
 alias serve="http-server -o" # Statically serve directory
@@ -75,6 +71,7 @@ alias yww="yarn workspaces run"
 alias ssh="z4h ssh"
 
 ## Substitute apps
+alias vim=nvim
 alias cat=bat
 alias grep=rg
 alias find=fd
@@ -83,6 +80,8 @@ alias dig=dog
 alias http=xh
 alias curl=curlie
 
+## Typos
+alias brwe=brew
 
 alias awsp="source _awsp"
 
@@ -101,11 +100,3 @@ alias lt="tree --level=2"
 # https://localtunnel.github.io/www/ conflicts with my happy alias
 alias localtunnel="\lt"
 
-## Prevent alias expansion
-# unalias z
-# function z {
-#   _fz "$@" 2>&1
-# }
-
-## Typos
-alias brwe=brew
