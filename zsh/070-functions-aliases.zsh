@@ -14,7 +14,7 @@ alias .e="e \$DOTFILES"                 # Edit this dotfiles repository
 alias .ce="cd \$DOTFILES; e"
 alias .zcomp="rm -f ~/.zcompdump && compinit"
 alias .tips="grep -v '^#' '$DOTFILES/tipstricks.ini' | $PAGER"
-alias .u="\$DOTFILES/bin/dotbot" # Run update script
+alias .up="\$DOTFILES/bin/dotbot" # Run update script
 
 ## Misc. ops
 alias serve="http-server -o" # Statically serve directory

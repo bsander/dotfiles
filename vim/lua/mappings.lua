@@ -10,6 +10,7 @@ g.maplocalleader = ","
 map("n", "<Space>", "", {})
 
 local options = {noremap = true, silent = false}
+local roptions = {noremap = false, silent = false}
 
 -- Navigate wrapped lines
 map("n", "j", "gj", options)
@@ -19,10 +20,9 @@ map("n", "U", "<C-r>", options)
 -- Clear current search
 map("n", "<S-Esc>", ':let @/ = ""<CR><Esc>', options)
 -- Consistency in search direction
--- Conflicts with pulse plugin https://github.com/inside/vim-search-pulse
--- -- map("n", "n", "/<CR>", options)
--- map("n", "N", "?<CR>", options)
--- map("n", "?", "/<CR>", options)
+map("n", "n", "/<CR>", options)
+map("n", "N", "?<CR>", options)
+map("n", "?", "/<CR>", options)
 -- Swap 0 and ^
 map("n", "0", "^", options)
 map("n", "^", "0", options)
@@ -34,6 +34,8 @@ map("n", "q", "<NOP>", options)
 map("n", "Q", "<NOP>", options)
 map("n", "Q", "<NOP>", options)
 
+-- [Y]ank until end of line
+map("", "Y", "y$", options)
 -- [m]ove instead of [d]elete
 map("", "m", "d", options)
 map("", "mm", "dd", options)
@@ -45,31 +47,47 @@ map("", "D", '"_D', options)
 map("x", "p", '"_dP', options) -- Keep yanked value after paste: https://stackoverflow.com/a/11993928
 map("v", "p", '"_dP', options)
 -- Yank to global clipboard with `g`
-map("", "gy", '"+y', {noremap = false})
-map("n", "gyy", '"+yy', {noremap = false})
-map("n", "gY", '"+Y', {noremap = false})
-map("", "gm", '"+m', {noremap = false})
-map("n", "gmm", '"+mm', {noremap = false})
-map("n", "gM", '"+M', {noremap = false})
-map("n", "gp", '"+p', {noremap = false})
-map("n", "gP", '"+P', {noremap = false})
+map("", "gy", '"+y', options)
+map("n", "gyy", '"+yy', options)
+map("n", "gY", '"+Y', options)
+map("", "gm", '"+m', options)
+map("n", "gmm", '"+mm', options)
+map("n", "gM", '"+M', options)
+map("n", "gp", '"+p', options)
+map("n", "gP", '"+P', options)
 map("x", "gp", '"_d"+P', options) -- Keep yanked value after paste: https://stackoverflow.com/a/11993928
 map("v", "gp", '"_d"+P', options)
 
 -- Completions
-map("i", "<C-Space>", "compe#complete()", {noremap = true, expr = true})
-map("i", "<CR>", 'compe#confirm("<CR>")', {noremap = true, expr = true})
-map("i", "<C-x>", 'compe#close("<C-x>")', {noremap = true, expr = true})
+-- map("i", "<C-Space>", "compe#complete()", {noremap = true, expr = true})
+-- map("i", "<CR>", 'compe#confirm("<CR>")', {noremap = true, expr = true})
+-- map("i", "<C-x>", 'compe#close("<C-x>")', {noremap = true, expr = true})
 
+-- Locate treesitter objects
+-- omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
+map("o", "?", ":<C-U>lua require('tsht').nodes()<CR>", roptions)
+-- vnoremap <silent> m :lua require('tsht').nodes()<CR>
+map("v", "?", ":<C-U>lua require('tsht').nodes()<CR>", options)
 -- Navigate in insert mode
-map("!", "<C-h>", "<Left>", options)
-map("!", "<C-l>", "<Right>", options)
-map("!", "<C-k>", "<Up>", options)
-map("!", "<C-j>", "<Down>", options)
-map("!", "<C-a>", "<Home>", options)
-map("!", "<C-e>", "<End>", options)
-map("!", "<C-d>", "<Delete>", options)
-map("!", "<C-c>", "<Esc>", options) -- CTRL-C doesn't trigger the InsertLeave autocmd
+map("i", "<C-h>", "<Left>", options)
+map("i", "<C-l>", "<Right>", options)
+map("i", "<C-k>", "<Up>", options)
+map("i", "<C-j>", "<Down>", options)
+map("i", "<C-a>", "<Home>", options)
+map("i", "<C-e>", "<End>", options)
+map("i", "<C-d>", "<Delete>", options)
+map("i", "<C-c>", "<Esc>", options) -- CTRL-C doesn't trigger the InsertLeave autocmd
+-- Intuitive surround in insert mode
+map("i", "''", "<C-s>'", roptions)
+map("i", '""', '<C-s>"', roptions)
+map("i", "``", "<C-s>`", roptions)
+map("i", "((", "<C-s>)", roptions)
+map("i", "))", "<C-s><C-s>(", roptions)
+map("i", "{{", "<C-s>{", roptions)
+map("i", "}}", "<C-s><C-s>{", roptions)
+map("i", "[[", "<C-s>[", roptions)
+map("i", "]]", "<C-s><C-s>[", roptions)
+map("i", "<<", "<><Left>", roptions)
 
 -- Move lines around
 map("n", "K", [[:m-2<CR>]], options)
@@ -84,6 +102,34 @@ map("v", "<Leader>xk", [[:t '>+0<CR>gv=gv]], options)
 -- Join lines
 map("", "H", "k:join<CR>", options)
 map("", "L", "<CMD>join<CR>", options)
+-- Swap line elements
+map("", "<Leader>xC", "<CMD>ISwap<CR>", options)
+map("", "<Leader>xc", "<CMD>ISwapWith<CR>", options)
+
+-- Intuitive word-operator motions
+-- map("", "vw", "viw", roptions)
+-- map("", "mw", "miw", roptions)
+-- map("", "dw", "diw", roptions)
+-- map("", "cw", "ciw", roptions)
+map("", "go", "o<Esc>[] cc", roptions)
+map("", "gO", "O<Esc>[] cc", roptions)
+
+--- Quick navigations
+-- "[ " "] ": Add blank line
+map("", "[<Space>", "<cmd>call append(line('.')-1, '')<CR>", options)
+map("", "]<Space>", "<cmd>call append(line('.'), '')<CR>", options)
+map("", "[]<Space>", "[ ] ", roptions)
+-- [e ]e: Errors
+map("", "[e", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", options)
+map("", "]e", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", options)
+-- [q ]q: Quickfix list
+map("", "[q", "<cmd>cprevious<CR>", options)
+map("", "]q", "<cmd>cnext<CR>", options)
+--  [cc ]cc: Comment above/below
+map("", "[c", "O<Esc>gcA", roptions)
+map("", "]cc", "o<Esc>gcA", roptions)
+-- [f ]f: Folding
+-- [[f ]]f: Recursive folding
 
 -- Editing and sourcing of Neovim config
 map("n", "<leader>ve", ":edit $MYVIMRC<CR>", options)
@@ -103,39 +149,30 @@ map("n", "<leader>fa", ":wall<CR>", options)
 map("n", "<leader>fD", ':call delete(expand("%")) | BufferClose!<CR>', options)
 
 -- Find files
--- map("n", "<leader>fr", ":Telescope oldfiles<CR>", options) -- Recently opened
 map("n", "<leader>fr", ":FZFHistory<CR>", options) -- Recently opened
 map("n", "<leader>fg", ":GFiles?<CR>", options) -- Changed files in Git
--- map("n", "<leader>ff", ":Telescope find_files<CR>", options) -- in cwd
 map("n", "<leader>ff", ":FZFFiles<CR>", options) -- in cwd
--- map(
---   "n",
---   "<leader>fp",
---   [[<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '--list', '--score'} }<CR>]],
---   options
--- ) -- go to directory from `z`
 map("n", "<leader>fp", [[<cmd>lua FZFProject()<CR>]], options) -- go to directory from `z`
 map("n", "<leader>f/", [[<cmd>lua FZFGrepDir()<CR>]], options) -- go to directory from `z`
 map("n", "<leader>fb", ":Telescope file_browser<CR>", options) -- Browse files
+map("n", "<leader>ft", ":CHADopen<CR>", options) -- Browse files
 
 -- Lists of files
 map("n", "<leader>fq", ":FZFQuickFix<CR>", options) -- Navigate quickfix content
 map("n", "<leader>fl", ":FZFLocList<CR>", options) -- Navigate loclist content
 
 -- Find inside files
--- map("n", "<leader>/", ":Telescope live_grep<CR>", options) -- in cwd
 map("n", "<leader>/", ":FZFRg<CR>", options) -- in cwd
--- map("n", "<leader>;", ":Telescope current_buffer_fuzzy_find<CR>", options) -- Current buffer
 map("n", "<leader>;", ":FZFBLines<CR>", options) -- Current buffer
 
 -- Navigate buffers
--- map("n", "<leader><Tab>", ":Telescope buffers<CR>", options)
 map("n", "<leader><Tab>", ":Buffers<CR>", options)
--- map("n", "<C-->", "<CMD>BufferPrevious<CR>", options)
--- map("n", "<C-=>", "<CMD>BufferNext<CR>", options)
-map("n", "<Leader>B", "<CMD>BufferLinePick<CR>", options)
-map("n", "<Tab>", "<CMD>BufferLineCycleNext<CR>", options)
-map("n", "<S-Tab>", "<CMD>BufferLineCyclePrev<CR>", options)
+map("n", "<C-->", "<CMD>bprevious<CR>", options)
+map("n", "<C-=>", "<CMD>bnext<CR>", options)
+-- map("n", "<Tab>", "<CMD>BufferLineCycleNext<CR>", options)
+map("n", "<Tab>", "<CMD>bnext<CR>", options)
+-- map("n", "<S-Tab>", "<CMD>BufferLineCyclePrev<CR>", options)
+map("n", "<S-Tab>", "<CMD>bprevious<CR>", options)
 
 -- New buffer
 map("n", "<Leader>bn", "<CMD>enew<CR>", options)
@@ -143,7 +180,7 @@ map("n", "<Leader>fn", "<CMD>enew<CR>", options) -- or mnemonically "file new"
 
 -- Close buffers
 map("n", "<Leader>bd", "<CMD>Bdelete<CR>", options)
-map("n", "<Leader>bD", "<CMD>BufferClose!<CR>", options)
+map("n", "<Leader>bD", "<CMD>Bdelete!<CR>", options)
 -- map("n", "<Leader>bo", "<CMD>BufferCloseAllButCurrent<CR>", options) -- Close other buffers
 map("n", "<Leader>bo", "<CMD>BufferLineCloseLeft<CR><CMD>BufferLineCloseRight<CR>", options) -- Close other buffers
 
@@ -152,14 +189,17 @@ map("n", "<Leader>br", "<CMD>edit<CR>", options)
 map("n", "<Leader>bR", "<CMD>edit!<CR>", options)
 
 -- Git
-map("n", "<Leader>gb", ":Git blame<CR>", options)
+-- map("n", "<Leader>gb", ":Git blame<CR>", options)
+map("n", "<Leader>gb", ":TigBlame<CR>", options)
 -- <Leader>gm: Git messenger (show line history info)
 
 -- Commands
--- map("n", "<Leader><Leader>", "<CMD>Telescope command_history<CR>", options)
 map("n", "<Leader><Leader>", "<CMD>History:<CR>", options)
-map("n", "<Leader>h", "<CMD>Telescope help_tags<CR>", options)
-map("n", "::", "<CMD>Telescope commands<CR>", options)
+map("n", "<Leader>hh", "<CMD>Helptags<CR>", options)
+map("n", "::", "<CMD>Commands<CR>", options)
+map("n", "<Leader>hb", "<CMD>Maps<CR>", options)
+map("n", "<Leader>hm", "<CMD>Bufferize verbose map<CR>", options) -- List all normal mode maps
+map("n", "<Leader>hi", "<CMD>Bufferize verbose imap<CR>", options) -- List all insert mode maps
 
 -- Messages
 map("n", "<Leader>bm", "<CMD>Bufferize messages<CR>", options)
@@ -178,50 +218,42 @@ map("n", "<Leader>wJ", "<C-W>J", options) -- Move window down
 map("n", "<Leader>wK", "<C-W>K", options) -- Move window up
 map("n", "<Leader>wL", "<C-W>L", options) -- Move window right
 
--- Toggles between hover doc
--- Kinda slow
-function ToggleHover()
-  local lsp = require("lspsaga.hover")
-  if lsp.has_saga_hover() then
-    return lsp.close_hover_window()
-  else
-    return lsp.render_hover_doc()
-  end
-end
-
 -- LSP
 -- This can be smarter: https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
-map("n", "gh", "<CMD>lua ToggleHover()<CR>", options) -- Toggle hover doc
-map("n", "<C-n>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', options) -- scroll down hover doc
-map("n", "<C-N>", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', options) -- scroll up hover doc
--- map('n', 'gh', '<CMD>lua vim.lsp.buf.hover()<CR>', options) -- Show hover information
--- map("n", "gH", "<CMD>lua vim.lsp.buf.signature_help()<CR>", options) -- Signature help?
+map("n", "gh", "<CMD>lua vim.lsp.buf.hover()<CR>", options) -- Show hover information
+map("n", "gH", "<CMD>lua vim.lsp.buf.signature_help()<CR>", options) -- Signature help?
 map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", options) -- Go to definition
 map("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", options) -- Go to implementation(s)
 map("n", "gt", "<CMD>lua vim.lsp.buf.type_definition()<CR>", options) -- Type definition
 map("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", options) -- Go to references
--- map("n", "gr", [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], options) -- Go to references
--- map('n', 'gR', '<CMD>lua vim.lsp.buf.rename()<CR>', options) -- Rename
-map("n", "gR", '<CMD>lua require("lspsaga.rename").rename()<CR>', options) -- Rename
--- map('n', 'g.', '<CMD>lua vim.lsp.buf.code_action()<CR>', options) -- Code action
-map("n", "g.", '<CMD>lua require("lspsaga.codeaction").code_action()<CR>', options) -- Code action
-map("v", "g.", '<CMD>lua require("lspsaga.codeaction").range_code_action()<CR>', options) -- Code action
-
--- Navigate errors/diagnostics
-map("n", "gH", "<CMD>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>", options) -- Code action
-map("n", "[e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>", options) -- Code action
-map("n", "]e", "<CMD>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>", options) -- Code action
+map("n", "gR", "<CMD>lua vim.lsp.buf.rename()<CR>", options) -- Rename
+map("n", "g.", "<CMD>lua vim.lsp.buf.code_action()<CR>", options) -- Code action
 
 -- Format buffer
 map("n", "<Leader>F", "<CMD>Format<CR>", options)
 -- Git
-map("n", "<Leader>gg", "<CMD>LazyGit<CR>", options)
+map("n", "<Leader>gg", "<CMD>TigStatus<CR>", options)
 
 -- Toggles and UI
--- map("n", "<Leader>tc", "<CMD>Telescope colorscheme<CR>", options)
-map("n", "<Leader>tc", "<CMD>Colors<CR>", options)
-map("n", "<Leader>tn", "<CMD>set invnumber<CR>", options)
+map("", "<Leader>tc", "<CMD>Colors<CR>", options)
+map("", "<Leader>tn", "<CMD>set invnumber<CR>", options)
+map("", "<Leader>tw", "<CMD>set invwrap<CR>", options)
+map("", "<Leader>tf", "<CMD>Filetypes<CR>", options)
+map("", "<Leader>tq", "<CMD>TroubleToggle<CR>", options)
+-- Navigate errors/diagnostics
+map("", "<Leader>e", "<CMD>TroubleToggle lsp_document_diagnostics<CR>", options) -- Code action
+map("", "<Leader>E", "<CMD>TroubleToggle lsp_workspace_diagnostics<CR>", options) -- Code action
+
+--
 map("n", "<Leader>tw", "<CMD>set invwrap<CR>", options)
+
+-- -- Show cursor highlight
+-- map(
+--   "n",
+--   "<Leader>cc",
+--   [[<cmd>echo 'hi<' . synIDattr(synID(line('.'), col('.'), 1), 'name') . '> trans<' . synIDattr(synID(line('.'), col('.'), 0), 'name') . '> lo<' . synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name') . '>'<CR>]],
+--   options
+-- )
 
 -- Commenting
 map("n", "gca", "<Plug>NERDCommenterAppend", options)

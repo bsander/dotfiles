@@ -24,39 +24,55 @@ require("packer").startup(
       -- Unix helpers: https://github.com/tpope/vim-eunuch
       use "tpope/vim-eunuch"
 
+      -- Repeating plugin actions
+      use "tpope/vim-repeat"
+
       -- use lua keymaps: https://github.com/svermeulen/vimpeccable
       -- use 'svermeulen/vimpeccable'
 
       -- useful lua functions https://github.com/nvim-lua/plenary.nvim
       use "nvim-lua/plenary.nvim"
 
-      -- Telescope: Find, Filter, Preview, Pick: https://github.com/nvim-telescope/telescope.nvim
-      use {
-        "nvim-telescope/telescope.nvim",
-        requires = {
-          "nvim-lua/popup.nvim",
-          "nvim-lua/plenary.nvim"
-        }
-      }
+      -- -- Telescope: Find, Filter, Preview, Pick: https://github.com/nvim-telescope/telescope.nvim
+      -- use {
+      --   "nvim-telescope/telescope.nvim",
+      --   requires = {
+      --     "nvim-lua/popup.nvim",
+      --     "nvim-lua/plenary.nvim"
+      --   }
+      -- }
 
-      -- Z for Telescope: https://github.com/nvim-telescope/telescope-z.nvim
-      use {
-        "nvim-telescope/telescope-z.nvim",
-        requires = {
-          "nvim-lua/plenary.nvim",
-          "nvim-lua/popup.nvim",
-          "nvim-telescope/telescope.nvim"
-        },
-        config = function()
-          require "telescope".load_extension "z"
-        end
-      }
+      -- -- Z for Telescope: https://github.com/nvim-telescope/telescope-z.nvim
+      -- use {
+      --   "nvim-telescope/telescope-z.nvim",
+      --   requires = {
+      --     "nvim-lua/plenary.nvim",
+      --     "nvim-lua/popup.nvim",
+      --     "nvim-telescope/telescope.nvim"
+      --   },
+      --   config = function()
+      --     require "telescope".load_extension "z"
+      --   end
+      -- }
 
       -- Wildmenu upgrade
-      use "gelguy/wilder.nvim"
+      -- use "gelguy/wilder.nvim"
+
+      -- -- Hop - jump to occurrence
+      -- use {
+      --   "phaazon/hop.nvim",
+      --   as = "hop",
+      --   config = function()
+      --     -- you can configure Hop the way you like here; see :h hop-config
+      --     require "hop".setup({})
+      --   end
+      -- }
+
+      -- Lightspeed - better motion plugin
+      use "ggandor/lightspeed.nvim"
 
       -- Flash line when navigating search results
-      use "inside/vim-search-pulse"
+      -- use "inside/vim-search-pulse"
 
       -- -- Tabline plugin: https://github.com/romgrk/barbar.nvim
       -- use {
@@ -95,6 +111,28 @@ require("packer").startup(
       --   end
       -- }
 
+      -- Inline colorizer of color codes
+      use {
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+          require "colorizer".setup({"*"})
+        end
+      }
+
+      -- Show highlight groups under cursor
+      use "dylnmc/synstack.vim"
+      -- Colorscheme creator
+      use "rktjmp/lush.nvim"
+      -- Homegrown colorscheme TODO:: fix path
+      use "/Users/sander/src/playground/tainted-lush-nvim"
+      -- collection of contrast-based Vim/Neovim colorschemes
+      use {
+        "mcchrish/zenbones.nvim",
+        -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+        -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+        -- In Vim, compat mode is turned on as Lush only works in Neovim.
+        requires = "rktjmp/lush.nvim"
+      }
       -- One colorscheme: https://github.com/Th3Whit3Wolf/one-nvim
       use "Th3Whit3Wolf/one-nvim"
       -- Minimal color scheme: https://github.com/cideM/yui
@@ -107,13 +145,22 @@ require("packer").startup(
       -- use {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"}
 
       -- Git signs in gutter: https://github.com/lewis6991/gitsigns.nvim/
-      -- use {
-      --   "lewis6991/gitsigns.nvim",
-      --   requires = "nvim-lua/plenary.nvim",
-      --   config = function()
-      --     require("gitsigns").setup()
-      --   end
-      -- }
+      use {
+        "lewis6991/gitsigns.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+          require("gitsigns").setup(
+            {
+              signcolumn = false,
+              numhl = true,
+              keymaps = nil -- No key mapping by default
+            }
+          )
+        end
+      }
+
+      -- Line diffs
+      use "AndrewRadev/linediff.vim"
 
       --- Auto-cwd to project root directory:
       -- https://github.com/ygm2/rooter.nvim
@@ -121,6 +168,9 @@ require("packer").startup(
       -- use { 'ygm2/rooter.nvim' }
       -- https://github.com/dbakker/vim-projectroot
       use "dbakker/vim-projectroot"
+
+      -- File explorer/tree
+      use {"ms-jpq/chadtree", branch = "chad", run = ":CHADdeps"}
 
       -- Building block for syntax highlighting and more: https://github.com/nvim-treesitter/nvim-treesitter
       use {
@@ -136,6 +186,12 @@ require("packer").startup(
         "nvim-treesitter/nvim-treesitter-textobjects",
         requires = "nvim-treesitter/nvim-treesitter"
       }
+      use {
+        "RRethy/nvim-treesitter-textsubjects",
+        requires = "nvim-treesitter/nvim-treesitter"
+      }
+      -- treesitter textobject helper
+      use "mfussenegger/nvim-ts-hint-textobject"
 
       -- Glow for markdown: https://github.com/npxbr/glow.nvim
       -- use {"npxbr/glow.nvim", branch = "main", run = ":GlowInstall"}
@@ -146,29 +202,48 @@ require("packer").startup(
       }
 
       use {
-        "kabouzeid/nvim-lspinstall",
+        "williamboman/nvim-lsp-installer",
         requires = "neovim/nvim-lspconfig"
       }
 
+      -- -- LSP Utils for actions
+      -- use {
+      --   "RishabhRD/nvim-lsputils",
+      --   requires = "RishabhRD/popfix"
+      -- }
+      -- g.lsp_utils_location_opts = {
+      --   mode = "editor"
+      -- }
+
+      -- -- FZF for LSP
+      -- use {
+      --   "ojroques/nvim-lspfuzzy",
+      --   requires = {
+      --     "junegunn/fzf",
+      --     "junegunn/fzf.vim" -- to enable preview (optional)
+      --   }
+      --   -- config = function()
+      --   --   require("lspfuzzy").setup {}
+      --   -- end
+      -- }
       use {
-        "glepnir/lspsaga.nvim",
-        requires = "neovim/nvim-lspconfig",
+        "gfanto/fzf-lsp.nvim",
+        requires = {
+          "neovim/nvim-lspconfig"
+        },
         config = function()
-          require "lspsaga".init_lsp_saga()
+          require "fzf_lsp".setup()
         end
       }
 
-      -- FZF for LSP
       use {
-        "ojroques/nvim-lspfuzzy",
-        requires = {
-          "junegunn/fzf",
-          "junegunn/fzf.vim" -- to enable preview (optional)
-        }
-        -- config = function()
-        --   require("lspfuzzy").setup {}
-        -- end
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+          require("trouble").setup({})
+        end
       }
+
       use {
         "chengzeyi/fzf-preview.vim",
         requires = {
@@ -207,12 +282,14 @@ require("packer").startup(
       }
 
       -- -- Git features
-      use "kdheepak/lazygit.nvim"
+      use {"iberianpig/tig-explorer.vim", requires = "rbgrouleff/bclose.vim"}
       use "tpope/vim-fugitive"
       use "rhysd/git-messenger.vim"
 
       -- Bufferize command output (like :messages): https://github.com/AndrewRadev/bufferize.vim
       use "AndrewRadev/bufferize.vim"
+      g.bufferize_command = "edit"
+      g.bufferize_keep_buffers = 1
 
       -- HTTP client
       use {
@@ -222,12 +299,41 @@ require("packer").startup(
           require("rest-nvim").setup()
         end
       }
-
+      -- Which key popup
+      use {
+        "folke/which-key.nvim",
+        config = function()
+          require("which-key").setup {}
+        end
+      }
       -- Black and White color scheme: https://github.com/pgdouyon/vim-yin-yang
       use "pgdouyon/vim-yin-yang"
 
-      -- Autocompletion: https://github.com/hrsh7th/nvim-compe
-      use "hrsh7th/nvim-compe"
+      -- -- fast completion for nvim
+      -- use {
+      --   "ms-jpq/coq_nvim",
+      --   branch = "coq",
+      --   run = ":COQdeps"
+      -- }
+      -- use {"ms-jpq/coq.artifacts", branch = "artifacts"} -- 9000+ Snippets
+
+      -- -- Autocompletion
+      use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+          "neovim/nvim-lspconfig",
+          "hrsh7th/cmp-nvim-lsp",
+          -- 'hrsh7th/cmp-buffer',
+          "hrsh7th/cmp-path",
+          "hrsh7th/cmp-cmdline",
+          "hrsh7th/cmp-vsnip",
+          "hrsh7th/vim-vsnip"
+        }
+
+        -- config = function()
+        --   require("completion")
+        -- end
+      }
 
       -- -- Autopairing: https://github.com/windwp/nvim-autopairs
       -- use {
@@ -263,11 +369,18 @@ require("packer").startup(
       --   end
       -- }
 
-      -- Manage comments: https://github.com/terrortylor/nvim-comment
+      -- -- Manage comments: https://github.com/terrortylor/nvim-comment
+      -- use {
+      --   "terrortylor/nvim-comment",
+      --   config = function()
+      --     require("nvim_comment").setup()
+      --   end
+      -- }
+
       use {
-        "terrortylor/nvim-comment",
+        "numToStr/Comment.nvim",
         config = function()
-          require("nvim_comment").setup()
+          require("Comment").setup()
         end
       }
 

@@ -31,7 +31,7 @@ _G.BuildQFList = function()
 end
 
 -- Load LSP-Fuzzy only after the above values are set
-require("lspfuzzy").setup {}
+-- require("lspfuzzy").setup {}
 
 local fzf = require("fzf")
 local fzf_helpers = require("fzf.helpers")
@@ -59,9 +59,9 @@ end
 
 function _G.FZFGrepDir()
   coroutine.wrap(
-  function()
-    local choice =
-      fzf.fzf(
+    function()
+      local choice =
+        fzf.fzf(
         fzf_helpers.cmd_line_transformer(
           "zoxide query --list",
           function(x)
@@ -69,10 +69,10 @@ function _G.FZFGrepDir()
           end
         )
       )
-    if choice then
-      vim.cmd(string.format("cd %s", choice[1]))
-      vim.cmd(":FZFRg")
+      if choice then
+        vim.cmd(string.format("cd %s", choice[1]))
+        vim.cmd(":FZFRg")
+      end
     end
-  end
   )()
 end
