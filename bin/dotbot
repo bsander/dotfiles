@@ -9,7 +9,7 @@ ACTION="${1:-default}"
 shift || :
 
 (
-  cd "$DOTFILES" \
+  cd "${DOTFILES:=$PROJECTS/dotfiles}" \
   && "repos/dotbot/bin/dotbot" \
     -d "$DOTFILES" \
     -c "actions/$ACTION.yml" \
