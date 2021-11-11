@@ -1,7 +1,6 @@
 local g = vim.g
 local cmp = require "cmp"
 
-print("LOLLEBRL")
 cmp.setup(
   {
     snippet = {

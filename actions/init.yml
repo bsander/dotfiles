@@ -9,9 +9,9 @@
     - description: Installing build chain
       command: xcode-select -p || xcode-select --install
     - description: Installing homebrew
-      command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     - description: Adding homebrew bin to PATH
-      command: launchctl config user path "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
+      command: launchctl config user path "/usr/bin:/bin:/usr/sbin:/sbin:/$(brew --prefix)/bin"
     - description: Running regular dotfiles operations
       command: $DOTFILES/bin/dotbot default
     - description: Add ZSH to /etc/shells
