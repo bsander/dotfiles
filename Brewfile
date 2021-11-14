@@ -9,6 +9,7 @@ tap "homebrew/cask"
 tap "homebrew/cask-drivers"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
+tap "homebrew/command-not-found"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "koekeishiya/formulae"
@@ -23,6 +24,8 @@ tap "wagoodman/dive"
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Cross-platform make
+brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Modern replacement for 'ls'
@@ -45,6 +48,10 @@ brew "git"
 brew "git-crypt"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Incremental merge for git
+brew "git-imerge"
+# Rebase alternative for easy & efficient in-memory rebases and fixups
+brew "git-revise"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
@@ -63,6 +70,8 @@ brew "hub"
 brew "jq"
 # Count lines of code quickly
 brew "loc"
+# Package manager for the Lua programming language
+brew "luarocks"
 # Swiss Army Knife for macOS
 brew "m-cli"
 # Mac App Store command-line interface
@@ -105,10 +114,10 @@ brew "zsh"
 cask "1password"
 # Application launcher and productivity software
 cask "alfred"
+# Inspect application bundles
+cask "apparency"
 # Application uninstaller
 cask "appcleaner"
-# Manage team projects and tasks
-cask "asana"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Voice and text chat software
@@ -121,6 +130,8 @@ cask "dropbox"
 cask "firefox"
 # Screen color temperature controller
 cask "flux"
+# Unofficial native application for Fastmail
+cask "fmail"
 cask "font-fira-code"
 cask "font-hack-nerd-font"
 # Monospaced typeface designed for programming in Julia
@@ -137,6 +148,10 @@ cask "key-codes"
 cask "kitty"
 # Sound clear in online meetings
 cask "krisp"
+# Support for Logitech G gear
+cask "logitech-g-hub"
+# File system integration
+cask "macfuse"
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # Online collaborative whiteboard platform
@@ -158,6 +173,16 @@ cask "plex"
 cask "postico"
 # Collaboration platform for API development
 cask "postman"
+# QuickLook plug-in that renders source code with syntax highlighting
+cask "qlcolorcode"
+# Display image info and preview unsupported formats in QuickLook
+cask "qlimagesize"
+# QuickLook generator for Markdown files
+cask "qlmarkdown"
+cask "qlstephen"
+cask "qlvideo"
+cask "quicklook-json"
+cask "quicklookase"
 # Instant messaging application focusing on security
 cask "signal"
 # Team communication and collaboration software
@@ -166,6 +191,8 @@ cask "slack"
 cask "sonos"
 # Music streaming service
 cask "spotify"
+# Application for inspecting installer packages
+cask "suspicious-package"
 # VPN client for secure internet access and private browsing
 cask "viscosity"
 # Open-source code editor
@@ -176,7 +203,10 @@ cask "whatsapp"
 cask "zoom"
 mas "DaisyDisk", id: 411643860
 mas "Folder Tidy", id: 486626129
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
 mas "Irvue", id: 1039633667
+mas "Keynote", id: 409183694
 mas "Meeter", id: 1510445899
 mas "Menu Bar Controller for Sonos", id: 1357379892
 mas "Numbers", id: 409203825

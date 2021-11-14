@@ -36,6 +36,7 @@ map("n", "Q", "<NOP>", options)
 
 -- [Y]ank until end of line
 map("", "Y", "y$", options)
+map("", "gY", "gy$", roptions)
 -- [m]ove instead of [d]elete
 map("", "m", "d", options)
 map("", "mm", "dd", options)

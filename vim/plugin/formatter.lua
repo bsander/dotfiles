@@ -14,6 +14,7 @@ local eslint_d = function()
   }
 end
 
+-- npm install -g lua-fmt
 local luafmt = function()
   return {
     exe = "luafmt",

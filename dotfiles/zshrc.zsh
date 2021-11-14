@@ -10,7 +10,7 @@ zmodload zsh/zprof
 # set -x
 
 ## your project folder that we can `c [tab]` to
-export PROJECTS="${PROJECTS:-$HOME/src}"
+export PROJECTS="${PROJECTS:-$HOME/Repos}"
 
 # shortcut to this dotfiles path is $DOTFILES
 export DOTFILES="${DOTFILES:-$PROJECTS/dotfiles}"

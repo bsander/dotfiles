@@ -144,6 +144,33 @@ require("packer").startup(
       -- `Community edition, waiting for https://github.com/npxbr/gruvbox.nvim/issues/16`
       -- use {"npxbr/gruvbox.nvim", requires = "rktjmp/lush.nvim"}
 
+      -- -- Rainbow brackets
+      -- require("nvim-treesitter.configs").setup {
+      --   rainbow = {
+      --     enable = true,
+      --     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+      --     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+      --     max_file_lines = nil, -- Do not enable for files with more than n lines, int
+      --     -- colors = {}, -- table of hex strings
+      --     -- termcolors = {} -- table of colour name strings
+      --   }
+      -- }
+
+      -- Indentation guides
+      use {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+          require("indent_blankline").setup {
+            char = "|",
+            buftype_exclude = {"terminal"},
+            space_char_blankline = " ",
+            show_current_context = true,
+            show_current_context_start = true
+          }
+        end
+      }
+      vim.opt.list = true
+
       -- Git signs in gutter: https://github.com/lewis6991/gitsigns.nvim/
       use {
         "lewis6991/gitsigns.nvim",
