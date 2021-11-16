@@ -1,4 +1,3 @@
 zhistory.txt filter=git-crypt diff=git-crypt
-npmrc.ini filter=git-crypt diff=git-crypt
 *.typubset filter=git-crypt diff=git-crypt
 fish/fish_variables filter=git-crypt diff=git-crypt
