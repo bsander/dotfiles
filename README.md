@@ -17,5 +17,5 @@ PROJECTS=.. make install
 1. Make sure [git-crypt](https://github.com/AGWA/git-crypt) is installed
 2. Locate the decryption certificate
 3. ```shell
-	 git crypt unlock /path/to/key
+   git crypt unlock /path/to/key
 	 ```
