@@ -1,20 +1,14 @@
 # #!/.files
 
-## Init
+## Usage
+
+Most operations are powered my `make`. Try running `make help`!
+
+### Installation
 
 ```shell
-git clone <this repo>
-PROJECTS=$PWD dotfiles/bin/dot init
+mkdir -p $HOME/Repos
+git clone https://github.com/bsander/dotfiles.git $HOME/Repos/dotfiles
+cd $HOME/Repos/dotfiles
+PROJECTS=.. make install
 ```
-
-## Update
-
-```shell
-.update
-```
-
-## Used
-
-- https://github.com/anishathalye/dotbot
-- https://github.com/AGWA/git-crypt
-- https://github.com/romkatv/zsh4humans
