@@ -51,16 +51,16 @@ DFS_CONFIG = fish kitty
 link-to-home: $(foreach f, $(DFS_HOME), link-to-home-$(f))
 
 link-to-home-%: $(DF_DIR)/%
-	@echo ln -snf "$<" $(HOME)/.$(basename $(notdir $*))
+	ln -snf "$<" $(HOME)/.$(basename $(notdir $*))
 
 ## Link these ditfiles to $HOME/.config/
 link-to-config: $(foreach f, $(DFS_CONFIG), link-to-config-$(f))
 
 link-to-config-%: $(CURDIR)/%
-	@echo ln -snf "$<" $(HOME)/.config/$(basename $(notdir $*))
+	ln -snf "$<" $(HOME)/.config/$(basename $(notdir $*))
 
 ## Link neovim config to both vim and nvim paths
 link-nvim: $(CURDIR)/vim
-	@echo ln -snf "$<" $(HOME)/.vim
-	@echo ln -snf "$<" $(HOME)/.config/nvim
+	ln -snf "$<" $(HOME)/.vim
+	ln -snf "$<" $(HOME)/.config/nvim
 

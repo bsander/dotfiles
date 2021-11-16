@@ -4,6 +4,8 @@
 
 Most operations are powered my `make`. Try running `make help`!
 
+To review what each target does, run `make -n <target>`.
+
 ### Installation
 
 ```shell
