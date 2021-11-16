@@ -13,7 +13,6 @@
     ~/.config/yarn/global/package.json: dotfiles/package.json
     ~/.ripgreprc: dotfiles/ripgreprc
     ~/.curlrc: dotfiles/curlrc.ini
-    ~/docker-compose.yml: dotfiles/docker-compose.yml
     $PROJECTS/.editorconfig: dotfiles/editorconfig.ini
     ~/.gitconfig: dotfiles/gitconfig.ini
     ~/.gitignore: dotfiles/gitignore.txt

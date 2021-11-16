@@ -124,7 +124,7 @@ require("packer").startup(
       -- Colorscheme creator
       use "rktjmp/lush.nvim"
       -- Homegrown colorscheme TODO:: fix path
-      use "/Users/sander/src/playground/tainted-lush-nvim"
+      -- use "/Users/sander/src/playground/tainted-lush-nvim"
       -- collection of contrast-based Vim/Neovim colorschemes
       use {
         "mcchrish/zenbones.nvim",
@@ -188,6 +188,12 @@ require("packer").startup(
 
       -- Line diffs
       use "AndrewRadev/linediff.vim"
+
+      -- Visualize undo tree
+      use "simnalamburt/vim-mundo"
+
+      -- Show register contents when needed
+      use "tversteeg/registers.nvim"
 
       --- Auto-cwd to project root directory:
       -- https://github.com/ygm2/rooter.nvim
@@ -350,7 +356,7 @@ require("packer").startup(
         requires = {
           "neovim/nvim-lspconfig",
           "hrsh7th/cmp-nvim-lsp",
-          -- 'hrsh7th/cmp-buffer',
+          "hrsh7th/cmp-buffer",
           "hrsh7th/cmp-path",
           "hrsh7th/cmp-cmdline",
           "hrsh7th/cmp-vsnip",
@@ -362,13 +368,19 @@ require("packer").startup(
         -- end
       }
 
-      -- -- Autopairing: https://github.com/windwp/nvim-autopairs
-      -- use {
-      --   "windwp/nvim-autopairs",
-      --   config = function()
-      --     require("nvim-autopairs").setup()
-      --   end
-      -- }
+      -- Autopairing: https://github.com/windwp/nvim-autopairs
+      use {
+        "windwp/nvim-autopairs",
+        config = function()
+          require("nvim-autopairs").setup()
+          -- {
+          --   check_ts = true,
+          --   ts_config = {
+          --     javascript = {"template_string"}
+          --   }
+          -- }()
+        end
+      }
 
       -- -- Surround stuff: https://github.com/blackCauldron7/surround.nvim
       -- -- This doesn't really appear to work.

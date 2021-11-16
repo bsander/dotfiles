@@ -114,8 +114,6 @@ brew "zsh"
 cask "1password"
 # Application launcher and productivity software
 cask "alfred"
-# Inspect application bundles
-cask "apparency"
 # Application uninstaller
 cask "appcleaner"
 # Web browser focusing on privacy
@@ -173,16 +171,6 @@ cask "plex"
 cask "postico"
 # Collaboration platform for API development
 cask "postman"
-# QuickLook plug-in that renders source code with syntax highlighting
-cask "qlcolorcode"
-# Display image info and preview unsupported formats in QuickLook
-cask "qlimagesize"
-# QuickLook generator for Markdown files
-cask "qlmarkdown"
-cask "qlstephen"
-cask "qlvideo"
-cask "quicklook-json"
-cask "quicklookase"
 # Instant messaging application focusing on security
 cask "signal"
 # Team communication and collaboration software
@@ -202,9 +190,11 @@ cask "whatsapp"
 # Video communication and virtual meeting platform
 cask "zoom"
 mas "DaisyDisk", id: 411643860
+mas "DiceGen", id: 980521593
 mas "Folder Tidy", id: 486626129
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
+mas "iPreview", id: 1519213509
 mas "Irvue", id: 1039633667
 mas "Keynote", id: 409183694
 mas "Meeter", id: 1510445899

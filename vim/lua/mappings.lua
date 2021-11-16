@@ -18,7 +18,8 @@ map("n", "k", "gk", options)
 -- Redo last action
 map("n", "U", "<C-r>", options)
 -- Clear current search
-map("n", "<S-Esc>", ':let @/ = ""<CR><Esc>', options)
+map("n", "<Esc>", "<CMD>nohlsearch<CR>", options)
+-- map("n", "<S-Esc>", ':let @/ = ""<CR><Esc>', options)
 -- Consistency in search direction
 map("n", "n", "/<CR>", options)
 map("n", "N", "?<CR>", options)
@@ -78,17 +79,17 @@ map("i", "<C-a>", "<Home>", options)
 map("i", "<C-e>", "<End>", options)
 map("i", "<C-d>", "<Delete>", options)
 map("i", "<C-c>", "<Esc>", options) -- CTRL-C doesn't trigger the InsertLeave autocmd
--- Intuitive surround in insert mode
-map("i", "''", "<C-s>'", roptions)
-map("i", '""', '<C-s>"', roptions)
-map("i", "``", "<C-s>`", roptions)
-map("i", "((", "<C-s>)", roptions)
-map("i", "))", "<C-s><C-s>(", roptions)
-map("i", "{{", "<C-s>{", roptions)
-map("i", "}}", "<C-s><C-s>{", roptions)
-map("i", "[[", "<C-s>[", roptions)
-map("i", "]]", "<C-s><C-s>[", roptions)
-map("i", "<<", "<><Left>", roptions)
+-- -- Intuitive surround in insert mode
+-- map("i", "''", "<C-s>'", roptions)
+-- map("i", '""', '<C-s>"', roptions)
+-- map("i", "``", "<C-s>`", roptions)
+-- map("i", "((", "<C-s>)", roptions)
+-- map("i", "))", "<C-s><C-s>(", roptions)
+-- map("i", "{{", "<C-s>{", roptions)
+-- map("i", "}}", "<C-s><C-s>{", roptions)
+-- map("i", "[[", "<C-s>[", roptions)
+-- map("i", "]]", "<C-s><C-s>[", roptions)
+-- map("i", "<<", "<><Left>", options)
 
 -- Move lines around
 map("n", "K", [[:m-2<CR>]], options)
@@ -147,7 +148,7 @@ map("n", "<leader>fR", ":Rename ", options)
 map("n", "<leader>fa", ":wall<CR>", options)
 
 -- Delete files
-map("n", "<leader>fD", ':call delete(expand("%")) | BufferClose!<CR>', options)
+map("n", "<leader>fD", ':call delete(expand("%")) | Bclose!<CR>', options)
 
 -- Find files
 map("n", "<leader>fr", ":FZFHistory<CR>", options) -- Recently opened
@@ -241,6 +242,7 @@ map("", "<Leader>tn", "<CMD>set invnumber<CR>", options)
 map("", "<Leader>tw", "<CMD>set invwrap<CR>", options)
 map("", "<Leader>tf", "<CMD>Filetypes<CR>", options)
 map("", "<Leader>tq", "<CMD>TroubleToggle<CR>", options)
+map("", "<Leader>tu", "<CMD>MundoToggle<CR>", options)
 -- Navigate errors/diagnostics
 map("", "<Leader>e", "<CMD>TroubleToggle lsp_document_diagnostics<CR>", options) -- Code action
 map("", "<Leader>E", "<CMD>TroubleToggle lsp_workspace_diagnostics<CR>", options) -- Code action
