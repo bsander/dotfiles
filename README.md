@@ -2,7 +2,7 @@
 
 ## Usage
 
-Most operations are powered my `make`. Try running `make help`!
+Most operations are powered by [`make`](https://www.gnu.org/software/make/manual/make.html). Try running `make help`!
 
 To review what each target does, run `make -n <target>`.
 
