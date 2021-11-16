@@ -29,10 +29,10 @@ o.hidden = true -- keep hidden buffers
 o.hlsearch = true -- don't highlight matching search
 o.ignorecase = true -- case insensitive on search
 o.inccommand = "split" -- incrementally show result of command
--- o.listchars      = { eol = "↲", tab= "» " } -- set listchars
 o.lazyredraw = false -- lazyredraw to make macro faster -- Disabled because of https://github.com/neovim/neovim/issues/11806
 o.laststatus = 2 -- always enable statusline
 o.list = false -- display listchars
+o.listchars = {eol = "↲", tab = "» "} -- set listchars
 o.mouse = "a" -- enable mouse support
 o.number = true -- show line number in gutter
 o.relativenumber = true -- use relative file numbers
