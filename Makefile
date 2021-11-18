@@ -29,7 +29,7 @@ update: ## Update packages from NPM, Homebrew and ZSH
 	npm upgrade -g
 	@echo Now run: z4h update
 
-link: link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles
+link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles
 
 .PHONY: help
 help: ## Show this help
@@ -64,3 +64,5 @@ link-nvim: $(CURDIR)/vim
 	ln -snf "$<" $(HOME)/.vim
 	ln -snf "$<" $(HOME)/.config/nvim
 
+$(HOME)/.zshlocal:
+	cp -n $(CURDIR)/zsh/local.zsh $(HOME)/.zshlocal

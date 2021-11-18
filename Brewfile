@@ -3,6 +3,7 @@ tap "aws/tap"
 tap "clojure/tools"
 tap "dart-lang/dart"
 tap "equalsraf/neovim-qt"
+tap "eth-p/software"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -110,6 +111,8 @@ brew "yarn"
 brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Bash scripts that integrate bat with various command-line tools
+brew "eth-p/software/bat-extras"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Application launcher and productivity software
