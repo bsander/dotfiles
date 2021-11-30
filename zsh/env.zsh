@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+## This file is sourced at each zsh invocation
+## https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
+
 ## Set PATH
 
 # Go: Subdir within $PROJECTS
@@ -17,15 +20,10 @@ export PATH="$DOTFILES/bin:$GOPATH/bin:$ANDROID_HOME/platform-tools:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 command -v fnm >/dev/null 2>&1 && eval "$(fnm env --shell zsh)"
 
-fpath=(
-  "$DOTFILES/zsh/functions"
-  "$DOTFILES/zsh/completions"
-  "$(brew --prefix)/share/zsh/site-functions"
-  $fpath
-)
+export FPATH="$DOTFILES/zsh/functions:$DOTFILES/zsh/completions:$(brew --prefix)/share/zsh/site-functions:$FPATH"
 
 # Load files from $DOTFILES/zsh/functions when needed
-autoload ${fpath[1]}/*(:t)
+[[ -n "$ZSH_VERSION" ]] && autoload "${fpath[1]}/*(:t)"
 
 ## Set locale properties
 [[ -z "$LANG" ]] && export LANG="en_US.UTF-8"
@@ -43,21 +41,22 @@ export BROWSER="open"
 # export PAGER=
 eval "$(batpipe)"
 
-export MANPAGER="batman"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export EDITOR="nvim"
-# export VISUAL=
+export EDITOR="nvr"
+export VISUAL="nvr"
+## Instead of GIT_EDITOR, see git config --global core.editor instead
 # export GIT_EDITOR=
 
 # Neovim remote socket
-# export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # FZF global options
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow"
 export FZF_DEFAULT_OPTS="--height=40%"
 
 # bat syntax highlighting respects active colorscheme
-export BAT_THEME="ansi"
+export BAT_THEME="base16"
 
 # Homebrew cask: install to system-wide applications directory
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"

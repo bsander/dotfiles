@@ -34,14 +34,14 @@ o.laststatus = 2 -- always enable statusline
 o.list = false -- display listchars
 o.listchars = {eol = "↲", tab = "» "} -- set listchars
 o.mouse = "a" -- enable mouse support
-o.number = true -- show line number in gutter
-o.relativenumber = true -- use relative file numbers
+o.number = false -- show line number in gutter
+o.relativenumber = false -- use relative file numbers
 o.pumheight = 10 -- limit completion items
 o.re = 0 -- set regexp engine to auto
 o.showmode = false -- don't show mode
 o.shortmess = "csa" -- disable some stuff on shortmess
 -- o.shell          = "/usr/bin/bash" -- use bash instead of zsh
-o.signcolumn = "no" -- enable sign column all the time, 4 column
+o.signcolumn = "auto" -- enable sign column all the time, 4 column
 o.scrolloff = 2 -- make scrolling better
 o.sidescroll = 2 -- make scrolling better
 o.shiftwidth = 2 -- set indentation width

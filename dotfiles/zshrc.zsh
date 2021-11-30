@@ -11,7 +11,7 @@ zstyle ':z4h:' auto-update      'ask'
 zstyle ':z4h:' auto-update-days '28'
 
 # Move prompt to the bottom when zsh starts and on Ctrl+L.
-zstyle ':z4h:' prompt-at-bottom 'yes'
+# zstyle ':z4h:' prompt-at-bottom 'no'
 
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard  'mac'
@@ -33,7 +33,7 @@ zstyle ':z4h:' iterm2-integration 'yes'
 
 # Enable ('yes') or disable ('no') automatic teleportation of z4h over
 # SSH when connecting to these hosts.
-zstyle ':z4h:ssh:htpc.local'   enable 'yes'
+# zstyle ':z4h:ssh:htpc.local'   enable 'yes'
 # The default value if none of the overrides above match the hostname.
 zstyle ':z4h:ssh:*'                   enable 'no'
 
@@ -52,8 +52,8 @@ z4h install knu/zsh-manydots-magic || return
 # z4h install chitoku-k/fzf-zsh-completions || return
 # z4h install bigH/git-fuzzy || return
 
-## Print a random line from tips & tricks file
-grep -v '^#|^\s*$' "$DOTFILES/tipstricks.ini" | "$(command -v gshuf || command -v shuf)" -n 1 -
+## Print a random line from tips & tricks file (announce)
+rg -v '^#|^\s*$' "$DOTFILES/tipstricks.ini" | "$(command -v gshuf || command -v shuf)" -n 1 -
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable until Zsh
@@ -84,9 +84,6 @@ zle -N self-insert url-quote-magic
 
 # # Auto-expand aliases (otherwise use Ctrl-Space)
 z4h source "$Z4H/ohmyzsh/ohmyzsh/plugins/globalias/globalias.plugin.zsh"
-
-# # Color manpages
-z4h source "$Z4H/ohmyzsh/ohmyzsh/plugins/colored-man-pages/colored-man-pages.plugin.zsh"
 
 ## FZF Completions
 # z4h source "$Z4H/chitoku-k/fzf-zsh-completions/fzf-zsh-completions.plugin.zsh"
@@ -138,9 +135,6 @@ autoload -Uz zmv
 # Define functions and completions.
 function mcd() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
-
-## Invoke editor fn
-e() { "$VISUAL" "${@:-.}"; }
 
 ## Dotfiles related
 alias c=zi
@@ -202,7 +196,7 @@ alias yr="yarn run"
 alias yw="yarn workspace"
 alias yww="yarn workspaces run"
 
-alias ssh="z4h ssh"
+# alias ssh="z4h ssh"
 
 ## Substitute apps
 alias vim=nvim

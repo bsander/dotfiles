@@ -24,6 +24,8 @@ map("n", "<Esc>", "<CMD>nohlsearch<CR>", options)
 map("n", "n", "/<CR>", options)
 map("n", "N", "?<CR>", options)
 map("n", "?", "/<CR>", options)
+-- FZF find word under cursor
+map("n", "g*", "<CMD>FzfLua grep_cword<CR>", options)
 -- Swap 0 and ^
 map("n", "0", "^", options)
 map("n", "^", "0", options)
@@ -134,8 +136,13 @@ map("", "]cc", "o<Esc>gcA", roptions)
 -- [[f ]]f: Recursive folding
 
 -- Editing and sourcing of Neovim config
-map("n", "<leader>ve", ":edit $MYVIMRC<CR>", options)
-map("n", "<leader>vs", ":write | luafile $MYVIMRC<CR>", options)
+map(
+  "n",
+  "<leader>ve",
+  "<CMD>lua require('fzf-lua').files({ cwd = vim.fn.fnamemodify(vim.env.DOTFILES or vim.env.MYVIMRC, ':p:h') })<CR>",
+  options
+)
+map("n", "<leader>vs", [[:write | PackerCompile | luafile "$MYVIMRC"<CR>]], options)
 map("n", "<leader>vi", ":PackerInstall<CR>", options)
 map("n", "<leader>vu", ":PackerSync<CR>", options)
 
@@ -151,24 +158,30 @@ map("n", "<leader>fa", ":wall<CR>", options)
 map("n", "<leader>fD", ':call delete(expand("%")) | Bclose!<CR>', options)
 
 -- Find files
-map("n", "<leader>fr", ":FZFHistory<CR>", options) -- Recently opened
-map("n", "<leader>fg", ":GFiles?<CR>", options) -- Changed files in Git
-map("n", "<leader>ff", ":FZFFiles<CR>", options) -- in cwd
+map("n", "<leader>fr", "<CMD>lua require('fzf-lua').oldfiles({ cwd_only = true	})<CR>", options) -- Recently opened
+map("n", "<leader>fR", ":FzfLua oldfiles<CR>", options) -- Recently opened
+map("n", "<leader>fg", ":FzfLua git_status<CR>", options) -- Changed files in Git
+map("n", "<leader>ff", ":FzfLua files<CR>", options) -- in cwd
 map("n", "<leader>fp", [[<cmd>lua FZFProject()<CR>]], options) -- go to directory from `z`
 map("n", "<leader>f/", [[<cmd>lua FZFGrepDir()<CR>]], options) -- go to directory from `z`
-map("n", "<leader>fb", ":Telescope file_browser<CR>", options) -- Browse files
-map("n", "<leader>ft", ":CHADopen<CR>", options) -- Browse files
+-- map("n", "<leader>fb", ":Telescope file_browser<CR>", options) -- Browse files
+map("n", "<leader>ft", ":NvimTreeFindFileToggle<CR>", options) -- Browse files
 
 -- Lists of files
-map("n", "<leader>fq", ":FZFQuickFix<CR>", options) -- Navigate quickfix content
-map("n", "<leader>fl", ":FZFLocList<CR>", options) -- Navigate loclist content
+map("n", "<leader>fq", ":FzfLua quickfix<CR>", options) -- Navigate quickfix content
+map("n", "<leader>fl", ":FzfLua loclist<CR>", options) -- Navigate loclist content
 
 -- Find inside files
-map("n", "<leader>/", ":FZFRg<CR>", options) -- in cwd
-map("n", "<leader>;", ":FZFBLines<CR>", options) -- Current buffer
+map("n", "<leader>/", "<CMD>lua require('fzf-lua').grep({ fzf_cli_args = '--nth 2..', search = '' })<CR>", options) -- in cwd
+map(
+  "n",
+  "<leader>;",
+  "<CMD>lua require('fzf-lua').grep_curbuf({ fzf_opts = { ['--with-nth'] =  '2,4..'}, search = '' })<CR>",
+  options
+) -- Current buffer
 
 -- Navigate buffers
-map("n", "<leader><Tab>", ":Buffers<CR>", options)
+map("n", "<leader><Tab>", ":FzfLua buffers<CR>", options)
 map("n", "<C-->", "<CMD>bprevious<CR>", options)
 map("n", "<C-=>", "<CMD>bnext<CR>", options)
 -- map("n", "<Tab>", "<CMD>BufferLineCycleNext<CR>", options)
@@ -196,10 +209,10 @@ map("n", "<Leader>gb", ":TigBlame<CR>", options)
 -- <Leader>gm: Git messenger (show line history info)
 
 -- Commands
-map("n", "<Leader><Leader>", "<CMD>History:<CR>", options)
-map("n", "<Leader>hh", "<CMD>Helptags<CR>", options)
-map("n", "::", "<CMD>Commands<CR>", options)
-map("n", "<Leader>hb", "<CMD>Maps<CR>", options)
+map("n", "<Leader><Leader>", "<CMD>FzfLua command_history<CR>", options)
+map("n", "<Leader>hh", "<CMD>FzfLua help_tags<CR>", options)
+map("n", "::", "<CMD>FzfLua commands<CR>", options)
+map("n", "<Leader>hb", "<CMD>FzfLua keymaps<CR>", options)
 map("n", "<Leader>hm", "<CMD>Bufferize verbose map<CR>", options) -- List all normal mode maps
 map("n", "<Leader>hi", "<CMD>Bufferize verbose imap<CR>", options) -- List all insert mode maps
 
@@ -224,12 +237,20 @@ map("n", "<Leader>wL", "<C-W>L", options) -- Move window right
 -- This can be smarter: https://github.com/neovim/nvim-lspconfig#keybindings-and-completion
 map("n", "gh", "<CMD>lua vim.lsp.buf.hover()<CR>", options) -- Show hover information
 map("n", "gH", "<CMD>lua vim.lsp.buf.signature_help()<CR>", options) -- Signature help?
-map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", options) -- Go to definition
-map("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", options) -- Go to implementation(s)
-map("n", "gt", "<CMD>lua vim.lsp.buf.type_definition()<CR>", options) -- Type definition
-map("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", options) -- Go to references
 map("n", "gR", "<CMD>lua vim.lsp.buf.rename()<CR>", options) -- Rename
-map("n", "g.", "<CMD>lua vim.lsp.buf.code_action()<CR>", options) -- Code action
+-- map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", options) -- Go to definition
+-- map("n", "gi", "<CMD>lua vim.lsp.buf.implementation()<CR>", options) -- Go to implementation(s)
+-- map("n", "gt", "<CMD>lua vim.lsp.buf.type_definition()<CR>", options) -- Type definition
+-- map("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", options) -- Go to references
+-- map("n", "g.", "<CMD>lua vim.lsp.buf.code_action()<CR>", options) -- Code action
+map("n", "gd", "<CMD>FzfLua lsp_definitions<CR>", options) -- Go to definition
+map("n", "gD", "<CMD>FzfLua lsp_declarations<CR>", options) -- Go to definition
+map("n", "gi", "<CMD>FzfLua lsp_implementations<CR>", options) -- Go to implementation(s)
+map("n", "gt", "<CMD>FzfLua lsp_typedefs<CR>", options) -- Type definition
+map("n", "gr", "<CMD>FzfLua lsp_references<CR>", options) -- Go to references
+map("n", "g.", "<CMD>FzfLua lsp_code_actions<CR>", options) -- Code action
+map("n", "g;", "<CMD>lua require'fzf-lua'.lsp_document_symbols({ fzf_cli_args = '--with-nth 2..' }) <CR>", options) -- Code action
+map("n", "g/", "<CMD>lua require'fzf-lua'.lsp_live_workspace_symbols({ fzf_cli_args = '--nth 2..' }) <CR>", options) -- Code action
 
 -- Format buffer
 map("n", "<Leader>F", "<CMD>Format<CR>", options)
@@ -237,10 +258,10 @@ map("n", "<Leader>F", "<CMD>Format<CR>", options)
 map("n", "<Leader>gg", "<CMD>TigStatus<CR>", options)
 
 -- Toggles and UI
-map("", "<Leader>tc", "<CMD>Colors<CR>", options)
+map("", "<Leader>tc", "<CMD>FzfLua colorschemes<CR>", options)
 map("", "<Leader>tn", "<CMD>set invnumber<CR>", options)
 map("", "<Leader>tw", "<CMD>set invwrap<CR>", options)
-map("", "<Leader>tf", "<CMD>Filetypes<CR>", options)
+map("", "<Leader>tf", "<CMD>FzfLua filetypes<CR>", options)
 map("", "<Leader>tq", "<CMD>TroubleToggle<CR>", options)
 map("", "<Leader>tu", "<CMD>MundoToggle<CR>", options)
 -- Navigate errors/diagnostics

@@ -1,5 +1,5 @@
 -- Preview theme adapts to vim theme
-vim.env.BAT_THEME = "ansi"
+vim.env.BAT_THEME = "base16"
 
 -- *bones configs
 local all_bones_config = {

@@ -30,6 +30,12 @@ require("packer").startup(
       -- use lua keymaps: https://github.com/svermeulen/vimpeccable
       -- use 'svermeulen/vimpeccable'
 
+      -- Open files in the same cursor position as they were closed
+      use "farmergreg/vim-lastplace"
+
+      -- Open all kinds of urls
+      use "stsewd/gx-extended.vim"
+
       -- useful lua functions https://github.com/nvim-lua/plenary.nvim
       use "nvim-lua/plenary.nvim"
 
@@ -202,7 +208,20 @@ require("packer").startup(
       use "dbakker/vim-projectroot"
 
       -- File explorer/tree
-      use {"ms-jpq/chadtree", branch = "chad", run = ":CHADdeps"}
+      -- use {"ms-jpq/chadtree", branch = "chad", run = ":CHADdeps"}
+      use {
+        "kyazdani42/nvim-tree.lua",
+        requires = {
+          "kyazdani42/nvim-web-devicons" -- optional, for file icon
+        },
+        config = function()
+          require "nvim-tree".setup {}
+        end
+      }
+      g.nvim_tree_respect_buf_cwd = 1
+      g.nvim_tree_add_trailing = 1
+      g.nvim_tree_group_empty = 1
+      g.nvim_tree_git_hl = 1
 
       -- Building block for syntax highlighting and more: https://github.com/nvim-treesitter/nvim-treesitter
       use {
@@ -258,15 +277,16 @@ require("packer").startup(
       --   --   require("lspfuzzy").setup {}
       --   -- end
       -- }
-      use {
-        "gfanto/fzf-lsp.nvim",
-        requires = {
-          "neovim/nvim-lspconfig"
-        },
-        config = function()
-          require "fzf_lsp".setup()
-        end
-      }
+
+      -- use {
+      --   "gfanto/fzf-lsp.nvim",
+      --   requires = {
+      --     "neovim/nvim-lspconfig"
+      --   },
+      --   config = function()
+      --     require "fzf_lsp".setup()
+      --   end
+      -- }
 
       use {
         "folke/trouble.nvim",
@@ -276,13 +296,13 @@ require("packer").startup(
         end
       }
 
-      use {
-        "chengzeyi/fzf-preview.vim",
-        requires = {
-          "junegunn/fzf",
-          "junegunn/fzf.vim"
-        }
-      }
+      -- use {
+      --   "chengzeyi/fzf-preview.vim",
+      --   requires = {
+      --     "junegunn/fzf",
+      --     "junegunn/fzf.vim"
+      --   }
+      -- }
 
       -- Improved fzf.vim written in lua https://github.com/ibhagwan/fzf-lua
       use {
@@ -290,7 +310,45 @@ require("packer").startup(
         requires = {
           "vijaymarupudi/nvim-fzf",
           "kyazdani42/nvim-web-devicons"
-        } -- optional for icons
+        }, -- optional for icons
+        config = function()
+          require "fzf-lua".setup {
+            winopts = {
+              preview = {
+                -- default     = 'bat',           -- override the default previewer?
+                -- default uses the 'builtin' previewer
+                -- border = "border", -- border|noborder, applies only to
+                -- native fzf previewers (bat/cat/git/etc)
+                vertical = "down:60%", -- up|down:size
+                horizontal = "right:60%", -- right|left:size
+                layout = "vertical" -- horizontal|vertical|flex
+                -- flip_columns = 120, -- #cols to switch to horizontal on flex
+                -- Only valid with the builtin previewer:
+                -- title = true, -- preview border title (file/buf)?
+                -- applies only when scrollbar = 'border'
+                -- winopts = {
+                --   -- builtin previewer window options
+                --   number = true,
+                --   relativenumber = false,
+                --   cursorline = true,
+                --   cursorlineopt = "both",
+                --   cursorcolumn = false,
+                --   signcolumn = "no",
+                --   list = false,
+                --   foldenable = false,
+                --   foldmethod = "manual"
+                -- }
+              }
+            },
+            previewers = {
+              git_diff = {
+                cmd = "git diff",
+                args = "--color",
+                pager = "delta --theme base16 --light" -- if you have `delta` installed
+              }
+            }
+          }
+        end
       }
 
       -- Better quickfix interaction
@@ -320,8 +378,8 @@ require("packer").startup(
 
       -- Bufferize command output (like :messages): https://github.com/AndrewRadev/bufferize.vim
       use "AndrewRadev/bufferize.vim"
-      g.bufferize_command = "edit"
-      g.bufferize_keep_buffers = 1
+      g.bufferize_command = "enew"
+      g.bufferize_keep_buffers = 0
 
       -- HTTP client
       use {
@@ -371,13 +429,15 @@ require("packer").startup(
       use {
         "windwp/nvim-autopairs",
         config = function()
-          require("nvim-autopairs").setup()
-          -- {
-          --   check_ts = true,
-          --   ts_config = {
-          --     javascript = {"template_string"}
-          --   }
-          -- }()
+          require("nvim-autopairs").setup(
+            {
+              fast_wrap = {},
+              check_ts = true
+              --   ts_config = {
+              --     javascript = {"template_string"}
+              --   }
+            }
+          )
         end
       }
 

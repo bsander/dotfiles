@@ -4,8 +4,8 @@ local env = vim.env
 env.FZF_DEFAULT_COMMAND = "rg --files --hidden --follow"
 env.FZF_DEFAULT_OPTS = "--cycle --reverse --exact --inline-info --tiebreak=begin,length,index"
 
-g.fzf_preview_window = {"down:50%:+{2}-/2", "ctrl-o"}
-g.fzf_layout = {window = {width = 0.8, height = 0.8}}
+-- g.fzf_preview_window = {"down:50%:+{2}-/2", "ctrl-o"}
+-- g.fzf_layout = {window = {width = 0.8, height = 0.8}}
 g.fzf_history_dir = "~/.local/share/fzf-history"
 -- g.fzf_action = {
 --   ["ctrl-l"] = function(lines)
@@ -50,8 +50,7 @@ function _G.FZFProject()
         )
       )
       if choice then
-        vim.cmd(string.format("cd %s", choice[1]))
-        vim.cmd(":FZFFiles")
+        vim.cmd(string.format("lua require('fzf-lua').oldfiles({ cwd = '%s', cwd_only = true }) ", choice[1]))
       end
     end
   )()
@@ -70,8 +69,7 @@ function _G.FZFGrepDir()
         )
       )
       if choice then
-        vim.cmd(string.format("cd %s", choice[1]))
-        vim.cmd(":FZFRg")
+        vim.cmd(string.format("lua require('fzf-lua').grep({ cwd = '%s' }) ", choice[1]))
       end
     end
   )()

@@ -18,6 +18,7 @@ tap "kryptco/tap"
 tap "railwaycat/emacsmacport"
 tap "rogual/neovim-dot-app"
 tap "schniz/tap"
+tap "tavianator/tap"
 tap "trinitronx/pcloud"
 tap "uptech/oss"
 tap "wagoodman/dive"
@@ -85,6 +86,8 @@ brew "moreutils"
 brew "ncdu"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Control nvim processes using `nvr` command-line tool
+brew "neovim-remote"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # Command-line YAML and XML processor that wraps jq
@@ -113,12 +116,16 @@ brew "zoxide"
 brew "zsh"
 # Bash scripts that integrate bat with various command-line tools
 brew "eth-p/software/bat-extras"
+# Breadth-first version of find.
+brew "tavianator/tap/bfs"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Application launcher and productivity software
 cask "alfred"
 # Application uninstaller
 cask "appcleaner"
+# Video calls designed for energy, ideas and action
+cask "around"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Voice and text chat software
@@ -141,6 +148,8 @@ cask "font-juliamono"
 cask "google-chrome"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
+# Optimise and personalise your Jabra headset
+cask "jabra-direct"
 # Keyboard customizer
 cask "karabiner-elements"
 # Display key code, unicode value and modifier keys state for any key combination

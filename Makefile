@@ -44,7 +44,7 @@ help: ## Show this help
 
 DF_DIR = $(CURDIR)/dotfiles
 
-DFS_HOME = curlrc.ini ripgreprc gitconfig.ini gitignore.txt hushlogin.txt ignore.txt p10k.zsh tigrc.ini zshrc.zsh zshenv.zsh
+DFS_HOME = curlrc.ini ripgreprc gitconfig.ini gitignore.txt hushlogin.txt ignore.txt p10k.zsh tigrc.ini zshrc.zsh zshenv.zsh profile.bash
 DFS_CONFIG = fish kitty
 
 ## Link these dotfiles to $HOME
