@@ -50,7 +50,7 @@ function _G.FZFProject()
         )
       )
       if choice then
-        vim.cmd(string.format("lua require('fzf-lua').oldfiles({ cwd = '%s', cwd_only = true }) ", choice[1]))
+        vim.cmd(string.format("lua require('fzf-lua').files({ cwd = '%s' }) ", choice[1]))
       end
     end
   )()

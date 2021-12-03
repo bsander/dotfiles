@@ -126,7 +126,7 @@ require("packer").startup(
       }
 
       -- Show highlight groups under cursor
-      use "dylnmc/synstack.vim"
+      -- use "dylnmc/synstack.vim"
       -- Colorscheme creator
       use "rktjmp/lush.nvim"
       -- Homegrown colorscheme TODO:: fix path
@@ -185,7 +185,7 @@ require("packer").startup(
             {
               signcolumn = false,
               numhl = true,
-              keymaps = nil -- No key mapping by default
+              keymaps = {} -- No key mapping by default
             }
           )
         end
@@ -196,6 +196,9 @@ require("packer").startup(
 
       -- Visualize undo tree
       use "simnalamburt/vim-mundo"
+
+      -- make xdc actually delete, and allow to introduce m for "move"
+      use "svermeulen/vim-cutlass"
 
       -- Show register contents when needed
       use "tversteeg/registers.nvim"
