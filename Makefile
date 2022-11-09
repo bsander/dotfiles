@@ -27,6 +27,7 @@ update: ## Update packages from NPM, Homebrew and ZSH
 	brew upgrade
 	brew bundle dump --describe --force
 	npm upgrade -g
+	tldr --update
 	@echo Now run: z4h update
 
 link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles

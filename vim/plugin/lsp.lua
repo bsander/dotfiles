@@ -21,16 +21,16 @@ local lsp_installer = require("nvim-lsp-installer")
 -- vim.lsp.handlers["callHierarchy/incomingCalls"] = require "fzf_lsp".incoming_calls_handler
 -- vim.lsp.handlers["callHierarchy/outgoingCalls"] = require "fzf_lsp".outgoing_calls_handler
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    underline = true,
-    virtual_text = true,
-    signs = true,
-    update_in_insert = false
-  }
-)
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+--   vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics,
+--   {
+--     underline = true,
+--     virtual_text = true,
+--     signs = true,
+--     update_in_insert = false
+--   }
+-- )
 
 local eslint = {
   lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",

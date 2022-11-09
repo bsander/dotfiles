@@ -1,6 +1,3 @@
--- Set this to the shell value of NVIM_LISTEN_ADDRESS to be able to pick up on existing sessions
-vim.cmd([[silent! call serverstart('/tmp/nvimsocket')]])
-
 local disabled_built_ins = {
   "netrw",
   "netrwPlugin",
@@ -49,3 +46,6 @@ if not vim.tbl_isempty(errors) then
     print(v)
   end
 end
+
+-- Set this to the shell value of NVIM_LISTEN_ADDRESS to be able to pick up on existing sessions
+vim.cmd([[silent! call serverstart('/tmp/nvimsocket')]])

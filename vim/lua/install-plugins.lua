@@ -2,14 +2,22 @@ local execute = vim.api.nvim_command
 local fn = vim.fn
 local g = vim.g
 
+-- Auto-compile packer when this file changes
+vim.cmd(
+  [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost install-plugins.lua source <afile> | PackerCompile
+  augroup end
+]]
+)
+
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path})
   execute "packadd packer.nvim"
 end
-
-vim.cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 
 require("packer").startup(
   {
@@ -33,11 +41,19 @@ require("packer").startup(
       -- Open files in the same cursor position as they were closed
       use "farmergreg/vim-lastplace"
 
+      -- Save files to new directories
+      use "DataWraith/auto_mkdir"
+
       -- Open all kinds of urls
       use "stsewd/gx-extended.vim"
 
       -- useful lua functions https://github.com/nvim-lua/plenary.nvim
       use "nvim-lua/plenary.nvim"
+
+      -- simple vim.ui* hooks
+      use "stevearc/dressing.nvim"
+
+      -- Support LSP colors in all themes use "folke/lsp-colors.nvim"
 
       -- -- Telescope: Find, Filter, Preview, Pick: https://github.com/nvim-telescope/telescope.nvim
       -- use {
@@ -247,6 +263,20 @@ require("packer").startup(
       -- treesitter textobject helper
       use "mfussenegger/nvim-ts-hint-textobject"
 
+      -- Other textobjects
+      use {
+        "sgur/vim-textobj-parameter",
+        requires = "kana/vim-textobj-user"
+      }
+      use {
+        "glts/vim-textobj-comment",
+        requires = "kana/vim-textobj-user"
+      }
+      use {
+        "kana/vim-textobj-entire",
+        requires = "kana/vim-textobj-user"
+      }
+
       -- Glow for markdown: https://github.com/npxbr/glow.nvim
       -- use {"npxbr/glow.nvim", branch = "main", run = ":GlowInstall"}
 
@@ -316,6 +346,7 @@ require("packer").startup(
         }, -- optional for icons
         config = function()
           require "fzf-lua".setup {
+            fzf_opts = {["--history"] = "$HOME/.fzf-lua-history"},
             winopts = {
               preview = {
                 -- default     = 'bat',           -- override the default previewer?
@@ -349,6 +380,12 @@ require("packer").startup(
                 args = "--color",
                 pager = "delta --theme base16 --light" -- if you have `delta` installed
               }
+            },
+            keymaps = {
+              fzf = {
+                ["ctrl-p"] = "previous-history",
+                ["ctrl-n"] = "next-history"
+              }
             }
           }
         end
@@ -357,13 +394,13 @@ require("packer").startup(
       -- Better quickfix interaction
       use {"kevinhwang91/nvim-bqf"}
 
-      -- https://www.reddit.com/r/neovim/comments/nq70dt/signature_help_using_new_open_floating_preview_api/
-      use {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-          require "lsp_signature".on_attach()
-        end
-      }
+      -- -- https://www.reddit.com/r/neovim/comments/nq70dt/signature_help_using_new_open_floating_preview_api/
+      -- use {
+      --   "ray-x/lsp_signature.nvim",
+      --   config = function()
+      --     require "lsp_signature".on_attach()
+      --   end
+      -- }
 
       -- Generate web links to current line in repo
       use {

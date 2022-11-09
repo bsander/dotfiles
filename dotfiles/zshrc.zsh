@@ -10,8 +10,11 @@ zstyle ':z4h:' auto-update      'ask'
 # Ask whether to auto-update this often; has no effect if auto-update is 'no'.
 zstyle ':z4h:' auto-update-days '28'
 
+# Don't start tmux.
+zstyle ':z4h:' start-tmux 'no'
+
 # Move prompt to the bottom when zsh starts and on Ctrl+L.
-# zstyle ':z4h:' prompt-at-bottom 'no'
+zstyle ':z4h:' prompt-at-bottom 'no'
 
 # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:bindkey' keyboard  'mac'
@@ -28,8 +31,8 @@ zstyle ':z4h:direnv'         enable 'no'
 # Show "loading" and "unloading" notifications from direnv.
 zstyle ':z4h:direnv:success' notify 'yes'
 
-# Enable iTerm2 integration
-zstyle ':z4h:' iterm2-integration 'yes'
+# Mark up shell's output with semantic information.
+zstyle ':z4h:' term-shell-integration 'yes'
 
 # Enable ('yes') or disable ('no') automatic teleportation of z4h over
 # SSH when connecting to these hosts.
@@ -95,6 +98,9 @@ manydots-magic
 
 ## Z: jumping to recently used directories
 eval "$(zoxide init zsh --hook prompt)"
+
+## SSH-agent
+eval "$(ssh-agent -s)" >/dev/null
 
 # Define key bindings.
 ## Useful commands:
@@ -207,6 +213,7 @@ alias ping=gping
 alias dig=dog
 alias http=xh
 alias curl=curlie
+alias nvm=fnm
 
 ## Typos
 alias brwe=brew

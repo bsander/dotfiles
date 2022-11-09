@@ -1,7 +1,7 @@
 local g = vim.g
 local map = vim.api.nvim_set_keymap
 
-local silent = true
+local silent = false
 local noremap = {noremap = true, silent = silent}
 local remap = {noremap = false, silent = silent}
 
@@ -50,7 +50,7 @@ map("", "M", "D", noremap)
 map("", "gy", '"+y', noremap)
 map("n", "gyy", '"+yy', noremap)
 map("n", "gY", '"+Y', remap)
-map("", "gm", '"+m', noremap)
+map("", "gm", '"+m', remap)
 map("n", "gmm", '"+mm', remap)
 map("n", "gM", '"+M', remap)
 map("", "gp", '"+p', noremap)
@@ -138,9 +138,9 @@ map(
   "<CMD>lua require('fzf-lua').files({ cwd = vim.fn.fnamemodify(vim.env.DOTFILES or vim.env.MYVIMRC, ':p:h') })<CR>",
   noremap
 )
-map("n", "<leader>vs", [[<CMD>write<CR><CMD>PackerCompile<CR><CMD>luafile $MYVIMRC<CR>]], noremap)
-map("n", "<leader>vi", ":PackerInstall<CR>", noremap)
-map("n", "<leader>vu", ":PackerSync<CR>", noremap)
+map("n", "<leader>vs", [[<CMD>write<CR><CMD>luafile $MYVIMRC<CR>]], noremap)
+map("n", "<leader>vi", "<CMD>PackerInstall<CR>", noremap)
+map("n", "<leader>vu", "<CMD>PackerSync<CR>", noremap)
 
 -- Save files
 map("n", "gs", "<CMD>write<CR>", noremap)
@@ -155,26 +155,21 @@ map("n", "<leader>fD", ':call delete(expand("%")) | Bclose!<CR>', noremap)
 
 -- Find files
 map("n", "<leader>fr", "<CMD>lua require('fzf-lua').oldfiles({ cwd_only = true	})<CR>", noremap) -- Recently opened
-map("n", "<leader>fR", ":FzfLua oldfiles<CR>", noremap) -- Recently opened
-map("n", "<leader>fg", ":FzfLua git_status<CR>", noremap) -- Changed files in Git
-map("n", "<leader>ff", ":FzfLua files<CR>", noremap) -- in cwd
+map("n", "<leader>fR", "<CMD>FzfLua oldfiles<CR>", noremap) -- Recently opened
+map("n", "<leader>fg", "<CMD>FzfLua git_status<CR>", noremap) -- Changed files in Git
+map("n", "<leader>ff", "<CMD>FzfLua files<CR>", noremap) -- in cwd
 map("n", "<leader>fp", [[<cmd>lua FZFProject()<CR>]], noremap) -- go to directory from `z`
 map("n", "<leader>f/", [[<cmd>lua FZFGrepDir()<CR>]], noremap) -- go to directory from `z`
 -- map("n", "<leader>fb", ":Telescope file_browser<CR>", options) -- Browse files
-map("n", "<leader>ft", ":NvimTreeFindFileToggle<CR>", noremap) -- Browse files
+map("n", "<leader>ft", "<CMD>NvimTreeFindFileToggle<CR>", noremap) -- Browse files
 
 -- Lists of files
-map("n", "<leader>fq", ":FzfLua quickfix<CR>", noremap) -- Navigate quickfix content
-map("n", "<leader>fl", ":FzfLua loclist<CR>", noremap) -- Navigate loclist content
+map("n", "<leader>fq", "<CMD>FzfLua quickfix<CR>", noremap) -- Navigate quickfix content
+map("n", "<leader>fl", "<CMD>FzfLua loclist<CR>", noremap) -- Navigate loclist content
 
 -- Find inside files
 map("n", "<leader>/", "<CMD>lua require('fzf-lua').grep({ fzf_cli_args = '--nth 2..', search = '' })<CR>", noremap) -- in cwd
-map(
-  "n",
-  "<leader>;",
-  "<CMD>lua require('fzf-lua').grep_curbuf({ fzf_opts = { ['--with-nth'] =  '2,4..'}, search = '' })<CR>",
-  noremap
-) -- Current buffer
+map("n", "<leader>;", "<CMD>lua require('fzf-lua').blines({ search = '' })<CR>", noremap) -- Current buffer
 
 -- Navigate buffers
 map("n", "<leader><Tab>", ":FzfLua buffers<CR>", noremap)
@@ -239,7 +234,7 @@ map("n", "gR", "<CMD>lua vim.lsp.buf.rename()<CR>", noremap) -- Rename
 -- map("n", "gt", "<CMD>lua vim.lsp.buf.type_definition()<CR>", options) -- Type definition
 -- map("n", "gr", "<CMD>lua vim.lsp.buf.references()<CR>", options) -- Go to references
 -- map("n", "g.", "<CMD>lua vim.lsp.buf.code_action()<CR>", options) -- Code action
-map("n", "gd", "<CMD>FzfLua lsp_definitions<CR>", noremap) -- Go to definition
+map("n", "gd", "<CMD>lua require'fzf-lua'.lsp_definitions({ jump_to_single_result = true })<CR>", noremap) -- Go to definition
 map("n", "gD", "<CMD>FzfLua lsp_declarations<CR>", noremap) -- Go to definition
 map("n", "gi", "<CMD>FzfLua lsp_implementations<CR>", noremap) -- Go to implementation(s)
 map("n", "gt", "<CMD>FzfLua lsp_typedefs<CR>", noremap) -- Type definition

@@ -11,11 +11,10 @@ export GOPATH="$PROJECTS/go"
 # https://stackoverflow.com/a/28296325
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
-
 eval "$(PATH= /usr/libexec/path_helper -s)"
-export PATH="$DOTFILES/bin:$GOPATH/bin:$ANDROID_HOME/platform-tools:$PATH"
-  # "$ANDROID_HOME/build-tools/30.0.1"
-  # "$HOME/.cargo/bin"
+export PATH="$DOTFILES/bin:$GOPATH/bin:$ANDROID_HOME/platform-tools:/opt/homebrew/opt/openjdk@11/bin:$PATH"
+# "$ANDROID_HOME/build-tools/30.0.1"
+# "$HOME/.cargo/bin"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 command -v fnm >/dev/null 2>&1 && eval "$(fnm env --shell zsh)"
@@ -43,8 +42,9 @@ eval "$(batpipe)"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-export EDITOR="nvr"
-export VISUAL="nvr"
+export EDITOR="code"
+# export EDITOR="nvim"
+export VISUAL="$EDITOR"
 ## Instead of GIT_EDITOR, see git config --global core.editor instead
 # export GIT_EDITOR=
 
@@ -53,13 +53,15 @@ export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 # FZF global options
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow"
-export FZF_DEFAULT_OPTS="--height=40%"
+# export FZF_DEFAULT_OPTS="--height=40%"
+export FZF_DEFAULT_OPTS="--height=40% --cycle --reverse --exact --inline-info --tiebreak=begin,length,index"
 
 # bat syntax highlighting respects active colorscheme
 export BAT_THEME="base16"
 
 # Homebrew cask: install to system-wide applications directory
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_NO_ENV_HINTS=1
 
 # ripgrep (rg) configuration
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
