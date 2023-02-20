@@ -4,6 +4,7 @@ tap "clojure/tools"
 tap "dart-lang/dart"
 tap "equalsraf/neovim-qt"
 tap "eth-p/software"
+tap "helix-editor/helix"
 tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -22,24 +23,34 @@ tap "tavianator/tap"
 tap "trinitronx/pcloud"
 tap "uptech/oss"
 tap "wagoodman/dive"
+# Text processing scripting language
+brew "awk"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# New way to see and navigate directory trees
+brew "broot"
 # Cross-platform make
 brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
+# Power of curl, ease of use of httpie
+brew "curlie"
+# Modern diagram scripting language that turns text to diagrams
+brew "d2"
+# Command-line DNS client
+brew "dog"
 # Modern replacement for 'ls'
 brew "exa"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Generic library support script
-brew "libtool"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
 # Fast and simple Node.js version manager
 brew "fnm"
 # Command-line fuzzy finder written in Go
@@ -60,6 +71,8 @@ brew "gnu-sed"
 brew "go"
 # Ping, but with a graph
 brew "gping"
+# Generic library support script
+brew "libtool"
 # Improved top (interactive process viewer)
 brew "htop"
 # User-friendly cURL replacement (command-line HTTP client)
@@ -68,8 +81,14 @@ brew "httpie"
 brew "httpstat"
 # Add GitHub support to git on the command-line
 brew "hub"
+# Configurable static site generator
+brew "hugo"
+# Get events and tasks from the macOS calendar database
+brew "ical-buddy"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Terminal file manager
+brew "lf"
 # Count lines of code quickly
 brew "loc"
 # Package manager for the Lua programming language
@@ -78,8 +97,8 @@ brew "luarocks"
 brew "m-cli"
 # Mac App Store command-line interface
 brew "mas"
-# Intercept, modify, replay, save HTTP/S traffic
-brew "mitmproxy"
+# Java-based project management
+brew "maven"
 # Collection of tools that nobody wrote when UNIX was young
 brew "moreutils"
 # NCurses Disk Usage
@@ -88,16 +107,16 @@ brew "ncdu"
 brew "neovim"
 # Control nvim processes using `nvr` command-line tool
 brew "neovim-remote"
-# CLI for Postgres with auto-completion and syntax highlighting
-brew "pgcli"
+# Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
+brew "prettier"
 # Command-line YAML and XML processor that wraps jq
 brew "python-yq"
-# Perl-powered file rename script with many helpful built-ins
-brew "rename"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Rust toolchain installer
 brew "rustup-init"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
 # Text interface for Git repositories
@@ -106,6 +125,8 @@ brew "tig"
 brew "tldr"
 # CLI tool that moves files or folder to the trash
 brew "trash"
+# Friendly and fast tool for sending HTTP requests
+brew "xh"
 # Fast CSV toolkit written in Rust
 brew "xsv"
 # JavaScript package manager
@@ -120,32 +141,36 @@ brew "eth-p/software/bat-extras"
 brew "tavianator/tap/bfs"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
-# Application launcher and productivity software
-cask "alfred"
 # Application uninstaller
 cask "appcleaner"
-# Video calls designed for energy, ideas and action
-cask "around"
 # Web browser focusing on privacy
 cask "brave-browser"
 # Voice and text chat software
 cask "discord"
-# App to build and share containerized applications and microservices
-cask "docker"
-# Client for the Dropbox cloud storage service
-cask "dropbox"
+# Collaborative team software
+cask "figma"
 # Web browser
 cask "firefox"
 # Screen color temperature controller
 cask "flux"
-# Unofficial native application for Fastmail
-cask "fmail"
+# Unofficial 'light' native application for Fastmail
+cask "fmail2"
+# Legible monospace font
+cask "font-comic-mono"
+# Free monospaced font with programming ligatures
 cask "font-fira-code"
+# Developer targeted fonts with a high number of glyphs
 cask "font-hack-nerd-font"
 # Monospaced typeface designed for programming in Julia
 cask "font-juliamono"
+# Finder replacement and FTP, SFTP, WebDAV and Amazon s3 client
+cask "forklift"
+# Utility to provide quick look previews for files that aren't natively supported
+cask "glance-chamburr"
 # Web browser
 cask "google-chrome"
+# Client for the Google Drive storage service
+cask "google-drive"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # Optimise and personalise your Jabra headset
@@ -154,35 +179,28 @@ cask "jabra-direct"
 cask "karabiner-elements"
 # Display key code, unicode value and modifier keys state for any key combination
 cask "key-codes"
-# GPU-based terminal emulator
-cask "kitty"
-# Sound clear in online meetings
-cask "krisp"
-# Support for Logitech G gear
-cask "logitech-g-hub"
 # File system integration
 cask "macfuse"
 # Meet, chat, call, and collaborate in just one place
 cask "microsoft-teams"
 # Online collaborative whiteboard platform
 cask "miro"
+# Tool to control external monitor brightness & volume
+cask "monitorcontrol"
 # Utility to move and zoom windows—on one display
 cask "moom"
-# Calculator and converter application
-cask "numi"
+# VPN client for secure internet access and private browsing
+cask "nordvpn"
+# Simple application that will prevent iTunes or Apple Music from launching
+cask "notunes"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
-# JDK from Oracle
-cask "oracle-jdk"
-# Client for the pCloud virtual cloud storage service
-cask "pcloud-drive"
-cask "plantronics-hub"
-# Home media player
-cask "plex"
-# GUI client for PostgreSQL databases
-cask "postico"
+# Cloud-based, multi-factor authentication
+cask "pingid"
 # Collaboration platform for API development
 cask "postman"
+# Control your tools with a few keystrokes
+cask "raycast"
 # Instant messaging application focusing on security
 cask "signal"
 # Team communication and collaboration software
@@ -191,9 +209,7 @@ cask "slack"
 cask "sonos"
 # Music streaming service
 cask "spotify"
-# Application for inspecting installer packages
-cask "suspicious-package"
-# VPN client for secure internet access and private browsing
+# OpenVPN client with AppleScript support
 cask "viscosity"
 # Open-source code editor
 cask "visual-studio-code"
@@ -201,6 +217,8 @@ cask "visual-studio-code"
 cask "whatsapp"
 # Video communication and virtual meeting platform
 cask "zoom"
+mas "Airmail", id: 918858936
+mas "Commander One", id: 1035236694
 mas "DaisyDisk", id: 411643860
 mas "DiceGen", id: 980521593
 mas "Folder Tidy", id: 486626129
@@ -213,7 +231,6 @@ mas "Meeter", id: 1510445899
 mas "Menu Bar Controller for Sonos", id: 1357379892
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Pocket", id: 568494494
+mas "rcmd", id: 1596283165
 mas "Shazam", id: 897118787
 mas "Todoist", id: 585829637
-mas "Trello", id: 1278508951

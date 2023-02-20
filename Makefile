@@ -1,7 +1,7 @@
 .PHONY: install
 .ONESHELL:
 install: ## Setup these dotfiles on a new Mac
-	@echo Installing dotfiles in $(CURDIR) with PROJECTS=$(PROJECTS)
+	@echo Installing dotfiles on $$(hostname -s) in $(CURDIR) with PROJECTS=$(PROJECTS)
 	# You can still change your mind!
 	@read -t 5 -r -s -p $$'Wait 5 seconds or press Enter to continue...\n' || true
 	# Let's make sure we have sudo permissions
@@ -20,12 +20,12 @@ install: ## Setup these dotfiles on a new Mac
 	chsh -s $$(which zsh)
 	mkdir -pv -m 0700 $(HOME)/.ssh
 	# Installing homebrew packages from bundle
-	brew bundle install
+	brew bundle --file="$(CURDIR)/devices/$$(hostname -s)/Brewfile" install
 
 .PHONY: update
 update: ## Update packages from NPM, Homebrew and ZSH
 	brew upgrade
-	brew bundle dump --describe --force
+	brew bundle --file="$(CURDIR)/devices/$$(hostname -s)/Brewfile" dump --describe --force
 	npm upgrade -g
 	tldr --update
 	@echo Now run: z4h update
