@@ -1,0 +1,325 @@
+tap "apenngrace/vulkan"
+tap "aws/tap"
+tap "clojure/tools"
+tap "dart-lang/dart"
+tap "equalsraf/neovim-qt"
+tap "heroku/brew"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-drivers"
+tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
+tap "homebrew/command-not-found"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "jason0x43/neovim-nightly"
+tap "koekeishiya/formulae"
+tap "kryptco/tap"
+tap "railwaycat/emacsmacport"
+tap "rogual/neovim-dot-app"
+tap "schniz/tap"
+tap "trinitronx/pcloud"
+tap "uptech/oss"
+tap "wagoodman/dive"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Decentralized dependency manager for Cocoa
+brew "carthage"
+# Cross-platform make
+brew "cmake"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Suite of command-line tools for converting to and working with CSV
+brew "csvkit"
+# Load/unload environment variables based on $PWD
+brew "direnv"
+# Docker Credential Helper for Amazon ECR
+brew "docker-credential-helper-ecr"
+# Select default apps for documents and URL schemes on macOS
+brew "duti"
+# Collection of reusable C++ library artifacts developed at Facebook
+brew "folly"
+# Platform built on V8 to build network applications
+brew "node"
+# LLVM bytecode to JavaScript compiler
+brew "emscripten"
+# Modern replacement for 'ls'
+brew "exa"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# International domain name library (IDNA2008, Punycode and TR46)
+brew "libidn2"
+# Play, record, convert, and stream audio and video
+brew "ffmpeg"
+# Collection of GNU find, xargs, and locate
+brew "findutils"
+# Fast and simple Node.js version manager
+brew "fnm"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# Distributed revision control system
+brew "git"
+# Enable transparent encryption/decryption of files in a git repo
+brew "git-crypt"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Git extension for versioning large files
+brew "git-lfs"
+# Blazing fast terminal-ui for git written in rust
+brew "gitui"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Ping, but with a graph
+brew "gping"
+# Generic library support script
+brew "libtool"
+# Graph visualization software from AT&T and Bell Labs
+brew "graphviz"
+# Idempotent command-line utility for managing your /etc/hosts file
+brew "hostess"
+# Improved top (interactive process viewer)
+brew "htop"
+# User-friendly cURL replacement (command-line HTTP client)
+brew "httpie"
+# Curl statistics made simple
+brew "httpstat"
+# Add GitHub support to git on the command-line
+brew "hub"
+# Improved colored diff
+brew "icdiff"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Generic command-line non-JVM Apache Kafka producer and consumer
+brew "kcat"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Build tool for Clojure
+brew "leiningen"
+# Sophisticated file transfer program
+brew "lftp"
+# Count lines of code quickly
+brew "loc"
+# Swiss Army Knife for macOS
+brew "m-cli"
+# Mac App Store command-line interface
+brew "mas"
+# Intercept, modify, replay, save HTTP/S traffic
+brew "mitmproxy"
+# Collection of tools that nobody wrote when UNIX was young
+brew "moreutils"
+# NCurses Disk Usage
+brew "ncdu"
+# Parser generator tool and incremental parsing library
+brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# HTTP/2 C Library
+brew "nghttp2"
+# Small build system for use with gyp or CMake
+brew "ninja"
+# Port scanning utility for large networks
+brew "nmap"
+# CLI for Postgres with auto-completion and syntax highlighting
+brew "pgcli"
+# Object-relational database system
+brew "postgresql@14"
+# Command-line YAML and XML processor that wraps jq
+brew "python-yq"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Run SQL directly on CSV or TSV files
+brew "q"
+# Perl-powered file rename script with many helpful built-ins
+brew "rename"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Rust toolchain installer
+brew "rustup-init"
+# Autoformat shell script source code
+brew "shfmt"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Text interface for Git repositories
+brew "tig"
+# Simplified and community-driven man pages
+brew "tldr"
+# CLI tool that moves files or folder to the trash
+brew "trash"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Watch files and take action when they change
+brew "watchman"
+# Show the current WiFi network password
+brew "wifi-password"
+# Fast CSV toolkit written in Rust
+brew "xsv"
+# JavaScript package manager
+brew "yarn"
+# Tracks most-used directories to make cd smarter
+brew "z"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# UNIX shell (command interpreter)
+brew "zsh"
+# AWS SAM CLI 🐿 is a tool for local development and testing of Serverless applications
+brew "aws/tap/aws-sam-cli"
+# The Clojure Programming Language
+brew "clojure/tools/clojure"
+# SDK
+brew "dart-lang/dart/dart"
+# Simple hotkey-daemon for macOS.
+brew "koekeishiya/formulae/skhd"
+# A tiling window manager for macOS based on binary space partitioning.
+brew "koekeishiya/formulae/yabai"
+# Command-line utility to find alternate file
+brew "uptech/oss/alt"
+# A tool for exploring each layer in a docker image
+brew "wagoodman/dive/dive"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Application launcher and productivity software
+cask "alfred"
+cask "android-sdk"
+# Tools for building Android applications
+cask "android-studio"
+# Application uninstaller
+cask "appcleaner"
+# Manage team projects and tasks
+cask "asana"
+# Web browser focusing on privacy
+cask "brave-browser"
+# Voice and text chat software
+cask "discord"
+# App to build and share containerized applications and microservices
+cask "docker"
+# Client for the Dropbox cloud storage service
+cask "dropbox"
+# Organize files, archive e-mails, save Web pages and notes, search everything
+cask "eaglefiler"
+# App for note taking, organizing, task lists, and archiving
+cask "evernote"
+# Free messaging app for popular messengers
+cask "ferdi"
+# Web browser
+cask "firefox"
+# UI toolkit for building applications for mobile, web and desktop
+cask "flutter"
+# Screen color temperature controller
+cask "flux"
+# Free monospaced font with programming ligatures
+cask "font-fira-code"
+# Developer targeted fonts with a high number of glyphs
+cask "font-hack-nerd-font"
+# Monospaced typeface designed for programming in Julia
+cask "font-juliamono"
+# Messaging app for WhatsApp, Facebook Messenger, Slack, Telegram and more
+cask "franz"
+# YouTube player focusing on privacy
+cask "freetube"
+# Web browser
+cask "google-chrome"
+# Access the HEY email service
+cask "hey"
+# HTTP and GraphQL Client
+cask "insomnia"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+cask "kafka-tool"
+# Keyboard customizer
+cask "karabiner-elements"
+# Display key code, unicode value and modifier keys state for any key combination
+cask "key-codes"
+# GPU-based terminal emulator
+cask "kitty"
+# Sound clear in online meetings
+cask "krisp"
+# Support for Logitech G gear
+cask "logitech-g-hub"
+# Privacy-first, open-source platform for knowledge sharing and management
+cask "logseq"
+# File system integration
+cask "macfuse"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
+# Meet, chat, call, and collaborate in just one place
+cask "microsoft-teams"
+# Online collaborative whiteboard platform
+cask "miro"
+# Utility to move and zoom windows—on one display
+cask "moom"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"
+# Calculator and converter application
+cask "numi"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# JDK from Oracle
+cask "oracle-jdk"
+# File system integration
+cask "osxfuse"
+# Client for the pCloud virtual cloud storage service
+cask "pcloud-drive"
+cask "plantronics-hub"
+# Home media player
+cask "plex"
+# GUI client for PostgreSQL databases
+cask "postico"
+# Collaboration platform for API development
+cask "postman"
+# QuickLook plugin for plaintext files without an extension
+cask "qlstephen"
+# All-in-one bookmark manager
+cask "raindropio"
+# Control your tools with a few keystrokes
+cask "raycast"
+# Instant messaging application focusing on security
+cask "signal"
+# Team communication and collaboration software
+cask "slack"
+# Control your Sonos system
+cask "sonos"
+# Music streaming service
+cask "spotify"
+# Video game digital distribution service
+cask "steam"
+# Virtual office for remote teams
+cask "tandem"
+# Open-source BitTorrent client
+cask "transmission"
+# GUI for the Neovim text editor
+cask "vimr"
+# OpenVPN client with AppleScript support
+cask "viscosity"
+# Open-source code editor
+cask "visual-studio-code"
+# Neovim client
+cask "vv"
+# Desktop client for WhatsApp
+cask "whatsapp"
+# Video communication and virtual meeting platform
+cask "zoom"
+# Collect, organize, cite, and share research sources
+cask "zotero"
+mas "Anybox", id: 1593408455
+mas "Clocker", id: 1056643111
+mas "DaisyDisk", id: 411643860
+mas "Folder Tidy", id: 486626129
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Meeter", id: 1510445899
+mas "Menu Bar Controller for Sonos", id: 1357379892
+mas "Numbers", id: 409203825
+mas "Pocket", id: 568494494
+mas "Shazam", id: 897118787
+mas "Todoist", id: 585829637
+mas "Trello", id: 1278508951
