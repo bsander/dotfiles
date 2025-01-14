@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <!-- Label for the LaunchAgent -->
+        <key>Label</key>
+        <string>com.user.autossh</string>
+
+        <!-- Program and arguments to execute -->
+        <key>ProgramArguments</key>
+        <array>
+            <string>/opt/homebrew/bin/autossh</string>
+            <string>-f</string>
+            <string>-M</string>
+            <string>60090</string>
+            <string>-L</string>
+            <string>60080:localhost:60080</string>
+            <string>-N</string>
+            <string>htpc</string>
+        </array>
+
+        <!-- Set environment variables if needed -->
+        <key>EnvironmentVariables</key>
+        <dict>
+            <key>PATH</key>
+            <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        </dict>
+
+        <!-- Run the command when the user logs in -->
+        <key>RunAtLoad</key>
+        <true />
+
+        <!-- Keep the process alive -->
+        <key>KeepAlive</key>
+        <true />
+
+        <!-- Standard output and error log paths -->
+        <key>StandardOutPath</key>
+        <string>/tmp/autossh.log</string>
+        <key>StandardErrorPath</key>
+        <string>/tmp/autossh.err</string>
+    </dict>
+</plist>

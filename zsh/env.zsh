@@ -81,3 +81,8 @@ export DO_NOT_TRACK=1
 export HOMEBREW_NO_ANALYTICS=1
 export AZURE_CORE_COLLECT_TELEMETRY=0
 export SAM_CLI_TELEMETRY=0
+
+# Something something Android bootloader
+export PATH="/opt/homebrew/bin:$PATH"
+export CFLAGS="-I/opt/homebrew/opt/openssl/include"
+export LDFLAGS="-L/opt/homebrew/opt/openssl/lib"

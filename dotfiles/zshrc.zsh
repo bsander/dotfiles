@@ -220,12 +220,12 @@ alias brwe=brew
 
 unalias ls
 ls() {
-  exa --group-directories-first --sort=name --classify "$@"
+  eza --group-directories-first --sort=name --classify "$@"
 }
 alias ll="ls --long --header --all"
 
 tree() {
-  exa --group-directories-first --sort=name --classify --tree --git-ignore "$@"
+  eza --group-directories-first --sort=name --classify --tree --git-ignore "$@"
 }
 
 alias lt="tree --level=2"

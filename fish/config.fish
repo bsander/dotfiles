@@ -72,3 +72,5 @@ if status --is-interactive
     set -g __fish_git_alias_du diff
 end
 set -g fish_user_paths "/usr/local/opt/node@10/bin" $fish_user_paths
+
+export PATH="$PATH:$HOME/.local/bin"

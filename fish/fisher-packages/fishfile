@@ -5,7 +5,7 @@ brgmnn/fish-docker-compose
 jethrokuan/fzf
 matchai/spacefish
 oh-my-fish/plugin-technicolor
-evanlucas/fish-kubectl-completions
+
 oh-my-fish/plugin-bang-bang
 oh-my-fish/plugin-functional
 oh-my-fish/plugin-aws
