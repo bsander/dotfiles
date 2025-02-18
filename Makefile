@@ -6,18 +6,20 @@ install: ## Setup these dotfiles on a new Mac
 	@read -t 5 -r -s -p $$'Wait 5 seconds or press Enter to continue...\n' || true
 	# Let's make sure we have sudo permissions
 	@sudo true
-	git submodule update --init --recursive
 	# Installing required software from Apple
 	xcode-select -p || xcode-select --install
+	# Initializing repo
+  git submodule update --init --recursive
 	/usr/bin/pgrep oahd >/dev/null 2>&1 || sudo softwareupdate --install-rosetta
 	# Installing Homebrew (https://brew.sh/)
 	command -v brew || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	eval "$$(/opt/homebrew/bin/brew shellenv)"
 	sudo launchctl config user path "/usr/bin:/bin:/usr/sbin:/sbin:$$(brew --prefix)/bin:$$(brew --prefix)/sbin"
-	brew --prefix --installed zsh || brew install zsh
-	@echo Setting default shell to $$(which zsh)
-	grep -qxF $$(which zsh) /etc/shells || echo $$(which zsh) | sudo tee -a /etc/shells
-	chsh -s $$(which zsh)
+## About printing comments: https://stackoverflow.com/a/18363477
+# brew --prefix --installed zsh || brew install zsh
+# @echo Setting default shell to $$(which zsh)
+# grep -qxF $$(which zsh) /etc/shells || echo $$(which zsh) | sudo tee -a /etc/shells
+# chsh -s $$(which zsh)
 	mkdir -pv -m 0700 $(HOME)/.ssh
 	# Installing homebrew packages from bundle
 	brew bundle --file="$(CURDIR)/devices/$$(hostname -s)/Brewfile" install
