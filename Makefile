@@ -20,7 +20,6 @@ install: ## Setup these dotfiles on a new Mac
 # @echo Setting default shell to $$(which zsh)
 # grep -qxF $$(which zsh) /etc/shells || echo $$(which zsh) | sudo tee -a /etc/shells
 # chsh -s $$(which zsh)
-	mkdir -pv -m 0700 $(HOME)/.ssh
 	# Installing homebrew packages from bundle
 	brew bundle --file="$(CURDIR)/devices/$$(hostname -s)/Brewfile" install
 
@@ -32,7 +31,7 @@ update: ## Update packages from NPM, Homebrew and ZSH
 	tldr --update
 	@echo Now run: z4h update
 
-link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles
+link: $(HOME)/.zshlocal $(HOME)/.ssh link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles
 
 .PHONY: help
 help: ## Show this help
@@ -69,3 +68,7 @@ link-nvim: $(CURDIR)/vim
 
 $(HOME)/.zshlocal:
 	cp -n $(CURDIR)/zsh/local.zsh $(HOME)/.zshlocal
+
+# $(HOME)/ssh:
+#   mkdir -pv -m 0700 $(HOME)/.ssh
+# 	ln -snf
