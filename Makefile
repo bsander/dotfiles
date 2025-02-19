@@ -9,7 +9,7 @@ install: ## Setup these dotfiles on a new Mac
 	# Installing required software from Apple
 	xcode-select -p || xcode-select --install
 	# Initializing repo
-  git submodule update --init --recursive
+    git submodule update --init --recursive
 	/usr/bin/pgrep oahd >/dev/null 2>&1 || sudo softwareupdate --install-rosetta
 	# Installing Homebrew (https://brew.sh/)
 	command -v brew || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
