@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+# zlayout - Switch layouts in current Zellij session or create new session
+
+set -euo pipefail
+
+LAYOUTS_DIR="$HOME/.config/zellij/layouts"
+
+show_help() {
+    cat << EOF
+Usage: zlayout [LAYOUT_NAME]
+
+Switch to a different layout in the current Zellij session.
+If not in a Zellij session, starts a new one with the specified layout.
+
+Arguments:
+  LAYOUT_NAME    The layout to switch to (optional, shows menu if not provided)
+
+Options:
+  -h, --help     Show this help message
+
+Available layouts:
+$(list_layouts_formatted)
+
+Examples:
+  zlayout dev              # Switch to dev layout
+  zlayout                  # Show interactive menu
+EOF
+}
+
+list_layouts_formatted() {
+    if [[ -d "$LAYOUTS_DIR" ]]; then
+        for layout in "$LAYOUTS_DIR"/*.kdl; do
+            if [[ -f "$layout" ]]; then
+                echo "  $(basename "$layout" .kdl)"
+            fi
+        done
+    else
+        echo "  No layouts found"
+    fi
+}
+
+select_layout_interactive() {
+    local layouts=()
+    if [[ -d "$LAYOUTS_DIR" ]]; then
+        while IFS= read -r -d '' layout; do
+            layouts+=("$(basename "$layout" .kdl)")
+        done < <(find "$LAYOUTS_DIR" -name "*.kdl" -print0 2>/dev/null || true)
+    fi
+    
+    if [[ ${#layouts[@]} -eq 0 ]]; then
+        echo "No layouts found in $LAYOUTS_DIR" >&2
+        exit 1
+    fi
+    
+    echo "Available layouts:"
+    for i in "${!layouts[@]}"; do
+        echo "$((i + 1)). ${layouts[i]}"
+    done
+    
+    echo -n "Select layout (1-${#layouts[@]}): "
+    read -r choice
+    
+    if [[ "$choice" =~ ^[0-9]+$ ]] && [[ "$choice" -ge 1 ]] && [[ "$choice" -le ${#layouts[@]} ]]; then
+        echo "${layouts[$((choice - 1))]}"
+    else
+        echo "Invalid selection" >&2
+        exit 1
+    fi
+}
+
+main() {
+    local layout=""
+    
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -h|--help)
+                show_help
+                exit 0
+                ;;
+            -*)
+                echo "Unknown option: $1" >&2
+                show_help >&2
+                exit 1
+                ;;
+            *)
+                layout="$1"
+                shift
+                ;;
+        esac
+    done
+    
+    # If no layout specified, show interactive menu
+    if [[ -z "$layout" ]]; then
+        layout=$(select_layout_interactive)
+    fi
+    
+    # Check if layout exists
+    if [[ ! -f "$LAYOUTS_DIR/$layout.kdl" ]]; then
+        echo "Error: Layout '$layout' not found at $LAYOUTS_DIR/$layout.kdl" >&2
+        exit 1
+    fi
+    
+    # Check if we're in a Zellij session
+    if [[ -n "${ZELLIJ:-}" ]]; then
+        # We're in Zellij, send action to switch layout
+        zellij action new-tab --layout "$layout"
+    else
+        # Not in Zellij, start new session
+        echo "Starting new Zellij session with layout '$layout'..."
+        zellij --layout "$layout"
+    fi
+}
+
+main "$@"

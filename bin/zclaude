@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+# zclaude - Add Claude pane to current Zellij session
+
+set -euo pipefail
+
+show_help() {
+    cat << EOF
+Usage: zclaude [OPTIONS]
+
+Add a Claude pane to the current Zellij session.
+
+Options:
+  -r, --right      Add Claude pane to the right (default, 33% width)
+  -b, --bottom     Add Claude pane to the bottom (33% height) 
+  -w, --width PCT  Set width percentage for right pane (default: 33)
+  -h, --height PCT Set height percentage for bottom pane (default: 33)
+  --help           Show this help message
+
+Examples:
+  zclaude                    # Add Claude pane to right at 33% width
+  zclaude -b                 # Add Claude pane to bottom at 33% height
+  zclaude -r -w 40          # Add Claude pane to right at 40% width
+EOF
+}
+
+main() {
+    local direction="right"
+    local size="33"
+    
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            -r|--right)
+                direction="right"
+                shift
+                ;;
+            -b|--bottom)
+                direction="down"
+                shift
+                ;;
+            -w|--width)
+                size="$2"
+                direction="right"
+                shift 2
+                ;;
+            -h|--height)
+                size="$2"
+                direction="down"
+                shift 2
+                ;;
+            --help)
+                show_help
+                exit 0
+                ;;
+            *)
+                echo "Unknown option: $1" >&2
+                show_help >&2
+                exit 1
+                ;;
+        esac
+    done
+    
+    # Check if we're in a Zellij session
+    if [[ -z "${ZELLIJ:-}" ]]; then
+        echo "Error: Not in a Zellij session. Please run this from within Zellij." >&2
+        exit 1
+    fi
+    
+    # Check if claude command exists
+    if ! command -v claude &> /dev/null; then
+        echo "Error: 'claude' command not found. Please install Claude CLI." >&2
+        exit 1
+    fi
+    
+    # Create new pane with Claude
+    zellij action new-pane --direction "$direction" --size "$size%" -- claude
+}
+
+main "$@"
