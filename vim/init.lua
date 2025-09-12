@@ -1,3 +1,4 @@
+-- Disable some built-in plugins we don't want
 local disabled_built_ins = {
   "netrw",
   "netrwPlugin",
@@ -23,29 +24,14 @@ for _, plugin in pairs(disabled_built_ins) do
   vim.g["loaded_" .. plugin] = 1
 end
 
--- order matters
-local modules = {
-  "settings", -- `set` stuff
-  "install-plugins",
-  "mappings"
-}
+-- Set up the leader key first
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
-local errors = {}
-for _, v in pairs(modules) do
-  if package.loaded and package.loaded[v] then
-    package.loaded[v] = nil
-  end
-  local ok, err = pcall(require, v)
-  if not ok then
-    table.insert(errors, err)
-  end
-end
+-- Load configuration modules
+require("config.settings")
+require("config.keymaps")
+require("config.lazy")
 
-if not vim.tbl_isempty(errors) then
-  for _, v in pairs(errors) do
-    print(v)
-  end
-end
-
--- Set this to the shell value of NVIM_LISTEN_ADDRESS to be able to pick up on existing sessions
+-- Start server for external tools
 vim.cmd([[silent! call serverstart('/tmp/nvimsocket')]])
