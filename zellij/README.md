@@ -210,6 +210,28 @@ Edit `config.kdl` in the `keybinds` section. Each mode can have different bindin
 ### Changing Theme
 Modify the `theme` setting in `config.kdl` or add custom themes in the `themes` section.
 
+## Getting Started in a Session
+
+When you start a layout (like `zdev`), you'll be in a multi-pane setup. Here's how to navigate:
+
+### Basic Navigation
+- **Move between panes**: `Alt+h/j/k/l` (quick) or `Ctrl+p` then `h/j/k/l`
+- **Create new pane**: `Alt+n` or `Ctrl+p` then `n`
+- **New pane to right**: `Ctrl+p` then `r` 
+- **New pane below**: `Ctrl+p` then `d`
+
+### Exiting Things
+- **Exit nvim**: `Esc` then `:q` and `Enter`
+- **Exit current pane**: `Ctrl+p` then `x`
+- **Detach session**: `Ctrl+o` then `d` (keeps session running)
+- **Quit entirely**: `Ctrl+q`
+
+### Common First Steps
+1. Start with `zdev` - launches nvim + claude
+2. Use `Alt+l` to move from nvim to claude pane
+3. Use `Ctrl+p` then `n` to create a new terminal pane
+4. Use `Ctrl+p` then `h/j/k/l` to navigate between all panes
+
 ## Tips
 
 1. **Start with `zdev`** - It's the most common layout you'll use

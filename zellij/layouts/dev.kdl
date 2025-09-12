@@ -8,12 +8,8 @@ layout {
 
     tab name="dev" focus=true {
         pane split_direction="vertical" {
-            pane name="editor" focus=true {
-                command "nvim"
-            }
-            pane size="33%" name="claude" {
-                command "claude"
-            }
+            pane name="editor" focus=true
+            pane size="33%" name="claude"
         }
     }
 }

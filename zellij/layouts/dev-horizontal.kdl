@@ -8,16 +8,10 @@ layout {
 
     tab name="dev" focus=true {
         pane split_direction="horizontal" {
-            pane name="editor" focus=true size="60%" {
-                command "nvim"
-            }
+            pane name="editor" focus=true size="60%"
             pane split_direction="vertical" {
-                pane name="claude" {
-                    command "claude"
-                }
-                pane name="terminal" {
-                    // Terminal for running commands, docker compose, etc.
-                }
+                pane name="claude"
+                pane name="terminal"
             }
         }
     }

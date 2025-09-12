@@ -9,16 +9,10 @@ layout {
     tab name="dev" focus=true {
         pane split_direction="vertical" {
             pane split_direction="horizontal" {
-                pane name="editor" focus=true {
-                    command "nvim"
-                }
-                pane size="25%" name="logs" {
-                    // This will just be a terminal - you can run docker compose logs, watch commands, etc.
-                }
+                pane name="editor" focus=true
+                pane size="25%" name="logs"
             }
-            pane size="33%" name="claude" {
-                command "claude"
-            }
+            pane size="33%" name="claude"
         }
     }
 }

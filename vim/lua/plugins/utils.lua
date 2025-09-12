@@ -85,27 +85,29 @@ return {
     end,
     config = function()
       local wk = require("which-key")
-      
+
       -- Configuration flag - set to false to reduce which-key triggers
       local show_extended_triggers = true
-      
+
       local triggers = {
         { "<leader>", mode = { "n", "v" } },
       }
-      
+
       -- Add extended triggers if enabled
       if show_extended_triggers then
         vim.list_extend(triggers, {
           { "g", mode = { "n", "v" } },
+          { "y", mode = { "n", "v" } },
+          { "d", mode = { "n", "v" } },
           { "]", mode = { "n", "v" } },
           { "[", mode = { "n", "v" } },
           { "z", mode = { "n", "v" } },
           { "<C-w>", mode = { "n" } },
         })
       end
-      
+
       wk.setup({
-        delay = 0, -- Show which-key immediately
+        delay = 100, -- Show which-key after this time
         triggers = triggers,
       })
 
@@ -123,7 +125,7 @@ return {
         { "<leader>v", group = "vim" },
         { "<leader>l", group = "location" },
       })
-      
+
       -- Extended mappings shown only if enabled
       if show_extended_triggers then
         wk.add({
@@ -245,7 +247,7 @@ return {
     },
   },
 
-  -- Interactive swapping (ISwap equivalent)  
+  -- Interactive swapping (ISwap equivalent)
   {
     "mizlan/iswap.nvim",
     keys = {

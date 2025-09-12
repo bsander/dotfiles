@@ -95,20 +95,16 @@ main() {
         exit 1
     fi
     
-    local zellij_args=(
-        "--layout" "$layout"
-        "--session" "$session_name"
-    )
-    
     if [[ "$attach" == true ]]; then
         # Try to attach, if session doesn't exist, create it
         if zellij list-sessions | grep -q "^$session_name\$"; then
             zellij attach "$session_name"
         else
-            zellij "${zellij_args[@]}"
+            zellij attach --create --layout "$LAYOUTS_DIR/$layout.kdl" "$session_name"
         fi
     else
-        zellij "${zellij_args[@]}"
+        # For non-attach mode, just start with layout (no session name)
+        zellij --layout "$LAYOUTS_DIR/$layout.kdl"
     fi
 }
 
