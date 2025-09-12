@@ -160,9 +160,9 @@ alias serve="http-server -o" # Statically serve directory
 # Print and copy last n commands
 last() { fc -ln -"${1:-1}" | awk '{$1=$1}1' | tee >(pbcopy); }
 
-gcd() {
-  cd "$(git rev-parse --show-toplevel)"
-}
+# gcd() {
+#   cd "$(git rev-parse --show-toplevel)"
+# }
 
 ## Global aliases (use anywhere)
 alias -g P='| $PAGER'
@@ -235,4 +235,8 @@ alias lt="tree --level=2"
 setopt glob_dots # no special treatment for file names with a leading dot
 setopt no_auto_menu # require an extra TAB press to open the completion menu
 
-source /Users/sanderb/.config/broot/launcher/bash/br
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/sb/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

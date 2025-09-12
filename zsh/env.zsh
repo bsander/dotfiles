@@ -17,7 +17,7 @@ export PATH="$DOTFILES/bin:$GOPATH/bin:$ANDROID_HOME/platform-tools:/opt/homebre
 # "$HOME/.cargo/bin"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
-command -v fnm >/dev/null 2>&1 && eval "$(fnm env --shell zsh)"
+command -v fnm >/dev/null 2>&1 && eval "$(fnm env --use-on-cd --shell zsh)"
 
 export FPATH="$DOTFILES/zsh/functions:$DOTFILES/zsh/completions:$(brew --prefix)/share/zsh/site-functions:$FPATH"
 

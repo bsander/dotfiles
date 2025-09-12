@@ -9,12 +9,12 @@ install: ## Setup these dotfiles on a new Mac
 	# Installing required software from Apple
 	xcode-select -p || xcode-select --install
 	# Initializing repo
-    git submodule update --init --recursive
-	/usr/bin/pgrep oahd >/dev/null 2>&1 || sudo softwareupdate --install-rosetta
+	git submodule update --init --recursive
+# /usr/bin/pgrep oahd >/dev/null 2>&1 || sudo softwareupdate --install-rosetta
 	# Installing Homebrew (https://brew.sh/)
 	command -v brew || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	eval "$$(/opt/homebrew/bin/brew shellenv)"
-	sudo launchctl config user path "/usr/bin:/bin:/usr/sbin:/sbin:$$(brew --prefix)/bin:$$(brew --prefix)/sbin"
+# sudo launchctl config user path "/usr/bin:/bin:/usr/sbin:/sbin:$$(brew --prefix)/bin:$$(brew --prefix)/sbin"
 ## About printing comments: https://stackoverflow.com/a/18363477
 # brew --prefix --installed zsh || brew install zsh
 # @echo Setting default shell to $$(which zsh)
@@ -31,7 +31,7 @@ update: ## Update packages from NPM, Homebrew and ZSH
 	tldr --update
 	@echo Now run: z4h update
 
-link: $(HOME)/.zshlocal $(HOME)/.ssh link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles
+link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles
 
 .PHONY: help
 help: ## Show this help
@@ -55,7 +55,7 @@ link-to-home: $(foreach f, $(DFS_HOME), link-to-home-$(f))
 link-to-home-%: $(DF_DIR)/%
 	ln -snf "$<" $(HOME)/.$(basename $(notdir $*))
 
-## Link these ditfiles to $HOME/.config/
+## Link these dotfiles to $HOME/.config/
 link-to-config: $(foreach f, $(DFS_CONFIG), link-to-config-$(f))
 
 link-to-config-%: $(CURDIR)/%

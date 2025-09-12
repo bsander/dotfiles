@@ -48,17 +48,17 @@ if status --is-interactive
 
     ## Setup keybindings
     function my_key_bindings
-      fish_hybrid_key_bindings
-      bind -M insert . 'expand-dot-to-parent-directory-path'
+        fish_hybrid_key_bindings
+        bind -M insert . expand-dot-to-parent-directory-path
 
-      # bind \cU 'fzf-bcd-widget'
-      # bind -M insert \cU 'fzf-bcd-widget'
+        # bind \cU 'fzf-bcd-widget'
+        # bind -M insert \cU 'fzf-bcd-widget'
 
-      # bind \cO '__fzf_cd'
-      # bind -M insert \cO '__fzf_cd'
+        # bind \cO '__fzf_cd'
+        # bind -M insert \cO '__fzf_cd'
 
-      # bind \cI '__fzf_complete'
-      # bind -M insert \cI '__fzf_complete'
+        # bind \cI '__fzf_complete'
+        # bind -M insert \cI '__fzf_complete'
     end
     set -g fish_key_bindings my_key_bindings
 

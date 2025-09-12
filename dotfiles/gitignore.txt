@@ -1,10 +1,13 @@
 ## MacOS noise files
 .DS_Store
 ## VSCode workspace config
-.vscode/
+# .vscode/
 ## Rest API client
 *.http
 ## Marker for vim (https://github.com/dbakker/vim-projectroot) to treat directory as projectroot
 .projectroot
 ## Non-git ignorefile (ripgrep, fd, ...)
 .ignore
+## Personal experiments / settings
+CLAUDE.md
+.claude/

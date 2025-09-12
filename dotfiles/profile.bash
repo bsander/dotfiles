@@ -5,4 +5,4 @@
 ##
 
 source "$HOME/.zshlocal"
-source "$DOTFILES/zsh/env.zsh"
+# source "$DOTFILES/zsh/env.zsh"

@@ -20,52 +20,52 @@ function e
 end
 
 ## Frequently used apps
-abbr --add --global b brew
-abbr --add --global bc "brew cask"
-abbr --add --global bci "brew cask info"
-abbr --add --global bcI "brew cask install"
-abbr --add --global bi "brew info"
-abbr --add --global bI "brew install"
-abbr --add --global bs "brew search"
+abbr --add b brew
+abbr --add bc "brew cask"
+abbr --add bci "brew cask info"
+abbr --add bcI "brew cask install"
+abbr --add bi "brew info"
+abbr --add bI "brew install"
+abbr --add bs "brew search"
 
-abbr --add --global g git
+abbr --add g git
 
-abbr --add --global d docker
-abbr --add --global dr "docker run --rm -it"
+abbr --add d docker
+abbr --add dr "docker run --rm -it"
 
-abbr --add --global dc docker-compose
-abbr --add --global dcr "docker-compose run --rm"
-abbr --add --global dcs "docker-compose stop"
-abbr --add --global dcu "docker-compose up"
-abbr --add --global dcud "docker-compose up -d"
-abbr --add --global dcl "docker-compose logs --follow --tail=20"
+abbr --add dc docker-compose
+abbr --add dcr "docker-compose run --rm"
+abbr --add dcs "docker-compose stop"
+abbr --add dcu "docker-compose up"
+abbr --add dcud "docker-compose up -d"
+abbr --add dcl "docker-compose logs --follow --tail=20"
 
 # function dcu
 #     docker-compose up -d $argv && docker-compose logs --follow --tail=20 $argv
 # end
 
-abbr --add --global dcl "docker-compose logs --follow --tail=20"
-abbr --add --global dcd "docker-compose down --timeout 0"
+abbr --add dcl "docker-compose logs --follow --tail=20"
+abbr --add dcd "docker-compose down --timeout 0"
 
 # Force of habit - consistency with vim
-abbr --add --global gg "tig status"
+abbr --add gg "tig status"
 
-abbr --add --global k kubectl
-abbr --add --global kx kubectx
+abbr --add k kubectl
+abbr --add kx kubectx
 
-abbr --add --global y yarn
-abbr --add --global yr "yarn run"
-abbr --add --global yw "yarn workspace"
-abbr --add --global yww "yarn workspaces run"
+abbr --add y yarn
+abbr --add yr "yarn run"
+abbr --add yw "yarn workspace"
+abbr --add yww "yarn workspaces run"
 
 
 ## Substitute apps
-abbr --add --global cat bat
-abbr --add --global grep rg
-abbr --add --global find fd
+abbr --add cat bat
+abbr --add grep rg
+abbr --add find fd
 # alias tree=lt
 alias ls="exa --group-directories-first --sort=name"
 alias ll="exa --long --grid --header --group-directories-first --sort=name"
 
 ## Typos
-abbr --add --global brwe brew
+abbr --add brwe brew
