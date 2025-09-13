@@ -64,15 +64,27 @@ local function generate_commit_message()
 
   -- Prepare the Claude prompt
   local prompt = string.format([[
-Analyze the git changes and generate a concise commit message in imperative mood.
+Analyze the git changes and generate a comprehensive commit message that covers ALL changes.
 
 Requirements:
+- Start with a one-line summary in imperative mood (under 72 characters)
+- List ALL significant changes that are happening in this commit
+- Use separate paragraphs for detailed descriptions when needed
 - Use imperative mood (e.g., "Add", "Fix", "Update", not "Added", "Fixed", "Updated")
-- Keep it under 72 characters for the subject line
-- If more happened, add concise descriptions in new paragraphs
-- Be specific about what changed
+- Be specific about what changed, don't just mention one thing
 - Follow conventional commit style when appropriate
+- Include all file changes, new features, bug fixes, refactoring, etc.
 - Only respond with the commit message, nothing else
+
+Format example:
+Summary line describing the main change
+
+- Detail about first change/addition
+- Detail about second change/modification  
+- Detail about configuration updates
+- etc.
+
+Additional paragraph for complex changes if needed.
 
 Changes:
 %s
@@ -98,9 +110,8 @@ Diff preview:
     local exit_code = handle:close()
 
     if exit_code and result and result ~= '' then
-      -- Clean up the response - take first line and trim
-      message = result:match('^([^\n]+)') or result
-      message = message:gsub('^%s+', ''):gsub('%s+$', '') -- trim whitespace
+      -- Clean up the response - keep full multi-line message but trim
+      message = result:gsub('^%s+', ''):gsub('%s+$', '') -- trim whitespace
       message = message:gsub('^"', ''):gsub('"$', '') -- remove quotes if present
     else
       -- Fallback to a simple message if Claude fails
@@ -132,13 +143,18 @@ Diff preview:
   vim.fn.delete(prompt_file)
 
   if message and message ~= '' then
+    -- Split message into lines for proper insertion
+    local message_lines = vim.split(message, '\n')
+    
     -- Insert the message at the beginning of the buffer
-    vim.api.nvim_buf_set_lines(0, 0, 0, false, {message})
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, message_lines)
 
     -- Position cursor at end of first line
-    vim.api.nvim_win_set_cursor(0, {1, #message})
+    vim.api.nvim_win_set_cursor(0, {1, #message_lines[1]})
 
-    vim.notify('Generated commit message: ' .. message, vim.log.levels.INFO)
+    -- Show just the first line in notification to avoid clutter
+    local summary = message_lines[1] or message
+    vim.notify('Generated commit message: ' .. summary, vim.log.levels.INFO)
   else
     vim.notify('Failed to generate commit message', vim.log.levels.ERROR)
   end

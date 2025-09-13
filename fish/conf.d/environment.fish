@@ -10,9 +10,13 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 
 set -q GIT_EDITOR
-or set -gx GIT_EDITOR "nvim --wait"
+or set -gx GIT_EDITOR nvim
 
-set -gx NVIM_LISTEN_ADDRESS /tmp/nvimsocket
+# Enable nvim remote functionality - each instance gets unique address
+if test -n "$NVIM_LISTEN_ADDRESS"
+    # Inside nvim terminal, use nvr to open files in parent instance
+    alias nvim='nvr'
+end
 
 # FZF global options
 set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow'
