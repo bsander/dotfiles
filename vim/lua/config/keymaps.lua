@@ -149,9 +149,9 @@ keymap('', 'M', 'D', { noremap = true, desc = 'Move/delete to end of line' })
 keymap('', 'gy', '"+y', { noremap = true, desc = 'Yank to system clipboard' })
 keymap('n', 'gyy', '"+yy', { noremap = true, desc = 'Yank line to system clipboard' })
 keymap('n', 'gY', '"+Y', { desc = 'Yank to end to system clipboard' })
-keymap('', 'gm', '"+m', { desc = 'Move to system clipboard' })
-keymap('n', 'gmm', '"+mm', { desc = 'Move line to system clipboard' })
-keymap('n', 'gM', '"+M', { desc = 'Move to end to system clipboard' })
+keymap('', 'gm', '"+d', { desc = 'Move to system clipboard' })
+keymap('n', 'gmm', '"+dd', { desc = 'Move line to system clipboard' })
+keymap('n', 'gM', '"+D', { desc = 'Move to end to system clipboard' })
 keymap('', 'gp', '"+p', { noremap = true, desc = 'Paste from system clipboard' })
 keymap('n', 'gP', '"+P', { noremap = true, desc = 'Paste before from system clipboard' })
 
@@ -186,8 +186,8 @@ keymap('v', '<Leader>xj', ":t '<-1<CR>gv=gv", { noremap = true, desc = 'Duplicat
 keymap('v', '<Leader>xk', ":t '>+0<CR>gv=gv", { noremap = true, desc = 'Duplicate selection above' })
 
 -- Custom go operations
-keymap('', 'go', 'o<Esc>[]cc', { desc = 'Insert line below and enter insert' })
-keymap('', 'gO', 'O<Esc>[]cc', { desc = 'Insert line above and enter insert' })
+keymap('', 'go', 'o<Esc>cc', { desc = 'Insert line below and enter insert' })
+keymap('', 'gO', 'O<Esc>cc', { desc = 'Insert line above and enter insert' })
 
 -- Advanced save operations
 keymap('n', 'gs', '<CMD>write<CR>', { noremap = true, desc = 'Save file' })
@@ -236,8 +236,7 @@ keymap('', ']e', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, de
 keymap('', '[q', '<cmd>cprevious<CR>', { noremap = true, desc = 'Previous quickfix' })
 keymap('', ']q', '<cmd>cnext<CR>', { noremap = true, desc = 'Next quickfix' })
 keymap('', '[c', 'O<Esc>gcA', { desc = 'Comment above' })
-keymap('', ']cc', 'o<Esc>gcA', { desc = 'Comment below' })
-keymap('', '[]<Space>', '[]<Space>', { desc = 'Add blank lines above and below' })
+keymap('', ']c', 'o<Esc>gcA', { desc = 'Comment below' })
 
 -- Advanced quit operations
 keymap('n', '<Leader>qq', '<CMD>confirm qall<CR>', { noremap = true, desc = 'Quit all with confirmation' })

@@ -68,41 +68,46 @@ Simple single terminal pane for general use.
 
 ## Key Bindings
 
-### Mode Switching
-- `Ctrl+p` → **Pane mode** (manage panes)
-- `Ctrl+t` → **Tab mode** (manage tabs)
-- `Ctrl+n` → **Resize mode** (resize panes)
-- `Ctrl+s` → **Scroll mode** (scroll through history)
-- `Ctrl+o` → **Session mode** (session management)
-- `Ctrl+g` → **Lock mode** (disable all keys)
+**Custom Alt-based keybindings (defaults cleared)**
 
-### Pane Management (Ctrl+p)
-- `h/j/k/l` → Navigate between panes
-- `n` → New pane
-- `d` → New pane below
-- `r` → New pane to the right
-- `x` → Close current pane
-- `f` → Toggle fullscreen
-- `z` → Toggle pane frames
+### Basic Navigation
+- `Alt+h/j/k/l` → Navigate between panes (vim keys)
 
-### Tab Management (Ctrl+t)
-- `n` → New tab
-- `x` → Close tab
-- `h/l` → Previous/next tab
-- `r` → Rename tab
-- `1-9` → Go to tab number
+### Pane Management
+- `Alt+v` → New pane to the right (50/50 vertical split)
+- `Alt+V` → New pane to the left (50/50 vertical split)
+- `Alt+s` → New pane below (50/50 horizontal split)
+- `Alt+x` → Close current pane
+- `Alt+f` → Toggle fullscreen
 
-### Resize Mode (Ctrl+n)
-- `h/j/k/l` → Increase size in direction
-- `H/J/K/L` → Decrease size in direction
+### Pane Movement
+- `Alt+Shift+h/j/k/l` → Move current pane in direction
+
+### Tab Management
+- `Alt+n` → New tab
+- `Alt+w` → Close tab
+- `Alt+q/e` → Previous/next tab (easy reach)
+- `Alt+1-9` → Go to tab 1-9
+
+### Utility Commands
+- `Alt+c` → Open Claude in right pane (33% width, auto-close on exit)
+- `Alt+t` → Open Tig in bottom pane (25% height, auto-close on exit)
+
+### Modes
+- `Alt+r` → Enter resize mode
+- `Alt+z` → Toggle pane frames
+- `Alt+p` → Toggle floating panes
+- `Alt+/` → Show help/keybindings (floating window)
+
+### System Controls
+- `Esc` → Quit Zellij
+- `Alt+Esc` → Detach from session
+
+### Resize Mode (Alt+r to enter)
+- `Esc` or `Alt+r` → Exit resize mode
+- `h/j/k/l` → Resize panes (vim keys)
 - `+/=` → Increase size
 - `-` → Decrease size
-
-### Global Shortcuts (Always Available)
-- `Alt+n` → New pane
-- `Alt+h/j/k/l` → Navigate panes
-- `Alt+=/-` → Resize current pane
-- `Ctrl+q` → Quit Zellij
 
 ## Helper Scripts
 
