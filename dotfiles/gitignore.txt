@@ -3,7 +3,7 @@
 ## VSCode workspace config
 # .vscode/
 ## Rest API client
-*.http
+# *.http
 ## Marker for vim (https://github.com/dbakker/vim-projectroot) to treat directory as projectroot
 .projectroot
 ## Non-git ignorefile (ripgrep, fd, ...)
@@ -11,3 +11,6 @@
 ## Personal experiments / settings
 CLAUDE.md
 .claude/
+.serena/
+.specify/
+specs/
