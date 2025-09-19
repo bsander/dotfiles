@@ -65,8 +65,9 @@ keymap('n', '<leader>w', '<cmd>w<CR>', { desc = 'Save file' })
 keymap('n', '<leader>W', '<cmd>wa<CR>', { desc = 'Save all files' })
 
 -- Quick quit
-keymap('n', '<leader>q', '<cmd>q<CR>', { desc = 'Quit' })
+keymap('n', '<leader>qq', '<cmd>q<CR>', { desc = 'Quit' })
 keymap('n', '<leader>Q', '<cmd>qa!<CR>', { desc = 'Quit all without saving' })
+keymap('n', '<leader>qw', '<cmd>wq<CR>', { desc = 'Write and quit' })
 
 -- File operations
 keymap('n', '<leader>fn', '<cmd>enew<CR>', { desc = '[F]ile [N]ew' })

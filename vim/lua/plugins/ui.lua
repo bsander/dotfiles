@@ -54,6 +54,22 @@ return {
     end,
   },
 
+  -- Zenbones
+  {
+      "zenbones-theme/zenbones.nvim",
+      -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+      -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+      -- In Vim, compat mode is turned on as Lush only works in Neovim.
+      dependencies = "rktjmp/lush.nvim",
+      lazy = false,
+      priority = 1000,
+      -- you can set set configuration options here
+      -- config = function()
+      --     vim.g.zenbones_darken_comments = 45
+      --     vim.cmd.colorscheme('zenbones')
+      -- end
+  },
+
   -- File explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -70,7 +86,7 @@ return {
         enable_git_status = true,
         enable_diagnostics = true,
         sort_case_insensitive = false,
-        
+
         default_component_configs = {
           container = {
             enable_character_fade = true
@@ -117,7 +133,7 @@ return {
             }
           },
         },
-        
+
         window = {
           position = "left",
           width = 40,
@@ -126,9 +142,9 @@ return {
             nowait = true,
           },
           mappings = {
-            ["<space>"] = { 
-                "toggle_node", 
-                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+            ["<space>"] = {
+                "toggle_node",
+                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
             },
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
@@ -141,7 +157,7 @@ return {
             ["w"] = "open_with_window_picker",
             ["C"] = "close_node",
             ["z"] = "close_all_nodes",
-            ["a"] = { 
+            ["a"] = {
               "add",
               config = {
                 show_path = "none" -- "none", "relative", "absolute"
@@ -163,7 +179,7 @@ return {
             ["i"] = "show_file_details",
           }
         },
-        
+
         nesting_rules = {},
         filesystem = {
           filtered_items = {
@@ -192,7 +208,7 @@ return {
           hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
           use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
         },
-        
+
         buffers = {
           follow_current_file = {
             enabled = true, -- This will find and focus the file in the active buffer every time
@@ -208,7 +224,7 @@ return {
             }
           },
         },
-        
+
         git_status = {
           window = {
             position = "float",
