@@ -1,3 +1,4 @@
+tap "atlassian/acli"
 tap "eth-p/software"
 tap "homebrew/bundle"
 tap "homebrew/command-not-found"
@@ -152,6 +153,8 @@ brew "tig"
 brew "tlrc"
 # CLI tool that moves files or folder to the trash
 brew "trash", link: true
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
@@ -172,6 +175,8 @@ brew "zellij"
 brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
+# Software to interact with Atlassian Cloud from the terminal
+brew "atlassian/acli/acli"
 # Bash scripts that integrate bat with various command-line tools
 brew "eth-p/software/bat-extras"
 # Todoist CLI client
@@ -204,6 +209,8 @@ cask "brave-browser"
 cask "calibre"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
+# Terminal-based AI coding assistant
+cask "claude-code"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # Voice and text chat software
@@ -255,6 +262,10 @@ cask "iterm2"
 cask "jabra-direct"
 # Keyboard customiser
 cask "karabiner-elements"
+# GPU-based terminal emulator
+cask "kitty"
+# Grammar, spelling and style suggestions in all the writing apps
+cask "languagetool-desktop"
 # Wallet desktop application to maintain multiple cryptocurrencies
 cask "ledger-live"
 # Open-source cross-platform alternative to AirDrop
@@ -349,6 +360,7 @@ vscode "alexanderte.dainty-vscode"
 vscode "alexesprit.vscode-unfancy-file-icons"
 vscode "alexpasmantier.television"
 vscode "angelomollame.conflict-squeezer"
+vscode "anthropic.claude-code"
 vscode "arcanis.vscode-zipfs"
 vscode "atelierbram.base2tone-vscode-themes"
 vscode "bettercallshao.indent-sorter"
@@ -393,6 +405,7 @@ vscode "keisukeyamashita.vscode-tig-language-support"
 vscode "leizongmin.node-module-intellisense"
 vscode "m4ns0ur.base64"
 vscode "maattdd.gitless"
+vscode "marcoantoniomaderalpez.toggle-pin-editor"
 vscode "mariusschulz.yarn-lock-syntax"
 vscode "matheusq94.tfs"
 vscode "mhutchie.git-graph"
@@ -407,7 +420,6 @@ vscode "ms-vsliveshare.vsliveshare"
 vscode "naela.comment-banners"
 vscode "naumovs.color-highlight"
 vscode "nextfaze.json-parse-stringify"
-vscode "nrwl.angular-console"
 vscode "orta.vscode-jest"
 vscode "peterjpxie.find-in-current-file"
 vscode "prisma.prisma"
