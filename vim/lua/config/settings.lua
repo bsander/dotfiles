@@ -11,7 +11,7 @@ opt.timeoutlen = 400                      -- Faster timeout wait time
 
 -- UI
 opt.number = true                         -- Show line numbers
-opt.relativenumber = true                 -- Relative line numbers
+opt.relativenumber = false                 -- Relative line numbers
 opt.cursorline = true                     -- Highlight current line
 opt.termguicolors = true                  -- True color support
 opt.background = 'light'                  -- Set background for colorscheme
@@ -22,7 +22,7 @@ opt.laststatus = 3                        -- Global statusline
 opt.pumheight = 10                        -- Popup menu height
 opt.scrolloff = 8                         -- Keep 8 lines above/below cursor
 opt.sidescrolloff = 8                     -- Keep 8 columns left/right of cursor
-opt.colorcolumn = '80'                    -- Show column at 80 chars
+-- opt.colorcolumn = '80'                    -- Show column at 80 chars
 
 -- Splits
 opt.splitbelow = true                     -- Split new windows below current

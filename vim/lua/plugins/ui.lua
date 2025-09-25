@@ -50,7 +50,7 @@ return {
       })
 
       -- Setup the colorscheme here
-      vim.cmd.colorscheme "catppuccin"
+      -- vim.cmd.colorscheme "catppuccin"
     end,
   },
 
@@ -63,11 +63,38 @@ return {
       dependencies = "rktjmp/lush.nvim",
       lazy = false,
       priority = 1000,
-      -- you can set set configuration options here
-      -- config = function()
-      --     vim.g.zenbones_darken_comments = 45
-      --     vim.cmd.colorscheme('zenbones')
-      -- end
+      config = function()
+        -- Available theme variants (supports both light/dark via vim.opt.background):
+
+        -- Default theme:
+        -- 'zenbones' (warm theme, adapts to background setting)
+
+        -- Light themes:
+        -- 'zenwritten' (zero hue/saturation, minimal light theme)
+
+        -- Dark themes:
+        -- 'neobones' (Neovim-inspired dark)
+        -- 'vimbones' (Vim-inspired dark)
+        -- 'rosebones' (Rosé Pine-inspired dark)
+        -- 'forestbones' (Everforest-inspired dark)
+        -- 'nordbones' (Nord-inspired dark)
+        -- 'tokyobones' (Tokyo Night-inspired dark)
+        -- 'seoulbones' (Seoul256-inspired dark)
+        -- 'duckbones' (Spaceduck-inspired dark)
+        -- 'zenburned' (Zenburn-inspired dark)
+        -- 'kanagawabones' (Kanagawa-inspired dark)
+
+        -- Special:
+        -- 'randombones' (randomly picks a theme)
+
+        -- Configuration options (all using defaults for now):
+        -- vim.g.zenbones_darken_comments = 45  -- Adjust comment darkness (0-100)
+        -- vim.opt.background = 'dark'  -- or 'light'
+        -- Brightness variants: 'bright', 'default', 'dim'
+        -- Darkness variants: 'stark', 'default', 'warm'
+
+        vim.cmd.colorscheme('zenbones')
+      end
   },
 
   -- File explorer
@@ -251,7 +278,7 @@ return {
       require('lualine').setup({
         options = {
           icons_enabled = true,
-          theme = 'catppuccin',
+          theme = 'auto',
           component_separators = { left = '', right = ''},
           section_separators = { left = '', right = ''},
           disabled_filetypes = {

@@ -8,7 +8,7 @@ return {
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -27,18 +27,18 @@ return {
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
         -- Custom LSP mappings (preserving old workflow)
-        local bufopts = { noremap=true, silent=true, buffer=bufnr }
-        
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
         -- Use telescope for better LSP navigation (with fallback to built-in)
         local has_telescope, telescope = pcall(require, 'telescope.builtin')
-        
+
         if has_telescope then
           vim.keymap.set('n', 'gd', telescope.lsp_definitions, bufopts)
-          vim.keymap.set('n', 'gD', telescope.lsp_declarations, bufopts)  
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
           vim.keymap.set('n', 'gi', telescope.lsp_implementations, bufopts)
           vim.keymap.set('n', 'gt', telescope.lsp_type_definitions, bufopts)
           vim.keymap.set('n', 'gr', telescope.lsp_references, bufopts)
-          vim.keymap.set('n', 'g.', telescope.lsp_code_actions, bufopts)
+          vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, bufopts)
           vim.keymap.set('n', 'g;', telescope.lsp_document_symbols, bufopts)
           vim.keymap.set('n', 'g/', telescope.lsp_workspace_symbols, bufopts)
         else
@@ -50,19 +50,19 @@ return {
           vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
           vim.keymap.set('n', 'g.', vim.lsp.buf.code_action, bufopts)
         end
-        
+
         -- Traditional LSP mappings for hover and rename
-        vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts) -- Show hover information  
+        vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)          -- Show hover information
         vim.keymap.set('n', 'gH', vim.lsp.buf.signature_help, bufopts) -- Signature help
-        vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts) -- Rename
-        
+        vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)         -- Rename
+
         -- Workspace management
         vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
         vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
         vim.keymap.set('n', '<space>wl', function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, bufopts)
-        
+
         -- Format
         vim.keymap.set('n', '<Leader>F', function() vim.lsp.buf.format { async = true } end, bufopts)
       end
@@ -80,10 +80,11 @@ return {
         },
       })
 
-      -- Configure individual language servers
-      local lspconfig = require('lspconfig')
-      
-      lspconfig.lua_ls.setup {
+      -- Configure individual language servers using vim.lsp.config
+      vim.lsp.config.lua_ls = {
+        cmd = { 'lua-language-server' },
+        filetypes = { 'lua' },
+        root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -94,32 +95,47 @@ return {
           },
         },
       }
-      
-      lspconfig.ts_ls.setup {
+
+      vim.lsp.config.ts_ls = {
+        cmd = { 'typescript-language-server', '--stdio' },
+        filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
+        root_markers = { 'tsconfig.json', 'package.json', 'jsconfig.json', '.git' },
         capabilities = capabilities,
         on_attach = on_attach,
       }
-      
-      lspconfig.pyright.setup {
+
+      vim.lsp.config.pyright = {
+        cmd = { 'pyright-langserver', '--stdio' },
+        filetypes = { 'python' },
+        root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', 'pyrightconfig.json', '.git' },
         capabilities = capabilities,
         on_attach = on_attach,
       }
-      
-      lspconfig.bashls.setup {
+
+      vim.lsp.config.bashls = {
+        cmd = { 'bash-language-server', 'start' },
+        filetypes = { 'sh', 'bash' },
+        root_markers = { '.git' },
         capabilities = capabilities,
         on_attach = on_attach,
       }
-      
-      lspconfig.jsonls.setup {
+
+      vim.lsp.config.jsonls = {
+        cmd = { 'vscode-json-language-server', '--stdio' },
+        filetypes = { 'json', 'jsonc' },
+        root_markers = { 'package.json', '.git' },
         capabilities = capabilities,
         on_attach = on_attach,
       }
-      
-      lspconfig.yamlls.setup {
+
+      vim.lsp.config.yamlls = {
+        cmd = { 'yaml-language-server', '--stdio' },
+        filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
+        root_markers = { '.git' },
         capabilities = capabilities,
         on_attach = on_attach,
       }
-      
+
       -- Configuration file editing keybindings
       vim.keymap.set('n', '<leader>ve', function()
         local dotfiles = vim.env.DOTFILES or vim.fn.expand('~/.config/nvim')
@@ -130,7 +146,7 @@ return {
           vim.cmd('edit ' .. dotfiles)
         end
       end, { desc = 'Edit vim config' })
-      
+
       vim.keymap.set('n', '<leader>vs', '<CMD>write<CR><CMD>source %<CR>', { desc = 'Source current file' })
       vim.keymap.set('n', '<leader>vr', function()
         vim.cmd('write')

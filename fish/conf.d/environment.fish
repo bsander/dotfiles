@@ -1,4 +1,4 @@
-# set -gx BASE_EDITOR "emacs -nw"
+false set -gx BASE_EDITOR "emacs -nw"
 # # set -gx BASE_VISUAL code
 # set -gx BASE_VISUAL emacs
 set -gx BROWSER open
@@ -56,3 +56,6 @@ set -gx DOCKER_BUILDKIT 1
 
 ## Homebrew
 set -gx HOMEBREW_NO_ENV_HINTS 1
+
+## Generic config location for macos
+set -gx XDG_CONFIG_HOME "$HOME/.config"

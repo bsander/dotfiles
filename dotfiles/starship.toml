@@ -1,3 +1,4 @@
+## Reference: https://starship.rs/config/
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
@@ -5,14 +6,15 @@ add_newline = true
 format = """
 $directory\
   $git_branch\
+  $git_commit\
   $git_state\
   $git_status\
-  $git_commit
+  $cmd_duration
 $character
 """
 
 [cmd_duration]
-min_time = 5
+min_time = 5_000
 
 [directory]
 truncation_symbol = '…/'
@@ -21,8 +23,8 @@ truncate_to_repo = true
 fish_style_pwd_dir_length = 3
 
 [directory.substitutions]
-'$HOME/src/iagl' = 'iagl'
-'apimgmt-devportal-partner-management' = 'iagl-monorepo'
+# '/Users/sb/src/iagl/apimgmt-devportal-partner-management' = 'pm'
+# '$HOME/src/iagl' = 'iagl'
 
 [git_status]
 style = "bold white"
@@ -38,14 +40,12 @@ behind = "⇣"
 diverged = "⇡⇣"
 
 [git_branch]
-format = '@ [$symbol$branch(:$remote_branch)]($style)'
+format = '[$symbol$branch(:$remote_branch)]($style)'
 
 [git_commit]
 commit_hash_length = 6
-# format = '$hash '
+format = '[:$hash]($style) '
 only_detached = false
-
-
 
 [character]
 success_symbol = '[\$]()'

@@ -1,0 +1,17 @@
+# Ghostty Terminal Configuration
+# Generated for dotfiles repository
+# Symlinked to ~/.config/ghostty/config via Make targets
+#
+# This configuration provides:
+# - Monaspice Nerd Font Mono for development
+# - Focus-follows-mouse for efficient workflow
+# - Chorded shortcuts (Ctrl+Shift) for window/split management
+# - Alt-based shortcuts for quick navigation and actions
+# - Multi-pane development workflow support
+
+# Font Configuration
+font-family = Monaspice Nerd Font Mono
+
+# Focus Behavior
+focus-follows-mouse = true
+

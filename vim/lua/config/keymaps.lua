@@ -194,7 +194,11 @@ keymap('', 'gO', 'O<Esc>cc', { desc = 'Insert line above and enter insert' })
 keymap('n', 'gs', '<CMD>write<CR>', { noremap = true, desc = 'Save file' })
 keymap('', '<D-s>', '<CMD>write<CR>', { noremap = true, desc = 'Save file (Cmd+s)' })
 keymap('n', '<leader>fs', '<CMD>write<CR>', { noremap = true, desc = 'Save file' })
-keymap('n', '<leader>fS', ":saveas " .. vim.fn.expand('%:p'), { noremap = true, expr = true, desc = 'Save as' })
+keymap('n', '<leader>fS', function()
+  vim.ui.input({ prompt = 'Save as: ', default = vim.fn.expand('%:p') }, function(input)
+    if input then vim.cmd('saveas ' .. input) end
+  end)
+end, { noremap = true, desc = 'Save as' })
 keymap('n', '<leader>fR', ':Rename ', { noremap = true, desc = 'Rename file' })
 keymap('n', '<leader>fa', ':wall<CR>', { noremap = true, desc = 'Save all files' })
 
@@ -245,3 +249,11 @@ keymap('n', '<Leader>QQ', '<CMD>qall!<CR>', { noremap = true, desc = 'Force quit
 
 -- Comment mappings (extending)
 keymap('n', 'gca', 'gcA', { desc = 'Comment at end of line' })
+
+-- Bufferize quick exit
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'bufferize',
+  callback = function()
+    vim.keymap.set('n', 'q', '<CMD>bdelete<CR>', { buffer = true, desc = 'Close bufferize window' })
+  end,
+})
