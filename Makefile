@@ -31,7 +31,7 @@ update: ## Update packages from NPM, Homebrew and ZSH
 	tldr --update
 	@echo Now run: z4h update
 
-link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim ## Setup symlinks in $HOME to dotfiles
+link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim link-macos-app-support ## Setup symlinks in $HOME to dotfiles
 
 .PHONY: help
 help: ## Show this help
@@ -48,6 +48,7 @@ DF_DIR = $(CURDIR)/dotfiles
 
 DFS_HOME = curlrc.ini ripgreprc gitconfig.ini gitignore.txt hushlogin.txt ignore.txt p10k.zsh tigrc.ini zshrc.zsh zshenv.zsh profile.bash
 DFS_CONFIG = fish kitty zellij ghostty lazygit
+DFS_MACOS_APP_SUPPORT = lazygit
 
 ## Link these dotfiles to $HOME
 link-to-home: $(foreach f, $(DFS_HOME), link-to-home-$(f))
@@ -65,6 +66,17 @@ link-to-config-%: $(CURDIR)/%
 link-nvim: $(CURDIR)/vim
 	ln -snf "$<" $(HOME)/.vim
 	ln -snf "$<" $(HOME)/.config/nvim
+
+## Link macOS Application Support configs (macOS only)
+link-macos-app-support:
+ifeq ($(shell uname -s),Darwin)
+	$(foreach f, $(DFS_MACOS_APP_SUPPORT), $(call link-macos-app-support-func,$(f)))
+endif
+
+define link-macos-app-support-func
+	mkdir -p "$(HOME)/Library/Application Support/$(1)"
+	ln -snf "$(HOME)/.config/$(1)/config.yml" "$(HOME)/Library/Application Support/$(1)/config.yml"
+endef
 
 $(HOME)/.zshlocal:
 	cp -n $(CURDIR)/zsh/local.zsh $(HOME)/.zshlocal
