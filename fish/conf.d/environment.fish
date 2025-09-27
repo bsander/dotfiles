@@ -59,3 +59,6 @@ set -gx HOMEBREW_NO_ENV_HINTS 1
 
 ## Generic config location for macos
 set -gx XDG_CONFIG_HOME "$HOME/.config"
+
+set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+

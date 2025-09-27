@@ -8,8 +8,15 @@ keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Clear highlights on search when pressing <Esc> in normal mode
-keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
+-- Smart escape: clear multicursors or search highlights
+keymap('n', '<Esc>', function()
+  local mc = require("multicursor-nvim")
+  if mc.cursorsEnabled() then
+    mc.clearCursors()
+  else
+    vim.cmd('nohlsearch')
+  end
+end, { desc = 'Clear multicursors or search highlights' })
 
 -- Better window navigation
 keymap('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -119,9 +126,8 @@ keymap('c', '<C-l>', '<Right>', { desc = 'Move cursor right' })
 keymap('c', '<C-a>', '<Home>', { desc = 'Move to beginning of line' })
 keymap('c', '<C-e>', '<End>', { desc = 'Move to end of line' })
 
--- Neo-tree
-keymap('n', '<leader>ft', '<cmd>Neotree toggle<CR>', { desc = '[F]ile [T]ree toggle' })
-keymap('n', '<leader>fr', '<cmd>Neotree reveal<CR>', { desc = '[F]ile [R]eveal in tree' })
+-- File manager
+keymap('n', '<leader>ft', '<cmd>Yazi<CR>', { desc = '[F]ile [T]ree toggle' })
 
 -- Diagnostics
 keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })

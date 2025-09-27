@@ -471,4 +471,35 @@ return {
       })
     end,
   },
+
+  -- Yazi file manager
+  {
+    "mikavilpas/yazi.nvim",
+    version = "*",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("yazi").setup({
+        -- Add any custom configuration here if needed
+      })
+    end,
+  },
+
+  -- Auto dark mode
+  {
+    "f-person/auto-dark-mode.nvim",
+    opts = {
+      set_dark_mode = function()
+        vim.opt.background = "dark"
+        vim.cmd.colorscheme("zenwritten")
+      end,
+      set_light_mode = function()
+        vim.opt.background = "light"
+        vim.cmd.colorscheme("zenwritten")
+      end,
+      fallback = "light"
+    }
+  },
 }

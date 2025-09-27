@@ -124,6 +124,15 @@ return {
         { "<leader>h", group = "help" },
         { "<leader>v", group = "vim" },
         { "<leader>l", group = "location" },
+        { "<leader>m", group = "multicursor" },
+        { "<leader>ma", desc = "Match add cursor" },
+        { "<leader>mA", desc = "Match add all cursors" },
+        { "<leader>ms", desc = "Match skip cursor" },
+        { "<leader>mj", desc = "Add cursor below" },
+        { "<leader>mk", desc = "Add cursor above" },
+        { "<leader>mJ", desc = "Skip cursor below" },
+        { "<leader>mK", desc = "Skip cursor above" },
+        { "<leader>mt", desc = "Toggle cursor mode" },
       })
 
       -- Extended mappings shown only if enabled

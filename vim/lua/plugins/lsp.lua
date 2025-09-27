@@ -136,6 +136,15 @@ return {
         on_attach = on_attach,
       }
 
+      vim.lsp.config.gh_actions_ls = {
+        cmd = { 'gh-actions-language-server', '--stdio' },
+        filetypes = { 'yaml.github' },
+        root_markers = { '.git', '.github' },
+        single_file_support = true,
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
       -- Configuration file editing keybindings
       vim.keymap.set('n', '<leader>ve', function()
         local dotfiles = vim.env.DOTFILES or vim.fn.expand('~/.config/nvim')
