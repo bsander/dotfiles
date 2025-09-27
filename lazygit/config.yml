@@ -1,0 +1,14 @@
+gui:
+  expandFocusedSidePanel: true
+  theme:
+    lightTheme: true
+    # activeBorderColor:
+    #   - black
+    #   - bold
+    # inactiveBorderColor:
+    #   - black
+git:
+  autoFetch: false
+  paging:
+    colorArg: always
+    pager: delta --paging=never

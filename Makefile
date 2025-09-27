@@ -47,7 +47,7 @@ help: ## Show this help
 DF_DIR = $(CURDIR)/dotfiles
 
 DFS_HOME = curlrc.ini ripgreprc gitconfig.ini gitignore.txt hushlogin.txt ignore.txt p10k.zsh tigrc.ini zshrc.zsh zshenv.zsh profile.bash
-DFS_CONFIG = fish kitty zellij ghostty
+DFS_CONFIG = fish kitty zellij ghostty lazygit
 
 ## Link these dotfiles to $HOME
 link-to-home: $(foreach f, $(DFS_HOME), link-to-home-$(f))
