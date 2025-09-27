@@ -47,8 +47,8 @@ help: ## Show this help
 DF_DIR = $(CURDIR)/dotfiles
 
 DFS_HOME = curlrc.ini ripgreprc gitconfig.ini gitignore.txt hushlogin.txt ignore.txt p10k.zsh tigrc.ini zshrc.zsh zshenv.zsh profile.bash
-DFS_CONFIG = fish kitty zellij ghostty lazygit
-DFS_MACOS_APP_SUPPORT = lazygit
+DFS_CONFIG = fish kitty zellij ghostty lazygit lazydocker
+DFS_MACOS_APP_SUPPORT = lazygit lazydocker
 
 ## Link these dotfiles to $HOME
 link-to-home: $(foreach f, $(DFS_HOME), link-to-home-$(f))
@@ -68,15 +68,13 @@ link-nvim: $(CURDIR)/vim
 	ln -snf "$<" $(HOME)/.config/nvim
 
 ## Link macOS Application Support configs (macOS only)
-link-macos-app-support:
-ifeq ($(shell uname -s),Darwin)
-	$(foreach f, $(DFS_MACOS_APP_SUPPORT), $(call link-macos-app-support-func,$(f)))
-endif
+link-macos-app-support: $(foreach f, $(DFS_MACOS_APP_SUPPORT), link-macos-app-support-$(f))
 
-define link-macos-app-support-func
-	mkdir -p "$(HOME)/Library/Application Support/$(1)"
-	ln -snf "$(HOME)/.config/$(1)/config.yml" "$(HOME)/Library/Application Support/$(1)/config.yml"
-endef
+link-macos-app-support-%:
+ifeq ($(shell uname -s),Darwin)
+	mkdir -p "$(HOME)/Library/Application Support/$*"
+	ln -snf "$(HOME)/.config/$*/config.yml" "$(HOME)/Library/Application Support/$*/config.yml"
+endif
 
 $(HOME)/.zshlocal:
 	cp -n $(CURDIR)/zsh/local.zsh $(HOME)/.zshlocal
