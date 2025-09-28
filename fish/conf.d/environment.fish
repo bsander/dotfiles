@@ -35,15 +35,16 @@ set -gx GOPATH "$PROJECTS/go"
 # set -gx NVM_DIR "$HOME/.nvm"
 # set -gx nvm_prefix /usr/local/opt/nvm
 
-# ## Set locale properties
-# set -q LANG
-# or set -gx LANG "en_US.UTF-8"
+## Set locale properties (needed for nerd font / powerline symbols)
+set -q LANG
+or set -gx LANG "en_US.UTF-8"
 
-# set -q LC_ALL
-# or set -gx LC_ALL "en_US.UTF-8"
+set -q LC_ALL
+or set -gx LC_ALL "en_US.UTF-8"
 
 ## Fix for `tr: Illegal byte sequence`: https://unix.stackexchange.com/a/141434
-set -gx LC_CTYPE C
+set -q LC_CTYPE
+or set -gx LC_CTYPE C
 
 ## Ripgrep config file
 set -gx RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
