@@ -57,6 +57,8 @@ brew "libtool"
 brew "folderify"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line tool
+brew "gh"
 # Distributed revision control system
 brew "git"
 # Enable transparent encryption/decryption of files in a git repo
@@ -77,10 +79,12 @@ brew "gnu-sed"
 brew "go"
 # Ping, but with a graph
 brew "gping"
+# Post-modern modal text editor
+brew "helix"
 # Improved top (interactive process viewer)
 brew "htop"
 # Platform built on V8 to build network applications
-brew "node"
+brew "node", link: false
 # Simple zero-configuration command-line HTTP server
 brew "http-server"
 # User-friendly cURL replacement (command-line HTTP client)
@@ -95,6 +99,8 @@ brew "ical-buddy"
 brew "jq"
 # Lazier way to manage everything docker
 brew "lazydocker"
+# Simple terminal UI for git commands
+brew "lazygit"
 # Terminal file manager
 brew "lf"
 # Library that sends desktop notifications to a notification daemon
@@ -137,6 +143,8 @@ brew "ripgrep"
 brew "rust"
 # Rust toolchain installer
 brew "rustup"
+# 7-Zip is a file archiver with a high compression ratio
+brew "sevenzip"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
@@ -165,10 +173,14 @@ brew "xh"
 brew "xsv"
 # Bring your favorite shell wherever you go through the ssh
 brew "xxh"
+# Linter for YAML files
+brew "yamllint"
 # JavaScript package manager
 brew "yarn"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
 # Shell extension to navigate your filesystem faster
@@ -239,7 +251,10 @@ cask "font-iosevka-curly-slab"
 cask "font-iosevka-etoile"
 cask "font-iosevka-term-slab-nerd-font"
 cask "font-juliamono"
+cask "font-monaspace"
 cask "font-monaspice-nerd-font"
+cask "font-powerline-symbols"
+cask "font-symbols-only-nerd-font"
 # GIT client
 cask "fork"
 # LibFUSE implementation that doesn't use kernel extensions
@@ -248,10 +263,14 @@ cask "fuse-t"
 cask "fuse-t-sshfs"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Desktop client for GitHub repositories
+cask "github"
 # Utility to provide quick look previews for files that aren't natively supported
 cask "glance-chamburr"
 # Web browser
 cask "google-chrome"
+# AI-powered notepad for meetings
+cask "granola"
 # Utility to hide menu bar items
 cask "hiddenbar"
 # Java IDE by JetBrains
@@ -312,6 +331,8 @@ cask "slack"
 cask "sonos"
 # Music streaming service
 cask "spotify"
+# Tool to disable temporal dithering on Apple Silicon Macs
+cask "stillcolor"
 # Git client
 cask "sublime-merge"
 # Mesh VPN based on WireGuard
