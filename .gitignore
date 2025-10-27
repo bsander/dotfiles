@@ -28,4 +28,20 @@ node_modules/
 
 # Task files
 # tasks.json
-# tasks/ 
+# tasks/
+
+# Claude Code ephemeral files
+dotfiles/claude/settings.local.json
+dotfiles/claude/plugins/cache/
+dotfiles/claude/plugins/marketplaces/
+dotfiles/claude/plugins/repos/
+dotfiles/claude/projects/
+dotfiles/claude/history.jsonl
+dotfiles/claude/file-history/
+dotfiles/claude/todos/
+dotfiles/claude/debug/
+dotfiles/claude/shell-snapshots/
+dotfiles/claude/session-env/
+dotfiles/claude/config/
+dotfiles/claude/statsig/
+dotfiles/claude/ide/ 
