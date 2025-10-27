@@ -1,3 +1,7 @@
+# ## Fix TMPDIR permissions issue
+# set -gx TMPDIR "$HOME/.tmp"
+# mkdir -p "$TMPDIR"
+
 false set -gx BASE_EDITOR "emacs -nw"
 # # set -gx BASE_VISUAL code
 # set -gx BASE_VISUAL emacs
@@ -62,4 +66,3 @@ set -gx HOMEBREW_NO_ENV_HINTS 1
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 
 set -gx SSH_AUTH_SOCK "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
