@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "plugins": {
+    "superpowers@superpowers-marketplace": {
+      "version": "3.2.3",
+      "installedAt": "2025-10-26T09:07:33.152Z",
+      "lastUpdated": "2025-10-26T09:07:33.152Z",
+      "installPath": "/Users/sb/.claude/plugins/cache/superpowers",
+      "gitCommitSha": "19e2997334eef29d0b4ab3c40a4bc124d200d1fb",
+      "isLocal": false
+    },
+    "superpowers-chrome@superpowers-marketplace": {
+      "version": "1.3.0",
+      "installedAt": "2025-10-26T09:07:33.734Z",
+      "lastUpdated": "2025-10-26T09:07:33.734Z",
+      "installPath": "/Users/sb/.claude/plugins/cache/superpowers-chrome",
+      "gitCommitSha": "5ba8f8b5031b76bbb6feec7a6714938618a9669c",
+      "isLocal": false
+    },
+    "elements-of-style@superpowers-marketplace": {
+      "version": "1.0.0",
+      "installedAt": "2025-10-26T09:07:34.261Z",
+      "lastUpdated": "2025-10-26T09:07:34.261Z",
+      "installPath": "/Users/sb/.claude/plugins/cache/elements-of-style",
+      "gitCommitSha": "6099c505c2a8eb066f3777f83a97d9d828f7954c",
+      "isLocal": false
+    },
+    "episodic-memory@superpowers-marketplace": {
+      "version": "1.0.5",
+      "installedAt": "2025-10-26T09:07:34.983Z",
+      "lastUpdated": "2025-10-26T09:07:34.983Z",
+      "installPath": "/Users/sb/.claude/plugins/cache/episodic-memory",
+      "gitCommitSha": "47ce8ce5fce0a1e1b70f0d1f1245fa6a59c21916",
+      "isLocal": false
+    }
+  }
+}

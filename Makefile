@@ -31,7 +31,7 @@ update: ## Update packages from NPM, Homebrew and ZSH
 	tldr --update
 	@echo Now run: z4h update
 
-link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim link-macos-app-support ## Setup symlinks in $HOME to dotfiles
+link: $(HOME)/.zshlocal link-to-home link-to-config link-nvim link-macos-app-support link-claude ## Setup symlinks in $HOME to dotfiles
 
 .PHONY: help
 help: ## Show this help
@@ -75,6 +75,15 @@ ifeq ($(shell uname -s),Darwin)
 	mkdir -p "$(HOME)/Library/Application Support/$*"
 	ln -snf "$(HOME)/.config/$*/config.yml" "$(HOME)/Library/Application Support/$*/config.yml"
 endif
+
+## Link Claude Code configuration to $HOME/.claude/
+link-claude:
+	mkdir -p $(HOME)/.claude
+	ln -snf $(DF_DIR)/claude/CLAUDE.md $(HOME)/.claude/CLAUDE.md
+	ln -snf $(DF_DIR)/claude/settings.json $(HOME)/.claude/settings.json
+	ln -snf $(DF_DIR)/claude/agents $(HOME)/.claude/agents
+	ln -snf $(DF_DIR)/claude/commands $(HOME)/.claude/commands
+	ln -snf $(DF_DIR)/claude/plugins $(HOME)/.claude/plugins
 
 $(HOME)/.zshlocal:
 	cp -n $(CURDIR)/zsh/local.zsh $(HOME)/.zshlocal
