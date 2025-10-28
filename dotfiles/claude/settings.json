@@ -5,16 +5,15 @@
   "permissions": {
     "defaultMode": "plan"
   },
-  "statusLine": {
-    "type": "command",
-    "command": "npx -y ccstatusline@latest",
-    "padding": 0
-  },
   "enabledPlugins": {
     "superpowers@superpowers-marketplace": false,
     "superpowers-chrome@superpowers-marketplace": false,
     "elements-of-style@superpowers-marketplace": false,
     "episodic-memory@superpowers-marketplace": false
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/statusline-command.sh"
+  }
 }

@@ -78,12 +78,7 @@ endif
 
 ## Link Claude Code configuration to $HOME/.claude/
 link-claude:
-	mkdir -p $(HOME)/.claude
-	ln -snf $(DF_DIR)/claude/CLAUDE.md $(HOME)/.claude/CLAUDE.md
-	ln -snf $(DF_DIR)/claude/settings.json $(HOME)/.claude/settings.json
-	ln -snf $(DF_DIR)/claude/agents $(HOME)/.claude/agents
-	ln -snf $(DF_DIR)/claude/commands $(HOME)/.claude/commands
-	ln -snf $(DF_DIR)/claude/plugins $(HOME)/.claude/plugins
+	ln -snf $(DF_DIR)/claude $(HOME)/.claude
 
 $(HOME)/.zshlocal:
 	cp -n $(CURDIR)/zsh/local.zsh $(HOME)/.zshlocal

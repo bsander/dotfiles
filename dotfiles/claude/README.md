@@ -23,7 +23,12 @@ claude/
 
 ## Installation
 
-After running `make link`, the files in this directory will be symlinked to `~/.claude/`.
+After running `make link-claude`, the entire `~/.claude/` directory will be symlinked to this directory.
+
+This means:
+- **All changes in `~/.claude/`** automatically appear in this dotfiles repo
+- **All new files** created by Claude Code show up in `git status` by default
+- **You decide** what to commit or add to `.gitignore` (denylist approach)
 
 The Makefile handles symlinking, but plugin installation must be done manually.
 
@@ -70,21 +75,26 @@ The plugin JSON files are a **dynamic snapshot** of currently installed plugins.
 - **Enabled/Disabled**: Plugin enable/disable state is stored in `settings.json` under `enabledPlugins`
 - **Update plugins**: Run `claude plugin marketplace update` to update all marketplaces
 
-## Files Not Tracked
+## Files Not Tracked (Denylist)
 
-These directories/files are **not** part of this repo (excluded via `.gitignore`):
+Since `~/.claude/` is symlinked to this directory, **all files appear in `git status` by default**. The following ephemeral files/directories are explicitly excluded via `.gitignore`:
 
 - `settings.local.json` - Machine-specific settings (permissions, etc.)
-- `plugins/cache/` - Downloaded plugin code
+- `plugins/cache/` - Downloaded plugin code (~7MB)
 - `plugins/marketplaces/` - Downloaded marketplace repositories
-- `projects/` - Per-project conversation history and state
+- `plugins/repos/` - Additional plugin data
+- `projects/` - Per-project conversation history and state (~25MB)
 - `history.jsonl` - Global conversation history
 - `file-history/` - File edit history
 - `todos/` - Todo state
 - `debug/` - Debug logs
 - `shell-snapshots/` - Shell session snapshots
+- `session-env/` - Session environment variables
 - `config/` - UI state (notifications, etc.)
-- And other ephemeral data
+- `statsig/` - Analytics cache
+- `ide/` - IDE integration state
+
+**New files not in this list will show up in `git status` - you can then choose to commit or add to `.gitignore`.**
 
 ## Customization
 
